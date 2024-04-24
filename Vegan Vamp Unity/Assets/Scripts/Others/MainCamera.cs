@@ -1,4 +1,6 @@
 using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEditor.EditorTools;
 using UnityEngine;
 
@@ -9,17 +11,21 @@ public class MainCamera : MonoBehaviour
     #region
 
     [SerializeField] GameObject player;
+    [SerializeField] GameObject playerPivot;
 
     //player settings
     [Header("Player Settings")][Tooltip("Settings the player can adjust")]
     public Vector2 rotationSpeed;
-    public float cameraShoulderOffset;
+    public float camShoulderOffset;
 
     //game settings
     [Header("Game Settings")][Tooltip("Settings the player can't adjust")]
-    [SerializeField] float cameraDistance;
-    [SerializeField] float cameraHeight;
-    Vector3 cameraOffset;
+    [SerializeField] float camDistance;
+    [SerializeField] float camHeight;
+    [SerializeField][Tooltip("Min and max camera angle on axis X")] Vector2 minMaxPitch;
+
+
+    Vector3 camOffset;
 
     //camera rotation
 
@@ -44,7 +50,7 @@ public class MainCamera : MonoBehaviour
     //========================
     #region
 
-
+    
 
     #endregion
     //========================
@@ -53,24 +59,41 @@ public class MainCamera : MonoBehaviour
     //RUNNING
     //========================
     #region
+
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
-        //position camera
-        cameraOffset = new Vector3(-cameraShoulderOffset, -cameraHeight, cameraDistance);
+        //position pivot
+        playerPivot.transform.localPosition = new Vector3 (camShoulderOffset, 0, 0);
+
+        camOffset = new Vector3(0, camHeight, -camDistance);
 
         //rotate camera
+        //get mouse movement
         mouseDelta.x = -Input.GetAxis("Mouse Y");
         mouseDelta.y = Input.GetAxis("Mouse X");
 
-        rotation.x = Mathf.Clamp(rotation.x, -90, 90);
-        rotation.y = Mathf.Clamp(rotation.y, -60, 60);
+        //limit camera movement
+        rotation.x = Mathf.Clamp(rotation.x, minMaxPitch.x, minMaxPitch.y);
 
-        rotation += Vector3.Scale(mouseDelta, rotationSpeed) * Time.deltaTime;
+        //add movement to rotation vector
+        rotation.x += mouseDelta.x * rotationSpeed.x  * 100 * Time.deltaTime;
+        rotation.y += mouseDelta.y * rotationSpeed.y  * 100 * Time.deltaTime;
+
+        //update offset
+        camOffset  = Quaternion.Euler(rotation) * camOffset;
         
 
         //update transform values
-        transform.position = player.transform.position - cameraOffset;
-        transform.rotation = Quaternion.Euler(rotation);
+        transform.position = playerPivot.transform.position + camOffset;
+        transform.LookAt(playerPivot.transform);
+        
+        //make player face same direction
+        player.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
     }
 
     #endregion
