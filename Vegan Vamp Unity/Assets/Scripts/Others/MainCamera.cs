@@ -94,6 +94,10 @@ public class MainCamera : MonoBehaviour
         
         //make player face same direction
         player.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+
+        //center mouse
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     #endregion

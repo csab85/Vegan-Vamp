@@ -142,11 +142,12 @@ public class Movement : MonoBehaviour
         
 
         //decelerate
-        if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
+        if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical"))
         {
             if (rb.velocity.x > 0 | rb.velocity.z > 0)
             {
                 rb.drag = drag;
+                print("aaaaaaaaaaaaaaaaaaa");
             }
         }
 
