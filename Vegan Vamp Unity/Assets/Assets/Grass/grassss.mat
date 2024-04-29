@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Material.001
+  m_Name: grassss
   m_Shader: {fileID: -6465566751694194690, guid: 68ff3587bedc62841b41db67b3888c44, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -72,7 +72,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: 856821fd8e5111644a6203b0ae744a34, type: 3}
+        m_Texture: {fileID: 2800000, guid: 363851c76b0ace247a80059ee17c169b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _windtextureorwhatever:
@@ -110,7 +110,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HeightBlend: 0.5
+    - _HeightBlend: 0.3
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -128,26 +128,25 @@ Material:
     - _TerrainSize: 1000
     - _UVSec: 0
     - _WindHeight: 0.5
-    - _WindIntensity: 0.1
+    - _WindIntensity: 0.2
     - _WindNoiseSpeed: 1
     - _WindSpeed: 0.1
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _alpha_threshold: 0.5
     - _smoozness: 0
     m_Colors:
-    - _BaseColor: {r: 0.9065321, g: 0.24809974, b: 0.059489056, a: 1}
-    - _BottomColor: {r: 0.06069775, g: 0.41509432, b: 0.24409203, a: 0}
-    - _Color: {r: 0.9065321, g: 0.24809968, b: 0.05948901, a: 1}
+    - _BaseColor: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
+    - _BottomColor: {r: 0.07058824, g: 0.5294118, b: 0.28662857, a: 1}
+    - _Color: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _FarColor: {r: 0.75429547, g: 0.90588236, b: 0.058823552, a: 1}
-    - _NearColor: {r: 0.082858644, g: 0.9245283, b: 0.12744625, a: 1}
+    - _FarColor: {r: 0.77824414, g: 0.9433962, b: 0.09344962, a: 1}
+    - _NearColor: {r: 0.14374647, g: 0.8867924, b: 0.04601282, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _WindNoiseConstrast: {r: -1, g: 1.5, b: 0, a: 0}
     - _WindNoiseScale: {r: 40, g: 100, b: 0, a: 0}
     - _nearfarrange: {r: 10, g: 60, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &9057288530214671844
+--- !u!114 &4755442429066012254
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
