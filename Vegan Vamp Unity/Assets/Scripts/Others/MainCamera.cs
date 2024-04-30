@@ -22,7 +22,7 @@ public class MainCamera : MonoBehaviour
     [Header("Game Settings")][Tooltip("Settings the player can't adjust")]
     [SerializeField] float camDistance;
     [SerializeField] float camHeight;
-    [SerializeField][Tooltip("Min and max camera angle on axis X")] Vector2 minMaxPitch;
+    [SerializeField][Tooltip("Min and max camera angle on axis X (looking up and down)")] Vector2 minMaxPitch;
 
 
     Vector3 camOffset;
@@ -59,12 +59,6 @@ public class MainCamera : MonoBehaviour
     //RUNNING
     //========================
     #region
-
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         //position pivot
