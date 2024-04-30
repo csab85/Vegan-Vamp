@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 329588087}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -514,7 +514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4424429688850171312, guid: 795d6a12523ec74429000e714be1e439, type: 3}
       propertyPath: jumpForce
-      value: 15
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4424429688850171312, guid: 795d6a12523ec74429000e714be1e439, type: 3}
       propertyPath: maxVelocity.x
@@ -523,6 +523,10 @@ PrefabInstance:
     - target: {fileID: 4424429688850171312, guid: 795d6a12523ec74429000e714be1e439, type: 3}
       propertyPath: maxVelocity.y
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424429688850171312, guid: 795d6a12523ec74429000e714be1e439, type: 3}
+      propertyPath: touchingFloor
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4424429688850171312, guid: 795d6a12523ec74429000e714be1e439, type: 3}
       propertyPath: horizontalMaxVRatio
