@@ -1,3 +1,5 @@
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -21,8 +23,15 @@ public class Movement : MonoBehaviour
     public float speed;
     public  Vector2 maxVelocity;
     public float drag;    
+    public float jumpForce;
 
     [SerializeField][Tooltip ("How much to ratio the horizontal max velocity ")] float horizontalMaxVRatio;
+
+    //Tags that count as floor
+    [SerializeField][Tooltip ("Tags of objects that count as floor")] string[] floorTags;
+
+    //states
+    public bool touchingFloor = true;
 
     #endregion
     //========================
@@ -83,7 +92,6 @@ public class Movement : MonoBehaviour
         if (!CapMaxVelocity())
         {
             float direction = Mathf.Sign(sign);
-            print(rb.velocity);
 
             Vector3 force = transform.forward * direction * speed * Time.deltaTime;
             rb.AddForce(force, ForceMode.VelocityChange);
@@ -99,26 +107,65 @@ public class Movement : MonoBehaviour
         if (!CapMaxVelocity(horizontal : true))
         {
             float direction = Mathf.Sign(sign);
-            print(rb.velocity);
 
             Vector3 force = transform.right * direction * speed * Time.deltaTime;
             rb.AddForce(force, ForceMode.VelocityChange);
         }
     }
 
-    void Decelarate(float verticalInput, float horizontalInput)
+    /// <summary>
+    /// Turns drag to the designated value if no movement button is pressed and speed > 0; If not drag is 0
+    /// </summary>
+    void Decelerate()
     {
-        if (verticalInput == 0)
+        if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical"))
         {
-            rb.velocity = Vector3.MoveTowards(rb.velocity, new Vector3(rb.velocity.x, rb.velocity.y, 0), 0.3f);
+            if (rb.velocity.x > 0 | rb.velocity.z > 0)
+            {
+                rb.drag = drag;
+            }
         }
 
-        if (horizontalInput == 0)
+        else
         {
-            rb.velocity = Vector3.MoveTowards(rb.velocity, new Vector3(0, rb.velocity.y, rb.velocity.z), 0.3f);
+            rb.drag = 0;
+        }
+    }
+    
+    /// <summary>
+    /// If touching floor, adds applies force up on the player
+    /// </summary>
+    void Jump()
+    {
+        if (touchingFloor)
+        {
+            rb.AddForce(transform.up * jumpForce * Time.deltaTime * 10, ForceMode.Impulse);
         }
     }
 
+    //Collision handling
+    void OnCollisionEnter(Collision collision)
+    {
+        if (floorTags.Contains(collision.gameObject.tag))
+        {
+            if (!touchingFloor)
+            {
+                touchingFloor = true;
+            }
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (floorTags.Contains(collision.gameObject.tag))
+        {
+            if (touchingFloor)
+            {
+                touchingFloor = false;
+            }
+        }
+    }
+    
     #endregion
     //========================
 
@@ -139,22 +186,15 @@ public class Movement : MonoBehaviour
         {
             HorizontalWalk(Input.GetAxis("Horizontal"));
         }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
         
 
         //decelerate
-        if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical"))
-        {
-            if (rb.velocity.x > 0 | rb.velocity.z > 0)
-            {
-                rb.drag = drag;
-                print("aaaaaaaaaaaaaaaaaaa");
-            }
-        }
-
-        else
-        {
-            rb.drag = 0;
-        }
+        Decelerate();
     }
 
     #endregion

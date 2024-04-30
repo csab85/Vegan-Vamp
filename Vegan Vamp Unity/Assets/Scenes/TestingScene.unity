@@ -513,6 +513,10 @@ PrefabInstance:
       value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4424429688850171312, guid: 795d6a12523ec74429000e714be1e439, type: 3}
+      propertyPath: jumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424429688850171312, guid: 795d6a12523ec74429000e714be1e439, type: 3}
       propertyPath: maxVelocity.x
       value: 5
       objectReference: {fileID: 0}
@@ -523,6 +527,14 @@ PrefabInstance:
     - target: {fileID: 4424429688850171312, guid: 795d6a12523ec74429000e714be1e439, type: 3}
       propertyPath: horizontalMaxVRatio
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424429688850171312, guid: 795d6a12523ec74429000e714be1e439, type: 3}
+      propertyPath: floorTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424429688850171312, guid: 795d6a12523ec74429000e714be1e439, type: 3}
+      propertyPath: floorTags.Array.data[0]
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 8029113748248665311, guid: 795d6a12523ec74429000e714be1e439, type: 3}
       propertyPath: m_Name
