@@ -1,5 +1,4 @@
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -21,8 +20,8 @@ public class Movement : MonoBehaviour
 
     [Header("Settings")]
     public float speed;
-    public  Vector2 maxVelocity;
-    public float drag;    
+    public  float maxVelocity;
+    public float decelerationSpeed;    
     public float jumpForce;
 
     [SerializeField][Tooltip ("How much to ratio the horizontal max velocity ")] float horizontalMaxVRatio;
@@ -49,34 +48,22 @@ public class Movement : MonoBehaviour
     bool CapMaxVelocity(bool horizontal = false)
     {
         bool capping = false;
-        float mvX = 0;
-        float mvY = 0;
+        float mv = 0;
 
         if (horizontal)
         {
-            mvX = maxVelocity.x / horizontalMaxVRatio;
-            mvY = maxVelocity.y / horizontalMaxVRatio;
+            mv = maxVelocity / horizontalMaxVRatio;
         }
 
         else
         {
-            mvX = maxVelocity.x;
-            mvY = maxVelocity.y;
+            mv = maxVelocity;
         }
 
-        if (Mathf.Abs(rb.velocity.x) >= mvX)
+        if (Mathf.Abs(rb.velocity.magnitude) >= mv)
         {
-            float velocitySign = Mathf.Sign(rb.velocity.x);
+            float velocitySign = Mathf.Sign(rb.velocity.magnitude);
 
-            rb.velocity = new Vector3(mvX * velocitySign, rb.velocity.y, rb.velocity.z);
-            capping = true;
-        }
-
-        if (Mathf.Abs(rb.velocity.z) >= mvY)
-        {
-            float velocitySign = Mathf.Sign(rb.velocity.z);
-
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, mvY * velocitySign);
             capping = true;
         }
 
@@ -88,7 +75,7 @@ public class Movement : MonoBehaviour
     /// </summary>
     /// <param name="sign">Positive number to go forward, negative to backwards</param>
     void VerticalWalk(float sign)
-    {       
+    {
         if (!CapMaxVelocity())
         {
             float direction = Mathf.Sign(sign);
@@ -108,8 +95,8 @@ public class Movement : MonoBehaviour
         {
             float direction = Mathf.Sign(sign);
 
-            Vector3 force = transform.right * direction * speed * Time.deltaTime;
-            rb.AddForce(force, ForceMode.VelocityChange);
+            Vector3 force = transform.right * direction * speed/2 * Time.deltaTime;
+            rb.AddForce(force, ForceMode.Force);
         }
     }
 
@@ -118,17 +105,9 @@ public class Movement : MonoBehaviour
     /// </summary>
     void Decelerate()
     {
-        if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical"))
+        if (rb.velocity.magnitude > 0)
         {
-            if (rb.velocity.x > 0 | rb.velocity.z > 0)
-            {
-                rb.drag = drag;
-            }
-        }
-
-        else
-        {
-            rb.drag = 0;
+            rb.velocity = Vector3.MoveTowards(rb.velocity, Vector3.zero, decelerationSpeed * Time.deltaTime);
         }
     }
     
@@ -194,7 +173,10 @@ public class Movement : MonoBehaviour
         
 
         //decelerate
-        Decelerate();
+        if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical"))
+        {
+            Decelerate();
+        }
     }
 
     #endregion
