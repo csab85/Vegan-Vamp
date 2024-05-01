@@ -32,6 +32,12 @@ public class MainCamera : MonoBehaviour
     Vector3 rotation;
     Vector3 mouseDelta;
 
+
+    //aim
+    public Ray aimRay;
+    public RaycastHit aimHit;
+    
+
     #endregion
     //========================
 
@@ -92,6 +98,11 @@ public class MainCamera : MonoBehaviour
         //center mouse
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //aim
+        Vector2 screenAim = new Vector2 (Screen.width / 2, ((Screen.height / 3) * 2));
+        aimRay = Camera.main.ScreenPointToRay(screenAim);
+        Physics.Raycast(aimRay, out aimHit);
     }
 
     #endregion
