@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -7,8 +6,10 @@ public class Movement : MonoBehaviour
     //========================
     #region
 
-    [Header("Player Components")]
-    [SerializeField][Tooltip ("Rigid Body")] Rigidbody rb;
+    [Header ("Imports")]
+    [SerializeField] Transform orientTransform;
+    [SerializeField] Rigidbody rb;
+    [SerializeField] LayerMask groundLayer;
 
     #endregion
     //========================
@@ -18,19 +19,24 @@ public class Movement : MonoBehaviour
     //========================
     #region
 
-    [Header("Settings")]
-    public float speed;
-    public  float maxVelocity;
-    public float decelerationSpeed;    
-    public float jumpForce;
+    [Header ("Walking Settings")]
+    [SerializeField] float playerHeight;
+    [SerializeField] float moveSpeed;
+    [SerializeField] float groundDrag;
 
-    [SerializeField][Tooltip ("How much to ratio the horizontal max velocity ")] float horizontalMaxVRatio;
+    [Header ("Jumping Settings")]
+    [SerializeField] float jumpForce;
+    [SerializeField] float jumpCooldown;
+    [SerializeField] float airMultiplier;
+    
+    //jumping
+    bool grounded;
+    bool readyToJump = true;
 
-    //Tags that count as floor
-    [SerializeField][Tooltip ("Tags of objects that count as floor")] string[] floorTags;
+    //moving
+    Vector3 moveDirection;
 
-    //states
-    public bool touchingFloor = true;
+    RaycastHit hit;
 
     #endregion
     //========================
@@ -40,111 +46,67 @@ public class Movement : MonoBehaviour
     //========================
     #region
 
-    /// <summary>
-    /// Caps velocity x and y to the maxVelocity Vector2 value
-    /// </summary>
-    /// <param name="horizontal">Default false. If true, ratios max speed</param>
-    /// <returns>True if capping any velocity, False if not</returns>
-    bool CapMaxVelocity(bool horizontal = false)
-    {
-        bool capping = false;
-        float mv = 0;
 
-        if (horizontal)
+
+    public void MovePlayer(float verticalInput, float horizontalInput)
+    {
+        moveDirection = orientTransform.forward * verticalInput + orientTransform.right * horizontalInput;
+
+        if (grounded)
         {
-            mv = maxVelocity / horizontalMaxVRatio;
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10, ForceMode.Force);
+        }
+
+        else if (!grounded)
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * airMultiplier * 10, ForceMode.Force);
+        }   
+    }
+
+    void CapVelocity()
+    {
+        Vector3 horizontalVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+        if (horizontalVel.magnitude > moveSpeed)
+        {
+            Vector3 cappedVel = horizontalVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(cappedVel.x, rb.velocity.y, cappedVel.z);
+        } 
+    }
+
+    void CheckIfGrounded()
+    {
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.2f, groundLayer);
+
+        if (grounded)
+        {
+            rb.drag = groundDrag;
         }
 
         else
         {
-            mv = maxVelocity;
+            rb.drag = 0;
         }
-
-        if (Mathf.Abs(rb.velocity.magnitude) >= mv)
-        {
-            float velocitySign = Mathf.Sign(rb.velocity.magnitude);
-
-            capping = true;
-        }
-
-        return capping;
     }
 
-    /// <summary>
-    /// Makes the player move forward or backwards
-    /// </summary>
-    /// <param name="sign">Positive number to go forward, negative to backwards</param>
-    void VerticalWalk(float sign)
+    public void Jump()
     {
-        if (!CapMaxVelocity())
+        if (readyToJump && grounded)
         {
-            float direction = Mathf.Sign(sign);
+            //reset y velocity
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-            Vector3 force = transform.forward * direction * speed * Time.deltaTime;
-            rb.AddForce(force, ForceMode.VelocityChange);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+            Invoke("Reset Jump", jumpCooldown);
         }
     }
 
-    /// <summary>
-    /// Makes the player move right or left
-    /// </summary>
-    /// <param name="sign">Positive number to go right, negative to go lef</param>
-    void HorizontalWalk(float sign)
+    void ResetJump()
     {
-        if (!CapMaxVelocity(horizontal : true))
-        {
-            float direction = Mathf.Sign(sign);
-
-            Vector3 force = transform.right * direction * speed/2 * Time.deltaTime;
-            rb.AddForce(force, ForceMode.VelocityChange);
-        }
+        readyToJump = true;
     }
 
-    /// <summary>
-    /// Turns drag to the designated value if no movement button is pressed and speed > 0; If not drag is 0
-    /// </summary>
-    void Decelerate()
-    {
-        // if (rb.velocity.magnitude > 0)
-        // {
-        //     rb.velocity = Vector3.MoveTowards(rb.velocity, Vector3.zero, decelerationSpeed * Time.deltaTime);
-        // }
-    }
-    
-    /// <summary>
-    /// If touching floor, adds applies force up on the player
-    /// </summary>
-    void Jump()
-    {
-        if (touchingFloor)
-        {
-            rb.AddForce(transform.up * jumpForce * Time.deltaTime * 10, ForceMode.Impulse);
-        }
-    }
-
-    //Collision handling
-    void OnCollisionEnter(Collision collision)
-    {
-        if (floorTags.Contains(collision.gameObject.tag))
-        {
-            if (!touchingFloor)
-            {
-                touchingFloor = true;
-            }
-        }
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        if (floorTags.Contains(collision.gameObject.tag))
-        {
-            if (touchingFloor)
-            {
-                touchingFloor = false;
-            }
-        }
-    }
-    
     #endregion
     //========================
 
@@ -155,28 +117,11 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        //react to button press
-        if (Input.GetAxis("Vertical") != 0)
-        {
-            VerticalWalk(Input.GetAxis("Vertical"));
-        }
+        //Check if on ground
+        CheckIfGrounded();
 
-        if (Input.GetAxis("Horizontal") != 0)
-        {
-            HorizontalWalk(Input.GetAxis("Horizontal"));
-        }
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            Jump();
-        }
-        
-
-        //decelerate
-        if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical"))
-        {
-            Decelerate();
-        }
+        //Max velocity cap
+        CapVelocity();
     }
 
     #endregion
