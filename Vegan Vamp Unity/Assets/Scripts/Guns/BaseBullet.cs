@@ -1,15 +1,16 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GrapeBullet : MonoBehaviour
+public class BaseBullet : MonoBehaviour
 {
     //IMPORTS
     //========================
     #region
 
+    [Header ("Imports")]
     [SerializeField] GameObject parent;
-    MainCamera mainCameraScript;
-    Gun grapeShooterScript;
+    [SerializeField] MainCamera mainCameraScript;
+    [SerializeField] Gun gunScript;
     
 
     #endregion
@@ -20,9 +21,17 @@ public class GrapeBullet : MonoBehaviour
     //========================
     #region
 
+    [Header ("Settings")]
     [SerializeField] float maxDistance;
+    [SerializeField] bool returnOnCollision;
+    
+    [Header ("Info")]
+    [SerializeField] bool targeted;
+    [SerializeField] public bool movingToTarget;
+    
+    
+
     Vector3 target;
-    public bool targeted = false;
 
     #endregion
     //========================
@@ -32,12 +41,23 @@ public class GrapeBullet : MonoBehaviour
     //========================
     #region
 
-    void OnCollisionEnter(Collision collision)
+    public void ReturnToPool()
     {
         transform.parent = parent.transform;
         transform.localPosition = Vector3.zero;
         targeted = false;
+        movingToTarget = false;
         gameObject.SetActive(false);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        movingToTarget = false;
+
+        if (returnOnCollision)
+        {
+            ReturnToPool();
+        }
     }
 
     #endregion
@@ -48,20 +68,11 @@ public class GrapeBullet : MonoBehaviour
     //========================
     #region
 
-    void Start()
-    {
-        mainCameraScript = GameObject.Find("Main Camera").GetComponent<MainCamera>();
-        grapeShooterScript = GameObject.Find("Grape Shooter").GetComponent<Gun>();
-    }
-
     void Update()
     {
         if (Vector3.Distance(transform.position, parent.transform.position) > maxDistance)
         {
-            transform.parent = parent.transform;
-            transform.localPosition = Vector3.zero;
-            targeted = false;
-            gameObject.SetActive(false);
+            ReturnToPool();
         }
 
         if (!targeted)
@@ -70,7 +81,10 @@ public class GrapeBullet : MonoBehaviour
             targeted = true;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, target, grapeShooterScript.shotPower * Time.deltaTime);
+        if (movingToTarget)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target, gunScript.shotPower * Time.deltaTime);
+        }
     }
 
     #endregion

@@ -96,7 +96,7 @@ public class Movement : MonoBehaviour
             float direction = Mathf.Sign(sign);
 
             Vector3 force = transform.right * direction * speed/2 * Time.deltaTime;
-            rb.AddForce(force, ForceMode.Force);
+            rb.AddForce(force, ForceMode.VelocityChange);
         }
     }
 
@@ -105,10 +105,10 @@ public class Movement : MonoBehaviour
     /// </summary>
     void Decelerate()
     {
-        if (rb.velocity.magnitude > 0)
-        {
-            rb.velocity = Vector3.MoveTowards(rb.velocity, Vector3.zero, decelerationSpeed * Time.deltaTime);
-        }
+        // if (rb.velocity.magnitude > 0)
+        // {
+        //     rb.velocity = Vector3.MoveTowards(rb.velocity, Vector3.zero, decelerationSpeed * Time.deltaTime);
+        // }
     }
     
     /// <summary>

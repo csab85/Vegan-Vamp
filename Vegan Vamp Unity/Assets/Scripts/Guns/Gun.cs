@@ -7,7 +7,7 @@ public class Gun: MonoBehaviour
     //IMPORTS
     //========================
     #region
-    [Header("Game Objects")]
+    [Header("Imports")]
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject bulletPool;
 
@@ -26,9 +26,9 @@ public class Gun: MonoBehaviour
     [SerializeField] float reloadTime;
     [SerializeField] bool automatic;
 
-
-    public int shotCounter = 0;
-    public bool shooting = false;
+    [Header("Info")]
+    [SerializeField] int shotCounter;
+    [SerializeField] bool shooting;
 
     #endregion
     //========================
@@ -51,11 +51,10 @@ public class Gun: MonoBehaviour
         bullet = bulletPool.transform.GetChild(bulletNum).gameObject;
 
         bullet.SetActive(true);
-
-        shooting = true;
-
         bullet.transform.SetParent(null);
+        bullet.GetComponent<BaseBullet>().movingToTarget = true;
         
+        shooting = true;
         shotCounter++;
 
         yield return new WaitForSecondsRealtime(shotCooldown);
