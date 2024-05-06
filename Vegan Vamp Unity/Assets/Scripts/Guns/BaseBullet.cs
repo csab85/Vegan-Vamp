@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class BaseBullet : MonoBehaviour
 {
@@ -9,9 +10,10 @@ public class BaseBullet : MonoBehaviour
 
     [Header ("Imports")]
     [SerializeField] GameObject parent;
-    [SerializeField] MainCamera mainCameraScript;
+    Rigidbody rb;
+
+    [Header ("Scripts")]
     [SerializeField] Gun gunScript;
-    
 
     #endregion
     //========================
@@ -26,12 +28,10 @@ public class BaseBullet : MonoBehaviour
     [SerializeField] bool returnOnCollision;
     
     [Header ("Info")]
-    [SerializeField] bool targeted;
     [SerializeField] public bool movingToTarget;
     
-    
-
-    Vector3 target;
+    //aim
+    Vector3 mouseWorldPosition;
 
     #endregion
     //========================
@@ -45,7 +45,6 @@ public class BaseBullet : MonoBehaviour
     {
         transform.parent = parent.transform;
         transform.localPosition = Vector3.zero;
-        targeted = false;
         movingToTarget = false;
         gameObject.SetActive(false);
     }
@@ -68,22 +67,27 @@ public class BaseBullet : MonoBehaviour
     //========================
     #region
 
+    void OnEnable()
+    {   
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
+        mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3 aimDirection = gunScript.aimHit.point - transform.position;
+
+        rb.AddForce(aimDirection, ForceMode.Impulse);
+
+        print("aaaaaaaaaaaaaaaaaaaaaa");
+    }
+
     void Update()
     {
         if (Vector3.Distance(transform.position, parent.transform.position) > maxDistance)
         {
             ReturnToPool();
-        }
-
-        if (!targeted)
-        {
-            target = mainCameraScript.aimHit.point;
-            targeted = true;
-        }
-
-        if (movingToTarget)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, target, gunScript.shotPower * Time.deltaTime);
         }
     }
 

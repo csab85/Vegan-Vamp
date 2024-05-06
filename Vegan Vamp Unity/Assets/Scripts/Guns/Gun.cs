@@ -30,6 +30,10 @@ public class Gun: MonoBehaviour
     [SerializeField] int shotCounter;
     [SerializeField] bool shooting;
 
+[SerializeField] Transform coiso;
+    Ray aimRay;
+    public RaycastHit aimHit;
+
     #endregion
     //========================
 
@@ -77,6 +81,12 @@ public class Gun: MonoBehaviour
 
     void Update()
     {
+        //Aim
+        Vector2 screenAim = new Vector2 (Screen.width / 2, Screen.height / 2);
+        aimRay = Camera.main.ScreenPointToRay(screenAim);
+        Physics.Raycast(aimRay, out aimHit);
+        coiso.position = aimHit.point;
+
         //Shooting
         if (automatic)
         {

@@ -36,7 +36,6 @@ public class ThirdPersonCamera : MonoBehaviour
         Combat
     }
 
-
     #endregion
     //========================
 
