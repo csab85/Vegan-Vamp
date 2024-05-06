@@ -41,6 +41,41 @@ public class Gun: MonoBehaviour
     //========================
     #region
 
+    void GetInput()
+    {
+        //Shooting
+        if (Cursor.visible == false)
+        {
+            if (automatic)
+            {
+                if (Input.GetButton("Shoot"))
+                {
+                    if (shotCounter < capacity && !shooting)
+                    {
+                        StartCoroutine(Shoot());
+                    }
+                }
+            }
+
+            if (!automatic)
+            {
+                if (Input.GetButtonDown("Shoot"))
+                {
+                    if (shotCounter < capacity && !shooting)
+                    {
+                        StartCoroutine(Shoot());
+                    }
+                }
+            }
+
+            //reload
+            if (Input.GetButtonDown("Reload"))
+            {
+                StartCoroutine(Reload());
+            }
+        }
+    }
+
     IEnumerator Shoot()
     {
         //bullet managing
@@ -84,39 +119,14 @@ public class Gun: MonoBehaviour
 
     void Update()
     {
+        GetInput();
+
         //Aim
         Vector2 screenAim = new Vector2 (Screen.width / 2, Screen.height / 2);
         aimRay = Camera.main.ScreenPointToRay(screenAim);
         Physics.Raycast(aimRay, out aimHit);
 
-        //Shooting
-        if (automatic)
-        {
-            if (Input.GetButton("Shoot"))
-            {
-                if (shotCounter < capacity && !shooting)
-                {
-                    StartCoroutine(Shoot());
-                }
-            }
-        }
 
-        if (!automatic)
-        {
-            if (Input.GetButtonDown("Shoot"))
-            {
-                if (shotCounter < capacity && !shooting)
-                {
-                    StartCoroutine(Shoot());
-                }
-            }
-        }
-
-        //reload
-        if (Input.GetButtonDown("Reload"))
-        {
-            StartCoroutine(Reload());
-        }
     }
 
     #endregion

@@ -30,7 +30,7 @@ public class ThirdPersonCamera : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] cameraMode currentMode;
 
-    int cameraModeNumber;
+    int cameraModeNumber = 0;
 
     public enum cameraMode
     {
@@ -103,6 +103,7 @@ public class ThirdPersonCamera : MonoBehaviour
             }
         }
 
+        //fix player look forward
         else if (currentMode == cameraMode.Combat)
         {
             Vector3 combatViewDirection = combatLookAt.position - new Vector3(transform.position.x, combatLookAt.position.y , transform.position.z);
@@ -113,12 +114,7 @@ public class ThirdPersonCamera : MonoBehaviour
         //Switch camera
         if (Input.GetButtonDown("Switch Camera"))
         {
-            cameraModeNumber ++;
-
-            if (cameraModeNumber > 1)
-            {
-                cameraModeNumber = 0;
-            }
+            cameraModeNumber = (cameraModeNumber + 1) % 2;
 
             SwitchCameraMode(cameraModeNumber);
         }
