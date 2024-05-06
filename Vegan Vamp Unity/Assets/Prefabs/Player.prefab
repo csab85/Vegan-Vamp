@@ -1174,7 +1174,6 @@ MonoBehaviour:
   automatic: 0
   shotCounter: 0
   shooting: 0
-  coiso: {fileID: 0}
 --- !u!1001 &5368895233192263756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1256,9 +1255,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 876bacc994c38284d841aba50e1a0bfe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3651639510851706777}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 876bacc994c38284d841aba50e1a0bfe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7562888501070912631}
   m_SourcePrefab: {fileID: 100100000, guid: 876bacc994c38284d841aba50e1a0bfe, type: 3}
 --- !u!1 &5062974060225084701 stripped
 GameObject:
@@ -1338,20 +1334,6 @@ MonoBehaviour:
   jumpForce: 8
   jumpCooldown: 0.25
   airMultiplier: 0.4
---- !u!114 &7562888501070912631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5062974060225084701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c07dffcbc5cf13d4fa81ebae36d1985e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementScript: {fileID: 3651639510851706777}
-  cameraScript: {fileID: 0}
 --- !u!4 &5550858861869262759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 876bacc994c38284d841aba50e1a0bfe, type: 3}

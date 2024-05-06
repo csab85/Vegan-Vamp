@@ -34,6 +34,8 @@ public class Movement : MonoBehaviour
     bool readyToJump = true;
 
     //moving
+    float verticalInput;
+    float horizontalInput;
     Vector3 moveDirection;
 
     RaycastHit hit;
@@ -46,9 +48,19 @@ public class Movement : MonoBehaviour
     //========================
     #region
 
+    void GetInputs()
+    {
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
 
+        if (Input.GetButtonDown("Jump") && readyToJump && grounded)
+        {
+            Jump();
+            Invoke("JumpReset", jumpCooldown);
+        }
+    }
 
-    public void MovePlayer(float verticalInput, float horizontalInput)
+    void MovePlayer()
     {
         moveDirection = orientTransform.forward * verticalInput + orientTransform.right * horizontalInput;
 
@@ -89,17 +101,12 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void Jump()
+    void Jump()
     {
-        if (readyToJump && grounded)
-        {
-            //reset y velocity
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        //reset y velocity
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-            Invoke("Reset Jump", jumpCooldown);
-        }
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     void ResetJump()
@@ -115,8 +122,15 @@ public class Movement : MonoBehaviour
     //========================
     #region
 
+    void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
     void Update()
     {
+        GetInputs();
+
         //Check if on ground
         CheckIfGrounded();
 
