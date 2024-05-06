@@ -45,24 +45,28 @@ public class Gun: MonoBehaviour
     IEnumerator Shoot()
     {
         //bullet managing
-        int bulletNum = shotCounter;
-
-        while (bulletNum > bulletPool.transform.childCount)
-        {
-            bulletNum =- bulletPool.transform.childCount;
-        }
-
-        bullet = bulletPool.transform.GetChild(bulletNum).gameObject;
-
-        bullet.SetActive(true);
-        bullet.transform.SetParent(null);
-        bullet.GetComponent<BaseBullet>().movingToTarget = true;
         
-        shooting = true;
-        shotCounter++;
 
-        yield return new WaitForSecondsRealtime(shotCooldown);
-        shooting = false;
+        //while (bulletNum > bulletPool.transform.childCount)
+        //{
+        //    bulletNum =- bulletPool.transform.childCount;
+        //}
+        if (shotCounter <= capacity)
+        {
+            int bulletNum = shotCounter;
+
+            bullet = bulletPool.transform.GetChild(bulletNum).gameObject;
+
+            bullet.SetActive(true);
+            bullet.transform.SetParent(null);
+            bullet.GetComponent<BaseBullet>().movingToTarget = true;
+
+            shooting = true;
+            shotCounter++;
+
+            yield return new WaitForSecondsRealtime(shotCooldown);
+            shooting = false;
+        }
     }
 
     IEnumerator Reload()

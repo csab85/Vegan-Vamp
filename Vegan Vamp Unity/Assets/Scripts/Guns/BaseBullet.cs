@@ -43,6 +43,7 @@ public class BaseBullet : MonoBehaviour
 
     public void ReturnToPool()
     {
+        rb.velocity = Vector3.zero;
         transform.parent = parent.transform;
         transform.localPosition = Vector3.zero;
         movingToTarget = false;
@@ -74,13 +75,9 @@ public class BaseBullet : MonoBehaviour
             rb = GetComponent<Rigidbody>();
         }
 
-        mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         Vector3 aimDirection = gunScript.aimHit.point - transform.position;
 
         rb.AddForce(aimDirection, ForceMode.Impulse);
-
-        print("aaaaaaaaaaaaaaaaaaaaaa");
     }
 
     void Update()
