@@ -21,11 +21,11 @@ public class Movement : MonoBehaviour
 
     [Header ("Walking Settings")]
     [SerializeField] float playerHeight;
-    [SerializeField] float moveSpeed;
+    [SerializeField] public float moveSpeed;
     [SerializeField] float groundDrag;
 
     [Header ("Jumping Settings")]
-    [SerializeField] float jumpForce;
+    [SerializeField] public float jumpForce;
     [SerializeField] float jumpCooldown;
     [SerializeField] float airMultiplier;
     
