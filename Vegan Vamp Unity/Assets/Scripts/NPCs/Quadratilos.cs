@@ -20,8 +20,7 @@ public class Quadratilos : MonoBehaviour
     //STATS AND VALUES
     //========================
     #region
-
-    [SerializeField] public bool dirty;
+    
     Vector3 startingPoint;
 
     #endregion

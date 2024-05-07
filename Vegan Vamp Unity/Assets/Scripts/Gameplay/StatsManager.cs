@@ -52,15 +52,12 @@ public class StatsManager : MonoBehaviour
         //get each stat type
         foreach (Stats statRead in statsList)
         {
-            print(statRead.GetType());
-            print(statGiven.GetType());
             //see if the stat type is the same as the one we wanna change
             if (statRead.GetType() == statGiven.GetType())
             {
                 //get the subclass of the type and make a list of its fields (variables)
                 Type subclass = statGiven.GetType();
                 FieldInfo[] fields = subclass.GetFields();
-                print(fields);
 
                 //loop through each field and update it with the given values
                 foreach (FieldInfo field in fields)
