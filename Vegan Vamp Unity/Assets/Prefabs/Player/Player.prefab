@@ -1461,6 +1461,7 @@ GameObject:
   - component: {fileID: 4856822152552693663}
   - component: {fileID: 519138543182980394}
   - component: {fileID: 6016819150285676171}
+  - component: {fileID: 1758311814281214761}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1638,6 +1639,22 @@ MonoBehaviour:
   dirty:
     intensity: 0
     duration: 0
+--- !u!208 &1758311814281214761
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291324401332410514}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.66400003, y: 0.90700006, z: 0.192}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.739, z: -0.032}
+  m_TimeToStationary: 0.5
 --- !u!1 &7632473057089589168
 GameObject:
   m_ObjectHideFlags: 0
@@ -2190,12 +2207,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7c3f331424d3f4faee10ccc7568559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 157604857846182584}
   bulletPool: {fileID: 4406551931402645988}
-  capacity: 0
-  shotCooldown: 0
-  shotPower: 0
-  reloadTime: 0
+  capacity: 10
+  shotCooldown: 1
+  shotPower: 20
+  reloadTime: 1
   automatic: 0
   shotCounter: 0
   shooting: 0
@@ -2307,12 +2323,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7c3f331424d3f4faee10ccc7568559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 8962674916761357687}
   bulletPool: {fileID: 8557379900677337419}
-  capacity: 0
-  shotCooldown: 0
-  shotPower: 0
-  reloadTime: 0
+  capacity: 5
+  shotCooldown: 2
+  shotPower: 30
+  reloadTime: 1
   automatic: 0
   shotCounter: 0
   shooting: 0
