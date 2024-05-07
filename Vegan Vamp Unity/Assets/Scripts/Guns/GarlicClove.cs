@@ -26,9 +26,14 @@ public class GarlicClove : MonoBehaviour
     //========================
     #region
 
-    void Dirty(GameObject target)
+    void OnCollisionEnter(Collision colllision)
     {
-        
+        StatsManager statsManager = colllision.gameObject.GetComponent<StatsManager>();
+
+        if (statsManager != null)
+        {
+            statsManager.ApplyStat(statsManager.dirty, 1, 5);           
+        }
     }
 
     #endregion

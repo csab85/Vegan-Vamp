@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +10,7 @@ public class Quadratilos : MonoBehaviour
     #region
 
     NavMeshAgent navMeshAgent;
+    StatsManager statsManager;
     [SerializeField] GameObject bathPoint;
 
     #endregion
@@ -43,17 +45,18 @@ public class Quadratilos : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        statsManager = GetComponent<StatsManager>();
         startingPoint = transform.position;
     }
 
     void Update()
     {
-        if (dirty)
+        if (statsManager.dirty.intensity > 0)
         {
             navMeshAgent.destination = bathPoint.transform.position;
         }
 
-        if (!dirty)
+        else
         {
             navMeshAgent.destination = startingPoint;
         }
