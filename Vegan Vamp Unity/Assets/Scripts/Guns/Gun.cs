@@ -8,8 +8,8 @@ public class Gun: MonoBehaviour
     //========================
     #region
     [Header("Imports")]
-    [SerializeField] GameObject bullet;
     [SerializeField] GameObject bulletPool;
+    GameObject bullet;
 
     #endregion
     //========================
@@ -32,6 +32,8 @@ public class Gun: MonoBehaviour
 
     Ray aimRay;
     public RaycastHit aimHit;
+
+
 
     #endregion
     //========================
@@ -79,17 +81,9 @@ public class Gun: MonoBehaviour
     IEnumerator Shoot()
     {
         //bullet managing
-        
-
-        //while (bulletNum > bulletPool.transform.childCount)
-        //{
-        //    bulletNum =- bulletPool.transform.childCount;
-        //}
         if (shotCounter <= capacity)
         {
-            int bulletNum = shotCounter;
-
-            bullet = bulletPool.transform.GetChild(bulletNum).gameObject;
+            bullet = bulletPool.transform.GetChild(0).gameObject;
 
             bullet.SetActive(true);
             bullet.transform.SetParent(null);

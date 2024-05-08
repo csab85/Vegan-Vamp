@@ -77,7 +77,7 @@ public class BaseBullet : MonoBehaviour
 
         Vector3 aimDirection = gunScript.aimHit.point - transform.position;
 
-        rb.AddForce(aimDirection, ForceMode.Impulse);
+        rb.AddForce(aimDirection.normalized * gunScript.shotPower, ForceMode.Impulse);
     }
 
     void Update()
