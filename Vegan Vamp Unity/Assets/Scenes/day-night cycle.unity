@@ -15,12 +15,12 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.109803915, g: 0.035294116, b: 0.36862746, a: 1}
+  m_FogColor: {r: 0.39503342, g: 0.990566, b: 0.974043, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.2352941, g: 0.33333334, b: 0.8941177, a: 1}
+  m_AmbientSkyColor: {r: 0.8705883, g: 0.8705883, b: 0.8705883, a: 1}
   m_AmbientEquatorColor: {r: 0.16220188, g: 0.5233713, b: 0.764151, a: 1}
   m_AmbientGroundColor: {r: 0.022828411, g: 0.025213055, b: 0.1792453, a: 1}
   m_AmbientIntensity: 1.43
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.22292483, g: 0.83842933, b: 0.8198152, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -314,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 648183643}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.43, y: 2.841, z: -0.69}
+  m_LocalPosition: {x: 9.274, y: 2.751, z: 13.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -451,7 +451,7 @@ Transform:
   m_GameObject: {fileID: 1054745615}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 25, y: 25, z: 25}
+  m_LocalPosition: {x: 25, y: 10.24, z: 25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -487,7 +487,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.035294116, g: 0.037968516, b: 0.36862746, a: 1}
+  m_Color: {r: 0.99485296, g: 0.9999105, b: 0.99754715, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -546,7 +546,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441716408}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.061628457, y: -0.70441604, z: -0.70441604, w: -0.061628457}
+  m_LocalRotation: {x: 0.052147456, y: 0.79820484, z: -0.59604776, w: 0.06983393}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -567,7 +567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DirectionalLight: {fileID: 1441716409}
   Preset: {fileID: 11400000, guid: 7abb3e9f775068648b9d791380d90ede, type: 2}
-  TimeOfDay: 24
+  TimeOfDay: 10.9
 --- !u!114 &1441716412
 MonoBehaviour:
   m_ObjectHideFlags: 0
