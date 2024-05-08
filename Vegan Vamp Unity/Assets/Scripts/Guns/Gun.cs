@@ -32,6 +32,10 @@ public class Gun: MonoBehaviour
 
     Ray aimRay;
     public RaycastHit aimHit;
+    Vector3 hitPoint;
+
+    [SerializeField] GameObject coiso;
+
 
 
 
@@ -94,6 +98,8 @@ public class Gun: MonoBehaviour
 
             yield return new WaitForSecondsRealtime(shotCooldown);
             shooting = false;
+
+            Instantiate(coiso);
         }
     }
 
@@ -119,6 +125,8 @@ public class Gun: MonoBehaviour
         Vector2 screenAim = new Vector2 (Screen.width / 2, Screen.height / 2);
         aimRay = Camera.main.ScreenPointToRay(screenAim);
         Physics.Raycast(aimRay, out aimHit);
+        hitPoint = Camera.main.ScreenToWorldPoint(aimHit.point);
+        
 
 
     }
