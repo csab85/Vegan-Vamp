@@ -7,13 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: grassss
-  m_Shader: {fileID: -6465566751694194690, guid: 68ff3587bedc62841b41db67b3888c44, type: 3}
+  m_Name: Skybox
+  m_Shader: {fileID: 4800000, guid: 9a4f1d2505958074a804665d3397432c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 0
+  m_InvalidKeywords:
+  - _SUNDISK_HIGH_QUALITY
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -67,18 +68,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _TerrainColor:
-        m_Texture: {fileID: 8400000, guid: 04423fb714ff66d4c9517fe2e9dfdd15, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: 363851c76b0ace247a80059ee17c169b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _windtextureorwhatever:
-        m_Texture: {fileID: 2800000, guid: 9264d321b70d8aa4bb5ccc60c5c93967, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -95,6 +84,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _AtmosphereThickness: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -107,46 +97,40 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _HeightBlend: 0.3
+    - _Exposure: 0.31
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
     - _Metallic: 0
-    - _Mode: 0
     - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _QueueControl: 0
+    - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Screenspace: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
+    - _SunDisk: 2
+    - _SunSize: 0.04
+    - _SunSizeConvergence: 5
     - _Surface: 0
-    - _TerrainOffset: 0
-    - _TerrainSize: 50
-    - _UVSec: 0
-    - _WindHeight: 0.5
-    - _WindIntensity: 0.2
-    - _WindNoiseSpeed: 1
-    - _WindSpeed: 0.1
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _smoozness: 0.2
+    - _mult: 1
+    - _pwer: 1
     m_Colors:
-    - _BaseColor: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
-    - _BottomColor: {r: 0.07058824, g: 0.5294118, b: 0.28627452, a: 1}
-    - _Color: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _FarColor: {r: 0.8390423, g: 0.9622642, b: 0.34042364, a: 1}
-    - _NearColor: {r: 0.14374647, g: 0.8867924, b: 0.04601282, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Bottom: {r: 0.45253304, g: 0.43173727, b: 0.6226415, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GroundColor: {r: 1, g: 0.2857143, b: 0, a: 1}
+    - _SkyTint: {r: 1, g: 0.28627452, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _WindNoiseConstrast: {r: -1, g: 1.5, b: 0, a: 0}
-    - _WindNoiseScale: {r: 40, g: 100, b: 0, a: 0}
-    - _nearfarrange: {r: 10, g: 60, b: 0, a: 0}
+    - _Top: {r: 1, g: 0.9974855, b: 0.9764151, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &4755442429066012254
+--- !u!114 &8107409879440780434
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
