@@ -20,7 +20,7 @@ public class VillageLoader: MonoBehaviour
 
     [SerializeField] float playerMaxDistance;
     [SerializeField] float playerDistance;
-    bool loaded;
+    bool loaded = false;
 
     #endregion
     //========================
@@ -43,13 +43,13 @@ public class VillageLoader: MonoBehaviour
     private void Update()
     {
         playerDistance = Vector3.Distance(player.transform.position, transform.position);
-        if (playerDistance > playerMaxDistance && !loaded)
+        if (playerDistance < playerMaxDistance && !loaded)
         {
-            SceneManager.LoadSceneAsync("Village 1 - Teste");
+            SceneManager.LoadSceneAsync("Village 1 - Teste", LoadSceneMode.Additive);
             loaded = true;
         }
 
-        else if (loaded)
+        else if (playerDistance > playerMaxDistance && loaded)
         {
             SceneManager.UnloadSceneAsync("Village 1 - Teste");
             loaded = false;
