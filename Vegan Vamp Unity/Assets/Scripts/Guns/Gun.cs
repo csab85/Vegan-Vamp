@@ -9,6 +9,9 @@ public class Gun: MonoBehaviour
     #region
     [Header("Imports")]
     [SerializeField] GameObject bulletPool;
+    [SerializeField] GameObject aimColliders;
+    [SerializeField] GameObject muzzleFX;
+    [SerializeField] GameObject hitFX;
     GameObject bullet;
 
     #endregion
@@ -25,6 +28,7 @@ public class Gun: MonoBehaviour
     [SerializeField] public float shotPower;
     [SerializeField] float reloadTime;
     [SerializeField] bool automatic;
+    [SerializeField] bool hitscan;
 
     [Header("Info")]
     [SerializeField] int shotCounter;
@@ -33,8 +37,6 @@ public class Gun: MonoBehaviour
     Ray aimRay;
     public RaycastHit aimHit;
     Vector3 hitPoint;
-
-    [SerializeField] GameObject coiso;
 
 
     #endregion
@@ -83,22 +85,26 @@ public class Gun: MonoBehaviour
     IEnumerator Shoot()
     {
         //bullet managing
-        if (shotCounter <= capacity)
+        if (!hitscan)
         {
             bullet = bulletPool.transform.GetChild(0).gameObject;
 
             bullet.SetActive(true);
             bullet.transform.SetParent(null);
             bullet.GetComponent<BaseBullet>().movingToTarget = true;
-
-            shooting = true;
-            shotCounter++;
-
-            yield return new WaitForSecondsRealtime(shotCooldown);
-            shooting = false;
-
-            Instantiate(coiso);
         }
+
+        if (hitscan)
+        {
+
+        }
+
+        //manage ammo
+        shooting = true;
+        shotCounter++;
+
+        yield return new WaitForSecondsRealtime(shotCooldown);
+        shooting = false;
     }
 
     IEnumerator Reload()
@@ -115,6 +121,11 @@ public class Gun: MonoBehaviour
     //========================
     #region
 
+    void Start()
+    {
+        aimColliders.SetActive(true);
+    }
+
     void Update()
     {
         GetInput();
@@ -123,10 +134,6 @@ public class Gun: MonoBehaviour
         Vector2 screenAim = new Vector2 (Screen.width / 2, Screen.height / 2);
         aimRay = Camera.main.ScreenPointToRay(screenAim);
         Physics.Raycast(aimRay, out aimHit);
-        hitPoint = Camera.main.ScreenToWorldPoint(aimHit.point);
-        
-
-
     }
 
     #endregion
