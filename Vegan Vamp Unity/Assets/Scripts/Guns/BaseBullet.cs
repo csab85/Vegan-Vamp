@@ -1,6 +1,8 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.VFX;
 
 public class BaseBullet : MonoBehaviour
 {
@@ -10,10 +12,12 @@ public class BaseBullet : MonoBehaviour
 
     [Header ("Imports")]
     [SerializeField] GameObject parent;
-    Rigidbody rb;
+    [SerializeField] GameObject hitPool;
 
     [Header ("Scripts")]
     [SerializeField] Gun gunScript;
+
+    Rigidbody rb;
 
     #endregion
     //========================
@@ -25,9 +29,8 @@ public class BaseBullet : MonoBehaviour
 
     [Header ("Settings")]
     [SerializeField] float maxDistance;
+    [SerializeField] float fxDelay;
     [SerializeField] bool returnOnCollision;
-
-    GameObject hit;
 
     #endregion
     //========================
@@ -45,20 +48,28 @@ public class BaseBullet : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void OnCollisionEnter(Collision collision)
+    IEnumerator PlayHitFx()
     {
+        GameObject hit = hitPool.transform.GetChild(0).gameObject;
+        VisualEffect hitFx = hit.GetComponent<VisualEffect>();
+
+        hit.transform.SetParent(null);
+        hit.transform.position = transform.position;
+
+        yield return new WaitForSecondsRealtime(fxDelay);
+
+        hit.SetActive(true);
+        hitFx.Play();
+
         if (returnOnCollision)
         {
             ReturnToPool();
         }
+    }
 
-        // GameObject hit = hitPool.transform.GetChild(0).gameObject;
-        // VisualEffect hitFx = hit.GetComponent<VisualEffect>();
-
-        // hit.transform.SetParent(null);
-        // hit.transform.position = aimHit.point;
-        // hit.SetActive(true);
-        // hitFx.Play();
+    void OnCollisionEnter(Collision collision)
+    {
+        StartCoroutine(PlayHitFx());
     }
 
     #endregion

@@ -12,7 +12,7 @@ public class Gun: MonoBehaviour
     [SerializeField] GameObject bulletPool;
     [SerializeField] GameObject aimColliders;
     [SerializeField] GameObject muzzle;
-    [SerializeField] GameObject hitPool;
+
     VisualEffect muzzleFX;
 
     #endregion
@@ -37,7 +37,6 @@ public class Gun: MonoBehaviour
 
     Ray aimRay;
     public RaycastHit aimHit;
-    Vector3 hitPoint;
     bool aiming;
 
 
@@ -86,7 +85,7 @@ public class Gun: MonoBehaviour
 
     IEnumerator Shoot()
     {
-        //bullet managing
+        //projectile bullet
         if (!hitscan)
         {
             GameObject bullet = bulletPool.transform.GetChild(0).gameObject;
@@ -95,10 +94,7 @@ public class Gun: MonoBehaviour
             bullet.transform.SetParent(null);
         }
 
-        //muzzle (quem diria em)
-        muzzleFX.Play();
-
-        //hit (only for hitscan)
+        //hitscan bullet
         if (hitscan)
         {
             if (aiming && aimHit.collider.tag != "Aim Collider")
@@ -113,6 +109,10 @@ public class Gun: MonoBehaviour
         //manage ammo
         shooting = true;
         shotCounter++;
+
+        //muzzle flash (quem diria em)
+        muzzle.SetActive(true);
+        muzzleFX.Play();
 
         yield return new WaitForSecondsRealtime(shotCooldown);
         shooting = false;
@@ -146,6 +146,11 @@ public class Gun: MonoBehaviour
         Vector2 screenAim = new Vector2 (Screen.width / 2, Screen.height / 2);
         aimRay = Camera.main.ScreenPointToRay(screenAim);
         aiming = Physics.Raycast(aimRay, out aimHit);
+    }
+
+    void OnDisable()
+    {
+        muzzle.SetActive(false);
     }
 
     #endregion
