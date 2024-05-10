@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Gun: MonoBehaviour
 {
@@ -9,7 +10,10 @@ public class Gun: MonoBehaviour
     #region
     [Header("Imports")]
     [SerializeField] GameObject bulletPool;
-    GameObject bullet;
+    [SerializeField] GameObject aimColliders;
+    [SerializeField] GameObject muzzle;
+    [SerializeField] GameObject hitPool;
+    VisualEffect muzzleFX;
 
     #endregion
     //========================
@@ -25,6 +29,7 @@ public class Gun: MonoBehaviour
     [SerializeField] public float shotPower;
     [SerializeField] float reloadTime;
     [SerializeField] bool automatic;
+    [SerializeField] bool hitscan;
 
     [Header("Info")]
     [SerializeField] int shotCounter;
@@ -33,10 +38,7 @@ public class Gun: MonoBehaviour
     Ray aimRay;
     public RaycastHit aimHit;
     Vector3 hitPoint;
-
-    [SerializeField] GameObject coiso;
-
-
+    bool aiming;
 
 
     #endregion
@@ -85,22 +87,35 @@ public class Gun: MonoBehaviour
     IEnumerator Shoot()
     {
         //bullet managing
-        if (shotCounter <= capacity)
+        if (!hitscan)
         {
-            bullet = bulletPool.transform.GetChild(0).gameObject;
+            GameObject bullet = bulletPool.transform.GetChild(0).gameObject;
 
             bullet.SetActive(true);
             bullet.transform.SetParent(null);
-            bullet.GetComponent<BaseBullet>().movingToTarget = true;
-
-            shooting = true;
-            shotCounter++;
-
-            yield return new WaitForSecondsRealtime(shotCooldown);
-            shooting = false;
-
-            Instantiate(coiso);
         }
+
+        //muzzle (quem diria em)
+        muzzleFX.Play();
+
+        //hit (only for hitscan)
+        if (hitscan)
+        {
+            if (aiming && aimHit.collider.tag != "Aim Collider")
+            {
+                GameObject bullet = bulletPool.transform.GetChild(0).gameObject;
+
+                bullet.SetActive(true);
+                bullet.transform.position = aimHit.point;
+            }
+        }
+
+        //manage ammo
+        shooting = true;
+        shotCounter++;
+
+        yield return new WaitForSecondsRealtime(shotCooldown);
+        shooting = false;
     }
 
     IEnumerator Reload()
@@ -117,6 +132,12 @@ public class Gun: MonoBehaviour
     //========================
     #region
 
+    void Start()
+    {
+        aimColliders.SetActive(true);
+        muzzleFX = muzzle.GetComponent<VisualEffect>();
+    }
+
     void Update()
     {
         GetInput();
@@ -124,11 +145,7 @@ public class Gun: MonoBehaviour
         //Aim
         Vector2 screenAim = new Vector2 (Screen.width / 2, Screen.height / 2);
         aimRay = Camera.main.ScreenPointToRay(screenAim);
-        Physics.Raycast(aimRay, out aimHit);
-        hitPoint = Camera.main.ScreenToWorldPoint(aimHit.point);
-        
-
-
+        aiming = Physics.Raycast(aimRay, out aimHit);
     }
 
     #endregion

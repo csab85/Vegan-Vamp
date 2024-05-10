@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEditor;
 
 public class VillageLoader: MonoBehaviour
 {
@@ -46,7 +47,7 @@ public class VillageLoader: MonoBehaviour
         if (playerDistance < playerMaxDistance && !loaded)
         {
             SceneManager.LoadSceneAsync("Village 1 - Teste", LoadSceneMode.Additive);
-            loaded = true;
+            Scene villageScene = SceneManager.GetSceneByName("Village 1 - Teste");
         }
 
         else if (playerDistance > playerMaxDistance && loaded)

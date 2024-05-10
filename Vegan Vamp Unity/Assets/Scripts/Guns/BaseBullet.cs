@@ -26,12 +26,8 @@ public class BaseBullet : MonoBehaviour
     [Header ("Settings")]
     [SerializeField] float maxDistance;
     [SerializeField] bool returnOnCollision;
-    
-    [Header ("Info")]
-    [SerializeField] public bool movingToTarget;
-    
-    //aim
-    Vector3 mouseWorldPosition;
+
+    GameObject hit;
 
     #endregion
     //========================
@@ -46,18 +42,23 @@ public class BaseBullet : MonoBehaviour
         rb.velocity = Vector3.zero;
         transform.parent = parent.transform;
         transform.localPosition = Vector3.zero;
-        movingToTarget = false;
         gameObject.SetActive(false);
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        movingToTarget = false;
-
         if (returnOnCollision)
         {
             ReturnToPool();
         }
+
+        // GameObject hit = hitPool.transform.GetChild(0).gameObject;
+        // VisualEffect hitFx = hit.GetComponent<VisualEffect>();
+
+        // hit.transform.SetParent(null);
+        // hit.transform.position = aimHit.point;
+        // hit.SetActive(true);
+        // hitFx.Play();
     }
 
     #endregion
@@ -68,12 +69,14 @@ public class BaseBullet : MonoBehaviour
     //========================
     #region
 
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     void OnEnable()
     {   
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody>();
-        }
+        rb.velocity = Vector3.zero;
 
         Vector3 aimDirection = gunScript.aimHit.point - transform.position;
 
