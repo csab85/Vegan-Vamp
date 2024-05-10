@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Gun: MonoBehaviour
 {
@@ -10,9 +11,9 @@ public class Gun: MonoBehaviour
     [Header("Imports")]
     [SerializeField] GameObject bulletPool;
     [SerializeField] GameObject aimColliders;
-    [SerializeField] GameObject muzzleFX;
-    [SerializeField] GameObject hitFX;
-    GameObject bullet;
+    [SerializeField] GameObject muzzle;
+    [SerializeField] GameObject hitPool;
+    VisualEffect muzzleFX;
 
     #endregion
     //========================
@@ -37,6 +38,7 @@ public class Gun: MonoBehaviour
     Ray aimRay;
     public RaycastHit aimHit;
     Vector3 hitPoint;
+    bool aiming;
 
 
     #endregion
@@ -87,16 +89,25 @@ public class Gun: MonoBehaviour
         //bullet managing
         if (!hitscan)
         {
-            bullet = bulletPool.transform.GetChild(0).gameObject;
+            GameObject bullet = bulletPool.transform.GetChild(0).gameObject;
 
             bullet.SetActive(true);
             bullet.transform.SetParent(null);
-            bullet.GetComponent<BaseBullet>().movingToTarget = true;
         }
 
+        //muzzle (quem diria em)
+        muzzleFX.Play();
+
+        //hit (only for hitscan)
         if (hitscan)
         {
+            if (aiming && aimHit.collider.tag != "Aim Collider")
+            {
+                GameObject bullet = bulletPool.transform.GetChild(0).gameObject;
 
+                bullet.SetActive(true);
+                bullet.transform.position = aimHit.point;
+            }
         }
 
         //manage ammo
@@ -124,6 +135,7 @@ public class Gun: MonoBehaviour
     void Start()
     {
         aimColliders.SetActive(true);
+        muzzleFX = muzzle.GetComponent<VisualEffect>();
     }
 
     void Update()
@@ -133,7 +145,7 @@ public class Gun: MonoBehaviour
         //Aim
         Vector2 screenAim = new Vector2 (Screen.width / 2, Screen.height / 2);
         aimRay = Camera.main.ScreenPointToRay(screenAim);
-        Physics.Raycast(aimRay, out aimHit);
+        aiming = Physics.Raycast(aimRay, out aimHit);
     }
 
     #endregion
