@@ -10,14 +10,10 @@ public class Gun: MonoBehaviour
     #region
     [Header("Imports")]
     [SerializeField] GameObject bulletPool;
-<<<<<<< HEAD
     [SerializeField] GameObject aimColliders;
     [SerializeField] GameObject muzzle;
     [SerializeField] GameObject hitPool;
     VisualEffect muzzleFX;
-=======
-    GameObject bullet;
->>>>>>> Scenery
 
     #endregion
     //========================
@@ -42,14 +38,7 @@ public class Gun: MonoBehaviour
     Ray aimRay;
     public RaycastHit aimHit;
     Vector3 hitPoint;
-<<<<<<< HEAD
     bool aiming;
-=======
-
-    [SerializeField] GameObject coiso;
-
-
->>>>>>> Scenery
 
 
     #endregion
@@ -98,30 +87,12 @@ public class Gun: MonoBehaviour
     IEnumerator Shoot()
     {
         //bullet managing
-<<<<<<< HEAD
         if (!hitscan)
         {
             GameObject bullet = bulletPool.transform.GetChild(0).gameObject;
 
             bullet.SetActive(true);
             bullet.transform.SetParent(null);
-=======
-        if (shotCounter <= capacity)
-        {
-            bullet = bulletPool.transform.GetChild(0).gameObject;
-
-            bullet.SetActive(true);
-            bullet.transform.SetParent(null);
-            bullet.GetComponent<BaseBullet>().movingToTarget = true;
-
-            shooting = true;
-            shotCounter++;
-
-            yield return new WaitForSecondsRealtime(shotCooldown);
-            shooting = false;
-
-            Instantiate(coiso);
->>>>>>> Scenery
         }
 
         //muzzle (quem diria em)
@@ -174,15 +145,7 @@ public class Gun: MonoBehaviour
         //Aim
         Vector2 screenAim = new Vector2 (Screen.width / 2, Screen.height / 2);
         aimRay = Camera.main.ScreenPointToRay(screenAim);
-<<<<<<< HEAD
         aiming = Physics.Raycast(aimRay, out aimHit);
-=======
-        Physics.Raycast(aimRay, out aimHit);
-        hitPoint = Camera.main.ScreenToWorldPoint(aimHit.point);
-        
-
-
->>>>>>> Scenery
     }
 
     #endregion

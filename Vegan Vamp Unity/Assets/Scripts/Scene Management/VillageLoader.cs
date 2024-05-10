@@ -1,10 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-<<<<<<< HEAD
 using UnityEditor;
-=======
->>>>>>> Scenery
 
 public class VillageLoader: MonoBehaviour
 {
@@ -50,11 +47,7 @@ public class VillageLoader: MonoBehaviour
         if (playerDistance < playerMaxDistance && !loaded)
         {
             SceneManager.LoadSceneAsync("Village 1 - Teste", LoadSceneMode.Additive);
-<<<<<<< HEAD
             Scene villageScene = SceneManager.GetSceneByName("Village 1 - Teste");
-=======
-            loaded = true;
->>>>>>> Scenery
         }
 
         else if (playerDistance > playerMaxDistance && loaded)
