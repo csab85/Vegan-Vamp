@@ -10,14 +10,12 @@ public class BaseBullet : MonoBehaviour
     //========================
     #region
 
-    [Header ("Imports")]
-    [SerializeField] GameObject parent;
-    [SerializeField] GameObject hitPool;
-
-    [Header ("Scripts")]
-    [SerializeField] Gun gunScript;
-
+    GameObject parent;
+    Gun gunScript;
     Rigidbody rb;
+    MeshRenderer meshRenderer;
+    GameObject hit;
+    VisualEffect hitFx;
 
     #endregion
     //========================
@@ -29,9 +27,10 @@ public class BaseBullet : MonoBehaviour
 
     [Header ("Settings")]
     [SerializeField] float maxDistance;
-    [SerializeField] float fxDelay;
     [SerializeField] bool returnOnCollision;
-
+    [SerializeField] float returnDelay;
+    [SerializeField] bool playFxOnCollision;
+    [SerializeField] float fxDelay;
     #endregion
     //========================
 
@@ -40,36 +39,50 @@ public class BaseBullet : MonoBehaviour
     //========================
     #region
 
-    public void ReturnToPool()
+    /// <summary>
+    /// Waits for the delay and resets the bullet to its initial state (including posit), then deactivates it
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator ReturnToPool()
     {
+        yield return new WaitForSeconds(returnDelay);
+
         rb.velocity = Vector3.zero;
+        rb.isKinematic = false;
+        meshRenderer.enabled = true;
         transform.parent = parent.transform;
         transform.localPosition = Vector3.zero;
+        transform.rotation = Quaternion.Euler(90, 0, 0);
+
+        hit.SetActive(false);
         gameObject.SetActive(false);
     }
 
-    IEnumerator PlayHitFx()
+    /// <summary>
+    /// Waits for the delay then plays the hit effect
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator PlayHitFx() 
     {
-        GameObject hit = hitPool.transform.GetChild(0).gameObject;
-        VisualEffect hitFx = hit.GetComponent<VisualEffect>();
-
-        hit.transform.SetParent(null);
-        hit.transform.position = transform.position;
-
         yield return new WaitForSecondsRealtime(fxDelay);
 
         hit.SetActive(true);
-        hitFx.Play();
-
-        if (returnOnCollision)
-        {
-            ReturnToPool();
-        }
+        meshRenderer.enabled = false;
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        StartCoroutine(PlayHitFx());
+        rb.isKinematic = true;
+
+        if (playFxOnCollision)
+        {
+            StartCoroutine(PlayHitFx());
+        }
+
+        if (returnOnCollision)
+        {
+            StartCoroutine(ReturnToPool());
+        }
     }
 
     #endregion
@@ -82,13 +95,16 @@ public class BaseBullet : MonoBehaviour
 
     void Awake()
     {
+        parent = transform.parent.gameObject;
+        gunScript = parent.transform.parent.GetComponent<Gun>();
         rb = GetComponent<Rigidbody>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        hit = transform.GetChild(0).gameObject;
+        hitFx = hit.GetComponent<VisualEffect>();
     }
 
     void OnEnable()
     {   
-        rb.velocity = Vector3.zero;
-
         Vector3 aimDirection = gunScript.aimHit.point - transform.position;
 
         rb.AddForce(aimDirection.normalized * gunScript.shotPower, ForceMode.Impulse);
@@ -98,7 +114,7 @@ public class BaseBullet : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, parent.transform.position) > maxDistance)
         {
-            ReturnToPool();
+            StartCoroutine(ReturnToPool());
         }
     }
 

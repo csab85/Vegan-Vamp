@@ -26,6 +26,10 @@ public class GunSelector : MonoBehaviour
     //========================
     #region
 
+    /// <summary>
+    /// Iterates list, activates the selected gun and deactivates the others
+    /// </summary>
+    /// <param name="gunNumber">The gun to be activated</param>
     public void SelectGun(int gunNumber)
     {
         foreach (GameObject gun in guns)

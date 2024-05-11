@@ -33,7 +33,7 @@ public class Gun: MonoBehaviour
 
     [Header("Info")]
     [SerializeField] int shotCounter;
-    [SerializeField] bool shooting;
+    [SerializeField] public bool shooting;
 
     Ray aimRay;
     public RaycastHit aimHit;
@@ -48,6 +48,9 @@ public class Gun: MonoBehaviour
     //========================
     #region
 
+    /// <summary>
+    /// Gets if the player is shooting (depends on if gun is automatic or not) or reloading, and call its respective functions
+    /// </summary>
     void GetInput()
     {
         //Shooting
@@ -83,6 +86,10 @@ public class Gun: MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawns bullet (at aim point if hitscan, at gun if not), reduces ammo, plays muzzle effect and puts gun on cooldown
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Shoot()
     {
         //projectile bullet
@@ -103,6 +110,7 @@ public class Gun: MonoBehaviour
 
                 bullet.SetActive(true);
                 bullet.transform.position = aimHit.point;
+                bullet.transform.parent = null;
             }
         }
 
@@ -118,6 +126,10 @@ public class Gun: MonoBehaviour
         shooting = false;
     }
 
+    /// <summary>
+    /// Try guessing (it resets ammo counter)
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Reload()
     {
         yield return new WaitForSecondsRealtime(reloadTime);
