@@ -12,7 +12,7 @@ public class Gun: MonoBehaviour
     [SerializeField] GameObject bulletPool;
     [SerializeField] GameObject aimColliders;
     [SerializeField] GameObject muzzle;
-    [SerializeField] GameObject hitPool;
+
     VisualEffect muzzleFX;
 
     #endregion
@@ -33,11 +33,10 @@ public class Gun: MonoBehaviour
 
     [Header("Info")]
     [SerializeField] int shotCounter;
-    [SerializeField] bool shooting;
+    [SerializeField] public bool shooting;
 
     Ray aimRay;
     public RaycastHit aimHit;
-    Vector3 hitPoint;
     bool aiming;
 
 
@@ -49,6 +48,9 @@ public class Gun: MonoBehaviour
     //========================
     #region
 
+    /// <summary>
+    /// Gets if the player is shooting (depends on if gun is automatic or not) or reloading, and call its respective functions
+    /// </summary>
     void GetInput()
     {
         //Shooting
@@ -84,9 +86,13 @@ public class Gun: MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawns bullet (at aim point if hitscan, at gun if not), reduces ammo, plays muzzle effect and puts gun on cooldown
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Shoot()
     {
-        //bullet managing
+        //projectile bullet
         if (!hitscan)
         {
             GameObject bullet = bulletPool.transform.GetChild(0).gameObject;
@@ -95,10 +101,7 @@ public class Gun: MonoBehaviour
             bullet.transform.SetParent(null);
         }
 
-        //muzzle (quem diria em)
-        muzzleFX.Play();
-
-        //hit (only for hitscan)
+        //hitscan bullet
         if (hitscan)
         {
             if (aiming && aimHit.collider.tag != "Aim Collider")
@@ -107,6 +110,7 @@ public class Gun: MonoBehaviour
 
                 bullet.SetActive(true);
                 bullet.transform.position = aimHit.point;
+                bullet.transform.parent = null;
             }
         }
 
@@ -114,10 +118,18 @@ public class Gun: MonoBehaviour
         shooting = true;
         shotCounter++;
 
+        //muzzle flash (quem diria em)
+        muzzle.SetActive(true);
+        muzzleFX.Play();
+
         yield return new WaitForSecondsRealtime(shotCooldown);
         shooting = false;
     }
 
+    /// <summary>
+    /// Try guessing (it resets ammo counter)
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Reload()
     {
         yield return new WaitForSecondsRealtime(reloadTime);
@@ -146,6 +158,11 @@ public class Gun: MonoBehaviour
         Vector2 screenAim = new Vector2 (Screen.width / 2, Screen.height / 2);
         aimRay = Camera.main.ScreenPointToRay(screenAim);
         aiming = Physics.Raycast(aimRay, out aimHit);
+    }
+
+    void OnDisable()
+    {
+        muzzle.SetActive(false);
     }
 
     #endregion
