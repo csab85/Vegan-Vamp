@@ -47,12 +47,12 @@ public class BaseBullet : MonoBehaviour
     {
         yield return new WaitForSeconds(returnDelay);
 
-        rb.velocity = Vector3.zero;
         rb.isKinematic = false;
+        rb.velocity = Vector3.zero;
         meshRenderer.enabled = true;
         transform.parent = parent.transform;
         transform.localPosition = Vector3.zero;
-        transform.rotation = Quaternion.Euler(90, 0, 0);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
 
         hit.SetActive(false);
         gameObject.SetActive(false);

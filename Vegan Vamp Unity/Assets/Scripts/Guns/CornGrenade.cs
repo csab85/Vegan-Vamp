@@ -66,7 +66,7 @@ public class CornGrenade : MonoBehaviour
         //make popcorns pop
         foreach (Transform child in transform)
         {
-            if (child.gameObject.tag == "Popcorn Frag")
+            if (child.gameObject.tag == "Projectile")
             {
                 child.gameObject.SetActive(true);
             }
