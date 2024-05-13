@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -185,11 +185,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8355637700649065927, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016638339
+      value: 0.000000016638348
       objectReference: {fileID: 0}
     - target: {fileID: 8355637700649065927, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000004384643
+      value: -0.0000000043846446
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -576,13 +576,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
   - 20
   - 20
+  - 0
+  - -5
+  - 0
+  - 20
+  - 0
   - 0
   - 0
   dirty:
@@ -2236,6 +2236,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1888992097 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9149338184819908258, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+  m_PrefabInstance: {fileID: 20576798}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1895309021
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,12 +2390,12 @@ GameObject:
   - component: {fileID: 1900620035}
   - component: {fileID: 1900620036}
   m_Layer: 0
-  m_Name: Bichao
+  m_Name: Diver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!195 &1900620030
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2524,12 +2529,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900620028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa13915ff50e4f64193e45d5c6d64b3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1888992097}
   initialDistance: {x: 15, y: 0, z: 10}
   toReduceDistance: {x: 6, y: 0, z: 6}
   attackDistance: 3

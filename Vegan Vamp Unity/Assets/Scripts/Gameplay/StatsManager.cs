@@ -133,8 +133,6 @@ public class StatsManager : MonoBehaviour
             { Stats.Health, health},
             {Stats.Dirty, dirty}
         };
-
-        ApplyStat(Stats.Dirty, 3, 10);
     }
 
     void Update()
