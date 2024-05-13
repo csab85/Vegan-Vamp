@@ -50,15 +50,15 @@ public class Quadratilos : MonoBehaviour
 
     void Update()
     {
-        if (statsManager.dirty.intensity > 0)
-        {
-            navMeshAgent.destination = bathPoint.transform.position;
-        }
+        // if (statsManager.dirtySelf.intensity > 0)
+        // {
+        //     navMeshAgent.destination = bathPoint.transform.position;
+        // }
 
-        else
-        {
-            navMeshAgent.destination = startingPoint;
-        }
+        // else
+        // {
+        //     navMeshAgent.destination = startingPoint;
+        // }
     }
 
     #endregion

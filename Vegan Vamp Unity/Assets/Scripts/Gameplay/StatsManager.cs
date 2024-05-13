@@ -1,12 +1,30 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics.SymbolStore;
-using System.Linq;
-using System.Reflection;
 using UnityEngine;
 
 public class StatsManager : MonoBehaviour
 {
+    //EXPLANATION
+    //Every StatsManager has a dict, and each dict stores each stat as a key (the stats can be found in the enum Stats). The value is an array of 8 floats, that refers to aspects of each stat. Those aspects are  always the same, but with different values.
+
+
+    //BASE INTENSITY (0) - The self intensity value the object will drift towards (if self intensity is different from base intensity)
+
+    //SELF INTENSITY (1) - How intense the effect is on the object
+
+    //SELF DURATION (2) - How many seconds it'll take for the intensity to get to it's base value. If <= 0 the value won't change
+
+    //APPLY INTENSITY (3) - How much of this effect will be added to the targets SELF INTENSITY. If negative reduces the intensity
+
+    //APPLY DURATION (4) - How much seconds more it'll take to SELF INTENSITY to go to the same as BASE INTENSITY
+    
+    //CAP INTENSITY (5) - The highest SELF INTENSITY the object can get to
+
+    //CAP INTENSITY (6) - The highest SELF DURATION the object can get to
+
+    //CAP STARTING INTENSITY (7) - How much intensity the object had the when SELF INTENSITY changes to a new value different from BASE INTENSITY
+
+    //PASSED TIME (8) - How many seconds passed since last time SELF INTENSITY != BASE INTENSITY
+
     //IMPORTS
     //========================
     #region
@@ -20,24 +38,33 @@ public class StatsManager : MonoBehaviour
     //STATS AND VALUES
     //========================
     #region
+    //the value to call each var inside a stat list
+    const int BASE_INTENSITY = 0;
+    const int SELF_INTENSITY = 1;
+    const int SELF_DURATION = 2;
+    const int APPLY_INTENSITY = 3;
+    const int APPLY_DURATION = 4;
+    const int CAP_INTENSITY = 5;
+    const int CAP_DURATION = 6;
+    const int STARTING_INTENSITY = 7;
+    const int PASSED_TIME = 8;
 
-    //Status classes
-    [Serializable]
-    public class Stats
+    //every stat in game
+    enum Stats
     {
-        [Serializable]
-        public class Dirty : Stats
-        {
-            public float intensity;
-            public float duration;
-        }
+        Dirty,
+        Health
     }
 
-    //Stats vars
-    [SerializeField] public Stats.Dirty dirty = new Stats.Dirty();
+    //Stats list of the game object
 
-    //Stats list
-    Stats[] statsList = {new Stats.Dirty()};
+    [SerializeField] float[] health;
+    [SerializeField] float[] dirty;
+    
+
+
+    //Create dict var
+    Dictionary<Stats, float[]> statsDict;
 
     #endregion
     //========================
@@ -47,31 +74,46 @@ public class StatsManager : MonoBehaviour
     //========================
     #region
 
-    public void ApplyStat(Stats statGiven, float intensity, float duration)
+    void ApplyStat(Stats stat, float intensity, float duration)
     {
-        //get each stat type
-        foreach (Stats statRead in statsList)
+        statsDict[stat][STARTING_INTENSITY] = intensity;
+        statsDict[stat][SELF_INTENSITY] = intensity;
+        statsDict[stat][SELF_DURATION] = duration;
+    }
+
+    void DriftTowardsBase()
+    {
+        foreach (KeyValuePair<Stats, float[]> pair in statsDict)
         {
-            //see if the stat type is the same as the one we wanna change
-            if (statRead.GetType() == statGiven.GetType())
+            float selfIntensity = pair.Value[SELF_INTENSITY];
+            float baseIntensity = pair.Value[BASE_INTENSITY];
+            float startingIntensity = pair.Value[STARTING_INTENSITY];
+            
+            //move self intensity towards base, based on how much of the duration passed
+            if (selfIntensity != baseIntensity)
             {
-                //get the subclass of the type and make a list of its fields (variables)
-                Type subclass = statGiven.GetType();
-                FieldInfo[] fields = subclass.GetFields();
+                float selfDuration = pair.Value[SELF_DURATION];
+                float passedTime = pair.Value[PASSED_TIME];
 
-                //loop through each field and update it with the given values
-                foreach (FieldInfo field in fields)
-                {
-                    if (field.Name == "intensity")
-                    {
-                        field.SetValue(statGiven, intensity);
-                    }
+                //get the percentage of durtation passed based on time passed
+                float durationPercentage = Mathf.Clamp01(passedTime / selfDuration);
+                
+                //set self intensity to percentage between starting and base value (percentage of time passed from toal duration) 
+                selfIntensity = Mathf.Lerp(startingIntensity, baseIntensity, durationPercentage);
 
-                    if (field.Name == "duration")
-                    {
-                        field.SetValue(statGiven, duration);
-                    }
-                }
+                //Updat values on dict
+                pair.Value[SELF_INTENSITY] = selfIntensity;
+                pair.Value[PASSED_TIME] += Time.deltaTime;
+
+                print(pair.Value[PASSED_TIME]);
+                print(selfIntensity);
+            }
+
+            //passed time to 0 if base and self intensity are the same
+            else if (pair.Value[PASSED_TIME] != 0 | pair.Value[SELF_DURATION] != 0)
+            {
+                pair.Value[PASSED_TIME] = 0;
+                pair.Value[SELF_DURATION] = 0;
             }
         }
     }
@@ -86,12 +128,18 @@ public class StatsManager : MonoBehaviour
 
     void Start()
     {
-        
+        statsDict = new Dictionary<Stats, float[]>()
+        {
+            { Stats.Health, health},
+            {Stats.Dirty, dirty}
+        };
+
+        ApplyStat(Stats.Dirty, 3, 10);
     }
 
     void Update()
     {
-        
+        DriftTowardsBase();
     }
 
     #endregion

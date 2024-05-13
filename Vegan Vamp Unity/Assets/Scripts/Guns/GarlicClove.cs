@@ -32,7 +32,7 @@ public class GarlicClove : MonoBehaviour
 
         if (statsManager != null)
         {
-            statsManager.ApplyStat(statsManager.dirty, 1, 5);           
+            //appliar o treco         
         }
     }
 
