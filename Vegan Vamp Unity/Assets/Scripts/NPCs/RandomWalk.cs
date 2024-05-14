@@ -32,7 +32,7 @@ public class RandomWalk : MonoBehaviour
     //========================
     #region
 
-    void MoveToRandomPosit()
+    public void MoveToRandomPosit()
     {
         float angle = Random.Range(0, Mathf.PI * 2);
         float distance = Random.Range(0, areaRadius);
@@ -59,14 +59,6 @@ public class RandomWalk : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = speed;
         MoveToRandomPosit();
-    }
-
-    void Update()
-    {
-        if (navMeshAgent.remainingDistance < 0.1f)
-        {
-            MoveToRandomPosit();
-        }
     }
 
     #endregion
