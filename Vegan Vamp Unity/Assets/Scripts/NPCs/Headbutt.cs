@@ -96,6 +96,10 @@ public class Headbutt : MonoBehaviour
                     }
                 
                     break;
+
+                case States.Aiming:
+
+                    break;
             }
         }
     }
