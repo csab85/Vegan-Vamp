@@ -1,49 +1,76 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RandomMovement : MonoBehaviour
+public class RandomWalk : MonoBehaviour
 {
+    //IMPORTS
+    //========================
+    #region
+
     NavMeshAgent navMeshAgent;
-    Vector3 targetPosition;
-    bool isMoving = false;
-    float minDistance = 5f;
-    float maxDistance = 10f;
-    float minWaitTime = 1f;
-    float maxWaitTime = 3f;
-    float nextMoveTime = 0f;
+
+    #endregion
+    //========================
+
+
+    //STATS AND VALUES
+    //========================
+    #region
+
+    [Header ("Area Settings")]
+    [SerializeField] Vector3 areaCenter;
+    [SerializeField] float areaRadius;
+
+    [Header ("Agent Settings")]
+    [SerializeField] float speed;
+
+    #endregion
+    //========================
+
+
+    //FUNCTIONS
+    //========================
+    #region
+
+    void MoveToRandomPosit()
+    {
+        float angle = Random.Range(0, Mathf.PI * 2);
+        float distance = Random.Range(0, areaRadius);
+
+        float circleX = areaCenter.x + Mathf.Cos(angle) * distance;
+        float circleZ = areaCenter.z + Mathf.Sin(angle) * distance;
+
+        Vector3 targetPosit = new Vector3(circleX, 0, circleZ);
+
+        navMeshAgent.destination = targetPosit;
+        print(targetPosit);
+    }
+
+    #endregion
+    //========================
+
+
+    //RUNNING
+    //========================
+    #region
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        SetRandomDestination();
+        navMeshAgent.speed = speed;
+        MoveToRandomPosit();
     }
 
     void Update()
     {
-        if (!isMoving && Time.time >= nextMoveTime)
+        if (navMeshAgent.remainingDistance < 0.1f)
         {
-            SetRandomDestination();
+            MoveToRandomPosit();
         }
     }
 
-    void SetRandomDestination()
-    {
-        Vector3 randomDirection = Random.insideUnitSphere * Random.Range(minDistance, maxDistance);
-        randomDirection += transform.position;
-        NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, maxDistance, NavMesh.AllAreas);
-        targetPosition = hit.position;
+    #endregion
+    //========================
 
-        navMeshAgent.SetDestination(targetPosition);
-        isMoving = true;
-        nextMoveTime = Time.time + Random.Range(minWaitTime, maxWaitTime);
-    }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Wall"))
-        {
-            isMoving = false;
-        }
-    }
 }
