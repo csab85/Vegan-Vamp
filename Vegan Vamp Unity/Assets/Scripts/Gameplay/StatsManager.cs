@@ -58,6 +58,7 @@ public class StatsManager : MonoBehaviour
 
     //Stats list of the game object
 
+    [Tooltip ("")]
     [SerializeField] float[] health;
     [SerializeField] float[] dirty;
     
@@ -101,7 +102,7 @@ public class StatsManager : MonoBehaviour
                 //set self intensity to percentage between starting and base value (percentage of time passed from toal duration) 
                 selfIntensity = Mathf.Lerp(startingIntensity, baseIntensity, durationPercentage);
 
-                //Updat values on dict
+                //Update values on dict
                 pair.Value[SELF_INTENSITY] = selfIntensity;
                 pair.Value[PASSED_TIME] += Time.deltaTime;
 

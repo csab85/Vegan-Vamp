@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1045,9 +1045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45eb7747b1aef034cbf3660e3240d17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaCenter: {x: 0, y: 0, z: 0}
   areaRadius: 0
-  speed: 0
 --- !u!114 &819097129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1484,9 +1482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45eb7747b1aef034cbf3660e3240d17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaCenter: {x: 506.27, y: 0, z: 496.18}
   areaRadius: 10
-  speed: 7
 --- !u!1 &1185915776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1794,16 +1790,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492316150}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8410d3afbe6f2ee4b9925dbed3e0e215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 483762580}
-  circleDistance: 8
   speed: 7
-  distanceThreshold: 0.5
+  aimTime: 0
+  headbuttForce: 0
   fighting: 1
+  aiming: 0
   actualState: 0
 --- !u!114 &1492316153
 MonoBehaviour:
@@ -1812,13 +1809,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492316150}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a21fd6e9e6da6dc48b35598cda00c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: []
+  health:
+  - 20
+  - 20
+  - 0
+  - -5
+  - 0
+  - 20
+  - 0
+  - 0
+  - 0
   dirty:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   - 0
@@ -2764,11 +2775,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5788436555807963280, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000003264852
+      value: -0.000000032972228
       objectReference: {fileID: 0}
     - target: {fileID: 5788436555807963280, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000009885175
+      value: 0.000000009983187
       objectReference: {fileID: 0}
     - target: {fileID: 7137297674817602837, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalPosition.y

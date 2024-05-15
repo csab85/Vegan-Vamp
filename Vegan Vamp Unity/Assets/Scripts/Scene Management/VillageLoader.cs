@@ -19,7 +19,7 @@ public class VillageLoader: MonoBehaviour
     //========================
     #region
 
-    [SerializeField] float playerMaxDistance;
+    [SerializeField] public float activationRadius;
     [SerializeField] float playerDistance;
     bool loaded = false;
 
@@ -44,13 +44,13 @@ public class VillageLoader: MonoBehaviour
     private void Update()
     {
         playerDistance = Vector3.Distance(player.transform.position, transform.position);
-        if (playerDistance < playerMaxDistance && !loaded)
+        if (playerDistance < activationRadius && !loaded)
         {
             SceneManager.LoadSceneAsync("Village 1 - Teste", LoadSceneMode.Additive);
             Scene villageScene = SceneManager.GetSceneByName("Village 1 - Teste");
         }
 
-        else if (playerDistance > playerMaxDistance && loaded)
+        else if (playerDistance > activationRadius && loaded)
         {
             SceneManager.UnloadSceneAsync("Village 1 - Teste");
             loaded = false;
