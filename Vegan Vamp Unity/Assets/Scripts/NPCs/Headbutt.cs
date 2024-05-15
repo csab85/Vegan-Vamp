@@ -26,16 +26,23 @@ public class Headbutt : MonoBehaviour
     #region
     
     [Header ("Settings")]
-    [SerializeField] float speed;
     [SerializeField] float aimTime;
     [SerializeField] float headbuttForce;
+    [SerializeField] float speedEnhance;
+    [SerializeField] float visionRangeEnhance;
+    [SerializeField] float visionAngleEnhance;
     
     float circleDistance;
     float distanceThreshold;
 
+    //pathfinding and states
     public bool fighting;
     public bool aiming;
     Vector3 playerPosit;
+
+    //chasing settings
+    float baseSpeed;
+    float baseVision;
 
     //circling
     List<Vector3> circlePoints = new List<Vector3>();
@@ -62,7 +69,7 @@ public class Headbutt : MonoBehaviour
     //vou guardar pq vai que ne
     void Circle()
     {
-        float angle = speed * Time.time;
+        float angle = navMeshAgent.speed * Time.time;
         float circleX = Mathf.Cos(angle) * circleDistance;
         float circleZ = Mathf.Sin(angle) * circleDistance;
 
@@ -113,6 +120,12 @@ public class Headbutt : MonoBehaviour
     {
         if (fighting)
         {
+            //Enhancements
+            if (navMeshAgent.speed != speed * speedEnhance)
+            {
+                navMeshAgent.speed *= speedEnhance;
+
+            }
 
             playerPosit = player.transform.position;
 
