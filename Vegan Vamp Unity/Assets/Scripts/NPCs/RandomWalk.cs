@@ -17,12 +17,9 @@ public class RandomWalk : MonoBehaviour
     //========================
     #region
 
-    [Header ("Area Settings")]
-    [SerializeField] Vector3 areaCenter;
+    [Header ("Settings")]
     [SerializeField] float areaRadius;
-
-    [Header ("Agent Settings")]
-    [SerializeField] float speed;
+    Vector3 areaCenter;
 
     #endregion
     //========================
@@ -57,8 +54,8 @@ public class RandomWalk : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.speed = speed;
-        MoveToRandomPosit();
+        
+        areaCenter = transform.position;
     }
 
     #endregion
