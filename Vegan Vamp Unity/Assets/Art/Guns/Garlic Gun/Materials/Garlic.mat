@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mushorrom
+  m_Name: Garlic
   m_Shader: {fileID: 4800000, guid: 589366c8d179a91428574ab8bc5cf021, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -32,11 +32,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 87661436b03dea142ac24855dfc3d04a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2d96f35bbf5756443a1229ec26cf0981, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 1b7b9a1a1154e9646b9e276db80c37c7, type: 3}
+        m_Texture: {fileID: 2800000, guid: 60a740ae1ecc52d4ebb40f3bcb1ea2cd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -123,7 +123,7 @@ Material:
     - _Cull: 2
     - _CullOutline: 1
     - _Culling: 0
-    - _Cutoff: 0.455
+    - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DiffuseFallOff: 0.01
@@ -138,7 +138,10 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Help: 0
+    - _HelpA: 0
+    - _HelpX: 0
     - _LightColorContribution: 1
+    - _LuxBlend: 0
     - _LuxSurface: 0
     - _Metallic: 0
     - _Mode: 0
@@ -158,7 +161,7 @@ Material:
     - _RimPower: 2
     - _ShadoBiasDirectional: 0
     - _ShadowBiasAdditional: 0
-    - _ShadowFallOff: 0.75
+    - _ShadowFallOff: 0.829
     - _ShadowOffset: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -193,10 +196,10 @@ Material:
     - _ShadedBaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadedDecalColor: {r: 0.5, g: 5.5000005, b: 0.5, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SpecColor2nd: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor2nd: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     - _ToonRimColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &3825826370835156350
+--- !u!114 &933966971958667966
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
