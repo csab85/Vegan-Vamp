@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Cano
+  m_Name: Plataform
   m_Shader: {fileID: 4800000, guid: 589366c8d179a91428574ab8bc5cf021, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -32,11 +32,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: d75c877cc44877647b039e1835513751, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9672c7723353015499e1cbe606a2bd27, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: ac68672ae7884f743aad1eda486b7959, type: 3}
+        m_Texture: {fileID: 2800000, guid: eff20cedf65a63149816be8994adca4c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -106,7 +106,7 @@ Material:
     - _AlphaFromMaskMap: 1
     - _AlphaToMask: 0
     - _Anisotropic: 0
-    - _Anisotropy: -1
+    - _Anisotropy: 0
     - _ApplyNormal: 0
     - _ApplyNormalDepthNormal: 1
     - _Blend: 0
@@ -154,7 +154,7 @@ Material:
     - _Rim: 0
     - _RimFrequency: 0
     - _RimMinPower: 1
-    - _RimPerPositionFrequency: 0.978
+    - _RimPerPositionFrequency: 1
     - _RimPower: 2
     - _ShadoBiasDirectional: 0
     - _ShadowBiasAdditional: 0
@@ -192,11 +192,11 @@ Material:
     - _RimColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _ShadedBaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadedDecalColor: {r: 0.5, g: 5.5000005, b: 0.5, a: 1}
-    - _SpecColor: {r: 0.9528302, g: 0, b: 0, a: 1}
-    - _SpecColor2nd: {r: 1, g: 0.4, b: 0.4, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _SpecColor2nd: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     - _ToonRimColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &9023298055356528043
+--- !u!114 &5672276645355932907
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
