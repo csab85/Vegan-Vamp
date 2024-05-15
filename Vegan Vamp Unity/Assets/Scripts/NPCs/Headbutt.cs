@@ -121,7 +121,7 @@ public class Headbutt : MonoBehaviour
         if (fighting)
         {
             //Enhancements
-            if (navMeshAgent.speed != speed * speedEnhance)
+            if (navMeshAgent.speed != navMeshAgent.speed * speedEnhance)
             {
                 navMeshAgent.speed *= speedEnhance;
 
