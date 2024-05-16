@@ -141,6 +141,11 @@ public class Headbutt : MonoBehaviour
 
                     if (fov.isSeeingPlayer)
                     {
+                        navMeshAgent.destination = playerPosit;
+                    }
+
+                    if (fov.isInAttackRange)
+                    {
                         actualState = States.Aiming;
                     }
 

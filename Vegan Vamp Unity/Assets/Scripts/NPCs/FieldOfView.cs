@@ -21,13 +21,15 @@ public class FieldOfView : MonoBehaviour
     #region
 
     [Header ("Settings")]
-     [SerializeField] public float radius;
+     [SerializeField] public float visionRadius;
+     [SerializeField] public float attackRadius;
 
      [Range (0, 360)]
      [SerializeField] public float angle;
     
     [Header ("Info")]
     [SerializeField] public bool isSeeingPlayer;
+    [SerializeField] public bool isInAttackRange;
 
     #endregion
     //========================
@@ -39,8 +41,8 @@ public class FieldOfView : MonoBehaviour
     
     void FieldOfViewCheck()
     {
-        //get colliders within range (only returns player collider)
-        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
+        //get colliders within range (only returns player collider) *THIS ONLY WORKS IF VISION RADIUS >= ATTACK RADIUS
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, visionRadius, targetMask);
 
         if (rangeChecks.Length != 0)
         {
@@ -56,11 +58,17 @@ public class FieldOfView : MonoBehaviour
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                 {
                     isSeeingPlayer = true;
+
+                    if (distanceToTarget<= attackRadius)
+                    {
+                        isInAttackRange = true;
+                    }
                 }
 
                 else
                 {
                     isSeeingPlayer = false;
+                    isInAttackRange = false;
                 }
             }
 
