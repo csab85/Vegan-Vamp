@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Callbacks;
+using UnityEditor.TerrainTools;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,8 +27,7 @@ public class RunAway : MonoBehaviour
     #region
     
     [Header ("Time Settings")]
-    [SerializeField] float aimTime;
-    [SerializeField] float stunTime;
+    [SerializeField] float resetTime;
 
     [Header ("Normal Movement Settings")]
     [SerializeField] float baseSpeed;
@@ -36,39 +36,20 @@ public class RunAway : MonoBehaviour
     [SerializeField] float baseVisionAngle;
 
     [Header ("Chasing Movement Settings")]
-    [SerializeField] float chasingSpeed;
-    [SerializeField] float chasingVisionRange;
-    [SerializeField] float chasingAttackRange;
-    [SerializeField] float chasingVisionAngle;
+    [SerializeField] float fleeingSpeed;
+    [SerializeField] float fleeingVisionRange;
+    [SerializeField] float fleeingAttackRange;
+    [SerializeField] float fleeingVisionAngle;
 
     [Header ("Headbutt Settings")]
-    [SerializeField] float headbuttForce;
-    [SerializeField] float headbuttDistance;
-    [SerializeField] float headbuttingSpeed;
     [SerializeField] LayerMask obstacleLayer;
-    
-    float circleDistance;
 
     //pathfinding and states
     [Header ("Info")]
-    [SerializeField] States actualState;
-    [SerializeField] bool fighting;
-    [SerializeField] bool aiming;
-    [SerializeField] bool waiting;
+    [SerializeField] bool fleeing;
+    [SerializeField] bool reseting;
 
     Vector3 playerPosit;
-
-    //circling
-    List<Vector3> circlePoints = new List<Vector3>();
-
-    enum States
-    {
-        Searching,
-        Aiming,
-        Headbutting,
-        Waiting,
-        Stunned
-    }
 
     #endregion
     //========================
@@ -78,56 +59,12 @@ public class RunAway : MonoBehaviour
     //========================
     #region
 
-    //vou guardar pq vai que ne
-    void Circle()
+    IEnumerator ResetState()
     {
-        float angle = navMeshAgent.speed * Time.time;
-        float circleX = Mathf.Cos(angle) * circleDistance;
-        float circleZ = Mathf.Sin(angle) * circleDistance;
-
-        circlePoints.Add(playerPosit + new Vector3(circleX, 0, circleZ));
-        navMeshAgent.destination = circlePoints[0];
-    }
-
-    IEnumerator Aim()
-    {
-        aiming = true;
-        yield return new WaitForSecondsRealtime(aimTime); 
-        actualState = States.Headbutting;      
-        aiming = false;
-    }
-
-    IEnumerator Wait(float waitTime)
-    {
-        
-        waiting = true;
-        navMeshAgent.speed = chasingSpeed;
-
-        yield return new WaitForSecondsRealtime(waitTime);
-        
-        waiting = false;
-        actualState = States.Searching;
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        if (fighting)
-        {
-            if (other.gameObject.tag == "Player")
-            {
-                StopCoroutine(Wait(1));
-
-                Vector3 headbuttDirection = (playerPosit - transform.position).normalized;
-
-                other.gameObject.GetComponent<Rigidbody>().AddForce(headbuttDirection * headbuttForce / 2, ForceMode.Impulse);
-            }
-
-            else if (other.gameObject.layer == obstacleLayer)
-            {
-                actualState = States.Stunned;
-            }
-        }
-        
+        reseting = true;
+        yield return new WaitForSecondsRealtime(resetTime);
+        fleeing = false;
+        reseting = false;
     }
 
     #endregion
@@ -154,108 +91,58 @@ public class RunAway : MonoBehaviour
 
     void Update()
     {
-        if (fighting)
+        if (fleeing)
         {
             //Enhancements
-            if (navMeshAgent.speed < chasingSpeed && actualState != States.Headbutting)
+            if (navMeshAgent.speed < fleeingSpeed)
             {
                     print("enhance");
-                    navMeshAgent.speed = chasingSpeed;
-                    fov.visionRadius = baseVisionRange;
-                    fov.attackRadius = baseAttackRange;
-                    fov.angle = baseVisionAngle;
+                    navMeshAgent.speed = fleeingSpeed;
+                    fov.visionRadius = fleeingVisionRange;
+                    fov.attackRadius = fleeingAttackRange;
+                    fov.angle = fleeingVisionAngle;
             }
 
+            //run away
             playerPosit = player.transform.position;
-
-
-            switch (actualState)
-            {
-                case States.Searching:
                     
-                    if (!navMeshAgent.autoBraking)
-                    {
-                        navMeshAgent.autoBraking = true;
-                    }
+            float distance = Vector3.Distance(playerPosit, transform.position);
 
-                    //follow player if seeing
-                    if (fov.isSeeingPlayer)
-                    {
-                        navMeshAgent.destination = playerPosit;
-                    }
+            if  (distance < fov.visionRadius)
+            {
+                if (reseting)
+                {
+                    StopCoroutine(ResetState());
+                    reseting = false;
+                }
 
-                    //attack if close enough
-                    if (fov.isInAttackRange)
-                    {
-                        actualState = States.Aiming;
-                    }
+                Vector3 direction = (playerPosit - transform.position).normalized;
 
-                    break;
-                
-                case States.Aiming:
+                float runDistance = fov.visionRadius + 2;
 
-                    //start aim countdown and look at player
-                    if (!aiming)
-                    {
-                        navMeshAgent.destination = transform.position;
-                        StartCoroutine(Aim());
-                    }
+                navMeshAgent.destination = transform.position - (runDistance * direction);
+            }
 
-                    transform.LookAt(playerPosit);
-
-                    break;
-
-                case States.Headbutting:
-
-                    //set to headbutt speed and set destination past player
-                    if (navMeshAgent.speed != headbuttingSpeed)
-                    {
-                        navMeshAgent.speed = headbuttingSpeed;
-                        navMeshAgent.destination = playerPosit + (headbuttDistance * transform.forward);
-                    }
-
-                    if (navMeshAgent.remainingDistance < 0.1f)
-                    {
-                        actualState = States.Waiting;
-                    }
-
-                    break;
-
-                case States.Waiting:
-
-                    if (!waiting)
-                    {
-                        StartCoroutine(Wait(1));
-                    }
-
-                    break;
-
-                case States.Stunned:
-
-                    if (!waiting)
-                    {
-                        StartCoroutine(Wait(stunTime));
-                    }
-
-                    break;
+            else
+            {
+                StartCoroutine(ResetState());
             }
         }
 
-        //random walk if not fighting
+        //random walk if not fleeing
         else if (navMeshAgent.remainingDistance <= 0.1f)
         {
             randomWalk.MoveToRandomPosit();
         }
 
-        //start searching if seeing
-        if (fov.isSeeingPlayer && !fighting)
+        //start fleeing if seeing
+        if (fov.isSeeingPlayer && !fleeing)
         {
-            fighting = true;
-            actualState = States.Searching;
+            fleeing = true;
         }
 
         //go to normal speed if not fighting
-        if (navMeshAgent.speed > baseSpeed && !fighting)
+        if (navMeshAgent.speed > baseSpeed && !fleeing)
         {
             print("decrease");
             navMeshAgent.speed = baseSpeed;
