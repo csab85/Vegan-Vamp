@@ -25,24 +25,38 @@ public class Headbutt : MonoBehaviour
     //========================
     #region
     
-    [Header ("Settings")]
+    [Header ("Time Settings")]
     [SerializeField] float aimTime;
+    [SerializeField] float stunTime;
+
+    [Header ("Normal Movement Settings")]
+    [SerializeField] float baseSpeed;
+    [SerializeField] float baseVisionRange;
+    [SerializeField] float baseAttackRange;
+    [SerializeField] float baseVisionAngle;
+
+    [Header ("Chasing Movement Settings")]
+    [SerializeField] float chasingSpeed;
+    [SerializeField] float chasingVisionRange;
+    [SerializeField] float chasingAttackRange;
+    [SerializeField] float chasingVisionAngle;
+
+    [Header ("Headbutt Settings")]
     [SerializeField] float headbuttForce;
-    [SerializeField] float speedEnhance;
-    [SerializeField] float visionRangeEnhance;
-    [SerializeField] float visionAngleEnhance;
+    [SerializeField] float headbuttDistance;
+    [SerializeField] float headbuttingSpeed;
+    [SerializeField] LayerMask obstacleLayer;
     
     float circleDistance;
-    float distanceThreshold;
 
     //pathfinding and states
-    public bool fighting;
-    public bool aiming;
-    Vector3 playerPosit;
+    [Header ("Info")]
+    [SerializeField] States actualState;
+    [SerializeField] bool fighting;
+    [SerializeField] bool aiming;
+    [SerializeField] bool waiting;
 
-    //chasing settings
-    float baseSpeed;
-    float baseVision;
+    Vector3 playerPosit;
 
     //circling
     List<Vector3> circlePoints = new List<Vector3>();
@@ -55,8 +69,6 @@ public class Headbutt : MonoBehaviour
         Waiting,
         Stunned
     }
-
-    [SerializeField] States actualState;
 
     #endregion
     //========================
@@ -85,19 +97,37 @@ public class Headbutt : MonoBehaviour
         aiming = false;
     }
 
+    IEnumerator Wait(float waitTime)
+    {
+        
+        waiting = true;
+        navMeshAgent.speed = chasingSpeed;
+
+        yield return new WaitForSecondsRealtime(waitTime);
+        
+        waiting = false;
+        actualState = States.Searching;
+    }
+
     void OnCollisionEnter(Collision other)
     {
-        if (actualState == States.Headbutting)
+        if (fighting)
         {
-            actualState = States.Searching;
-        }
+            if (other.gameObject.tag == "Player")
+            {
+                StopCoroutine(Wait(1));
 
-        if (other.gameObject.tag == "Player")
-        {
-            Vector3 headbuttDirection = (playerPosit - transform.position).normalized;
+                Vector3 headbuttDirection = (playerPosit - transform.position).normalized;
 
-            other.gameObject.GetComponent<Rigidbody>().AddForce(headbuttDirection * headbuttForce / 2, ForceMode.Impulse);
+                other.gameObject.GetComponent<Rigidbody>().AddForce(headbuttDirection * headbuttForce / 2, ForceMode.Impulse);
+            }
+
+            else if (other.gameObject.layer == obstacleLayer)
+            {
+                actualState = States.Stunned;
+            }
         }
+        
     }
 
     #endregion
@@ -114,6 +144,12 @@ public class Headbutt : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         randomWalk = GetComponent<RandomWalk>();
         fov = GetComponent<FieldOfView>();
+
+        //get base values
+        baseSpeed = navMeshAgent.speed;
+        baseVisionRange = fov.visionRadius;
+        baseAttackRange = fov.attackRadius;
+        baseVisionAngle = fov.angle;
     }
 
     void Update()
@@ -121,10 +157,13 @@ public class Headbutt : MonoBehaviour
         if (fighting)
         {
             //Enhancements
-            if (navMeshAgent.speed != navMeshAgent.speed * speedEnhance)
+            if (navMeshAgent.speed < chasingSpeed && actualState != States.Headbutting)
             {
-                navMeshAgent.speed *= speedEnhance;
-
+                    print("enhance");
+                    navMeshAgent.speed = chasingSpeed;
+                    fov.visionRadius = baseVisionRange;
+                    fov.attackRadius = baseAttackRange;
+                    fov.angle = baseVisionAngle;
             }
 
             playerPosit = player.transform.position;
@@ -133,17 +172,19 @@ public class Headbutt : MonoBehaviour
             switch (actualState)
             {
                 case States.Searching:
-
-                    if (!navMeshAgent.enabled)
+                    
+                    if (!navMeshAgent.autoBraking)
                     {
-                        navMeshAgent.enabled = true;
+                        navMeshAgent.autoBraking = true;
                     }
 
+                    //follow player if seeing
                     if (fov.isSeeingPlayer)
                     {
                         navMeshAgent.destination = playerPosit;
                     }
 
+                    //attack if close enough
                     if (fov.isInAttackRange)
                     {
                         actualState = States.Aiming;
@@ -153,6 +194,7 @@ public class Headbutt : MonoBehaviour
                 
                 case States.Aiming:
 
+                    //start aim countdown and look at player
                     if (!aiming)
                     {
                         navMeshAgent.destination = transform.position;
@@ -165,28 +207,69 @@ public class Headbutt : MonoBehaviour
 
                 case States.Headbutting:
 
-                        navMeshAgent.enabled = false;
-                        rb.AddForce((playerPosit - transform.position).normalized * headbuttForce, ForceMode.Impulse);
+                    //set to headbutt speed and set destination past player
+                    if (navMeshAgent.speed != headbuttingSpeed)
+                    {
+                        navMeshAgent.speed = headbuttingSpeed;
+                        navMeshAgent.destination = playerPosit + (headbuttDistance * transform.forward);
+                    }
 
+                    if (navMeshAgent.remainingDistance < 0.1f)
+                    {
                         actualState = States.Waiting;
+                    }
 
                     break;
 
                 case States.Waiting:
+
+                    if (!waiting)
+                    {
+                        StartCoroutine(Wait(1));
+                    }
+
+                    break;
+
+                case States.Stunned:
+
+                    if (!waiting)
+                    {
+                        StartCoroutine(Wait(stunTime));
+                    }
+
                     break;
             }
         }
 
+        //random walk if not fighting
         else if (navMeshAgent.remainingDistance <= 0.1f)
         {
             randomWalk.MoveToRandomPosit();
         }
 
+        //start searching if seeing
         if (fov.isSeeingPlayer && !fighting)
         {
             fighting = true;
             actualState = States.Searching;
         }
+
+        //go to normal speed if not fighting
+        if (navMeshAgent.speed > baseSpeed && !fighting)
+        {
+            print("decrease");
+            navMeshAgent.speed = baseSpeed;
+            fov.visionRadius = baseVisionRange;
+            fov.attackRadius = baseAttackRange;
+            fov.angle = baseVisionAngle;
+        }
+
+        //coeficient of speed (from stat manager)
+
+        // if (StatsManager.speedCoeficient != 0 && navMeshAgent.speed != Manager.speedBase * spedCOeficient)
+        // {
+        //     navMeshAgent.speed *= ManagedReferenceMissingType.speedcoeficient
+        // }
     }
 
     #endregion

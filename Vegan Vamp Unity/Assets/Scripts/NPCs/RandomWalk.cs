@@ -18,7 +18,7 @@ public class RandomWalk : MonoBehaviour
     #region
 
     [Header ("Settings")]
-    [SerializeField] float areaRadius;
+    [SerializeField] public float areaRadius;
     Vector3 areaCenter;
 
     #endregion
@@ -40,7 +40,6 @@ public class RandomWalk : MonoBehaviour
         Vector3 targetPosit = new Vector3(circleX, 0, circleZ);
 
         navMeshAgent.destination = targetPosit;
-        print(targetPosit);
     }
 
     #endregion
