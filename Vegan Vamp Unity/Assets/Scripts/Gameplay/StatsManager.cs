@@ -50,22 +50,24 @@ public class StatsManager : MonoBehaviour
     const int PASSED_TIME = 8;
 
     //every stat in game
-    enum Stats
+    public enum Stats
     {
-        Dirty,
-        Health
+        Health,
+        Burning,
+        Dirty
     }
 
     //Stats list of the game object
 
     [Tooltip ("")]
     [SerializeField] float[] health;
+    [SerializeField] float[] burning;
     [SerializeField] float[] dirty;
     
 
 
     //Create dict var
-    Dictionary<Stats, float[]> statsDict;
+    public Dictionary<Stats, float[]> statsDict;
 
     #endregion
     //========================
@@ -75,11 +77,17 @@ public class StatsManager : MonoBehaviour
     //========================
     #region
 
-    void ApplyStat(Stats stat, float intensity, float duration)
+    /// <summary>
+    /// Applies the a stat on the object calling this function
+    /// </summary>
+    /// <param name="stat">The stat being applied</param>
+    /// <param name="intensity">How much intensity is being added</param>
+    /// <param name="duration">How much duration is being added</param>
+    void ApplyStatSelf(Stats stat, float intensity, float duration)
     {
-        statsDict[stat][STARTING_INTENSITY] = intensity;
-        statsDict[stat][SELF_INTENSITY] = intensity;
-        statsDict[stat][SELF_DURATION] = duration;
+        statsDict[stat][SELF_INTENSITY] += intensity;
+        statsDict[stat][SELF_DURATION] += duration;
+        statsDict[stat][STARTING_INTENSITY] = statsDict[stat][SELF_INTENSITY];
     }
 
     void DriftTowardsBase()
@@ -131,7 +139,8 @@ public class StatsManager : MonoBehaviour
     {
         statsDict = new Dictionary<Stats, float[]>()
         {
-            { Stats.Health, health},
+            {Stats.Health, health},
+            {Stats.Burning, burning},
             {Stats.Dirty, dirty}
         };
     }
@@ -139,6 +148,14 @@ public class StatsManager : MonoBehaviour
     void Update()
     {
         DriftTowardsBase();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (gameObject.name == "Scared Bug")
+            {
+                ApplyStatSelf(Stats.Burning, 1, 3);
+            }
+        }
     }
 
     #endregion
