@@ -7,6 +7,7 @@ public class GunSelector : MonoBehaviour
     #region
 
     [SerializeField] GameObject[] guns;
+    [SerializeField] ThirdPersonCamera camScript;
 
     #endregion
     //========================
@@ -16,7 +17,7 @@ public class GunSelector : MonoBehaviour
     //========================
     #region
 
-
+    
 
     #endregion
     //========================
@@ -32,16 +33,19 @@ public class GunSelector : MonoBehaviour
     /// <param name="gunNumber">The gun to be activated</param>
     public void SelectGun(int gunNumber)
     {
-        foreach (GameObject gun in guns)
+        if (camScript.currentMode == ThirdPersonCamera.CameraMode.Combat)
         {
-            if (gun == guns[gunNumber])
+            foreach (GameObject gun in guns)
             {
-                gun.SetActive(true);
-            }
+                if (gun == guns[gunNumber])
+                {
+                    gun.SetActive(true);
+                }
 
-            else
-            {
-                gun.SetActive(false);
+                else
+                {
+                    gun.SetActive(false);
+                }
             }
         }
     }
@@ -54,7 +58,19 @@ public class GunSelector : MonoBehaviour
     //========================
     #region
 
-
+    void Update()
+    {
+        if (camScript.currentMode == ThirdPersonCamera.CameraMode.Exploration)
+        {
+            foreach(GameObject gun in guns)
+            {
+                if (gun.activeSelf)
+                {
+                    gun.SetActive(false);
+                }    
+            }
+        }
+    }
 
     #endregion
     //========================

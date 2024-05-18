@@ -28,11 +28,11 @@ public class ThirdPersonCamera : MonoBehaviour
 
     [Header ("Settings")]
     [SerializeField] float rotationSpeed;
-    [SerializeField] cameraMode currentMode;
+    [SerializeField] public CameraMode currentMode;
 
-    int cameraModeNumber = 0;
+    int CameraModeNumber = 0;
 
-    public enum cameraMode
+    public enum CameraMode
     {
         Exploration,
         Combat
@@ -48,18 +48,18 @@ public class ThirdPersonCamera : MonoBehaviour
 
     public void SwitchCameraMode(int modeNumber)
     {
-        cameraMode[] modes = {cameraMode.Exploration, cameraMode.Combat};
+        CameraMode[] modes = {CameraMode.Exploration, CameraMode.Combat};
 
         explorationCamera.SetActive(false);
         combatCamera.SetActive(false);
 
-        if(modes[modeNumber] == cameraMode.Exploration)
+        if(modes[modeNumber] == CameraMode.Exploration)
         {
             explorationCamera.SetActive(true);
             crosshair.SetActive(false);
         }
 
-        if(modes[modeNumber] == cameraMode.Combat)
+        if(modes[modeNumber] == CameraMode.Combat)
         {
             combatCamera.SetActive(true);
             crosshair.SetActive(true);
@@ -90,7 +90,7 @@ public class ThirdPersonCamera : MonoBehaviour
         orientTransf.forward = viewDirection.normalized;
 
         //rotate player
-        if (currentMode == cameraMode.Exploration)
+        if (currentMode == CameraMode.Exploration)
         {
             float horizontalInput = Input.GetAxis ("Horizontal");
             float verticalInput = Input.GetAxis ("Vertical");
@@ -104,7 +104,7 @@ public class ThirdPersonCamera : MonoBehaviour
         }
 
         //fix player look forward
-        else if (currentMode == cameraMode.Combat)
+        else if (currentMode == CameraMode.Combat)
         {
             Vector3 combatViewDirection = combatLookAt.position - new Vector3(transform.position.x, combatLookAt.position.y , transform.position.z);
 
@@ -114,9 +114,9 @@ public class ThirdPersonCamera : MonoBehaviour
         //Switch camera
         if (Input.GetButtonDown("Switch Camera"))
         {
-            cameraModeNumber = (cameraModeNumber + 1) % 2;
+            CameraModeNumber = (CameraModeNumber + 1) % 2;
 
-            SwitchCameraMode(cameraModeNumber);
+            SwitchCameraMode(CameraModeNumber);
         }
     }
 
