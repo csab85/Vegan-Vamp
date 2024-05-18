@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     //========================
     #region
     
-    [SerializeField] public GameObject[] ingredientsList;
+    [SerializeField] public GameObject[] inventoryList;
     [SerializeField] GameObject inventoryUI;
 
     TextMeshProUGUI inventoryText;
@@ -41,15 +41,15 @@ public class Inventory : MonoBehaviour
         {
             ingredientsText = "";
 
-            foreach (GameObject ingredient in ingredientsList)
+            foreach (GameObject item in inventoryList)
             {
-                if (ingredient.name == AddedItem.name)
+                if (item.name == AddedItem.name)
                 {
-                    ingredientsDict[ingredient.name] += 1;
+                    ingredientsDict[item.name] += 1;
                 }
 
                 //update dict text
-                ingredientsText += $"{ingredient.name}: {ingredientsDict[ingredient.name]}\n";
+                ingredientsText += $"{item.name}: {ingredientsDict[item.name]}\n";
             }
 
             inventoryText.text = ingredientsText;
@@ -76,11 +76,11 @@ public class Inventory : MonoBehaviour
         inventoryText = inventoryUI.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
 
         //fill dict
-        foreach (GameObject ingredient in ingredientsList)
+        foreach (GameObject item in inventoryList)
         {
-            ingredientsDict[ingredient.name] = 0;
+            ingredientsDict[item.name] = 0;
 
-            ingredientsText += $"{ingredient.name}: {ingredientsDict[ingredient.name]}\n";
+            ingredientsText += $"{item.name}: {ingredientsDict[item.name]}\n";
 
             inventoryText.text = ingredientsText;
         }
