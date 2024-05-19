@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GunSelector : MonoBehaviour
+public class WeaponWheel : MonoBehaviour
 {
     //IMPORTS
     //========================
@@ -8,6 +8,7 @@ public class GunSelector : MonoBehaviour
 
     [SerializeField] GameObject[] guns;
     [SerializeField] ThirdPersonCamera camScript;
+    GameObject weaponWheelUI;
 
     #endregion
     //========================
@@ -58,8 +59,35 @@ public class GunSelector : MonoBehaviour
     //========================
     #region
 
+    void Start()
+    {
+        weaponWheelUI = transform.GetChild(0).gameObject;
+    }
+
     void Update()
     {
+        //open wheel if on combat mode
+        if(camScript.currentMode == ThirdPersonCamera.CameraMode.Combat)
+        {
+            if (Input.GetButton("Weapon Wheel") && !weaponWheelUI.activeSelf)
+            {
+                weaponWheelUI.SetActive(true);
+
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+
+            if (!Input.GetButton("Weapon Wheel") && weaponWheelUI.activeSelf)
+            {
+                weaponWheelUI.SetActive(false);
+
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+
+
+        //deactivate all guns if on exploration mode
         if (camScript.currentMode == ThirdPersonCamera.CameraMode.Exploration)
         {
             foreach(GameObject gun in guns)

@@ -10,12 +10,12 @@ public class Interactions : MonoBehaviour
     #region
 
     [Header ("Imports")]
-    [SerializeField] LayerMask targetLayers;
-    [SerializeField] GameObject interactUI;
-
-    Collider[] nearbyInteractions;
+    [SerializeField] Inventory inventory;
+    [SerializeField] public GameObject player;
+    
+    GameObject interactionUI;
     GameObject interactText; 
-    Inventory inventory;
+    Collider[] nearbyInteractions;
 
     #endregion
     //========================
@@ -27,6 +27,7 @@ public class Interactions : MonoBehaviour
 
     [Header ("Settings")]
     [SerializeField] public float interactionRange;
+    [SerializeField] LayerMask targetLayers;
     [SerializeField] Vector2 textOffset;
 
     #endregion
@@ -41,6 +42,7 @@ public class Interactions : MonoBehaviour
     {
         if (interactObj.layer == LayerMask.NameToLayer("Ingredient"))
         {
+            print("Aaaa");
             interactObj.SetActive(false);
             inventory.AddItem(interactObj);
         }
@@ -55,14 +57,14 @@ public class Interactions : MonoBehaviour
     #region
 
     void Start()
-    {
-        interactText = interactUI.transform.GetChild(0).gameObject;
-        inventory = GetComponent<Inventory>();
+    {   
+        interactionUI = transform.GetChild(0).gameObject;
+        interactText = interactionUI.transform.GetChild(0).gameObject;
     }
 
     void Update()
     {
-        nearbyInteractions = Physics.OverlapSphere(transform.position, interactionRange, targetLayers);
+        nearbyInteractions = Physics.OverlapSphere(player.transform.position, interactionRange, targetLayers);
 
         if (nearbyInteractions.Length > 0)
         {
@@ -74,7 +76,7 @@ public class Interactions : MonoBehaviour
             
             if (pointOnScreen.x > 0 && pointOnScreen.y > 0)
             {
-                interactUI.SetActive(true);
+                interactionUI.SetActive(true);
                 interactText.GetComponent<RectTransform>().position = pointOnScreen + textOffset;
 
                 //get if interact button is pressed
@@ -87,7 +89,7 @@ public class Interactions : MonoBehaviour
 
         else
         {
-            interactUI.SetActive(false);
+            interactionUI.SetActive(false);
         }
     }
 
