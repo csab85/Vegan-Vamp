@@ -42,7 +42,6 @@ public class Interactions : MonoBehaviour
     {
         if (interactObj.layer == LayerMask.NameToLayer("Ingredient"))
         {
-            print("Aaaa");
             interactObj.SetActive(false);
             inventory.AddItem(interactObj);
         }

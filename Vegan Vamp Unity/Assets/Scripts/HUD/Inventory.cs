@@ -12,9 +12,10 @@ public class Inventory : MonoBehaviour
     #region
 
     [Header ("Imports")]
+    [SerializeField] ThirdPersonCamera camScript;
     [SerializeField] GameObject player;
-    [SerializeField] GameObject[] inventoryItemsArray;
     [SerializeField] GameObject[] worldItemsArray;
+    [SerializeField] GameObject[] inventoryItemsArray;
 
     GameObject bag;
     RectTransform bagRectTransform;
@@ -34,6 +35,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] Vector3 smallScale;
     [SerializeField] Vector3 smallPosit;
 
+    bool openMode = false;
+
     #endregion
     //========================
 
@@ -46,14 +49,11 @@ public class Inventory : MonoBehaviour
     {
         foreach (GameObject item in inventoryItemsArray)
         {
-            print(AddedItem.name + " 2D");
-            print(item.name);
-
             if ((AddedItem.name + " 2D") == item.name)
             {
+                GameObject newItem = Instantiate(item, spawnPoint.transform.position, Quaternion.identity, bag.transform);
 
-                print("salv");
-                Instantiate(item, spawnPoint.transform.position, Quaternion.identity);
+                newItem.name = item.name;
 
                 break;
             }
@@ -62,25 +62,23 @@ public class Inventory : MonoBehaviour
 
     public void DropItem(GameObject item)
     {
-        Destroy(item);
-
         foreach (GameObject worldItem in worldItemsArray)
         {
-            string worldName = worldItem.name.Remove(worldItem.name.Length - 4, 3);
+            string worldName = item.name.Remove(item.name.Length - 3, 3);
 
             if (worldName == worldItem.name)
             {
                 Vector3 spawnDistance = 2 * player.transform.forward;
 
-                Instantiate(worldItem, player.transform.position + spawnDistance, Quaternion.identity);
+                GameObject newItem = Instantiate(worldItem, player.transform.position + spawnDistance, Quaternion.identity);
+
+                newItem.name = worldName;
+
+                Destroy(item);
 
                 break;
             }
         }
-
-        Vector3 dropDistance = 1 * Vector3.forward;
-
-        Instantiate(item, transform.position + dropDistance, Quaternion.Euler(Vector3.zero));
     }
 
     #endregion
@@ -100,20 +98,39 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Inventory"))
+        if (camScript.currentMode == ThirdPersonCamera.CameraMode.Exploration)
+        {
+            if (Input.GetButtonDown("Inventory"))
+            {
+                if (bagRectTransform.localScale.x > smallScale.x)
+                {
+                    bagRectTransform.localScale = smallScale;
+                    bagRectTransform.anchoredPosition = smallPosit;
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+
+                else
+                {
+                    bagRectTransform.localScale = bigScale;
+                    bagRectTransform.anchoredPosition = bigPosit;
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                }
+            }
+        }
+
+        else
         {
             if (bagRectTransform.localScale.x > smallScale.x)
             {
                 bagRectTransform.localScale = smallScale;
                 bagRectTransform.anchoredPosition = smallPosit;
-            }
-
-            else
-            {
-                bagRectTransform.localScale = bigScale;
-                bagRectTransform.anchoredPosition = bigPosit;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
+        
 
         if (Input.GetButtonDown("Drop"))
         {
