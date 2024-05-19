@@ -62,6 +62,7 @@ public class StatsManager : MonoBehaviour
     [Tooltip ("")]
     [SerializeField] float[] health;
     [SerializeField] float[] burning;
+    [SerializeField] float[] chilling;
     [SerializeField] float[] dirty;
     
 
@@ -83,7 +84,7 @@ public class StatsManager : MonoBehaviour
     /// <param name="stat">The stat being applied</param>
     /// <param name="intensity">How much intensity is being added</param>
     /// <param name="duration">How much duration is being added</param>
-    void ApplyStatSelf(Stats stat, float intensity, float duration)
+    public void ApplyStatSelf(Stats stat, float intensity, float duration)
     {
         statsDict[stat][SELF_INTENSITY] += intensity;
         statsDict[stat][SELF_DURATION] += duration;
