@@ -91,6 +91,12 @@ public class StatsManager : MonoBehaviour
         statsDict[stat][STARTING_INTENSITY] = statsDict[stat][SELF_INTENSITY];
     }
 
+    public void AddToSelfApply(Stats stat, float intensity, float duration)
+    {
+        statsDict[stat][APPLY_INTENSITY] += intensity;
+        statsDict[stat][APPLY_DURATION] += duration;
+    } 
+
     void DriftTowardsBase()
     {
         foreach (KeyValuePair<Stats, float[]> pair in statsDict)

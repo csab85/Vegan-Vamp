@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4599619843406256245}
   - component: {fileID: 7361362943926414865}
   - component: {fileID: -2664763553218836141}
+  - component: {fileID: -8849651131976973501}
   m_Layer: 10
   m_Name: Chill Ingredient
   m_TagString: Untagged
@@ -133,3 +134,55 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8849651131976973501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642176660711944569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21fd6e9e6da6dc48b35598cda00c70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  burning:
+  - 0
+  - 0
+  - 0
+  - 5
+  - 5
+  - 0
+  - 0
+  - 0
+  - 0
+  chilling:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  dirty:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
