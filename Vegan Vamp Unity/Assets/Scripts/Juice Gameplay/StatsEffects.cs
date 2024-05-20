@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.AI;
 
 //VFX container gotta be the third object
 
@@ -17,6 +18,8 @@ public class StatsEffects : MonoBehaviour
 
     //objects
     [SerializeField] GameObject iceCube1;
+
+    NavMeshAgent agent;
 
     #endregion
     //========================
@@ -42,6 +45,8 @@ public class StatsEffects : MonoBehaviour
 
     //Check what coroutine is running
     bool burning;
+
+    float baseSpeed;
 
     #endregion
     //========================
@@ -69,6 +74,9 @@ public class StatsEffects : MonoBehaviour
         Transform VFX = transform.GetChild(2);
 
         fire = VFX.GetChild(FIRE).gameObject;
+
+        agent = GetComponent<NavMeshAgent>();
+        baseSpeed = agent.speed;
     }
 
     void Update()
@@ -105,6 +113,8 @@ public class StatsEffects : MonoBehaviour
             float iceScale = selfStats.chilling[SELF_INTENSITY];
 
             iceCube1.transform.localScale = new Vector3(iceScale, iceScale, iceScale);
+
+            agent.speed = 0;
         }
 
         else
@@ -112,6 +122,7 @@ public class StatsEffects : MonoBehaviour
             if (iceCube1.activeSelf)
             {
                 iceCube1.SetActive(false);
+                agent.speed = baseSpeed;
             }
         }
     }
