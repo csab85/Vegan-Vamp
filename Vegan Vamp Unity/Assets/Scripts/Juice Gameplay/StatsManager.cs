@@ -48,27 +48,19 @@ public class StatsManager : MonoBehaviour
     const int CAP_DURATION = 6;
     const int STARTING_INTENSITY = 7;
     const int PASSED_TIME = 8;
-
-    //every stat in game
-    public enum Stats
-    {
-        Health,
-        Burning,
-        Dirty
-    }
-
+    
     //Stats list of the game object
 
     [Tooltip ("")]
-    [SerializeField] float[] health;
-    [SerializeField] float[] burning;
-    [SerializeField] float[] chilling;
-    [SerializeField] float[] dirty;
+    [SerializeField] public float[] health;
+    [SerializeField] public float[] burning;
+    [SerializeField] public float[] chilling;
+    [SerializeField] public float[] dirty;
     
 
 
-    //Create dict var
-    public Dictionary<Stats, float[]> statsDict;
+    //Create jagged array
+    public float[][] statsArray;
 
     #endregion
     //========================
@@ -78,38 +70,39 @@ public class StatsManager : MonoBehaviour
     //========================
     #region
 
+    //se der errado usar o nome ao inves de float
     /// <summary>
     /// Applies the a stat on the object calling this function
     /// </summary>
     /// <param name="stat">The stat being applied</param>
     /// <param name="intensity">How much intensity is being added</param>
     /// <param name="duration">How much duration is being added</param>
-    public void ApplyStatSelf(Stats stat, float intensity, float duration)
+    public void ApplyStatSelf(int statNum, float intensity, float duration)
     {
-        statsDict[stat][SELF_INTENSITY] += intensity;
-        statsDict[stat][SELF_DURATION] += duration;
-        statsDict[stat][STARTING_INTENSITY] = statsDict[stat][SELF_INTENSITY];
+        statsArray[statNum][SELF_INTENSITY] += intensity;
+        statsArray[statNum][SELF_DURATION] += duration;
+        statsArray[statNum][STARTING_INTENSITY] = statsArray[statNum][SELF_INTENSITY];
     }
 
-    public void AddToSelfApply(Stats stat, float intensity, float duration)
+    public void AddToSelfApply(int statNum, float intensity, float duration)
     {
-        statsDict[stat][APPLY_INTENSITY] += intensity;
-        statsDict[stat][APPLY_DURATION] += duration;
+        statsArray[statNum][APPLY_INTENSITY] += intensity;
+        statsArray[statNum][APPLY_DURATION] += duration;
     } 
 
     void DriftTowardsBase()
     {
-        foreach (KeyValuePair<Stats, float[]> pair in statsDict)
+        foreach (float[] stat in statsArray)
         {
-            float selfIntensity = pair.Value[SELF_INTENSITY];
-            float baseIntensity = pair.Value[BASE_INTENSITY];
-            float startingIntensity = pair.Value[STARTING_INTENSITY];
+            float selfIntensity = stat[SELF_INTENSITY];
+            float baseIntensity = stat[BASE_INTENSITY];
+            float startingIntensity = stat[STARTING_INTENSITY];
             
             //move self intensity towards base, based on how much of the duration passed
             if (selfIntensity != baseIntensity)
             {
-                float selfDuration = pair.Value[SELF_DURATION];
-                float passedTime = pair.Value[PASSED_TIME];
+                float selfDuration = stat[SELF_DURATION];
+                float passedTime = stat[PASSED_TIME];
 
                 //get the percentage of durtation passed based on time passed
                 float durationPercentage = Mathf.Clamp01(passedTime / selfDuration);
@@ -118,18 +111,15 @@ public class StatsManager : MonoBehaviour
                 selfIntensity = Mathf.Lerp(startingIntensity, baseIntensity, durationPercentage);
 
                 //Update values on dict
-                pair.Value[SELF_INTENSITY] = selfIntensity;
-                pair.Value[PASSED_TIME] += Time.deltaTime;
-
-                print(pair.Value[PASSED_TIME]);
-                print(selfIntensity);
+                stat[SELF_INTENSITY] = selfIntensity;
+                stat[PASSED_TIME] += Time.deltaTime;
             }
 
             //passed time to 0 if base and self intensity are the same
-            else if (pair.Value[PASSED_TIME] != 0 | pair.Value[SELF_DURATION] != 0)
+            else if (stat[PASSED_TIME] != 0 | stat[SELF_DURATION] != 0)
             {
-                pair.Value[PASSED_TIME] = 0;
-                pair.Value[SELF_DURATION] = 0;
+                stat[PASSED_TIME] = 0;
+                stat[SELF_DURATION] = 0;
             }
         }
     }
@@ -142,27 +132,17 @@ public class StatsManager : MonoBehaviour
     //========================
     #region
 
-    void Start()
+    void Awake()
     {
-        statsDict = new Dictionary<Stats, float[]>()
+        if (statsArray == null)
         {
-            {Stats.Health, health},
-            {Stats.Burning, burning},
-            {Stats.Dirty, dirty}
-        };
+            statsArray = new float[][] {health, burning, chilling, dirty};
+        }   
     }
 
     void Update()
     {
         DriftTowardsBase();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (gameObject.name == "Scared Bug")
-            {
-                ApplyStatSelf(Stats.Burning, 1, 3);
-            }
-        }
     }
 
     #endregion

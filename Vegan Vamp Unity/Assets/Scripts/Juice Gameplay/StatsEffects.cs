@@ -10,10 +10,13 @@ public class StatsEffects : MonoBehaviour
     //========================
     #region
 
-    StatsManager statsManager;
+    StatsManager selfStats;
 
     //FX
     GameObject fire;
+
+    //objects
+    [SerializeField] GameObject iceCube1;
 
     #endregion
     //========================
@@ -36,12 +39,6 @@ public class StatsEffects : MonoBehaviour
 
     //Stats order
     const int FIRE = 0;
-
-    //Import enum
-    StatsManager.Stats Burning = StatsManager.Stats.Burning;
-
-    //create dict
-    Dictionary<StatsManager.Stats, float[]> statsDict = new Dictionary<StatsManager.Stats, float[]>();
 
     //Check what coroutine is running
     bool burning;
@@ -66,7 +63,7 @@ public class StatsEffects : MonoBehaviour
 
     void Start()
     {
-        statsManager = GetComponent<StatsManager>();
+        selfStats = GetComponent<StatsManager>();
 
         //Get vfx objects
         Transform VFX = transform.GetChild(2);
@@ -76,20 +73,17 @@ public class StatsEffects : MonoBehaviour
 
     void Update()
     {
-        //update dict values
-        statsDict = statsManager.statsDict;
-
         //FIRE
-        if (statsDict[Burning][SELF_INTENSITY] > 0)
+        if (selfStats.burning[SELF_INTENSITY] > 0)
         {
             if (!fire.activeSelf)
             {
                 fire.SetActive(true);
             }
 
-            float scale = statsDict[Burning][SELF_INTENSITY];
+            float fireScale = selfStats.burning[SELF_INTENSITY];
 
-            fire.transform.localScale = new Vector3(scale, scale, scale);
+            fire.transform.localScale = new Vector3(fireScale, fireScale, fireScale);
         }
 
         else
@@ -97,6 +91,27 @@ public class StatsEffects : MonoBehaviour
             if (fire.activeSelf)
             {
                 fire.SetActive(false);
+            }
+        }
+
+        //ICE
+        if (selfStats.chilling[SELF_INTENSITY] > 0)
+        {
+            if (!iceCube1.activeSelf)
+            {
+                iceCube1.SetActive(true);
+            }
+
+            float iceScale = selfStats.chilling[SELF_INTENSITY];
+
+            iceCube1.transform.localScale = new Vector3(iceScale, iceScale, iceScale);
+        }
+
+        else
+        {
+            if (iceCube1.activeSelf)
+            {
+                iceCube1.SetActive(false);
             }
         }
     }

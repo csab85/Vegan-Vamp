@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -9,7 +10,7 @@ public class JuiceBottle : MonoBehaviour
     #region
 
     [Header ("Imports")]
-    [SerializeField] GameObject Intact;
+    [SerializeField] public GameObject Intact;
     [SerializeField] GameObject Broken;
     [SerializeField] GameObject splash;
     [SerializeField] Rigidbody rb;
@@ -19,6 +20,7 @@ public class JuiceBottle : MonoBehaviour
     RaycastHit aimHit;
 
     StatsManager selfStats;
+    bool smashable = false;
 
     #endregion
     //========================
@@ -51,7 +53,7 @@ public class JuiceBottle : MonoBehaviour
     //========================
     #region
 
-    private void Break()
+    void Break()
     {
         Intact.SetActive(false);
         Broken.SetActive(true);
@@ -71,23 +73,48 @@ public class JuiceBottle : MonoBehaviour
             GameObject target = targetCollider.gameObject;
 
             //apply every stat on the object (if the stat has any spply intensity)
-            foreach (var item in selfStats.statsDict)
+            for (int i = 0; i < selfStats.statsArray.Count(); i++)
             {
-                StatsManager.Stats stat = item.Key;
-                float applyIntensity = selfStats.statsDict[stat][APPLY_INTENSITY];
-                float applyDuration = selfStats.statsDict[stat][APPLY_DURATION];
+                float applyIntensity = selfStats.statsArray[i][APPLY_INTENSITY];
+                float applyDuration = selfStats.statsArray[i][APPLY_DURATION];
 
                 if (applyIntensity != 0)
                 {
-                    target.GetComponent<StatsManager>().ApplyStatSelf(stat, applyIntensity, applyDuration);
+                    //se pa erro aqui
+                    target.GetComponent<StatsManager>().ApplyStatSelf(i, applyIntensity, applyDuration);
                 }
             }
         }
     }
 
+    //ISSO AQUI É PROVISORIO
+    public void GrabJuice(GameObject juice)
+    {   
+        //copy stats
+        for (int i = 0; i < selfStats.statsArray.Count(); i++)
+        {
+            for(int j = 0; j < 9; j++)
+            {
+                selfStats.statsArray[i][j] = juice.GetComponent<StatsManager>().statsArray[i][j];
+            }
+        }
+
+        Destroy(juice);
+
+        //make it visible if not
+        if (!Intact.activeSelf)
+        {
+            Intact.SetActive(true);
+            Broken.SetActive(false);
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        Break();
+        if (smashable)
+        {
+            Break();
+        }
     }
 
     #endregion
@@ -100,8 +127,8 @@ public class JuiceBottle : MonoBehaviour
 
     private void Awake()
     {
-        Intact.SetActive(true);
-        Broken.SetActive(false);
+        // Intact.SetActive(true);
+        // Broken.SetActive(false);
 
         bc = GetComponent<BoxCollider>();
 
@@ -110,14 +137,18 @@ public class JuiceBottle : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Throw"))
-        {
-            transform.parent = null;
+        if (Input.GetButtonDown("Throw") && Intact.activeSelf && gameObject.name == "Base Juice")
+        {   
+            Vector3 spawnPoint = transform.position + transform.forward * 0.7f;
+            GameObject copyJuice = Instantiate(gameObject, spawnPoint, Quaternion.identity, null);
 
             Vector3 aimDirection = aimHit.point - transform.position;
 
-            rb.isKinematic = false;
-            rb.AddForce(aimDirection.normalized * throwPower, ForceMode.Impulse);
+            copyJuice.GetComponent<JuiceBottle>().smashable = true;
+            copyJuice.GetComponent<Rigidbody>().isKinematic = false;
+            copyJuice.GetComponent<Rigidbody>().AddForce(aimDirection.normalized * throwPower, ForceMode.Impulse);
+
+            Intact.SetActive(false);
         }
 
         //Aim

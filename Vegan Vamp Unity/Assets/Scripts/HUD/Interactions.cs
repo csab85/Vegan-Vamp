@@ -11,6 +11,8 @@ public class Interactions : MonoBehaviour
 
     [Header ("Imports")]
     [SerializeField] Inventory inventory;
+    [SerializeField] BlenderJuice blenderJuice;
+    [SerializeField] JuiceBottle juiceBottle;
     [SerializeField] public GameObject player;
     
     GameObject interactionUI;
@@ -44,6 +46,16 @@ public class Interactions : MonoBehaviour
         {
             interactObj.SetActive(false);
             inventory.AddItem(interactObj);
+        }
+
+        if (interactObj.name == "Blender")
+        {
+            blenderJuice.BlendJuice();
+        }
+
+        if (interactObj.name == "Base Juice(Clone)")
+        {
+            juiceBottle.GrabJuice(interactObj);
         }
     }
 

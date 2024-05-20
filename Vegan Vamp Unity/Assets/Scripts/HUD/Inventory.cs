@@ -68,7 +68,7 @@ public class Inventory : MonoBehaviour
 
             if (worldName == worldItem.name)
             {
-                Vector3 spawnDistance = 2 * player.transform.forward;
+                Vector3 spawnDistance = 1.5f * player.transform.forward;
 
                 GameObject newItem = Instantiate(worldItem, player.transform.position + spawnDistance, Quaternion.identity);
 
