@@ -1772,7 +1772,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 174589286581677083, guid: fc80d631b41d1834db64577b3ca7d496, type: 3}
       propertyPath: m_Name
-      value: Default Bottle
+      value: Base Juice
       objectReference: {fileID: 0}
     - target: {fileID: 938269427059210995, guid: fc80d631b41d1834db64577b3ca7d496, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1812,6 +1812,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 938269427059210995, guid: fc80d631b41d1834db64577b3ca7d496, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4608400803650286390, guid: fc80d631b41d1834db64577b3ca7d496, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5225742424974075477, guid: fc80d631b41d1834db64577b3ca7d496, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8805932273843021431, guid: fc80d631b41d1834db64577b3ca7d496, type: 3}
@@ -1983,7 +1991,7 @@ MonoBehaviour:
   splash: {fileID: 6219979283168409204}
   rb: {fileID: 2475283405227329169}
   throwPower: 15
-  splashRange: 4
+  splashRange: 50
   targetLayers:
     serializedVersion: 2
     m_Bits: 512

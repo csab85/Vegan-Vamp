@@ -122,13 +122,11 @@ public class Movement : MonoBehaviour
     //========================
     #region
 
-    void FixedUpdate()
-    {
-        MovePlayer();
-    }
 
     void Update()
     {
+        MovePlayer();
+
         GetInputs();
 
         //Check if on ground

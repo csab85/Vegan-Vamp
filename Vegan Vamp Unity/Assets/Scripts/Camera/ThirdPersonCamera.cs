@@ -13,6 +13,7 @@ public class ThirdPersonCamera : MonoBehaviour
     [SerializeField] Transform combatLookAt;
     [SerializeField] Rigidbody playerRb;
     [SerializeField] GameObject crosshair;
+    [SerializeField] Inventory inventory;
 
     [Header ("Cameras")]
     [SerializeField] GameObject explorationCamera;
@@ -82,7 +83,7 @@ public class ThirdPersonCamera : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //rotate orientation
         Vector3 viewDirection = playerTransf.position - new Vector3(transform.position.x, playerTransf.position.y , transform.position.z);
@@ -99,7 +100,8 @@ public class ThirdPersonCamera : MonoBehaviour
 
             if (inputDirection != Vector3.zero)
             {
-                playerTransf.forward = Vector3.Slerp(playerTransf.forward, inputDirection.normalized, rotationSpeed * Time.deltaTime);
+                //THIS WILL POSSIBLY NEED DELTA TIME
+                playerTransf.forward = Vector3.Lerp(playerTransf.forward, inputDirection.normalized, rotationSpeed * Time.deltaTime);
             }
         }
 
@@ -117,6 +119,17 @@ public class ThirdPersonCamera : MonoBehaviour
             CameraModeNumber = (CameraModeNumber + 1) % 2;
 
             SwitchCameraMode(CameraModeNumber);
+        }
+
+        //Stop movement while on inventory
+        if (inventory.openMode)
+        {
+            explorationCamera.SetActive(false);
+        }
+
+        else if (currentMode == CameraMode.Exploration && !explorationCamera.activeSelf)
+        {
+            explorationCamera.SetActive(true);
         }
     }
 

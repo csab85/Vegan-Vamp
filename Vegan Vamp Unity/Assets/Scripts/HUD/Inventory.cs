@@ -32,10 +32,12 @@ public class Inventory : MonoBehaviour
     [Header ("Settings")]
     [SerializeField] Vector3 bigScale;
     [SerializeField] Vector3 bigPosit;
+    [SerializeField] float collisionBarMax;
     [SerializeField] Vector3 smallScale;
     [SerializeField] Vector3 smallPosit;
+    [SerializeField] float collisionBarMin;
 
-    bool openMode = false;
+    public bool openMode = false;
 
     #endregion
     //========================
@@ -81,6 +83,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    static GameObject FindChild(Transform parent, string name)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.gameObject.name == name)
+            {
+                return child.gameObject;
+            }
+        }
+
+        return null;
+    }
+
     #endregion
     //========================
 
@@ -91,7 +106,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        bag = transform.GetChild(0).gameObject;
+        bag = FindChild(transform, "Bag");
         bagRectTransform = bag.GetComponent<RectTransform>();
         spawnPoint = bag.transform.GetChild(0).gameObject;
     }
@@ -102,12 +117,13 @@ public class Inventory : MonoBehaviour
         {
             if (Input.GetButtonDown("Inventory"))
             {
-                if (bagRectTransform.localScale.x > smallScale.x)
+                if (openMode)
                 {
                     bagRectTransform.localScale = smallScale;
                     bagRectTransform.anchoredPosition = smallPosit;
                     Cursor.visible = false;
                     Cursor.lockState = CursorLockMode.Locked;
+                    openMode = false;
                 }
 
                 else
@@ -116,25 +132,21 @@ public class Inventory : MonoBehaviour
                     bagRectTransform.anchoredPosition = bigPosit;
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
+                    openMode = true;
                 }
             }
         }
 
         else
         {
-            if (bagRectTransform.localScale.x > smallScale.x)
+            if (openMode)
             {
                 bagRectTransform.localScale = smallScale;
                 bagRectTransform.anchoredPosition = smallPosit;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
+                openMode = false;
             }
-        }
-        
-
-        if (Input.GetButtonDown("Drop"))
-        {
-            
         }
     }
 
