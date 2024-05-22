@@ -21,6 +21,7 @@ public class VillageLoader: MonoBehaviour
 
     [SerializeField] public float activationRadius;
     [SerializeField] float playerDistance;
+    [SerializeField] string sceneName;
     bool loaded = false;
 
     #endregion
@@ -46,13 +47,13 @@ public class VillageLoader: MonoBehaviour
         playerDistance = Vector3.Distance(player.transform.position, transform.position);
         if (playerDistance < activationRadius && !loaded)
         {
-            SceneManager.LoadSceneAsync("Village 1 - Teste", LoadSceneMode.Additive);
-            Scene villageScene = SceneManager.GetSceneByName("Village 1 - Teste");
+            SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            Scene villageScene = SceneManager.GetSceneByName(sceneName);
         }
 
         else if (playerDistance > activationRadius && loaded)
         {
-            SceneManager.UnloadSceneAsync("Village 1 - Teste");
+            SceneManager.UnloadSceneAsync(sceneName);
             loaded = false;
         }
     }
