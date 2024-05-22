@@ -19,7 +19,7 @@ public class RandomWalk : MonoBehaviour
 
     [Header ("Settings")]
     [SerializeField] public float areaRadius;
-    Vector3 areaCenter;
+    [HideInInspector] public Vector3 areaCenter;
 
     #endregion
     //========================
