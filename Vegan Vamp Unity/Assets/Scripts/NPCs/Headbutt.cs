@@ -16,6 +16,7 @@ public class Headbutt : MonoBehaviour
     NavMeshAgent navMeshAgent;
     RandomWalk randomWalk;
     FieldOfView fov;
+    Animator animator;
 
     #endregion
     //========================
@@ -29,12 +30,6 @@ public class Headbutt : MonoBehaviour
     [SerializeField] float aimTime;
     [SerializeField] float stunTime;
 
-    [Header ("Normal Movement Settings")]
-    [SerializeField] float baseSpeed;
-    [SerializeField] float baseVisionRange;
-    [SerializeField] float baseAttackRange;
-    [SerializeField] float baseVisionAngle;
-
     [Header ("Chasing Movement Settings")]
     [SerializeField] float chasingSpeed;
     [SerializeField] float chasingVisionRange;
@@ -46,8 +41,6 @@ public class Headbutt : MonoBehaviour
     [SerializeField] float headbuttDistance;
     [SerializeField] float headbuttingSpeed;
     [SerializeField] LayerMask obstacleLayer;
-    
-    float circleDistance;
 
     //pathfinding and states
     [Header ("Info")]
@@ -55,6 +48,11 @@ public class Headbutt : MonoBehaviour
     [SerializeField] bool fighting;
     [SerializeField] bool aiming;
     [SerializeField] bool waiting;
+
+    float baseSpeed;
+    float baseVisionRange;
+    float baseAttackRange;
+    float baseVisionAngle;
 
     Vector3 playerPosit;
 
@@ -78,25 +76,25 @@ public class Headbutt : MonoBehaviour
     //========================
     #region
 
-    //vou guardar pq vai que ne
-    void Circle()
-    {
-        float angle = navMeshAgent.speed * Time.time;
-        float circleX = Mathf.Cos(angle) * circleDistance;
-        float circleZ = Mathf.Sin(angle) * circleDistance;
-
-        circlePoints.Add(playerPosit + new Vector3(circleX, 0, circleZ));
-        navMeshAgent.destination = circlePoints[0];
-    }
-
+    /// <summary>
+    /// The object will look at the table for aim time seconds then go to state headbutting
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Aim()
     {
         aiming = true;
+        animator.SetBool ("Aiming", true);
         yield return new WaitForSecondsRealtime(aimTime); 
         actualState = States.Headbutting;      
         aiming = false;
+        animator.SetBool ("Aiming", false);
     }
 
+    /// <summary>
+    /// Waits for a wait time seconds then goes into searching state
+    /// </summary>
+    /// <param name="waitTime">Seconds to wait</param>
+    /// <returns></returns>
     IEnumerator Wait(float waitTime)
     {
         
@@ -112,7 +110,8 @@ public class Headbutt : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         if (fighting)
-        {
+        {   
+            //knockback player then wait
             if (other.gameObject.tag == "Player")
             {
                 StopCoroutine(Wait(1));
@@ -122,6 +121,7 @@ public class Headbutt : MonoBehaviour
                 other.gameObject.GetComponent<Rigidbody>().AddForce(headbuttDirection * headbuttForce / 2, ForceMode.Impulse);
             }
 
+            //get stunned
             else if (other.gameObject.layer == obstacleLayer)
             {
                 actualState = States.Stunned;
@@ -144,6 +144,7 @@ public class Headbutt : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         randomWalk = GetComponent<RandomWalk>();
         fov = GetComponent<FieldOfView>();
+        animator = GetComponent<Animator>();
 
         //get base values
         baseSpeed = navMeshAgent.speed;
@@ -172,11 +173,6 @@ public class Headbutt : MonoBehaviour
             switch (actualState)
             {
                 case States.Searching:
-                    
-                    if (!navMeshAgent.autoBraking)
-                    {
-                        navMeshAgent.autoBraking = true;
-                    }
 
                     //follow player if seeing
                     if (fov.isSeeingPlayer)
