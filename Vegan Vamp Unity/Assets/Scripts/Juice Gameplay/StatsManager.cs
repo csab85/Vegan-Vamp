@@ -53,9 +53,8 @@ public class StatsManager : MonoBehaviour
 
     [Tooltip ("")]
     [SerializeField] public float[] health;
-    [SerializeField] public float[] burning;
-    [SerializeField] public float[] chilling;
-    [SerializeField] public float[] dirty;
+    [SerializeField] public float[] fire;
+    [SerializeField] public float[] ice;
     
 
 
@@ -82,6 +81,16 @@ public class StatsManager : MonoBehaviour
         statsArray[statNum][SELF_INTENSITY] += intensity;
         statsArray[statNum][SELF_DURATION] += duration;
         statsArray[statNum][STARTING_INTENSITY] = statsArray[statNum][SELF_INTENSITY];
+    }
+
+    public void ApplyToBase(int statNum, float intensity, float duration = -1)
+    {
+        statsArray[statNum][BASE_INTENSITY] = intensity;
+
+        if (duration >= 0)
+        {
+            statsArray[statNum][SELF_DURATION] = duration;
+        }
     }
 
     public void AddToSelfApply(int statNum, float intensity, float duration)
@@ -124,6 +133,33 @@ public class StatsManager : MonoBehaviour
         }
     }
 
+    void CapValues()
+    {
+        foreach (float[] stat in statsArray)
+        {
+            if (stat[SELF_INTENSITY] > stat[CAP_INTENSITY] && stat[CAP_INTENSITY] >= 0)
+            {
+                print(stat);
+                stat[SELF_INTENSITY] = stat[CAP_INTENSITY];
+            }
+
+            if (stat[SELF_DURATION] > stat[CAP_DURATION] && stat[CAP_DURATION] >= 0)
+            {
+                stat[SELF_DURATION] = stat[CAP_DURATION];
+            }
+
+            if (stat[SELF_INTENSITY] < 0)
+            {
+                stat[SELF_INTENSITY] = 0;
+            }
+
+            if (stat[BASE_INTENSITY] < 0)
+            {
+                stat[BASE_INTENSITY] = 0;
+            }
+        }
+    }
+
     #endregion
     //========================
 
@@ -136,12 +172,13 @@ public class StatsManager : MonoBehaviour
     {
         if (statsArray == null)
         {
-            statsArray = new float[][] {health, burning, chilling, dirty};
+            statsArray = new float[][] {health, fire, ice};
         }   
     }
 
     void Update()
     {
+        CapValues();
         DriftTowardsBase();
     }
 

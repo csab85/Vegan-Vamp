@@ -13,13 +13,15 @@ public class StatsEffects : MonoBehaviour
 
     StatsManager selfStats;
 
-    //FX
+    //VFX
     GameObject fire;
 
-    //objects
-    [SerializeField] GameObject iceCube1;
+    //models
+    List<GameObject> iceCubesList = new List<GameObject>();
 
+    Animator animator;
     NavMeshAgent agent;
+    
 
     #endregion
     //========================
@@ -28,6 +30,8 @@ public class StatsEffects : MonoBehaviour
     //STATS AND VALUES
     //========================
     #region
+
+
 
     //Consts
     const int BASE_INTENSITY = 0;
@@ -41,12 +45,27 @@ public class StatsEffects : MonoBehaviour
     const int PASSED_TIME = 8;
 
     //Stats order
-    const int FIRE = 0;
+    const int HEALTH = 0;
+    const int FIRE = 1;
+    const int ICE = 0;
+
+    //type of object
+    enum Type
+    {
+        Entity,
+        Ingredient
+    }
+
+    [SerializeField] Type objectType;
 
     //Check what coroutine is running
     bool burning;
+    bool frozen;
 
     float baseSpeed;
+
+    //extras
+    int iceNumber;
 
     #endregion
     //========================
@@ -69,59 +88,94 @@ public class StatsEffects : MonoBehaviour
     void Start()
     {
         selfStats = GetComponent<StatsManager>();
+        TryGetComponent<NavMeshAgent>(out agent);
+        TryGetComponent<Animator>(out animator);
 
         //Get vfx objects
-        Transform VFX = transform.GetChild(2);
+        Transform VFX = transform.Find("VFX");
 
-        fire = VFX.GetChild(FIRE).gameObject;
+        if (selfStats.fire[CAP_INTENSITY] != 0)
+        {
+            fire = VFX.GetChild(0).gameObject;
+        }
 
-        agent = GetComponent<NavMeshAgent>();
-        baseSpeed = agent.speed;
+        //get models
+        if (selfStats.ice[CAP_INTENSITY] != 0)
+        {
+            foreach (Transform iceCube in transform.Find("Models").Find("Ice Cubes"))
+            {
+                iceCubesList.Add(iceCube.gameObject);
+            }
+        }
     }
 
     void Update()
     {
         //FIRE
-        if (selfStats.burning[SELF_INTENSITY] > 0)
+        if (fire != null)
         {
-            if (!fire.activeSelf)
+            if (selfStats.fire[SELF_INTENSITY] > 0)
             {
-                fire.SetActive(true);
+                if (!fire.activeSelf)
+                {
+                    fire.SetActive(true);
+                }
+
+                float fireScale = selfStats.fire[SELF_INTENSITY];
+
+                fire.transform.localScale = new Vector3(fireScale, fireScale, fireScale);
             }
 
-            float fireScale = selfStats.burning[SELF_INTENSITY];
-
-            fire.transform.localScale = new Vector3(fireScale, fireScale, fireScale);
-        }
-
-        else
-        {
-            if (fire.activeSelf)
+            else
             {
-                fire.SetActive(false);
+                if (fire.activeSelf)
+                {
+                    fire.SetActive(false);
+                }
             }
         }
+        
 
         //ICE
-        if (selfStats.chilling[SELF_INTENSITY] > 0)
+        if (iceCubesList.Count > 0)
         {
-            if (!iceCube1.activeSelf)
+            if (selfStats.ice[SELF_INTENSITY] > 0)
             {
-                iceCube1.SetActive(true);
+                if (!frozen)
+                {
+                    iceNumber = Random.Range(0, iceCubesList.Count);
+                }
+
+                GameObject iceCube = iceCubesList[iceNumber];
+
+                if (!iceCube.activeSelf)
+                {
+                    iceCube.SetActive(true);
+                }
+
+                float iceScale = selfStats.ice[SELF_INTENSITY];
+
+                iceCube.transform.localScale = new Vector3(iceScale, iceScale, iceScale);
+
+                if (animator != null && agent != null)
+                {
+                    animator.speed = 0;
+                    agent.speed = 0;
+                }
+
+                frozen = true;
             }
 
-            float iceScale = selfStats.chilling[SELF_INTENSITY];
-
-            iceCube1.transform.localScale = new Vector3(iceScale, iceScale, iceScale);
-
-            agent.speed = 0;
-        }
-
-        else
-        {
-            if (iceCube1.activeSelf)
+            else if (frozen)
             {
-                iceCube1.SetActive(false);
+                frozen = false;
+
+                foreach (GameObject iceCube in iceCubesList)
+                {
+                    iceCube.SetActive(false);
+                }
+
+                animator.speed = 1;
                 agent.speed = baseSpeed;
             }
         }

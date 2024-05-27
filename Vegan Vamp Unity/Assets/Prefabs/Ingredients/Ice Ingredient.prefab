@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2664763553218836141}
   - component: {fileID: -8849651131976973501}
   m_Layer: 10
-  m_Name: Chill Ingredient
+  m_Name: Ice Ingredient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,42 +147,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  burning:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  chilling:
-  - 0
-  - 0
-  - 0
   - 5
   - 5
   - 0
   - 0
   - 0
-  - 0
-  dirty:
-  - 0
-  - 0
+  - 10
+  - -1
   - 0
   - 0
+  fire:
   - 0
   - 0
   - 0
+  - -0.2
+  - 1
+  - 0.3
+  - 1
+  - 0
+  - 0
+  ice:
+  - 0
+  - 0
+  - 0
+  - 0.2
+  - 1
+  - 0.2
+  - 3
   - 0
   - 0

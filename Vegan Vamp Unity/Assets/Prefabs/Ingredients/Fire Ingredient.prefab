@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3277952592877928504}
   - component: {fileID: 6547248019484790962}
   - component: {fileID: 5331338981652639497}
-  - component: {fileID: 1983680979325476949}
   - component: {fileID: -6358843902386736365}
+  - component: {fileID: 2653876269665576988}
   - component: {fileID: -6933742861515782086}
   m_Layer: 10
   m_Name: Fire Ingredient
@@ -86,29 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1983680979325476949
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6751693394272966389}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.1927464
-  m_Height: 0.51529205
-  m_Direction: 1
-  m_Center: {x: -0.007514715, y: 0.2197326, z: 0.010990381}
 --- !u!54 &-6358843902386736365
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -136,6 +113,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &2653876269665576988
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6751693394272966389}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1927464
+  m_Height: 0.5152921
+  m_Direction: 1
+  m_Center: {x: -0.008538887, y: 0.030706681, z: 0.006007679}
 --- !u!114 &-6933742861515782086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,42 +149,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
+  - 10
+  - 10
   - 0
   - 0
   - 0
+  - 20
+  - -1
+  - 0
+  - 0
+  fire:
   - 0
   - 0
   - 0
-  - 0
-  - 0
-  - 0
-  burning:
-  - 0
-  - 0
-  - 0
+  - 1
   - 5
+  - 2
   - 5
   - 0
   - 0
-  - 0
-  - 0
-  chilling:
-  - 0
+  ice:
   - 0
   - 0
   - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  dirty:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - -1
+  - 1
+  - 0.6
+  - 1
   - 0
   - 0
