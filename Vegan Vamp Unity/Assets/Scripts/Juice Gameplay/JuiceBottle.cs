@@ -81,8 +81,8 @@ public class JuiceBottle : MonoBehaviour
 
                 if (applyIntensity != 0)
                 {
-                    //se pa erro aqui
-                    target.GetComponent<StatsManager>().ApplyStatSelf(i, applyIntensity, applyDuration);
+                    //se pa erro aqui FIX THIS
+                    //target.GetComponent<StatsManager>().ApplyStatSelf(i, applyIntensity, applyDuration);
                 }
             }
         }

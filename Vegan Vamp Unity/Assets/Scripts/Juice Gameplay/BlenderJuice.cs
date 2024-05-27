@@ -55,7 +55,8 @@ public class BlenderJuice : MonoBehaviour
             //get only apply values (see if I cant get em all. Prolly not)
             for (int i = 0; i < selfStats.statsArray.Count(); i++)
             {
-                selfStats.AddToSelfApply(i, ingredientStats.statsArray[i][APPLY_INTENSITY], ingredientStats.statsArray[i][APPLY_DURATION]);
+                //FIX THIS
+                //selfStats.AddToSelfApply(i, ingredientStats.statsArray[i][APPLY_INTENSITY], ingredientStats.statsArray[i][APPLY_DURATION]);
             }
         }
     }
