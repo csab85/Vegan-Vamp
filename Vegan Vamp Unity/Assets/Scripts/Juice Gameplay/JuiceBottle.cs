@@ -30,20 +30,25 @@ public class JuiceBottle : MonoBehaviour
     //========================
     #region
 
+    const int DEFAULT_BASE = 0;
+    const int CURRENT_BASE = 1;
+    const int SELF_INTENSITY = 2;
+    const int SELF_REACH_TIME = 3;
+    const int SELF_RETURN_TIME = 4;
+    const int APPLY_INTENSITY = 5;
+    const int APPLY_REACH_TIME = 6;
+    const int APPLY_RETURN_TIME = 7;
+    const int CAP_INTENSITY = 8;
+    const int CAP_REACH_TIME = 9;
+    const int CAP_RETURN_TIME = 10;
+    const int STARTING_BASE = 11;
+    const int STARTING_INTENSITY = 12;
+    const int PASSED_TIME = 13;
+
     [Header ("Settings")]
     [SerializeField] float throwPower;
     [SerializeField] public float splashRange;
     [SerializeField] LayerMask targetLayers;
-
-    const int BASE_INTENSITY = 0;
-    const int SELF_INTENSITY = 1;
-    const int SELF_DURATION = 2;
-    const int APPLY_INTENSITY = 3;
-    const int APPLY_DURATION = 4;
-    const int CAP_INTENSITY = 5;
-    const int CAP_DURATION = 6;
-    const int STARTING_INTENSITY = 7;
-    const int PASSED_TIME = 8;
 
     #endregion
     //========================
@@ -77,12 +82,12 @@ public class JuiceBottle : MonoBehaviour
             for (int i = 0; i < selfStats.statsArray.Count(); i++)
             {
                 float applyIntensity = selfStats.statsArray[i][APPLY_INTENSITY];
-                float applyDuration = selfStats.statsArray[i][APPLY_DURATION];
+                float applyReachTime = selfStats.statsArray[i][APPLY_REACH_TIME];
+                float applyReturnTime = selfStats.statsArray[i][APPLY_RETURN_TIME];
 
                 if (applyIntensity != 0)
                 {
-                    //se pa erro aqui FIX THIS
-                    //target.GetComponent<StatsManager>().ApplyStatSelf(i, applyIntensity, applyDuration);
+                    target.GetComponent<StatsManager>().ApplyStatSelf(i, applyIntensity, applyReachTime, applyReturnTime);
                 }
             }
         }

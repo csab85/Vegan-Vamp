@@ -27,15 +27,20 @@ public class BlenderJuice : MonoBehaviour
 
     List<GameObject> ingredientsInside = new List<GameObject>{};
 
-    const int BASE_INTENSITY = 0;
-    const int SELF_INTENSITY = 1;
-    const int SELF_DURATION = 2;
-    const int APPLY_INTENSITY = 3;
-    const int APPLY_DURATION = 4;
-    const int CAP_INTENSITY = 5;
-    const int CAP_DURATION = 6;
-    const int STARTING_INTENSITY = 7;
-    const int PASSED_TIME = 8;
+    const int DEFAULT_BASE = 0;
+    const int CURRENT_BASE = 1;
+    const int SELF_INTENSITY = 2;
+    const int SELF_REACH_TIME = 3;
+    const int SELF_RETURN_TIME = 4;
+    const int APPLY_INTENSITY = 5;
+    const int APPLY_REACH_TIME = 6;
+    const int APPLY_RETURN_TIME = 7;
+    const int CAP_INTENSITY = 8;
+    const int CAP_REACH_TIME = 9;
+    const int CAP_RETURN_TIME = 10;
+    const int STARTING_BASE = 11;
+    const int STARTING_INTENSITY = 12;
+    const int PASSED_TIME = 13;
 
     #endregion
     //========================
@@ -55,8 +60,7 @@ public class BlenderJuice : MonoBehaviour
             //get only apply values (see if I cant get em all. Prolly not)
             for (int i = 0; i < selfStats.statsArray.Count(); i++)
             {
-                //FIX THIS
-                //selfStats.AddToSelfApply(i, ingredientStats.statsArray[i][APPLY_INTENSITY], ingredientStats.statsArray[i][APPLY_DURATION]);
+                selfStats.AddToSelfApply(i, ingredientStats.statsArray[i][APPLY_INTENSITY], ingredientStats.statsArray[i][APPLY_REACH_TIME], ingredientStats.statsArray[i][APPLY_RETURN_TIME]);
             }
         }
     }
