@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class StatsManager : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class StatsManager : MonoBehaviour
     //========================
     #region
 
-
+    
 
     #endregion
     //========================
@@ -65,10 +66,14 @@ public class StatsManager : MonoBehaviour
     
     //Stats list of the game object
 
-    [Tooltip ("")]
-    [SerializeField] public float[] health;
-    [SerializeField] public float[] fire;
-    [SerializeField] public float[] ice;
+    [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
+    public float[] health;
+
+    [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
+    public float[] fire;
+
+    [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
+    public float[] ice;
     
 
 
@@ -83,7 +88,6 @@ public class StatsManager : MonoBehaviour
     //========================
     #region
 
-    //se der errado usar o nome ao inves de float
     /// <summary>
     /// Applies the a stat on the object calling this function
     /// </summary>
@@ -99,7 +103,7 @@ public class StatsManager : MonoBehaviour
         statsArray[statNum][STARTING_INTENSITY] = statsArray[statNum][SELF_INTENSITY];
 
         statsArray[statNum][SELF_RETURN_TIME] += returnTime + reachTime;
-        statsArray[statNum][STARTING_BASE] = statsArray[statNum][STARTING_BASE];
+        statsArray[statNum][STARTING_BASE] = statsArray[statNum][CURRENT_BASE];
     }
 
     public void ApplyToBase(int statNum, float intensity, float returnTime = -1)
@@ -121,8 +125,10 @@ public class StatsManager : MonoBehaviour
 
     void DriftTowardsBase()
     {
-        foreach (float[] stat in statsArray)
+        for (int i = 0; i < statsArray.Length; i++)
         {
+            float[] stat = statsArray[i];
+
             float defaultBase = stat[DEFAULT_BASE];
             float currentBase = stat[CURRENT_BASE];
             float selfIntensity = stat[SELF_INTENSITY];
@@ -130,6 +136,8 @@ public class StatsManager : MonoBehaviour
             //move self intensity towards current base, based on how much of the reach time
             if (selfIntensity != currentBase)
             {
+                print(gameObject.name);
+                print(i);
                 float reachTime = stat[SELF_REACH_TIME];
                 float passedTime = stat[PASSED_TIME];
                 float startingIntensity = stat[STARTING_INTENSITY];
@@ -142,12 +150,13 @@ public class StatsManager : MonoBehaviour
 
                 //Update values on dict
                 stat[SELF_INTENSITY] = selfIntensity;
+                print(Time.deltaTime);
                 stat[PASSED_TIME] += Time.deltaTime;
             }
 
 
             //move current base towards default base, based on how much of the return time
-            if (currentBase != defaultBase && selfIntensity == currentBase)
+            else if (currentBase != defaultBase && selfIntensity == currentBase)
             {
                 float returnTime = stat[SELF_RETURN_TIME];
                 float passedTime = stat[PASSED_TIME];
@@ -175,33 +184,37 @@ public class StatsManager : MonoBehaviour
         }
     }
 
-    //fix this
-    //void CapValues()
-    //{
-    //    foreach (float[] stat in statsArray)
-    //    {
-    //        if (stat[SELF_INTENSITY] > stat[CAP_INTENSITY] && stat[CAP_INTENSITY] >= 0)
-    //        {
-    //            print(stat);
-    //            stat[SELF_INTENSITY] = stat[CAP_INTENSITY];
-    //        }
+    void CapValues()
+    {
+       foreach (float[] stat in statsArray)
+       {
+           if (stat[CURRENT_BASE] > stat[CAP_INTENSITY] && stat[CAP_INTENSITY] >= 0)
+           {
+               print(stat);
+               stat[CURRENT_BASE] = stat[CAP_INTENSITY];
+           }
 
-    //        if (stat[SELF_DURATION] > stat[CAP_DURATION] && stat[CAP_DURATION] >= 0)
-    //        {
-    //            stat[SELF_DURATION] = stat[CAP_DURATION];
-    //        }
+           if (stat[SELF_REACH_TIME] > stat[CAP_REACH_TIME] && stat[SELF_REACH_TIME] >= 0)
+           {
+               stat[SELF_REACH_TIME] = stat[CAP_REACH_TIME];
+           }
 
-    //        if (stat[SELF_INTENSITY] < 0)
-    //        {
-    //            stat[SELF_INTENSITY] = 0;
-    //        }
+           if (stat[SELF_RETURN_TIME] > stat[CAP_RETURN_TIME] && stat[SELF_RETURN_TIME] >= 0)
+           {
+               stat[SELF_RETURN_TIME] = stat[CAP_RETURN_TIME];
+           }
 
-    //        if (stat[DEFAULT_BASE] < 0)
-    //        {
-    //            stat[DEFAULT_BASE] = 0;
-    //        }
-    //    }
-    //}
+           if (stat[CURRENT_BASE] < 0)
+           {
+               stat[CURRENT_BASE] = 0;
+           }
+
+           if (stat[DEFAULT_BASE] < 0)
+           {
+               stat[DEFAULT_BASE] = 0;
+           }
+       }
+    }
 
     #endregion
     //========================
@@ -229,4 +242,59 @@ public class StatsManager : MonoBehaviour
     //========================
 
 
+}
+
+//CLASSES TO CREATE THE NAME ARRAY THINGY
+
+public class NamedArrayAttribute : PropertyAttribute
+{
+    public string[] names;
+
+    public NamedArrayAttribute(params string[] names)
+    {
+        this.names = names;
+    }
+}
+
+[CustomPropertyDrawer(typeof(NamedArrayAttribute))]
+public class NamedArrayDrawer : PropertyDrawer
+{
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        NamedArrayAttribute namedArray = attribute as NamedArrayAttribute;
+
+        if (property.propertyType == SerializedPropertyType.ArraySize)
+        {
+            EditorGUI.PropertyField(position, property, label, true);
+        }
+
+        else if (property.propertyType == SerializedPropertyType.Float)
+        {
+            int index = GetIndex(property);
+            
+            if (index >= 0 && index < namedArray.names.Length)
+            {
+                label.text = namedArray.names[index];
+            }
+
+            EditorGUI.PropertyField(position, property, label, true);
+        }
+        else
+        {
+            EditorGUI.PropertyField(position, property, label, true);
+        }
+    }
+
+    private int GetIndex(SerializedProperty property)
+    {
+        string path = property.propertyPath;
+        string indexStr = path.Substring(path.LastIndexOf("[") + 1);
+        indexStr = indexStr.Substring(0, indexStr.Length - 1);
+
+        if (int.TryParse(indexStr, out int index))
+        {
+            return index;
+        }
+        return -1;
+    }
 }
