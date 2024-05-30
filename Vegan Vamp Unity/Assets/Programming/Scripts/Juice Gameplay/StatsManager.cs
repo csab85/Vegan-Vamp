@@ -63,6 +63,7 @@ public class StatsManager : MonoBehaviour
     const int STARTING_BASE = 11;
     const int STARTING_INTENSITY = 12;
     const int PASSED_TIME = 13;
+
     
     //Stats list of the game object
 
@@ -79,6 +80,19 @@ public class StatsManager : MonoBehaviour
 
     //Create jagged array
     public float[][] statsArray;
+
+
+    //object type
+    public enum Type
+    {
+        None,
+        Ingredient,
+        NPC,
+        Player,
+        Other
+    }
+
+    [SerializeField] public Type objectType;
 
     #endregion
     //========================
@@ -136,8 +150,6 @@ public class StatsManager : MonoBehaviour
             //move self intensity towards current base, based on how much of the reach time
             if (selfIntensity != currentBase)
             {
-                print(gameObject.name);
-                print(i);
                 float reachTime = stat[SELF_REACH_TIME];
                 float passedTime = stat[PASSED_TIME];
                 float startingIntensity = stat[STARTING_INTENSITY];
@@ -150,7 +162,6 @@ public class StatsManager : MonoBehaviour
 
                 //Update values on dict
                 stat[SELF_INTENSITY] = selfIntensity;
-                print(Time.deltaTime);
                 stat[PASSED_TIME] += Time.deltaTime;
             }
 
@@ -190,7 +201,6 @@ public class StatsManager : MonoBehaviour
        {
            if (stat[CURRENT_BASE] > stat[CAP_INTENSITY] && stat[CAP_INTENSITY] >= 0)
            {
-               print(stat);
                stat[CURRENT_BASE] = stat[CAP_INTENSITY];
            }
 

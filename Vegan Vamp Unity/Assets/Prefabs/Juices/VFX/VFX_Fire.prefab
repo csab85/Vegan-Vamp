@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1799221582209651809}
+  - component: {fileID: 7456423882413693916}
   m_Layer: 0
   m_Name: VFX_Fire
   m_TagString: Untagged
@@ -34,6 +35,29 @@ Transform:
   - {fileID: 7565516560561460705}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7456423882413693916
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037477674951185413}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.32730103
+  m_Height: 1.4203585
+  m_Direction: 1
+  m_Center: {x: -0.019607544, y: 0.38164103, z: 0}
 --- !u!1 &2820917058063118531
 GameObject:
   m_ObjectHideFlags: 0
