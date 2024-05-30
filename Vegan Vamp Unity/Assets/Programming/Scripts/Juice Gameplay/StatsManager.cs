@@ -5,6 +5,9 @@ using UnityEditor;
 public class StatsManager : MonoBehaviour
 {
     //EXPLANATION
+    //========================
+    #region
+
     //Every StatsManager has a dict, and each dict stores each stat as a key (the stats can be found in the enum Stats). The value is an array of 8 floats, that refers to aspects of each stat. Those aspects are  always the same, but with different values.
 
 
@@ -33,6 +36,9 @@ public class StatsManager : MonoBehaviour
     //CAP STARTING INTENSITY (11) - How much intensity the object had the when SELF INTENSITY changes to a new value different from BASE INTENSITY
 
     //PASSED TIME (12) - How many seconds passed since last time SELF INTENSITY != BASE INTENSITY
+
+    #endregion
+    //========================
 
 
     //IMPORTS
@@ -204,12 +210,12 @@ public class StatsManager : MonoBehaviour
                stat[CURRENT_BASE] = stat[CAP_INTENSITY];
            }
 
-           if (stat[SELF_REACH_TIME] > stat[CAP_REACH_TIME] && stat[SELF_REACH_TIME] >= 0)
+           if (stat[SELF_REACH_TIME] > stat[CAP_REACH_TIME] && stat[CAP_REACH_TIME] >= 0)
            {
                stat[SELF_REACH_TIME] = stat[CAP_REACH_TIME];
            }
 
-           if (stat[SELF_RETURN_TIME] > stat[CAP_RETURN_TIME] && stat[SELF_RETURN_TIME] >= 0)
+           if (stat[SELF_RETURN_TIME] > stat[CAP_RETURN_TIME] && stat[CAP_RETURN_TIME] >= 0)
            {
                stat[SELF_RETURN_TIME] = stat[CAP_RETURN_TIME];
            }
@@ -244,17 +250,18 @@ public class StatsManager : MonoBehaviour
 
     void Update()
     {
-        //CapValues();
+        CapValues();
         DriftTowardsBase();
     }
 
     #endregion
     //========================
-
-
 }
 
+
 //CLASSES TO CREATE THE NAME ARRAY THINGY
+//========================
+#region 
 
 public class NamedArrayAttribute : PropertyAttribute
 {
@@ -308,3 +315,6 @@ public class NamedArrayDrawer : PropertyDrawer
         return -1;
     }
 }
+
+#endregion
+//========================
