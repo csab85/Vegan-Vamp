@@ -72,6 +72,7 @@ public class StatsManager : MonoBehaviour
 
     
     //Stats list of the game object
+    #region
 
     [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
     public float[] health;
@@ -81,8 +82,29 @@ public class StatsManager : MonoBehaviour
 
     [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
     public float[] ice;
-    
 
+    [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
+    public float[] tornado;
+    
+    [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
+    public float[] speedy;
+
+    [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
+    public float[] noGravity;
+
+    [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
+    public float[] teleport;
+
+    [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
+    public float[] grow;
+
+    [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
+    public float[] shrink;
+
+    [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
+    public float[] dunno;
+    
+    #endregion
 
     //Create jagged array
     public float[][] statsArray;
@@ -244,7 +266,7 @@ public class StatsManager : MonoBehaviour
     {
         if (statsArray == null)
         {
-            statsArray = new float[][] {health, fire, ice};
+            statsArray = new float[][] {health, fire, ice, tornado, speedy, noGravity, teleport, grow, shrink, dunno};
         }   
     }
 
@@ -256,6 +278,31 @@ public class StatsManager : MonoBehaviour
 
     #endregion
     //========================
+}
+
+//GLOBAL CONSTANTS CLASS
+public static class StatsConst
+{ 
+    public const int DEFAULT_BASE = 0;
+    public const int CURRENT_BASE = 1;
+    public const int SELF_INTENSITY = 2;
+    public const int SELF_REACH_TIME = 3;
+    public const int SELF_RETURN_TIME = 4;
+    public const int APPLY_INTENSITY = 5;
+    public const int APPLY_REACH_TIME = 6;
+    public const int APPLY_RETURN_TIME = 7;
+    public const int CAP_INTENSITY = 8;
+    public const int CAP_REACH_TIME = 9;
+    public const int CAP_RETURN_TIME = 10;
+    public const int STARTING_BASE = 11;
+    public const int STARTING_INTENSITY = 12;
+    public const int PASSED_TIME = 13;
+
+    //Stats order
+    public const int HEALTH = 0;
+    public const int FIRE = 1;
+    public const int ICE = 2; 
+    public const int TORNADO = 3;
 }
 
 

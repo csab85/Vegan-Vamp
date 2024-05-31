@@ -64,7 +64,7 @@ public class BaseBullet : MonoBehaviour
     /// <returns></returns>
     public IEnumerator PlayHitFx() 
     {
-        yield return new WaitForSecondsRealtime(fxDelay);
+        yield return new WaitForSeconds(fxDelay);
 
         hit.SetActive(true);
         meshRenderer.enabled = false;

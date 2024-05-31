@@ -62,7 +62,7 @@ public class RunAway : MonoBehaviour
     IEnumerator ResetState()
     {
         reseting = true;
-        yield return new WaitForSecondsRealtime(resetTime);
+        yield return new WaitForSeconds(resetTime);
         fleeing = false;
         reseting = false;
     }

@@ -50,7 +50,7 @@ public class StatsEffects : MonoBehaviour
     //Stats order
     const int HEALTH = 0;
     const int FIRE = 1;
-    const int ICE = 0;
+    const int ICE = 0; 
 
     //Check what coroutine is running
     bool burning;

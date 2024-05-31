@@ -15,6 +15,9 @@ public class JuiceBottle : MonoBehaviour
     [SerializeField] GameObject splash;
     [SerializeField] Rigidbody rb;
 
+    [Header ("Juices Ingredientes")]
+    [SerializeField] GameObject tornado;
+
     BoxCollider bc;
     Ray aimRay;
     RaycastHit aimHit;
@@ -90,6 +93,15 @@ public class JuiceBottle : MonoBehaviour
                     target.GetComponent<StatsManager>().ApplyStatSelf(i, applyIntensity, applyReachTime, applyReturnTime);
                 }
             }
+        }
+
+        //Juice effects that don't need a target
+
+        //spawn tornado
+        if (selfStats.tornado[StatsConst.SELF_INTENSITY] > 0)
+        {
+            tornado = Instantiate(tornado, transform.position, Quaternion.identity, null);
+            tornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TORNADO, selfStats.tornado[StatsConst.APPLY_INTENSITY], selfStats.tornado[StatsConst.APPLY_REACH_TIME], selfStats.tornado[StatsConst.APPLY_RETURN_TIME]);
         }
     }
 

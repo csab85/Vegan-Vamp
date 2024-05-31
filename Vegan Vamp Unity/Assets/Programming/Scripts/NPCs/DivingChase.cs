@@ -62,7 +62,7 @@ public class DivingChase : MonoBehaviour
         
         waiting = true;
 
-        yield return new WaitForSecondsRealtime(waitTime);
+        yield return new WaitForSeconds(waitTime);
         
         waiting = false;
         animator.SetBool("Attacking", false);

@@ -79,7 +79,7 @@ public class CarefulChase : MonoBehaviour
     IEnumerator ReduceDistance()
     {
         waitingReduce = true;
-        yield return new WaitForSecondsRealtime(approachCooldown);
+        yield return new WaitForSeconds(approachCooldown);
         targetDistance -= toReduceDistance;
         waitingReduce = false;
     }
@@ -92,7 +92,7 @@ public class CarefulChase : MonoBehaviour
     IEnumerator Attack()
     {
         navMeshAgent.speed = 5;
-        yield return new WaitForSecondsRealtime(attackDuration);
+        yield return new WaitForSeconds(attackDuration);
         actualState = states.retreating;
     }
 

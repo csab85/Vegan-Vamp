@@ -122,7 +122,7 @@ public class Gun: MonoBehaviour
         muzzle.SetActive(true);
         muzzleFX.Play();
 
-        yield return new WaitForSecondsRealtime(shotCooldown);
+        yield return new WaitForSeconds(shotCooldown);
         shooting = false;
     }
 
@@ -132,7 +132,7 @@ public class Gun: MonoBehaviour
     /// <returns></returns>
     IEnumerator Reload()
     {
-        yield return new WaitForSecondsRealtime(reloadTime);
+        yield return new WaitForSeconds(reloadTime);
         shotCounter = 0;
     }
 

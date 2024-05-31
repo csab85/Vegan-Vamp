@@ -84,7 +84,7 @@ public class CornGrenade : MonoBehaviour
     {
         Collider[] targets = {};
 
-        yield return new WaitForSecondsRealtime(explosionCountdown);
+        yield return new WaitForSeconds(explosionCountdown);
 
         targets = Physics.OverlapSphere(transform.position, explosionSize);
 

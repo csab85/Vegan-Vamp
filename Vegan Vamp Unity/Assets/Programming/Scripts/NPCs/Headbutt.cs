@@ -84,7 +84,7 @@ public class Headbutt : MonoBehaviour
     {
         aiming = true;
         animator.SetBool ("Aiming", true);
-        yield return new WaitForSecondsRealtime(aimTime); 
+        yield return new WaitForSeconds(aimTime); 
         actualState = States.Headbutting;      
         aiming = false;
         animator.SetBool ("Aiming", false);
@@ -101,7 +101,7 @@ public class Headbutt : MonoBehaviour
         waiting = true;
         navMeshAgent.speed = chasingSpeed;
 
-        yield return new WaitForSecondsRealtime(waitTime);
+        yield return new WaitForSeconds(waitTime);
         
         waiting = false;
         actualState = States.Searching;

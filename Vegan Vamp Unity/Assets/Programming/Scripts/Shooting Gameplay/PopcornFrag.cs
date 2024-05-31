@@ -46,7 +46,7 @@ public class PopcornFrag : MonoBehaviour
     IEnumerator Explode()
     {
         //wait to explode
-        yield return new WaitForSecondsRealtime(randomCountdown);
+        yield return new WaitForSeconds(randomCountdown);
 
         //get targets using physics
         targets = Physics.OverlapSphere(transform.position, explosionSize);
@@ -66,7 +66,7 @@ public class PopcornFrag : MonoBehaviour
         explosion.SetActive(true);
         explosionFx.Play();
 
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSeconds(0.1f);
 
         //update counting on the grenade script (so it knows when to reset)
         grenadeScript.fragCount ++;
