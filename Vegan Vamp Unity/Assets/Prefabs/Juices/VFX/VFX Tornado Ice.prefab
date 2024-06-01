@@ -60,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7259656182060204331}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 498.43, y: -0.0000009536743, z: 513.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -125,16 +125,25 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 10.374033, y: 110.08001, z: 98.28769, w: 0}
+      - m_Value: {x: 27.84, y: 5.1225605, z: 1.1136006, w: 0}
         m_Name: TornadoCoreColor
         m_Overridden: 1
-      - m_Value: {x: 1.292573, y: 4, z: 4, w: 0}
+      - m_Value: {x: 0.7490196, y: 0.24789894, z: 0.24313724, w: 0}
         m_Name: TornadoLayer1Color
+        m_Overridden: 1
+      - m_Value: {x: 1.292573, y: 4, z: 4, w: 0}
+        m_Name: Tornado Color 1
+        m_Overridden: 1
+      - m_Value: {x: 27.84, y: 5.1225605, z: 1.1136006, w: 0}
+        m_Name: Tornado Color 2
         m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 5
+        m_Name: Lerp duration
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
@@ -354,13 +363,111 @@ MonoBehaviour:
   health: []
   fire: []
   ice: []
-  tornado: []
-  speedy: []
-  noGravity: []
-  teleport: []
-  grow: []
-  shrink: []
-  dunno: []
+  tornado:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  speedy:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  noGravity:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  teleport:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  grow:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  shrink:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  dunno:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   objectType: 0
 --- !u!73398921 &3437048379850186082
 VFXRenderer:

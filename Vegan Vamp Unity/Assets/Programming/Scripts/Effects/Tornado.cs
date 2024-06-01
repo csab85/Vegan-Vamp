@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.VFX;
 
 public class Tornado : MonoBehaviour
 {
@@ -11,8 +13,16 @@ public class Tornado : MonoBehaviour
     [SerializeField] Transform tornadoCenter;
     [SerializeField] float pullForce;
     [SerializeField] float waitTime;
-
+    [SerializeField] float colorRefreshRate;
+    [SerializeField] Color iceColor;
+    [SerializeField] float iceColorIntensity;
+    [SerializeField] Color fireColor;
+    [SerializeField] float fireColorIntensity;
+ 
+    Color actualColor1;
+    Color actualColor2;
     StatsManager selfStats;
+    VisualEffect vfx;
 
     #endregion
     //========================
@@ -73,16 +83,71 @@ public class Tornado : MonoBehaviour
 
     void Start()
     {
+        actualColor1 = Color.white;
+        actualColor2 = Color.white;
         selfStats = GetComponent<StatsManager>();
+        vfx = GetComponent<VisualEffect>();
+
+        iceColor *= iceColorIntensity;
+        fireColor *= fireColorIntensity;
     }
 
     void Update()
     {
         if (selfStats.tornado[StatsConst.SELF_INTENSITY] > 0)
         {
+            //set size
             float selfScale = selfStats.tornado[StatsConst.SELF_INTENSITY];
 
             transform.localScale = new Vector3(selfScale, selfScale, selfScale);
+
+            //do thingies for elemental tornados
+            
+            if (selfStats.fire[StatsConst.SELF_INTENSITY] > 0 && selfStats.ice[StatsConst.SELF_INTENSITY] > 0)
+            {
+                if (actualColor1 != iceColor | actualColor2 != fireColor)
+                {
+                    print("mixed");
+                    actualColor1 = Vector4.MoveTowards(actualColor1, iceColor, colorRefreshRate);
+                    actualColor2 = Vector4.MoveTowards(actualColor2, fireColor, colorRefreshRate);
+                }
+            }
+
+            else if (selfStats.ice[StatsConst.SELF_INTENSITY] > 0)
+            {
+                if (actualColor1 != iceColor)
+                {
+                    print("ice");
+                    actualColor1 = Vector4.MoveTowards(actualColor1, iceColor, colorRefreshRate);
+                    actualColor2 = Vector4.MoveTowards(actualColor2, iceColor, colorRefreshRate);
+                }
+            }
+
+            else if (selfStats.fire[StatsConst.SELF_INTENSITY] > 0)
+            {
+                if (actualColor1 != fireColor)
+                {
+                    print("fire");
+                    actualColor1 = Vector4.MoveTowards(actualColor1, fireColor, colorRefreshRate);
+                    actualColor2 = Vector4.MoveTowards(actualColor2, fireColor, colorRefreshRate);
+                }
+            }
+
+            else
+            {
+                if (actualColor1 != Color.white)
+                {
+                    print("normal");
+                    actualColor1 = Vector4.MoveTowards(actualColor1, Color.white, colorRefreshRate);
+                    actualColor2 = Vector4.MoveTowards(actualColor2, Color.white, colorRefreshRate);
+                }
+            }
+
+            //update colors
+            int tornadoColor1 = Shader.PropertyToID("Tornado Color 1");
+            int tornadoColor2 = Shader.PropertyToID("Tornado Color 2");
+            vfx.SetVector4(tornadoColor1, actualColor1);
+            vfx.SetVector4(tornadoColor2, actualColor2);
         }
 
         else

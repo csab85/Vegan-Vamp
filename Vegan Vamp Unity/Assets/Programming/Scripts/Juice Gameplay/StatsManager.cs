@@ -55,20 +55,7 @@ public class StatsManager : MonoBehaviour
     //========================
     #region
     //the value to call each var inside a stat list
-    const int DEFAULT_BASE = 0;
-    const int CURRENT_BASE = 1;
-    const int SELF_INTENSITY = 2;
-    const int SELF_REACH_TIME = 3;
-    const int SELF_RETURN_TIME = 4;
-    const int APPLY_INTENSITY = 5;
-    const int APPLY_REACH_TIME = 6;
-    const int APPLY_RETURN_TIME = 7;
-    const int CAP_INTENSITY = 8;
-    const int CAP_REACH_TIME = 9;
-    const int CAP_RETURN_TIME = 10;
-    const int STARTING_BASE = 11;
-    const int STARTING_INTENSITY = 12;
-    const int PASSED_TIME = 13;
+
 
     
     //Stats list of the game object
@@ -139,30 +126,30 @@ public class StatsManager : MonoBehaviour
     /// /// <param name="returnTime">How much time to return is being added</param>
     public void ApplyStatSelf(int statNum, float intensity, float reachTime, float returnTime)
     {
-        statsArray[statNum][CURRENT_BASE] += intensity;
+        statsArray[statNum][StatsConst.CURRENT_BASE] += intensity;
 
-        statsArray[statNum][SELF_REACH_TIME] += reachTime;
-        statsArray[statNum][STARTING_INTENSITY] = statsArray[statNum][SELF_INTENSITY];
+        statsArray[statNum][StatsConst.SELF_REACH_TIME] += reachTime;
+        statsArray[statNum][StatsConst.STARTING_INTENSITY] = statsArray[statNum][StatsConst.SELF_INTENSITY];
 
-        statsArray[statNum][SELF_RETURN_TIME] += returnTime + reachTime;
-        statsArray[statNum][STARTING_BASE] = statsArray[statNum][CURRENT_BASE];
+        statsArray[statNum][StatsConst.SELF_RETURN_TIME] += returnTime + reachTime;
+        statsArray[statNum][StatsConst.STARTING_BASE] = statsArray[statNum][StatsConst.CURRENT_BASE];
     }
 
     public void ApplyToBase(int statNum, float intensity, float returnTime = -1)
     {
-        statsArray[statNum][DEFAULT_BASE] = intensity;
+        statsArray[statNum][StatsConst.DEFAULT_BASE] = intensity;
 
         if (returnTime >= 0)
         {
-            statsArray[statNum][SELF_RETURN_TIME] = returnTime + statsArray[statNum][SELF_REACH_TIME];
+            statsArray[statNum][StatsConst.SELF_RETURN_TIME] = returnTime + statsArray[statNum][StatsConst.SELF_REACH_TIME];
         }
     }
 
     public void AddToSelfApply(int statNum, float intensity, float reachTime, float returnTime)
     {
-        statsArray[statNum][APPLY_INTENSITY] += intensity;
-        statsArray[statNum][APPLY_REACH_TIME] += reachTime;
-        statsArray[statNum][APPLY_RETURN_TIME] += returnTime;
+        statsArray[statNum][StatsConst.APPLY_INTENSITY] += intensity;
+        statsArray[statNum][StatsConst.APPLY_REACH_TIME] += reachTime;
+        statsArray[statNum][StatsConst.APPLY_RETURN_TIME] += returnTime;
     } 
 
     void DriftTowardsBase()
@@ -171,16 +158,16 @@ public class StatsManager : MonoBehaviour
         {
             float[] stat = statsArray[i];
 
-            float defaultBase = stat[DEFAULT_BASE];
-            float currentBase = stat[CURRENT_BASE];
-            float selfIntensity = stat[SELF_INTENSITY];
+            float defaultBase = stat[StatsConst.DEFAULT_BASE];
+            float currentBase = stat[StatsConst.CURRENT_BASE];
+            float selfIntensity = stat[StatsConst.SELF_INTENSITY];
 
             //move self intensity towards current base, based on how much of the reach time
             if (selfIntensity != currentBase)
             {
-                float reachTime = stat[SELF_REACH_TIME];
-                float passedTime = stat[PASSED_TIME];
-                float startingIntensity = stat[STARTING_INTENSITY];
+                float reachTime = stat[StatsConst.SELF_REACH_TIME];
+                float passedTime = stat[StatsConst.PASSED_TIME];
+                float startingIntensity = stat[StatsConst.STARTING_INTENSITY];
 
                 //get the percentage of durtation passed based on time passed
                 float reachTimePercentage = Mathf.Clamp01(passedTime / reachTime);
@@ -189,17 +176,17 @@ public class StatsManager : MonoBehaviour
                 selfIntensity = Mathf.Lerp(startingIntensity, currentBase, reachTimePercentage);
 
                 //Update values on dict
-                stat[SELF_INTENSITY] = selfIntensity;
-                stat[PASSED_TIME] += Time.deltaTime;
+                stat[StatsConst.SELF_INTENSITY] = selfIntensity;
+                stat[StatsConst.PASSED_TIME] += Time.deltaTime;
             }
 
 
             //move current base towards default base, based on how much of the return time
             else if (currentBase != defaultBase && selfIntensity == currentBase)
             {
-                float returnTime = stat[SELF_RETURN_TIME];
-                float passedTime = stat[PASSED_TIME];
-                float startingBase = stat[STARTING_BASE];
+                float returnTime = stat[StatsConst.SELF_RETURN_TIME];
+                float passedTime = stat[StatsConst.PASSED_TIME];
+                float startingBase = stat[StatsConst.STARTING_BASE];
 
                 //get the percentage of durtation passed based on time passed
                 float returnTimePercentage = Mathf.Clamp01((passedTime) / returnTime);
@@ -208,17 +195,17 @@ public class StatsManager : MonoBehaviour
                 currentBase = Mathf.Lerp(startingBase, defaultBase, returnTimePercentage);
 
                 //Update values on dict and keep intensity equal to current base (this might makeintensity unchangeble)
-                stat[CURRENT_BASE] = currentBase;
-                stat[SELF_INTENSITY] = currentBase;
-                stat[PASSED_TIME] += Time.deltaTime;
+                stat[StatsConst.CURRENT_BASE] = currentBase;
+                stat[StatsConst.SELF_INTENSITY] = currentBase;
+                stat[StatsConst.PASSED_TIME] += Time.deltaTime;
             }
 
             //passed time to 0 if base and self intensity are the same
-            else if (stat[PASSED_TIME] != 0 | stat[SELF_REACH_TIME] != 0 | stat[SELF_RETURN_TIME] != 0)
+            else if (stat[StatsConst.PASSED_TIME] != 0 | stat[StatsConst.SELF_REACH_TIME] != 0 | stat[StatsConst.SELF_RETURN_TIME] != 0)
             {
-                stat[PASSED_TIME] = 0;
-                stat[SELF_REACH_TIME] = 0;
-                stat[SELF_RETURN_TIME] = 0;
+                stat[StatsConst.PASSED_TIME] = 0;
+                stat[StatsConst.SELF_REACH_TIME] = 0;
+                stat[StatsConst.SELF_RETURN_TIME] = 0;
             }
         }
     }
@@ -227,29 +214,29 @@ public class StatsManager : MonoBehaviour
     {
        foreach (float[] stat in statsArray)
        {
-           if (stat[CURRENT_BASE] > stat[CAP_INTENSITY] && stat[CAP_INTENSITY] >= 0)
+           if (stat[StatsConst.CURRENT_BASE] > stat[StatsConst.CAP_INTENSITY] && stat[StatsConst.CAP_INTENSITY] >= 0)
            {
-               stat[CURRENT_BASE] = stat[CAP_INTENSITY];
+               stat[StatsConst.CURRENT_BASE] = stat[StatsConst.CAP_INTENSITY];
            }
 
-           if (stat[SELF_REACH_TIME] > stat[CAP_REACH_TIME] && stat[CAP_REACH_TIME] >= 0)
+           if (stat[StatsConst.SELF_REACH_TIME] > stat[StatsConst.CAP_REACH_TIME] && stat[StatsConst.CAP_REACH_TIME] >= 0)
            {
-               stat[SELF_REACH_TIME] = stat[CAP_REACH_TIME];
+               stat[StatsConst.SELF_REACH_TIME] = stat[StatsConst.CAP_REACH_TIME];
            }
 
-           if (stat[SELF_RETURN_TIME] > stat[CAP_RETURN_TIME] && stat[CAP_RETURN_TIME] >= 0)
+           if (stat[StatsConst.SELF_RETURN_TIME] > stat[StatsConst.CAP_RETURN_TIME] && stat[StatsConst.CAP_RETURN_TIME] >= 0)
            {
-               stat[SELF_RETURN_TIME] = stat[CAP_RETURN_TIME];
+               stat[StatsConst.SELF_RETURN_TIME] = stat[StatsConst.CAP_RETURN_TIME];
            }
 
-           if (stat[CURRENT_BASE] < 0)
+           if (stat[StatsConst.CURRENT_BASE] < 0)
            {
-               stat[CURRENT_BASE] = 0;
+               stat[StatsConst.CURRENT_BASE] = 0;
            }
 
-           if (stat[DEFAULT_BASE] < 0)
+           if (stat[StatsConst.DEFAULT_BASE] < 0)
            {
-               stat[DEFAULT_BASE] = 0;
+               stat[StatsConst.DEFAULT_BASE] = 0;
            }
        }
     }

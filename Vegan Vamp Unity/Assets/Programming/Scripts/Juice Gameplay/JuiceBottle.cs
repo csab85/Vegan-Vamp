@@ -15,8 +15,7 @@ public class JuiceBottle : MonoBehaviour
     [SerializeField] GameObject splash;
     [SerializeField] Rigidbody rb;
 
-    [Header ("Juices Ingredientes")]
-    [SerializeField] GameObject tornado;
+    GameObject tornado;
 
     BoxCollider bc;
     Ray aimRay;
@@ -32,21 +31,6 @@ public class JuiceBottle : MonoBehaviour
     //STATS AND VALUES
     //========================
     #region
-
-    const int DEFAULT_BASE = 0;
-    const int CURRENT_BASE = 1;
-    const int SELF_INTENSITY = 2;
-    const int SELF_REACH_TIME = 3;
-    const int SELF_RETURN_TIME = 4;
-    const int APPLY_INTENSITY = 5;
-    const int APPLY_REACH_TIME = 6;
-    const int APPLY_RETURN_TIME = 7;
-    const int CAP_INTENSITY = 8;
-    const int CAP_REACH_TIME = 9;
-    const int CAP_RETURN_TIME = 10;
-    const int STARTING_BASE = 11;
-    const int STARTING_INTENSITY = 12;
-    const int PASSED_TIME = 13;
 
     [Header ("Settings")]
     [SerializeField] float throwPower;
@@ -84,9 +68,9 @@ public class JuiceBottle : MonoBehaviour
             //apply every stat on the object (if the stat has any spply intensity)
             for (int i = 0; i < selfStats.statsArray.Count(); i++)
             {
-                float applyIntensity = selfStats.statsArray[i][APPLY_INTENSITY];
-                float applyReachTime = selfStats.statsArray[i][APPLY_REACH_TIME];
-                float applyReturnTime = selfStats.statsArray[i][APPLY_RETURN_TIME];
+                float applyIntensity = selfStats.statsArray[i][StatsConst.APPLY_INTENSITY];
+                float applyReachTime = selfStats.statsArray[i][StatsConst.APPLY_REACH_TIME];
+                float applyReturnTime = selfStats.statsArray[i][StatsConst.APPLY_RETURN_TIME];
 
                 if (applyIntensity != 0)
                 {
@@ -97,11 +81,19 @@ public class JuiceBottle : MonoBehaviour
 
         //Juice effects that don't need a target
 
-        //spawn tornado
-        if (selfStats.tornado[StatsConst.SELF_INTENSITY] > 0)
+        //activate tornado
+        if (selfStats.tornado[StatsConst.APPLY_INTENSITY] > 0)
         {
-            tornado = Instantiate(tornado, transform.position, Quaternion.identity, null);
+            tornado.transform.parent = null;
+            tornado.transform.rotation = Quaternion.identity;
+            tornado.SetActive(true);
+
+            //apply tornado ice and fire
             tornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TORNADO, selfStats.tornado[StatsConst.APPLY_INTENSITY], selfStats.tornado[StatsConst.APPLY_REACH_TIME], selfStats.tornado[StatsConst.APPLY_RETURN_TIME]);
+
+            tornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.ICE, selfStats.ice[StatsConst.APPLY_INTENSITY], selfStats.ice[StatsConst.APPLY_REACH_TIME], selfStats.ice[StatsConst.APPLY_RETURN_TIME]);
+
+            tornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.FIRE, selfStats.fire[StatsConst.APPLY_INTENSITY], selfStats.fire[StatsConst.APPLY_REACH_TIME], selfStats.fire[StatsConst.APPLY_RETURN_TIME]);
         }
     }
 
@@ -147,6 +139,8 @@ public class JuiceBottle : MonoBehaviour
     {
         // Intact.SetActive(true);
         // Broken.SetActive(false);
+
+        tornado = transform.Find("VFX Tornado").gameObject;
 
         bc = GetComponent<BoxCollider>();
 

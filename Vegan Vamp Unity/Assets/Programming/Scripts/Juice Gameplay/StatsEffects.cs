@@ -31,27 +31,6 @@ public class StatsEffects : MonoBehaviour
     //========================
     #region
 
-    //Consts
-    const int DEFAULT_BASE = 0;
-    const int CURRENT_BASE = 1;
-    const int SELF_INTENSITY = 2;
-    const int SELF_REACH_TIME = 3;
-    const int SELF_RETURN_TIME = 4;
-    const int APPLY_INTENSITY = 5;
-    const int APPLY_REACH_TIME = 6;
-    const int APPLY_RETURN_TIME = 7;
-    const int CAP_INTENSITY = 8;
-    const int CAP_REACH_TIME = 9;
-    const int CAP_RETURN_TIME = 10;
-    const int STARTING_BASE = 11;
-    const int STARTING_INTENSITY = 12;
-    const int PASSED_TIME = 13;
-
-    //Stats order
-    const int HEALTH = 0;
-    const int FIRE = 1;
-    const int ICE = 0; 
-
     //Check what coroutine is running
     bool burning;
     bool frozen;
@@ -88,13 +67,13 @@ public class StatsEffects : MonoBehaviour
         //Get vfx objects
         Transform VFX = transform.Find("VFX");
 
-        if (selfStats.fire[CAP_INTENSITY] != 0)
+        if (selfStats.fire[StatsConst.CAP_INTENSITY] != 0)
         {
             fire = VFX.GetChild(0).gameObject;
         }
 
         //get models
-        if (selfStats.ice[CAP_INTENSITY] != 0)
+        if (selfStats.ice[StatsConst.CAP_INTENSITY] != 0)
         {
             foreach (Transform iceCube in transform.Find("Models").Find("Ice Cubes"))
             {
@@ -111,7 +90,7 @@ public class StatsEffects : MonoBehaviour
             //FIRE
             if (fire != null)
             {
-                if (selfStats.fire[SELF_INTENSITY] > 0)
+                if (selfStats.fire[StatsConst.SELF_INTENSITY] > 0)
                 {
                     //activate fire fx
                     if (!fire.activeSelf)
@@ -119,7 +98,7 @@ public class StatsEffects : MonoBehaviour
                         fire.SetActive(true);
                     }
 
-                    float fireScale = selfStats.fire[SELF_INTENSITY];
+                    float fireScale = selfStats.fire[StatsConst.SELF_INTENSITY];
 
                     fire.transform.localScale = new Vector3(fireScale, fireScale, fireScale);
 
@@ -149,7 +128,7 @@ public class StatsEffects : MonoBehaviour
             //ICE
             if (iceCubesList.Count > 0)
             {
-                if (selfStats.ice[SELF_INTENSITY] > 0)
+                if (selfStats.ice[StatsConst.SELF_INTENSITY] > 0)
                 {
                     if (!frozen)
                     {
@@ -163,7 +142,7 @@ public class StatsEffects : MonoBehaviour
                         iceCube.SetActive(true);
                     }
 
-                    float iceScale = selfStats.ice[SELF_INTENSITY];
+                    float iceScale = selfStats.ice[StatsConst.SELF_INTENSITY];
 
                     iceCube.transform.localScale = new Vector3(iceScale, iceScale, iceScale);
 
