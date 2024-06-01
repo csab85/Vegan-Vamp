@@ -131,10 +131,19 @@ VisualEffect:
       - m_Value: {x: 2.595225, y: 2.595225, z: 2.595225, w: 0}
         m_Name: TornadoLayer1Color
         m_Overridden: 1
+      - m_Value: {x: 0.9681626, y: 2.9960787, z: 2.9960787, w: 0}
+        m_Name: Tornado Color 1
+        m_Overridden: 1
+      - m_Value: {x: 27.84, y: 5.1225605, z: 1.1136006, w: 0}
+        m_Name: Tornado Color 2
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 2
+        m_Name: Lerp duration
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
@@ -373,11 +382,11 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 0.01
+  - 0.1
+  - -1
+  - -1
+  - -1
   - 0
   - 0
   - 0
@@ -390,16 +399,16 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  - 0
-  - 0
-  - 0
+  - -1
+  - -1
+  - -1
   - 0
   - 0
   - 0
   tornado:
   - 0
   - 0
-  - 0
+  - 0.1
   - 0
   - 0
   - 0
@@ -556,4 +565,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tornadoCenter: {fileID: 7665370522347912854}
   pullForce: 1000
-  waitTime: 0.1
+  waitTime: 0.05
+  colorRefreshRate: 0.1
+  iceColor: {r: 0.24313726, g: 0.7490196, b: 0.7490196, a: 0}
+  iceColorIntensity: 2
+  fireColor: {r: 1, g: 0.18400002, b: 0.04000002, a: 0}
+  fireColorIntensity: 5
