@@ -9,6 +9,10 @@ public class NewBehaviourScript : MonoBehaviour
     [Header("Mesh Related")]
     public float meshRefrashRate = 0.1f;
     public Transform positionToSpawn;
+    public float meshDestroyDelay = 3f;
+
+    [Header("Shader Related")]
+    public Material mat;
 
     private bool isTrailActive;
     private SkinnedMeshRenderer[] skinnedMeshRenderers;
@@ -42,6 +46,9 @@ public class NewBehaviourScript : MonoBehaviour
                 skinnedMeshRenderers[i].BakeMesh(mesh);
                 
                 mf.mesh = mesh;
+                mr.material = mat;
+
+                Destroy(gObj, meshDestroyDelay);
             }
             
 
