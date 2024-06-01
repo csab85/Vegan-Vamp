@@ -67,13 +67,13 @@ public class StatsEffects : MonoBehaviour
         //Get vfx objects
         Transform VFX = transform.Find("VFX");
 
-        if (selfStats.fire[StatsConst.CAP_INTENSITY] != 0)
+        if (selfStats.fire[StatsConst.CAP_INTENSITY] != 0 && selfStats.objectType != StatsManager.Type.None)
         {
             fire = VFX.GetChild(0).gameObject;
         }
 
         //get models
-        if (selfStats.ice[StatsConst.CAP_INTENSITY] != 0)
+        if (selfStats.ice[StatsConst.CAP_INTENSITY] != 0 && selfStats.objectType != StatsManager.Type.None)
         {
             foreach (Transform iceCube in transform.Find("Models").Find("Ice Cubes"))
             {

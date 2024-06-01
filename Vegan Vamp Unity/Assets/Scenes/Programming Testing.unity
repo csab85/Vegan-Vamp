@@ -1180,6 +1180,22 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2247386790054602020, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: worldItemsArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2247386790054602020, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: worldItemsArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 8036862644267875125, guid: 6dc141cabcf3eaa4795b1dcb22e5ecd0, type: 3}
+    - target: {fileID: 2247386790054602020, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: inventoryItemsArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2247386790054602020, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: inventoryItemsArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 6569667940618654670, guid: d34e305a30575ff46b17cbf856d1a066, type: 3}
     - target: {fileID: 2252431239455984374, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_Name
       value: Player Pack
@@ -2990,11 +3006,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!4 &869824018 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2407038503671482073, guid: 46204b7e3b83d574a8fc0aed5a1bd529, type: 3}
-  m_PrefabInstance: {fileID: 1773661847307490091}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &888908117 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7822815019230662221, guid: 52b84ebb34b0ee14684a67030fab489c, type: 3}
@@ -5386,7 +5397,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 869824018}
+  - {fileID: 4177885566583166450}
   - {fileID: 5861058511382468207}
   - {fileID: 543450652446078633}
   m_Father: {fileID: 0}
@@ -6785,6 +6796,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cad2a21c701451c4f8c4aca99fec40bc, type: 3}
+--- !u!4 &4177885566583166450 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2407038503671482073, guid: 46204b7e3b83d574a8fc0aed5a1bd529, type: 3}
+  m_PrefabInstance: {fileID: 1773661847307490091}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5300535457712392439
 PrefabInstance:
   m_ObjectHideFlags: 0
