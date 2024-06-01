@@ -9,10 +9,12 @@ public class Gun: MonoBehaviour
     //========================
     #region
     [Header("Imports")]
+    [SerializeField] GameObject player;
     [SerializeField] GameObject bulletPool;
     [SerializeField] GameObject aimColliders;
     [SerializeField] GameObject muzzle;
 
+    Animator animator;
     VisualEffect muzzleFX;
 
     #endregion
@@ -122,6 +124,9 @@ public class Gun: MonoBehaviour
         muzzle.SetActive(true);
         muzzleFX.Play();
 
+        //play animation
+        animator.Play("Shoot", 1);        
+
         yield return new WaitForSeconds(shotCooldown);
         shooting = false;
     }
@@ -147,6 +152,7 @@ public class Gun: MonoBehaviour
     void Start()
     {
         aimColliders.SetActive(true);
+        animator = player.GetComponent<Animator>();
         muzzleFX = muzzle.GetComponent<VisualEffect>();
     }
 

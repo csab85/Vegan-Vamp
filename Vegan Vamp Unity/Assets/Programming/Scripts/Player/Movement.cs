@@ -8,8 +8,10 @@ public class Movement : MonoBehaviour
 
     [Header ("Imports")]
     [SerializeField] Transform orientTransform;
-    [SerializeField] Rigidbody rb;
     [SerializeField] LayerMask groundLayer;
+
+    Rigidbody rb;
+    Animator animator;
 
     #endregion
     //========================
@@ -26,12 +28,10 @@ public class Movement : MonoBehaviour
 
     [Header ("Jumping Settings")]
     [SerializeField] public float jumpForce;
-    [SerializeField] float jumpCooldown;
     [SerializeField] float airMultiplier;
     
     //jumping
     bool grounded;
-    bool readyToJump = true;
 
     //moving
     float verticalInput;
@@ -53,10 +53,9 @@ public class Movement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Jump") && readyToJump && grounded)
+        if (Input.GetButtonDown("Jump") && grounded)
         {
             Jump();
-            Invoke("JumpReset", jumpCooldown);
         }
     }
 
@@ -72,7 +71,17 @@ public class Movement : MonoBehaviour
         else if (!grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * airMultiplier * 10, ForceMode.Force);
-        }   
+        }
+
+        if (rb.velocity.magnitude > 2f && grounded)
+        {
+            animator.SetBool("Running", true);
+        }
+
+        else
+        {
+            animator.SetBool("Running", false);
+        }
     }
 
     void CapVelocity()
@@ -93,11 +102,13 @@ public class Movement : MonoBehaviour
         if (grounded)
         {
             rb.drag = groundDrag;
+            animator.SetBool("Falling", false);
         }
 
         else
         {
             rb.drag = 0;
+            animator.SetBool("Falling", true);
         }
     }
 
@@ -107,11 +118,9 @@ public class Movement : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    }
 
-    void ResetJump()
-    {
-        readyToJump = true;
+        //play animation
+        animator.SetTrigger("Jump");
     }
 
     #endregion
@@ -122,6 +131,11 @@ public class Movement : MonoBehaviour
     //========================
     #region
 
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+    }
 
     void Update()
     {

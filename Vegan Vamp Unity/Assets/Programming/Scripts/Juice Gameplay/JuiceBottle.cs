@@ -10,6 +10,7 @@ public class JuiceBottle : MonoBehaviour
     #region
 
     [Header ("Imports")]
+    [SerializeField] GameObject player;
     [SerializeField] public GameObject Intact;
     [SerializeField] GameObject Broken;
     [SerializeField] GameObject splash;
@@ -17,6 +18,7 @@ public class JuiceBottle : MonoBehaviour
 
     GameObject tornado;
 
+    Animator animator;
     BoxCollider bc;
     Ray aimRay;
     RaycastHit aimHit;
@@ -119,6 +121,24 @@ public class JuiceBottle : MonoBehaviour
         }
     }
 
+    public void ThrowBottle()
+    {
+        if (Intact.activeSelf && gameObject.name == "Base Juice")
+        {   
+            Vector3 spawnPoint = transform.position + transform.forward * 0.4f;
+            GameObject copyJuice = Instantiate(gameObject, spawnPoint, gameObject.transform.rotation, null);
+
+            Vector3 aimDirection = aimHit.point - transform.position;
+
+            copyJuice.transform.localScale = Vector3.one;
+            copyJuice.GetComponent<JuiceBottle>().smashable = true;
+            copyJuice.GetComponent<Rigidbody>().isKinematic = false;
+            copyJuice.GetComponent<Rigidbody>().AddForce(aimDirection.normalized * throwPower, ForceMode.Impulse);
+
+            Intact.SetActive(false);
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (smashable)
@@ -140,6 +160,8 @@ public class JuiceBottle : MonoBehaviour
         // Intact.SetActive(true);
         // Broken.SetActive(false);
 
+        animator = player.GetComponent<Animator>();
+
         tornado = transform.Find("VFX Tornado").gameObject;
 
         bc = GetComponent<BoxCollider>();
@@ -149,18 +171,10 @@ public class JuiceBottle : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Throw") && Intact.activeSelf && gameObject.name == "Base Juice")
-        {   
-            Vector3 spawnPoint = transform.position + transform.forward * 0.7f;
-            GameObject copyJuice = Instantiate(gameObject, spawnPoint, Quaternion.identity, null);
-
-            Vector3 aimDirection = aimHit.point - transform.position;
-
-            copyJuice.GetComponent<JuiceBottle>().smashable = true;
-            copyJuice.GetComponent<Rigidbody>().isKinematic = false;
-            copyJuice.GetComponent<Rigidbody>().AddForce(aimDirection.normalized * throwPower, ForceMode.Impulse);
-
-            Intact.SetActive(false);
+        //throw bottle
+        if (Input.GetButtonDown("Throw"))
+        {
+            animator.SetTrigger("Throw");
         }
 
         //Aim
