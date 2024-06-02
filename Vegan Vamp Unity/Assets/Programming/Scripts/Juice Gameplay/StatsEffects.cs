@@ -1,5 +1,5 @@
+using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,7 +21,6 @@ public class StatsEffects : MonoBehaviour
 
     Animator animator;
     NavMeshAgent agent;
-    
 
     #endregion
     //========================
@@ -30,6 +29,13 @@ public class StatsEffects : MonoBehaviour
     //STATS AND VALUES
     //========================
     #region
+
+    //Fire Damage
+    [Tooltip ("Can burn but won't take damage")]
+    [SerializeField] bool fireProof;
+    static float fireDamage = 0.1f;
+    static float fireRefreshRate = 0.05f;
+
 
     //Check what coroutine is running
     bool burning;
@@ -48,7 +54,15 @@ public class StatsEffects : MonoBehaviour
     //========================
     #region
 
-
+    IEnumerator FireDOT()
+    {
+        if (burning)
+        {
+            selfStats.health[StatsConst.DEFAULT_BASE] -= fireDamage;
+            yield return new WaitForSeconds(fireRefreshRate);
+            StartCoroutine(FireDOT());
+        }
+    }
 
     #endregion
     //========================
@@ -87,11 +101,47 @@ public class StatsEffects : MonoBehaviour
         //EFFECTS
         if (selfStats.objectType != StatsManager.Type.None)
         {
+            //HEALTH
+            if (selfStats.dead)
+            {
+                if (selfStats.objectType == StatsManager.Type.Ingredient)
+                {
+                    Destroy(gameObject);
+                }
+
+                if (selfStats.objectType == StatsManager.Type.Other)
+                {
+                    Destroy(gameObject);
+                }
+
+                if (selfStats.objectType == StatsManager.Type.NPC)
+                {
+                    Destroy(gameObject);
+                }
+
+                if (selfStats.objectType == StatsManager.Type.Player)
+                {
+                    animator.SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 1);
+                    animator.Play("Death", AnimationConsts.DAMAGE_LAYER);
+                    gameObject.GetComponent<CapsuleCollider>().height = 0.1f;
+                }
+            }
+
             //FIRE
             if (fire != null)
             {
                 if (selfStats.fire[StatsConst.SELF_INTENSITY] > 0)
                 {
+                    if (!burning)
+                    {
+                        burning = true;
+                        //damage over time
+                        if (!fireProof)
+                        {
+                            StartCoroutine(FireDOT());
+                        }
+                    }
+
                     //activate fire fx
                     if (!fire.activeSelf)
                     {
@@ -111,6 +161,11 @@ public class StatsEffects : MonoBehaviour
 
                 else
                 {
+                    if (burning)
+                    {
+                        burning = false;
+                    }
+
                     if (fire.activeSelf)
                     {
                         fire.SetActive(false);

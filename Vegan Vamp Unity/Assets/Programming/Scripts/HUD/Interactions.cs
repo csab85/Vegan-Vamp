@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -18,6 +19,7 @@ public class Interactions : MonoBehaviour
     GameObject interactionUI;
     GameObject interactText; 
     Collider[] nearbyInteractions;
+    StatsManager playerStats;
 
     #endregion
     //========================
@@ -71,6 +73,7 @@ public class Interactions : MonoBehaviour
     {   
         interactionUI = transform.GetChild(0).gameObject;
         interactText = interactionUI.transform.GetChild(0).gameObject;
+        playerStats = player.GetComponent<StatsManager>();
     }
 
     void Update()
@@ -91,7 +94,7 @@ public class Interactions : MonoBehaviour
                 interactText.GetComponent<RectTransform>().position = pointOnScreen + textOffset;
 
                 //get if interact button is pressed
-                if (Input.GetButtonDown("Interact"))
+                if (Input.GetButtonDown("Interact") && !playerStats.dead)
                 {
                     Interact(interactObject);
                 }

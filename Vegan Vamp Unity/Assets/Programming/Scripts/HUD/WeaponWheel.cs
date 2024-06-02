@@ -6,9 +6,13 @@ public class WeaponWheel : MonoBehaviour
     //========================
     #region
 
+    [SerializeField] GameObject player;
     [SerializeField] GameObject[] guns;
     [SerializeField] ThirdPersonCamera camScript;
+
     GameObject weaponWheelUI;
+    Animator animator;
+    StatsManager playerStats;
 
     #endregion
     //========================
@@ -62,6 +66,8 @@ public class WeaponWheel : MonoBehaviour
     void Start()
     {
         weaponWheelUI = transform.GetChild(0).gameObject;
+        animator = player.GetComponent<Animator>();
+        playerStats = player.GetComponent<StatsManager>();
     }
 
     void Update()
@@ -69,7 +75,7 @@ public class WeaponWheel : MonoBehaviour
         //open wheel if on combat mode
         if(camScript.currentMode == ThirdPersonCamera.CameraMode.Combat)
         {
-            if (Input.GetButton("Weapon Wheel") && !weaponWheelUI.activeSelf)
+            if (Input.GetButton("Weapon Wheel") && !weaponWheelUI.activeSelf && !playerStats.dead)
             {
                 weaponWheelUI.SetActive(true);
 
@@ -84,6 +90,8 @@ public class WeaponWheel : MonoBehaviour
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
             }
+
+            animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 1);
         }
 
 
@@ -97,6 +105,8 @@ public class WeaponWheel : MonoBehaviour
                     gun.SetActive(false);
                 }    
             }
+
+            animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 0);
         }
     }
 

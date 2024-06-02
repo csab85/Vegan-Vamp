@@ -54,10 +54,9 @@ public class StatsManager : MonoBehaviour
     //STATS AND VALUES
     //========================
     #region
-    //the value to call each var inside a stat list
 
+    [HideInInspector] public bool dead = false;
 
-    
     //Stats list of the game object
     #region
 
@@ -131,7 +130,7 @@ public class StatsManager : MonoBehaviour
         statsArray[statNum][StatsConst.SELF_REACH_TIME] += reachTime;
         statsArray[statNum][StatsConst.STARTING_INTENSITY] = statsArray[statNum][StatsConst.SELF_INTENSITY];
 
-        statsArray[statNum][StatsConst.SELF_RETURN_TIME] += returnTime + reachTime;
+        statsArray[statNum][StatsConst.SELF_RETURN_TIME] += returnTime;
         statsArray[statNum][StatsConst.STARTING_BASE] = statsArray[statNum][StatsConst.CURRENT_BASE];
     }
 
@@ -141,7 +140,7 @@ public class StatsManager : MonoBehaviour
 
         if (returnTime >= 0)
         {
-            statsArray[statNum][StatsConst.SELF_RETURN_TIME] = returnTime + statsArray[statNum][StatsConst.SELF_REACH_TIME];
+            statsArray[statNum][StatsConst.SELF_RETURN_TIME] = returnTime;
         }
     }
 
@@ -182,14 +181,15 @@ public class StatsManager : MonoBehaviour
 
 
             //move current base towards default base, based on how much of the return time
-            else if (currentBase != defaultBase && selfIntensity == currentBase)
+            else if (currentBase != defaultBase)
             {
                 float returnTime = stat[StatsConst.SELF_RETURN_TIME];
+                float reachTime = stat[StatsConst.SELF_REACH_TIME];
                 float passedTime = stat[StatsConst.PASSED_TIME];
                 float startingBase = stat[StatsConst.STARTING_BASE];
 
                 //get the percentage of durtation passed based on time passed
-                float returnTimePercentage = Mathf.Clamp01((passedTime) / returnTime);
+                float returnTimePercentage = Mathf.Clamp01(passedTime / (returnTime + reachTime));
 
                 //set self intensity to percentage between starting and base value (percentage of time passed from toal duration) 
                 currentBase = Mathf.Lerp(startingBase, defaultBase, returnTimePercentage);
@@ -261,6 +261,11 @@ public class StatsManager : MonoBehaviour
     {
         CapValues();
         DriftTowardsBase();
+
+        if (health[StatsConst.SELF_INTENSITY] <= 0)
+        {
+            dead = true;
+        }
     }
 
     #endregion

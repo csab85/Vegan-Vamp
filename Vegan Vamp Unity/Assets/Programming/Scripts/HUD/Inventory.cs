@@ -20,6 +20,7 @@ public class Inventory : MonoBehaviour
     GameObject bag;
     RectTransform bagRectTransform;
     GameObject spawnPoint;
+    StatsManager playerStats;
 
     #endregion
     //========================
@@ -109,13 +110,14 @@ public class Inventory : MonoBehaviour
         bag = FindChild(transform, "Bag");
         bagRectTransform = bag.GetComponent<RectTransform>();
         spawnPoint = bag.transform.GetChild(0).gameObject;
+        playerStats = player.GetComponent<StatsManager>();
     }
 
     void Update()
     {
         if (camScript.currentMode == ThirdPersonCamera.CameraMode.Exploration)
         {
-            if (Input.GetButtonDown("Inventory"))
+            if (Input.GetButtonDown("Inventory") && !playerStats)
             {
                 if (openMode)
                 {

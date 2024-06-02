@@ -118,12 +118,15 @@ public class JuiceBottle : MonoBehaviour
         {
             Intact.SetActive(true);
             Broken.SetActive(false);
+
+            //update hold animation
+            animator.SetLayerWeight(AnimationConsts.BOTTLE_LAYER, 1);
         }
     }
 
     public void ThrowBottle()
     {
-        if (Intact.activeSelf && gameObject.name == "Base Juice")
+        if (Intact.activeSelf && gameObject.name == "Base Juice" && !selfStats.dead)
         {   
             Vector3 spawnPoint = transform.position + transform.forward * 0.4f;
             GameObject copyJuice = Instantiate(gameObject, spawnPoint, gameObject.transform.rotation, null);
@@ -136,6 +139,9 @@ public class JuiceBottle : MonoBehaviour
             copyJuice.GetComponent<Rigidbody>().AddForce(aimDirection.normalized * throwPower, ForceMode.Impulse);
 
             Intact.SetActive(false);
+
+            //deactivate animation layer
+            animator.SetLayerWeight(AnimationConsts.BOTTLE_LAYER, 0);
         }
     }
 

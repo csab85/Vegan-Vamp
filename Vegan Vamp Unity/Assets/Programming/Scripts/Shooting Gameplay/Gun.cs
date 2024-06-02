@@ -125,7 +125,7 @@ public class Gun: MonoBehaviour
         muzzleFX.Play();
 
         //play animation
-        animator.Play("Shoot", 1);        
+        animator.Play("Shoot", AnimationConsts.GUN_LAYER);        
 
         yield return new WaitForSeconds(shotCooldown);
         shooting = false;

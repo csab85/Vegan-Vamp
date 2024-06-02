@@ -38,6 +38,8 @@ public class Movement : MonoBehaviour
     float horizontalInput;
     Vector3 moveDirection;
 
+    StatsManager selfStats;
+
     RaycastHit hit;
 
     #endregion
@@ -53,7 +55,7 @@ public class Movement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (Input.GetButtonDown("Jump") && grounded && !selfStats.dead)
         {
             Jump();
         }
@@ -61,26 +63,29 @@ public class Movement : MonoBehaviour
 
     void MovePlayer()
     {
-        moveDirection = orientTransform.forward * verticalInput + orientTransform.right * horizontalInput;
-
-        if (grounded)
+        if (!selfStats.dead)
         {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10, ForceMode.Force);
-        }
+            moveDirection = orientTransform.forward * verticalInput + orientTransform.right * horizontalInput;
 
-        else if (!grounded)
-        {
-            rb.AddForce(moveDirection.normalized * moveSpeed * airMultiplier * 10, ForceMode.Force);
-        }
+            if (grounded)
+            {
+                rb.AddForce(moveDirection.normalized * moveSpeed * 10, ForceMode.Force);
+            }
 
-        if (rb.velocity.magnitude > 2f && grounded)
-        {
-            animator.SetBool("Running", true);
-        }
+            else if (!grounded)
+            {
+                rb.AddForce(moveDirection.normalized * moveSpeed * airMultiplier * 10, ForceMode.Force);
+            }
 
-        else
-        {
-            animator.SetBool("Running", false);
+            if (rb.velocity.magnitude > 2f && grounded)
+            {
+                animator.SetBool("Running", true);
+            }
+
+            else
+            {
+                animator.SetBool("Running", false);
+            }
         }
     }
 
@@ -133,6 +138,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+        selfStats = GetComponent<StatsManager>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
