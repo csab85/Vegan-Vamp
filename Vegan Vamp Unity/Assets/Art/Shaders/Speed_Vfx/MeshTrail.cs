@@ -13,6 +13,9 @@ public class NewBehaviourScript : MonoBehaviour
 
     [Header("Shader Related")]
     public Material mat;
+    public string shaderVarRef;
+    public float shaderVarRate = 0.1f;
+    public float shaderVarRefreshRate = 0.05f;
 
     private bool isTrailActive;
     private SkinnedMeshRenderer[] skinnedMeshRenderers;
@@ -48,6 +51,8 @@ public class NewBehaviourScript : MonoBehaviour
                 mf.mesh = mesh;
                 mr.material = mat;
 
+                StartCoroutine(AnimateMaterialFloat(mr.material,0,shaderVarRate, shaderVarRefreshRate));
+
                 Destroy(gObj, meshDestroyDelay);
             }
             
@@ -56,5 +61,17 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
         isTrailActive = false;
+    }
+
+    IEnumerator AnimateMaterialFloat (Material mat, float goal, float rate, float refreshRate)
+    {
+        float valueToAnimate = mat.GetFloat(shaderVarRef);
+
+        while (valueToAnimate > goal)
+        {
+            valueToAnimate -= rate;
+            mat.SetFloat(shaderVarRef, valueToAnimate);
+            yield return new WaitForSeconds(refreshRate);
+        }
     }
 }

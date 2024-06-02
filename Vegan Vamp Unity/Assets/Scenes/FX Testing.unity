@@ -146,10 +146,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 2
-  meshRefrashRate: 0.1
+  meshRefrashRate: 0.05
   positionToSpawn: {fileID: 7052858}
   meshDestroyDelay: 3
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  shaderVarRefreshRate: 0.05
 --- !u!1 &77120807
 GameObject:
   m_ObjectHideFlags: 0
@@ -35350,10 +35353,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 2
-  meshRefrashRate: 0.1
+  meshRefrashRate: 0.05
   positionToSpawn: {fileID: 619268655}
   meshDestroyDelay: 3
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  shaderVarRefreshRate: 0.05
 --- !u!1 &628801264
 GameObject:
   m_ObjectHideFlags: 0
@@ -41100,10 +41106,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 2
-  meshRefrashRate: 0.1
+  meshRefrashRate: 0.05
   positionToSpawn: {fileID: 863455861}
   meshDestroyDelay: 3
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  shaderVarRefreshRate: 0.05
 --- !u!1 &878286564
 GameObject:
   m_ObjectHideFlags: 0
@@ -46261,10 +46270,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 2
-  meshRefrashRate: 0.1
+  meshRefrashRate: 0.05
   positionToSpawn: {fileID: 1085904962}
   meshDestroyDelay: 3
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  shaderVarRefreshRate: 0.05
 --- !u!1 &1125116212
 GameObject:
   m_ObjectHideFlags: 0
@@ -46638,10 +46650,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 2
-  meshRefrashRate: 0.1
+  meshRefrashRate: 0.05
   positionToSpawn: {fileID: 1201343426}
   meshDestroyDelay: 3
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  shaderVarRefreshRate: 0.05
 --- !u!1 &1234456264 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9176829464448462102, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
@@ -46665,10 +46680,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 2
-  meshRefrashRate: 0.1
+  meshRefrashRate: 0.05
   positionToSpawn: {fileID: 1234456265}
   meshDestroyDelay: 3
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  shaderVarRefreshRate: 0.05
 --- !u!1001 &1250456442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56583,10 +56601,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 2
-  meshRefrashRate: 0.1
+  meshRefrashRate: 0.05
   positionToSpawn: {fileID: 1567255911}
   meshDestroyDelay: 3
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  shaderVarRefreshRate: 0.05
 --- !u!1 &1606795416
 GameObject:
   m_ObjectHideFlags: 0
@@ -72185,11 +72206,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5788436555807963280, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000001646809
+      value: -0.000000016468093
       objectReference: {fileID: 0}
     - target: {fileID: 5788436555807963280, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000004986136
+      value: 0.0000000049861373
       objectReference: {fileID: 0}
     - target: {fileID: 7137297674817602837, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -72205,11 +72226,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079953850476517827, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000001860223
+      value: -0.000000018602229
       objectReference: {fileID: 0}
     - target: {fileID: 8079953850476517827, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000049021796
+      value: 0.000000004902179
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
