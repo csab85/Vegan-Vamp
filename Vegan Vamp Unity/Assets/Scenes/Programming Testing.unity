@@ -1173,7 +1173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5433996995578409525, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: fire.Array.data[8]
-      value: -1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5433996995578409525, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: fire.Array.data[9]
@@ -1189,15 +1189,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5433996995578409525, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: health.Array.data[0]
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5433996995578409525, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: health.Array.data[1]
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5433996995578409525, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: health.Array.data[2]
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5433996995578409525, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: health.Array.data[8]
@@ -1229,11 +1229,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079953850476517827, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000018602229
+      value: -0.00000001860223
       objectReference: {fileID: 0}
     - target: {fileID: 8079953850476517827, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000004902179
+      value: 0.0000000049021796
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4178,6 +4178,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 7fdbe7e5516682e4ca11d5bc46dd384c, type: 3}
+      propertyPath: m_Name
+      value: Body
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7fdbe7e5516682e4ca11d5bc46dd384c, type: 3}
       propertyPath: m_Name
       value: Moskito
@@ -4190,6 +4194,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 557ae44dfe4b0d24fbdef294743546d6, type: 2}
+    - target: {fileID: 8513859187771203891, guid: 7fdbe7e5516682e4ca11d5bc46dd384c, type: 3}
+      propertyPath: m_Name
+      value: Wings
+      objectReference: {fileID: 0}
+    - target: {fileID: 8513859187771203891, guid: 7fdbe7e5516682e4ca11d5bc46dd384c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

@@ -136,7 +136,8 @@ public class StatsManager : MonoBehaviour
 
     public void ApplyToBase(int statNum, float intensity, float returnTime = -1)
     {
-        statsArray[statNum][StatsConst.DEFAULT_BASE] = intensity;
+        statsArray[statNum][StatsConst.DEFAULT_BASE] += intensity;
+        statsArray[statNum][StatsConst.STARTING_BASE] = statsArray[statNum][StatsConst.DEFAULT_BASE];
 
         if (returnTime >= 0)
         {
@@ -164,6 +165,7 @@ public class StatsManager : MonoBehaviour
             //move self intensity towards current base, based on how much of the reach time
             if (selfIntensity != currentBase)
             {
+                print("selfIntensity != currentBase");
                 float reachTime = stat[StatsConst.SELF_REACH_TIME];
                 float passedTime = stat[StatsConst.PASSED_TIME];
                 float startingIntensity = stat[StatsConst.STARTING_INTENSITY];
@@ -183,6 +185,7 @@ public class StatsManager : MonoBehaviour
             //move current base towards default base, based on how much of the return time
             else if (currentBase != defaultBase)
             {
+                print("currentBase != defaultBase");
                 float returnTime = stat[StatsConst.SELF_RETURN_TIME];
                 float reachTime = stat[StatsConst.SELF_REACH_TIME];
                 float passedTime = stat[StatsConst.PASSED_TIME];
