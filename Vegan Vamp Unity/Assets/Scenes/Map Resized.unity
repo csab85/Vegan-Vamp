@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.19311497, g: 0.8252026, b: 0.79444927, a: 1}
+  m_IndirectSpecularColor: {r: 0.2730447, g: 0.30534074, b: 0.30177677, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -339,11 +339,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079953850476517827, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000018602229
+      value: 0.00000001860223
       objectReference: {fileID: 0}
     - target: {fileID: 8079953850476517827, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000004902179
+      value: -0.0000000049021796
       objectReference: {fileID: 0}
     - target: {fileID: 8214183097158058767, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -360,7 +360,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8462891972629033784, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 873354317}
   m_SourcePrefab: {fileID: 100100000, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
 --- !u!4 &384381444 stripped
 Transform:
@@ -648,6 +651,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &873354315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8462891972629033784, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+  m_PrefabInstance: {fileID: 323745390}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &873354317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873354315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df84f811c0478d498628633ae401828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PauseMenu: {fileID: 1132889487}
 --- !u!1 &1012725692
 GameObject:
   m_ObjectHideFlags: 0
