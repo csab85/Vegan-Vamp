@@ -75,6 +75,7 @@ public class BlenderJuice : MonoBehaviour
         }
 
         newJuice.layer = LayerMask.NameToLayer("Interactable");
+        newJuice.transform.localScale = Vector3.one;
     
         //throw juice from blender
         Vector3 throwDirection = (transform.forward + transform.up) * 5;

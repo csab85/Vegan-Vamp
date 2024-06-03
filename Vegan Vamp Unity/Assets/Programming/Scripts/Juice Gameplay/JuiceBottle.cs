@@ -126,7 +126,8 @@ public class JuiceBottle : MonoBehaviour
 
     public void ThrowBottle()
     {
-        if (Intact.activeSelf && gameObject.name == "Base Juice" && !selfStats.dead)
+        //make not throwable if you're dead
+        if (Intact.activeSelf && gameObject.name == "Base Juice")
         {   
             Vector3 spawnPoint = transform.position + transform.forward * 0.4f;
             GameObject copyJuice = Instantiate(gameObject, spawnPoint, gameObject.transform.rotation, null);
