@@ -148,7 +148,7 @@ MonoBehaviour:
   activeTime: 2
   meshRefrashRate: 0.05
   positionToSpawn: {fileID: 7052858}
-  meshDestroyDelay: 3
+  meshDestroyDelay: 1
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
   shaderVarRef: _Alpha
   shaderVarRate: 0.1
@@ -5071,8 +5071,7 @@ Transform:
   m_LocalPosition: {x: -2.0083618, y: -1.1157227, z: -12.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 484843258}
+  m_Children: []
   m_Father: {fileID: 447115573}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &78139099
@@ -5138,7 +5137,13 @@ VisualEffect:
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 15.438885, y: 67.46712, z: 10.056412, w: 0}
+        m_Name: EletricyColor
+        m_Overridden: 1
+      - m_Value: {x: 4.7936716, y: 17.799276, z: 2.3844314, w: 0}
+        m_Name: SparksColor
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -30336,55 +30341,6 @@ Transform:
   - {fileID: 78139098}
   m_Father: {fileID: 837447140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &484843257
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 484843258}
-  - component: {fileID: 484843259}
-  m_Layer: 0
-  m_Name: Global Volume
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &484843258
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484843257}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 78139098}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &484843259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484843257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 467abc8198d14f1408fa09203d0b815a, type: 2}
 --- !u!1001 &501030998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35355,7 +35311,7 @@ MonoBehaviour:
   activeTime: 2
   meshRefrashRate: 0.05
   positionToSpawn: {fileID: 619268655}
-  meshDestroyDelay: 3
+  meshDestroyDelay: 1
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
   shaderVarRef: _Alpha
   shaderVarRate: 0.1
@@ -41110,7 +41066,7 @@ MonoBehaviour:
   activeTime: 2
   meshRefrashRate: 0.05
   positionToSpawn: {fileID: 863455861}
-  meshDestroyDelay: 3
+  meshDestroyDelay: 1
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
   shaderVarRef: _Alpha
   shaderVarRate: 0.1
@@ -46274,7 +46230,7 @@ MonoBehaviour:
   activeTime: 2
   meshRefrashRate: 0.05
   positionToSpawn: {fileID: 1085904962}
-  meshDestroyDelay: 3
+  meshDestroyDelay: 1
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
   shaderVarRef: _Alpha
   shaderVarRate: 0.1
@@ -46654,7 +46610,7 @@ MonoBehaviour:
   activeTime: 2
   meshRefrashRate: 0.05
   positionToSpawn: {fileID: 1201343426}
-  meshDestroyDelay: 3
+  meshDestroyDelay: 1
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
   shaderVarRef: _Alpha
   shaderVarRate: 0.1
@@ -46684,7 +46640,7 @@ MonoBehaviour:
   activeTime: 2
   meshRefrashRate: 0.05
   positionToSpawn: {fileID: 1234456265}
-  meshDestroyDelay: 3
+  meshDestroyDelay: 1
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
   shaderVarRef: _Alpha
   shaderVarRate: 0.1
@@ -56670,7 +56626,10 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 1
+        m_Name: Duration
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -56716,7 +56675,7 @@ MonoBehaviour:
   activeTime: 2
   meshRefrashRate: 0.05
   positionToSpawn: {fileID: 1567255911}
-  meshDestroyDelay: 3
+  meshDestroyDelay: 1
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
   shaderVarRef: _Alpha
   shaderVarRate: 0.1
@@ -72456,11 +72415,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3782733795317026175, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016556061
+      value: -0.000000016556063
       objectReference: {fileID: 0}
     - target: {fileID: 3782733795317026175, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000004685766
+      value: 0.000000004685767
       objectReference: {fileID: 0}
     - target: {fileID: 5788436555807963280, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -72468,11 +72427,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5788436555807963280, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000001646809
+      value: -0.000000016468093
       objectReference: {fileID: 0}
     - target: {fileID: 5788436555807963280, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000004986136
+      value: 0.0000000049861373
       objectReference: {fileID: 0}
     - target: {fileID: 7137297674817602837, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -72480,19 +72439,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7355575716650221375, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016556061
+      value: -0.000000016556063
       objectReference: {fileID: 0}
     - target: {fileID: 7355575716650221375, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000004685766
+      value: 0.0000000046857664
       objectReference: {fileID: 0}
     - target: {fileID: 8079953850476517827, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000001860223
+      value: -0.000000018602229
       objectReference: {fileID: 0}
     - target: {fileID: 8079953850476517827, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000049021796
+      value: 0.000000004902179
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
