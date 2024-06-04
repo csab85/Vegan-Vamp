@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21fd6e9e6da6dc48b35598cda00c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
   health:
   - 0
   - 0
@@ -898,15 +899,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a1510045c54655c4da2cbbade304caaa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.118
+      value: 545.8885
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a1510045c54655c4da2cbbade304caaa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.53
+      value: 17.52415
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a1510045c54655c4da2cbbade304caaa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.372
+      value: 433.78134
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a1510045c54655c4da2cbbade304caaa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1021,10 +1022,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21fd6e9e6da6dc48b35598cda00c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
   health:
-  - 0
-  - 0
-  - 0
+  - 10
+  - 10
+  - 10
   - 0
   - 0
   - 0
@@ -1184,6 +1186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireProof: 0
 --- !u!114 &3515042394732771092
 MonoBehaviour:
   m_ObjectHideFlags: 0

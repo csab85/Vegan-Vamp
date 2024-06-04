@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class MeshTrail : MonoBehaviour
 {
     public float activeTime = 2f;
 

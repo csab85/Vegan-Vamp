@@ -8491,6 +8491,7 @@ GameObject:
   - component: {fileID: 1197826924267287941}
   - component: {fileID: 5746613009733521310}
   - component: {fileID: 2190120469391700226}
+  - component: {fileID: 391737219539120668}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -8564,10 +8565,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2046051
-  m_Height: 1.9127529
+  m_Radius: 0.24978638
+  m_Height: 2.0307195
   m_Direction: 1
-  m_Center: {x: 0.0019378662, y: -0.7892331, z: -0.04524231}
+  m_Center: {x: 0.0049438477, y: 0.1511079, z: -0.04524231}
 --- !u!95 &5785548556348405185
 Animator:
   serializedVersion: 5
@@ -8604,7 +8605,7 @@ MonoBehaviour:
   orientTransform: {fileID: 5113703170296919139}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 64
   playerHeight: 3.2
   moveSpeed: 3.5
   groundDrag: 2
@@ -8812,6 +8813,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   juiceBottle: {fileID: 6528787239560788025}
+--- !u!114 &391737219539120668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291324401332410514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3f8889bbee1a94998de7971782275f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeTime: 2
+  meshRefrashRate: 0.1
+  positionToSpawn: {fileID: 2738054663653988900}
+  meshDestroyDelay: 3
+  mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  shaderVarRefreshRate: 0.05
 --- !u!1 &7292006846606806682
 GameObject:
   m_ObjectHideFlags: 0
@@ -9430,9 +9451,9 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  - 3
-  - 0.5
-  - 3
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   - 0
@@ -9445,9 +9466,9 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  - 2
-  - 0.5
-  - 10
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   - 0
@@ -9558,6 +9579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7291324401332410514}
+  actualJuice: {fileID: 0}
   Intact: {fileID: 5801692520601460711}
   Broken: {fileID: 2878369206100429444}
   splash: {fileID: 6219979283168409204}
@@ -10347,7 +10369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 30ec8f72a1a23284c8803aac0a204724, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 30ec8f72a1a23284c8803aac0a204724, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10385,11 +10407,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Body
       objectReference: {fileID: 0}
+    - target: {fileID: -1206874426333947015, guid: 30ec8f72a1a23284c8803aac0a204724, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c34fee25a2508624e84827840c0caa8c, type: 2}
     - target: {fileID: 919132149155446097, guid: 30ec8f72a1a23284c8803aac0a204724, type: 3}
       propertyPath: m_Name
       value: Sullen Model
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 30ec8f72a1a23284c8803aac0a204724, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 778741634508314757, guid: 30ec8f72a1a23284c8803aac0a204724, type: 3}

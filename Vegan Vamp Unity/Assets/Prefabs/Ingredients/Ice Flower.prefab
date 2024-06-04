@@ -109,15 +109,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7c01ae0c1c6708e4699fcf67c6cc1b15, type: 2}
     - target: {fileID: -8679921383154817045, guid: 8b90f908159e1654cb686247e252b431, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.73
+      value: 545.89874
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b90f908159e1654cb686247e252b431, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5235618
+      value: 17.673576
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b90f908159e1654cb686247e252b431, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.08
+      value: 432.46796
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b90f908159e1654cb686247e252b431, type: 3}
       propertyPath: m_LocalRotation.w
@@ -339,14 +339,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21fd6e9e6da6dc48b35598cda00c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
   health:
   - 5
   - 5
+  - 5
   - 0
   - 0
   - 0
-  - 10
-  - -1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   fire:
@@ -359,6 +365,11 @@ MonoBehaviour:
   - 1
   - 0
   - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   ice:
   - 0
   - 0
@@ -369,6 +380,117 @@ MonoBehaviour:
   - 3
   - 0
   - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  tornado:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  speedy:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  noGravity:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  teleport:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  grow:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  shrink:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  dunno:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  objectType: 0
 --- !u!114 &1155173256011485426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireProof: 0
 --- !u!4 &1757609540443616895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7219076460700332019, guid: 8b90f908159e1654cb686247e252b431, type: 3}
@@ -424,14 +547,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21fd6e9e6da6dc48b35598cda00c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
   health:
   - 5
   - 5
+  - 5
   - 0
   - 0
   - 0
-  - 10
-  - -1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   fire:
@@ -444,6 +573,11 @@ MonoBehaviour:
   - 1
   - 0
   - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   ice:
   - 0
   - 0
@@ -454,6 +588,117 @@ MonoBehaviour:
   - 3
   - 0
   - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  tornado:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  speedy:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  noGravity:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  teleport:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  grow:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  shrink:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  dunno:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  objectType: 0
 --- !u!114 &7305025024740186032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireProof: 0
 --- !u!1 &6079768924923384976 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6335250783087129314, guid: 8b90f908159e1654cb686247e252b431, type: 3}
@@ -504,14 +750,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21fd6e9e6da6dc48b35598cda00c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
   health:
   - 5
   - 5
+  - 5
   - 0
   - 0
   - 0
-  - 10
-  - -1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   fire:
@@ -524,6 +776,11 @@ MonoBehaviour:
   - 1
   - 0
   - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   ice:
   - 0
   - 0
@@ -534,6 +791,117 @@ MonoBehaviour:
   - 3
   - 0
   - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  tornado:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  speedy:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  noGravity:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  teleport:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  grow:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  shrink:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  dunno:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  objectType: 0
 --- !u!114 &4909403597178813548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireProof: 0
 --- !u!1 &7720342203708010275 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1688617927700330159, guid: 8b90f908159e1654cb686247e252b431, type: 3}
@@ -584,14 +953,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21fd6e9e6da6dc48b35598cda00c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
   health:
   - 5
   - 5
+  - 5
   - 0
   - 0
   - 0
-  - 10
-  - -1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   fire:
@@ -604,6 +979,11 @@ MonoBehaviour:
   - 1
   - 0
   - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   ice:
   - 0
   - 0
@@ -614,6 +994,117 @@ MonoBehaviour:
   - 3
   - 0
   - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  tornado:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  speedy:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  noGravity:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  teleport:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  grow:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  shrink:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  dunno:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  objectType: 0
 --- !u!114 &4234472882282150094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,6 +1117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireProof: 0
 --- !u!1 &7908563917569423296 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7959026430977397170, guid: 8b90f908159e1654cb686247e252b431, type: 3}
@@ -664,14 +1156,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21fd6e9e6da6dc48b35598cda00c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
   health:
   - 5
   - 5
+  - 5
   - 0
   - 0
   - 0
-  - 10
-  - -1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   fire:
@@ -684,6 +1182,11 @@ MonoBehaviour:
   - 1
   - 0
   - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   ice:
   - 0
   - 0
@@ -694,6 +1197,117 @@ MonoBehaviour:
   - 3
   - 0
   - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  tornado:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  speedy:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  noGravity:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  teleport:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  grow:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  shrink:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  dunno:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  objectType: 0
 --- !u!114 &9008707997352090723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,6 +1320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireProof: 0
 --- !u!1 &8246341944934378552 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1025663018108745142, guid: 8b90f908159e1654cb686247e252b431, type: 3}
@@ -735,9 +1350,158 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21fd6e9e6da6dc48b35598cda00c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: []
-  fire: []
-  ice: []
+  dead: 0
+  health:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  fire:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  ice:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  tornado:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  speedy:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  noGravity:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  teleport:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  grow:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  shrink:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  dunno:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  objectType: 0
 --- !u!114 &8711774806084833534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,3 +1514,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireProof: 0
