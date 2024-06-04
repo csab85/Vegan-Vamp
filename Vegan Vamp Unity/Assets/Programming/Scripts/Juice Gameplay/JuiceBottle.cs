@@ -126,7 +126,8 @@ public class JuiceBottle : MonoBehaviour
 
     public void ThrowBottle()
     {
-        if (Intact.activeSelf && gameObject.name == "Base Juice" && !selfStats.dead)
+        //make not throwable if you're dead
+        if (Intact.activeSelf && gameObject.name == "Base Juice")
         {   
             Vector3 spawnPoint = transform.position + transform.forward * 0.4f;
             GameObject copyJuice = Instantiate(gameObject, spawnPoint, gameObject.transform.rotation, null);
@@ -134,6 +135,7 @@ public class JuiceBottle : MonoBehaviour
             Vector3 aimDirection = aimHit.point - transform.position;
 
             copyJuice.transform.localScale = Vector3.one;
+            copyJuice.GetComponent<BoxCollider>().isTrigger = false;
             copyJuice.GetComponent<JuiceBottle>().smashable = true;
             copyJuice.GetComponent<Rigidbody>().isKinematic = false;
             copyJuice.GetComponent<Rigidbody>().AddForce(aimDirection.normalized * throwPower, ForceMode.Impulse);
