@@ -58,7 +58,7 @@ public class StatsEffects : MonoBehaviour
     {
         if (burning)
         {
-            selfStats.health[StatsConst.DEFAULT_BASE] -= fireDamage;
+            selfStats.ApplyToBase(StatsConst.HEALTH, -fireDamage);
             yield return new WaitForSeconds(fireRefreshRate);
             StartCoroutine(FireDOT());
         }
@@ -123,7 +123,8 @@ public class StatsEffects : MonoBehaviour
                 {
                     animator.SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 1);
                     animator.Play("Death", AnimationConsts.DAMAGE_LAYER);
-                    gameObject.GetComponent<CapsuleCollider>().height = 0.1f;
+                    gameObject.GetComponent<CapsuleCollider>().height = 0.5f;
+                    gameObject.GetComponent<CapsuleCollider>().center = new Vector3(0, -1.5f, 0);
                 }
             }
 

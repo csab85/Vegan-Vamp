@@ -80,7 +80,7 @@ public class BlenderJuice : MonoBehaviour
         //throw juice from blender
         Vector3 throwDirection = (transform.forward + transform.up) * 5;
         newJuice.GetComponent<JuiceBottle>().Intact.SetActive(true);
-        newJuice.GetComponent<BoxCollider>().enabled = true;
+        newJuice.GetComponent<BoxCollider>().isTrigger = false;
         newJuice.GetComponent<Rigidbody>().isKinematic = false;
         newJuice.GetComponent<Rigidbody>().AddForce(throwDirection, ForceMode.Impulse);
 

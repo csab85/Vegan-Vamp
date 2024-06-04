@@ -59,7 +59,6 @@ public class Fire : MonoBehaviour
                 {
                     burningObjs.Add(collider.gameObject);
                     StartCoroutine(BurnObject(collider.gameObject, objStats));
-                    print(collider.name);
                 }
             }
         }

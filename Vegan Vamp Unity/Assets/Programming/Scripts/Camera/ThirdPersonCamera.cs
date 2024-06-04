@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
@@ -18,6 +19,8 @@ public class ThirdPersonCamera : MonoBehaviour
     [Header ("Cameras")]
     [SerializeField] GameObject explorationCamera;
     [SerializeField] GameObject combatCamera;
+
+    StatsManager playerStats;
 
     #endregion
     //========================
@@ -81,55 +84,59 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        playerStats = playerTransf.gameObject.GetComponent<StatsManager>();
     }
 
     private void FixedUpdate()
     {
-        //rotate orientation
-        Vector3 viewDirection = playerTransf.position - new Vector3(transform.position.x, playerTransf.position.y , transform.position.z);
-
-        orientTransf.forward = viewDirection.normalized;
-
-        //rotate player
-        if (currentMode == CameraMode.Exploration)
+        if (!playerStats.dead)
         {
-            float horizontalInput = Input.GetAxis ("Horizontal");
-            float verticalInput = Input.GetAxis ("Vertical");
+            //rotate orientation
+            Vector3 viewDirection = playerTransf.position - new Vector3(transform.position.x, playerTransf.position.y , transform.position.z);
 
-            Vector3 inputDirection = orientTransf.forward * verticalInput + orientTransf.right * horizontalInput;
+            orientTransf.forward = viewDirection.normalized;
 
-            if (inputDirection != Vector3.zero)
+            //rotate player
+            if (currentMode == CameraMode.Exploration)
             {
-                //THIS WILL POSSIBLY NEED DELTA TIME
-                playerTransf.forward = Vector3.Lerp(playerTransf.forward, inputDirection.normalized, rotationSpeed * Time.deltaTime);
+                float horizontalInput = Input.GetAxis ("Horizontal");
+                float verticalInput = Input.GetAxis ("Vertical");
+
+                Vector3 inputDirection = orientTransf.forward * verticalInput + orientTransf.right * horizontalInput;
+
+                if (inputDirection != Vector3.zero)
+                {
+                    //THIS WILL POSSIBLY NEED DELTA TIME
+                    playerTransf.forward = Vector3.Lerp(playerTransf.forward, inputDirection.normalized, rotationSpeed * Time.deltaTime);
+                }
             }
-        }
 
-        //fix player look forward
-        else if (currentMode == CameraMode.Combat)
-        {
-            Vector3 combatViewDirection = combatLookAt.position - new Vector3(transform.position.x, combatLookAt.position.y , transform.position.z);
+            //fix player look forward
+            else if (currentMode == CameraMode.Combat)
+            {
+                Vector3 combatViewDirection = combatLookAt.position - new Vector3(transform.position.x, combatLookAt.position.y , transform.position.z);
 
-            playerTransf.forward = combatViewDirection.normalized;
-        }
+                playerTransf.forward = combatViewDirection.normalized;
+            }
 
-        //Switch camera
-        if (Input.GetButtonDown("Switch Camera"))
-        {
-            CameraModeNumber = (CameraModeNumber + 1) % 2;
+            //Switch camera
+            if (Input.GetButtonDown("Switch Camera"))
+            {
+                CameraModeNumber = (CameraModeNumber + 1) % 2;
 
-            SwitchCameraMode(CameraModeNumber);
-        }
+                SwitchCameraMode(CameraModeNumber);
+            }
 
-        //Stop movement while on inventory
-        if (inventory.openMode)
-        {
-            explorationCamera.SetActive(false);
-        }
+            //Stop movement while on inventory
+            if (inventory.openMode)
+            {
+                explorationCamera.SetActive(false);
+            }
 
-        else if (currentMode == CameraMode.Exploration && !explorationCamera.activeSelf)
-        {
-            explorationCamera.SetActive(true);
+            else if (currentMode == CameraMode.Exploration && !explorationCamera.activeSelf)
+            {
+                explorationCamera.SetActive(true);
+            }
         }
     }
 

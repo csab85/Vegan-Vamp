@@ -141,7 +141,14 @@ public class StatsManager : MonoBehaviour
 
         if (returnTime >= 0)
         {
+            print("sim fi");
             statsArray[statNum][StatsConst.SELF_RETURN_TIME] = returnTime;
+        }
+
+        else
+        {
+            print("dueuid");
+            statsArray[statNum][StatsConst.SELF_RETURN_TIME] = 0.001f;
         }
     }
 
@@ -165,7 +172,6 @@ public class StatsManager : MonoBehaviour
             //move self intensity towards current base, based on how much of the reach time
             if (selfIntensity != currentBase)
             {
-                print("selfIntensity != currentBase");
                 float reachTime = stat[StatsConst.SELF_REACH_TIME];
                 float passedTime = stat[StatsConst.PASSED_TIME];
                 float startingIntensity = stat[StatsConst.STARTING_INTENSITY];
@@ -185,7 +191,6 @@ public class StatsManager : MonoBehaviour
             //move current base towards default base, based on how much of the return time
             else if (currentBase != defaultBase)
             {
-                print("currentBase != defaultBase");
                 float returnTime = stat[StatsConst.SELF_RETURN_TIME];
                 float reachTime = stat[StatsConst.SELF_REACH_TIME];
                 float passedTime = stat[StatsConst.PASSED_TIME];

@@ -41,9 +41,6 @@ public class RunAway : MonoBehaviour
     [SerializeField] float fleeingAttackRange;
     [SerializeField] float fleeingVisionAngle;
 
-    [Header ("Headbutt Settings")]
-    [SerializeField] LayerMask obstacleLayer;
-
     //pathfinding and states
     [Header ("Info")]
     [SerializeField] bool fleeing;

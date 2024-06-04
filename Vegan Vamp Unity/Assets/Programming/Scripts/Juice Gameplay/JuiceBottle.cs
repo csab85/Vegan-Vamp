@@ -11,6 +11,7 @@ public class JuiceBottle : MonoBehaviour
 
     [Header ("Imports")]
     [SerializeField] GameObject player;
+    [SerializeField] GameObject actualJuice;
     [SerializeField] public GameObject Intact;
     [SerializeField] GameObject Broken;
     [SerializeField] GameObject splash;
@@ -64,7 +65,6 @@ public class JuiceBottle : MonoBehaviour
 
         foreach (Collider targetCollider in targets)
         {
-            print(targetCollider.gameObject.name);
             GameObject target = targetCollider.gameObject;
 
             //apply every stat on the object (if the stat has any spply intensity)
@@ -129,7 +129,7 @@ public class JuiceBottle : MonoBehaviour
         //make not throwable if you're dead
         if (Intact.activeSelf && gameObject.name == "Base Juice")
         {   
-            Vector3 spawnPoint = transform.position + transform.forward * 0.4f;
+            Vector3 spawnPoint = transform.position + transform.forward * 0.15f;
             GameObject copyJuice = Instantiate(gameObject, spawnPoint, gameObject.transform.rotation, null);
 
             Vector3 aimDirection = aimHit.point - transform.position;

@@ -56,9 +56,6 @@ public class Headbutt : MonoBehaviour
 
     Vector3 playerPosit;
 
-    //circling
-    List<Vector3> circlePoints = new List<Vector3>();
-
     enum States
     {
         Searching,
