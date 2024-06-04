@@ -135,6 +135,7 @@ public class JuiceBottle : MonoBehaviour
             Vector3 aimDirection = aimHit.point - transform.position;
 
             copyJuice.transform.localScale = Vector3.one;
+            copyJuice.GetComponent<BoxCollider>().isTrigger = false;
             copyJuice.GetComponent<JuiceBottle>().smashable = true;
             copyJuice.GetComponent<Rigidbody>().isKinematic = false;
             copyJuice.GetComponent<Rigidbody>().AddForce(aimDirection.normalized * throwPower, ForceMode.Impulse);
