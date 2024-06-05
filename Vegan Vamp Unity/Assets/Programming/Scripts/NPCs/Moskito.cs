@@ -76,6 +76,8 @@ public class Moskito : MonoBehaviour
         GameObject newProjectile = Instantiate(projectile, transform.position, Quaternion.identity, null);
         newProjectile.SetActive(true);
         newProjectile.GetComponent<Rigidbody>().AddForce(transform.forward * 20, ForceMode.Impulse);
+
+        StartCoroutine(Wait());
     }
 
     void Bite()
@@ -121,21 +123,41 @@ public class Moskito : MonoBehaviour
             {
                     print("enhance");
                     agent.speed = chasingSpeed;
-                    fov.visionRadius = baseVisionRange;
-                    fov.attackRadius = baseAttackRange;
-                    fov.angle = baseVisionAngle;
+                    fov.visionRadius = chasingVisionRange;
+                    fov.attackRadius = chasingAttackRange;
+                    fov.angle = chasingVisionAngle;
             }
 
             playerPosit = player.transform.position;
+
+            //focus on flying around player
+            randomFlight.areaCenter = playerPosit;
 
             switch (actualState)
             {
                 case State.Searching:
 
-                    //follow player if seeing
                     if (fov.isSeeingPlayer)
-                    {
-                        agent.destination = playerPosit;
+                    {   
+                        //attack player if seeing and close enough
+                        if (fov.isInAttackRange)
+                        {
+                            if (flying)
+                            {
+                                actualState = State.Aim;
+                            }
+
+                            else
+                            {
+                                actualState = State.Dragging;
+                            }
+                        }
+
+                        //if not close go to player
+                        else
+                        {
+                            agent.destination = playerPosit;
+                        }
                     }
 
                     //if not seeing and on last seen posit, walk randomly
@@ -144,21 +166,18 @@ public class Moskito : MonoBehaviour
                         fighting = false;
                     }
 
-                    //attack if close enough
-                    if (fov.isInAttackRange && fov.isSeeingPlayer)
-                    {
-                        actualState = State.Aim;
-                    }
-
                     break;
 
                 case State.Aim:
 
                     if (flying)
                     {
-                        randomFlight.areaCenter = playerPosit;
                         randomFlight.MoveToRandomPosit();
-                        actualState = State.Flying;
+
+                        if (Vector3.Distance(agent.destination, playerPosit) > 5)
+                        {
+                            actualState = State.Flying;
+                        }
                     }
 
                     else
@@ -205,7 +224,7 @@ public class Moskito : MonoBehaviour
 
                 case State.Waiting:
 
-                    StartCoroutine(Wait());
+                    //varios nadas acontecendo aqui
 
                     break;
 
