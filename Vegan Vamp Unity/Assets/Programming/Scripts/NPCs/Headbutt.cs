@@ -13,7 +13,7 @@ public class Headbutt : MonoBehaviour
 
     [SerializeField] GameObject player;
     Rigidbody rb;
-    NavMeshAgent navMeshAgent;
+    NavMeshAgent agent;
     RandomWalk randomWalk;
     FieldOfView fov;
     Animator animator;
@@ -44,7 +44,7 @@ public class Headbutt : MonoBehaviour
 
     //pathfinding and states
     [Header ("Info")]
-    [SerializeField] States actualState;
+    [SerializeField] State actualState;
     [SerializeField] bool fighting;
     [SerializeField] bool aiming;
     [SerializeField] bool waiting;
@@ -56,7 +56,7 @@ public class Headbutt : MonoBehaviour
 
     Vector3 playerPosit;
 
-    enum States
+    enum State
     {
         Searching,
         Aiming,
@@ -82,7 +82,7 @@ public class Headbutt : MonoBehaviour
         aiming = true;
         animator.SetBool ("Aiming", true);
         yield return new WaitForSeconds(aimTime); 
-        actualState = States.Headbutting;      
+        actualState = State.Headbutting;      
         aiming = false;
         animator.SetBool ("Aiming", false);
     }
@@ -96,12 +96,12 @@ public class Headbutt : MonoBehaviour
     {
         
         waiting = true;
-        navMeshAgent.speed = chasingSpeed;
+        agent.speed = chasingSpeed;
 
         yield return new WaitForSeconds(waitTime);
         
         waiting = false;
-        actualState = States.Searching;
+        actualState = State.Searching;
     }
 
     void OnCollisionEnter(Collision other)
@@ -121,7 +121,7 @@ public class Headbutt : MonoBehaviour
             //get stunned
             else if (other.gameObject.layer == obstacleLayer)
             {
-                actualState = States.Stunned;
+                actualState = State.Stunned;
             }
         }
         
@@ -137,14 +137,14 @@ public class Headbutt : MonoBehaviour
 
     void Start()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         randomWalk = GetComponent<RandomWalk>();
         fov = GetComponent<FieldOfView>();
         animator = GetComponent<Animator>();
 
         //get base values
-        baseSpeed = navMeshAgent.speed;
+        baseSpeed = agent.speed;
         baseVisionRange = fov.visionRadius;
         baseAttackRange = fov.attackRadius;
         baseVisionAngle = fov.angle;
@@ -155,10 +155,10 @@ public class Headbutt : MonoBehaviour
         if (fighting)
         {
             //Enhancements
-            if (navMeshAgent.speed < chasingSpeed && actualState != States.Headbutting)
+            if (agent.speed < chasingSpeed && actualState != State.Headbutting)
             {
                     print("enhance");
-                    navMeshAgent.speed = chasingSpeed;
+                    agent.speed = chasingSpeed;
                     fov.visionRadius = baseVisionRange;
                     fov.attackRadius = baseAttackRange;
                     fov.angle = baseVisionAngle;
@@ -169,28 +169,34 @@ public class Headbutt : MonoBehaviour
 
             switch (actualState)
             {
-                case States.Searching:
+                case State.Searching:
 
                     //follow player if seeing
                     if (fov.isSeeingPlayer)
                     {
-                        navMeshAgent.destination = playerPosit;
+                        agent.destination = playerPosit;
+                    }
+
+                    //if not seeing and on last seen posit, walk randomly
+                    else if (agent.remainingDistance < 0.1f)
+                    {
+                        fighting = false;
                     }
 
                     //attack if close enough
-                    if (fov.isInAttackRange)
+                    if (fov.isInAttackRange && fov.isSeeingPlayer)
                     {
-                        actualState = States.Aiming;
+                        actualState = State.Aiming;
                     }
 
                     break;
                 
-                case States.Aiming:
+                case State.Aiming:
 
                     //start aim countdown and look at player
                     if (!aiming)
                     {
-                        navMeshAgent.destination = transform.position;
+                        agent.destination = transform.position;
                         StartCoroutine(Aim());
                     }
 
@@ -198,23 +204,23 @@ public class Headbutt : MonoBehaviour
 
                     break;
 
-                case States.Headbutting:
+                case State.Headbutting:
 
                     //set to headbutt speed and set destination past player
-                    if (navMeshAgent.speed != headbuttingSpeed)
+                    if (agent.speed != headbuttingSpeed)
                     {
-                        navMeshAgent.speed = headbuttingSpeed;
-                        navMeshAgent.destination = playerPosit + (headbuttDistance * transform.forward);
+                        agent.speed = headbuttingSpeed;
+                        agent.destination = playerPosit + (headbuttDistance * transform.forward);
                     }
 
-                    if (navMeshAgent.remainingDistance < 0.1f)
+                    if (agent.remainingDistance < 0.1f)
                     {
-                        actualState = States.Waiting;
+                        actualState = State.Waiting;
                     }
 
                     break;
 
-                case States.Waiting:
+                case State.Waiting:
 
                     if (!waiting)
                     {
@@ -223,7 +229,7 @@ public class Headbutt : MonoBehaviour
 
                     break;
 
-                case States.Stunned:
+                case State.Stunned:
 
                     if (!waiting)
                     {
@@ -235,7 +241,7 @@ public class Headbutt : MonoBehaviour
         }
 
         //random walk if not fighting
-        else if (navMeshAgent.remainingDistance <= 0.1f)
+        else if (agent.remainingDistance <= 0.1f)
         {
             randomWalk.MoveToRandomPosit();
         }
@@ -244,14 +250,14 @@ public class Headbutt : MonoBehaviour
         if (fov.isSeeingPlayer && !fighting)
         {
             fighting = true;
-            actualState = States.Searching;
+            actualState = State.Searching;
         }
 
         //go to normal speed if not fighting
-        if (navMeshAgent.speed > baseSpeed && !fighting)
+        if (agent.speed > baseSpeed && !fighting)
         {
             print("decrease");
-            navMeshAgent.speed = baseSpeed;
+            agent.speed = baseSpeed;
             fov.visionRadius = baseVisionRange;
             fov.attackRadius = baseAttackRange;
             fov.angle = baseVisionAngle;
@@ -259,9 +265,9 @@ public class Headbutt : MonoBehaviour
 
         //coeficient of speed (from stat manager)
 
-        // if (StatsManager.speedCoeficient != 0 && navMeshAgent.speed != Manager.speedBase * spedCOeficient)
+        // if (StatsManager.speedCoeficient != 0 && agent.speed != Manager.speedBase * spedCOeficient)
         // {
-        //     navMeshAgent.speed *= ManagedReferenceMissingType.speedcoeficient
+        //     agent.speed *= ManagedReferenceMissingType.speedcoeficient
         // }
     }
 

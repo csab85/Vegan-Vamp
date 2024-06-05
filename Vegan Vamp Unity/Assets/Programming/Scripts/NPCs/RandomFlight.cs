@@ -37,7 +37,7 @@ public class RandomFlight : MonoBehaviour
     {
         float angle = Random.Range(0, Mathf.PI * 2);
         float distance = Random.Range(0, areaRadius);
-        height = Random.Range(0, height);
+        height = Random.Range(0, areaHeight);
 
         float circleX = areaCenter.x + Mathf.Cos(angle) * distance;
         float circleZ = areaCenter.z + Mathf.Sin(angle) * distance;
