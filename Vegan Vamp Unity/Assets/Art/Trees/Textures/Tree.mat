@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Tree
-  m_Shader: {fileID: -6465566751694194690, guid: 14e833c215379e642ad5240df4e5e452, type: 3}
-  m_Parent: {fileID: -876546973899608171, guid: 14e833c215379e642ad5240df4e5e452, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 68ff3587bedc62841b41db67b3888c44, type: 3}
+  m_Parent: {fileID: -876546973899608171, guid: 68ff3587bedc62841b41db67b3888c44, type: 3}
   m_ModifiedSerializedProperties: 4
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -22,11 +22,22 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: c595aec0a32554145b6d858856f4d045, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _windtextureorwhatever:
+        m_Texture: {fileID: 2800000, guid: 6dbc5c4aba210f6408914e7ad3d2d3d9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _QueueControl: 0
     - _Wiggle: 1
+    - _WindHeight: 0.41
+    - _WindIntensity: 0.23
+    - _WindSpeed: 0.08
     - _Wind_Speed: 0.2
     - _Wind_Strength: 0.7
     m_Colors:
