@@ -82,7 +82,8 @@ public class Moskito : MonoBehaviour
 
     void Bite()
     {
-
+        print("bite");
+        StartCoroutine(Wait());
     }
 
     IEnumerator Wait()
@@ -142,15 +143,7 @@ public class Moskito : MonoBehaviour
                         //attack player if seeing and close enough
                         if (fov.isInAttackRange)
                         {
-                            if (flying)
-                            {
-                                actualState = State.Aim;
-                            }
-
-                            else
-                            {
-                                actualState = State.Dragging;
-                            }
+                            actualState = State.Aim;
                         }
 
                         //if not close go to player
@@ -210,7 +203,6 @@ public class Moskito : MonoBehaviour
                 case State.Shooting:
 
                     Shoot();
-
                     actualState = State.Waiting;
 
                     break;
