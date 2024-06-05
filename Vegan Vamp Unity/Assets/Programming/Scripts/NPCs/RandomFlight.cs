@@ -24,6 +24,7 @@ public class RandomFlight : MonoBehaviour
     [HideInInspector] public Vector3 areaCenter;
 
     float height;
+    bool flying;
 
     #endregion
     //========================
@@ -60,17 +61,10 @@ public class RandomFlight : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         
         areaCenter = transform.position + offset;
-
-        MoveToRandomPosit();
     }
 
     void Update()
     {
-        if (agent.remainingDistance < 0.1f)
-        {
-            MoveToRandomPosit();
-        }
-
         if (agent.baseOffset != height)
         {
             agent.baseOffset = Mathf.MoveTowards(agent.baseOffset, height, 1 * Time.deltaTime);

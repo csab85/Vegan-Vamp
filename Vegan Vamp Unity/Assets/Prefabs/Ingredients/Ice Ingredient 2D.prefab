@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3000244277676804870}
   - component: {fileID: 3325386477646319768}
   - component: {fileID: 2997801544376034785}
-  - component: {fileID: 2789629166910151677}
+  - component: {fileID: 9166298321807466405}
+  - component: {fileID: 8348346585773670015}
   - component: {fileID: 7918404208164338385}
   m_Layer: 0
   m_Name: Ice Ingredient 2D
@@ -113,7 +114,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6569667940618654670}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -141,7 +142,95 @@ CircleCollider2D:
   m_Offset: {x: -0.029484464, y: 0}
   serializedVersion: 2
   m_Radius: 10.04586
---- !u!114 &2789629166910151677
+--- !u!60 &9166298321807466405
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569667940618654670}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.3673096, y: 9.401764}
+      - {x: -0.114593506, y: 8.458282}
+      - {x: -1.4925232, y: 7.061363}
+      - {x: -2.1819763, y: 5.775688}
+      - {x: -2.264511, y: 4.225754}
+      - {x: -3.137268, y: 5.0547867}
+      - {x: -4.5973816, y: 5.6345367}
+      - {x: -7.2264557, y: 5.6656113}
+      - {x: -8.599045, y: 5.0903397}
+      - {x: -8.760864, y: 3.2439117}
+      - {x: -7.8267365, y: 1.3510971}
+      - {x: -6.909485, y: 0.5093994}
+      - {x: -5.6675024, y: -0.05878088}
+      - {x: -7.363739, y: -0.7749481}
+      - {x: -8.703796, y: -2.1305237}
+      - {x: -9.604645, y: -3.703827}
+      - {x: -9.731492, y: -5.865719}
+      - {x: -7.5830383, y: -6.186249}
+      - {x: -5.3610992, y: -5.8831787}
+      - {x: -4.120407, y: -5.3488464}
+      - {x: -3.1560822, y: -4.579399}
+      - {x: -2.9717865, y: -5.945427}
+      - {x: -2.2137604, y: -7.543358}
+      - {x: -0.37017822, y: -9.087318}
+      - {x: 1.0178696, y: -9.880688}
+      - {x: 2.3872375, y: -8.518578}
+      - {x: 3.1880798, y: -6.8932114}
+      - {x: 3.5354614, y: -5.8883667}
+      - {x: 3.557022, y: -4.3894043}
+      - {x: 3.1163025, y: -2.9976425}
+      - {x: 2.5961914, y: -2.2708817}
+      - {x: 5.0929565, y: -2.4684067}
+      - {x: 7.5154877, y: -1.5149231}
+      - {x: 8.699844, y: -0.64551544}
+      - {x: 9.800598, y: 0.6700134}
+      - {x: 8.92334, y: 1.5284958}
+      - {x: 7.7769165, y: 2.357582}
+      - {x: 4.8518066, y: 3.1512299}
+      - {x: 2.5100403, y: 2.8180084}
+      - {x: 3.6402283, y: 5.073372}
+      - {x: 3.3860931, y: 7.5274887}
+      - {x: 3.0564117, y: 8.668297}
+      - {x: 2.2838812, y: 9.825741}
+  m_UseDelaunayMesh: 0
+--- !u!114 &8348346585773670015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +239,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6569667940618654670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 572300609b02579489bbb330211aaaf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 40a30f6c57f031247baae8e944b16f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7918404208164338385
@@ -170,7 +259,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2789629166910151677}
+        - m_Target: {fileID: 8348346585773670015}
           m_TargetAssemblyTypeName: DragObject, Assembly-CSharp
           m_MethodName: Drag
           m_Mode: 1
@@ -186,7 +275,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2789629166910151677}
+        - m_Target: {fileID: 8348346585773670015}
           m_TargetAssemblyTypeName: DragObject, Assembly-CSharp
           m_MethodName: Drop
           m_Mode: 1

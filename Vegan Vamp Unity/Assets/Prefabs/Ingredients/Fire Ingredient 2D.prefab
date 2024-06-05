@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 3000244277676804870}
   - component: {fileID: 3325386477646319768}
   - component: {fileID: 2997801544376034785}
-  - component: {fileID: 2789629166910151677}
+  - component: {fileID: 2607039791541099294}
   - component: {fileID: 7918404208164338385}
+  - component: {fileID: 2744455047855708517}
   m_Layer: 0
   m_Name: Fire Ingredient 2D
   m_TagString: Untagged
@@ -31,7 +32,7 @@ RectTransform:
   m_GameObject: {fileID: 6569667940618654670}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,7 +114,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6569667940618654670}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -141,7 +142,7 @@ CircleCollider2D:
   m_Offset: {x: -0.029484464, y: 0}
   serializedVersion: 2
   m_Radius: 10.04586
---- !u!114 &2789629166910151677
+--- !u!114 &2607039791541099294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6569667940618654670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 572300609b02579489bbb330211aaaf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 40a30f6c57f031247baae8e944b16f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7918404208164338385
@@ -170,7 +171,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2789629166910151677}
+        - m_Target: {fileID: 2607039791541099294}
           m_TargetAssemblyTypeName: DragObject, Assembly-CSharp
           m_MethodName: Drag
           m_Mode: 1
@@ -186,7 +187,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2789629166910151677}
+        - m_Target: {fileID: 2607039791541099294}
           m_TargetAssemblyTypeName: DragObject, Assembly-CSharp
           m_MethodName: Drop
           m_Mode: 1
@@ -198,3 +199,80 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!60 &2744455047855708517
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569667940618654670}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 8.254669, y: 3.7545092}
+      - {x: 7.6127625, y: 3.397346}
+      - {x: 6.8542175, y: 5.1598773}
+      - {x: 5.0803833, y: 7.400563}
+      - {x: 2.8479462, y: 8.885611}
+      - {x: 1.6970367, y: 9.465552}
+      - {x: 0.27497864, y: 9.795393}
+      - {x: -1.4413605, y: 9.494289}
+      - {x: -2.9701385, y: 8.979193}
+      - {x: -5.305588, y: 7.27643}
+      - {x: -6.8159943, y: 5.175521}
+      - {x: -7.1814423, y: 5.4325013}
+      - {x: -8.378235, y: 3.4422295}
+      - {x: -8.4470825, y: 1.908382}
+      - {x: -8.634513, y: 1.3536507}
+      - {x: -8.905426, y: -0.48894894}
+      - {x: -8.843597, y: -1.7878846}
+      - {x: -9.654648, y: -1.6063898}
+      - {x: -9.722076, y: -3.6574197}
+      - {x: -8.147797, y: -6.391744}
+      - {x: -6.1315475, y: -8.157469}
+      - {x: -3.1900787, y: -9.314729}
+      - {x: -0.40579224, y: -9.662979}
+      - {x: 1.9499207, y: -9.549602}
+      - {x: 4.9644485, y: -8.445645}
+      - {x: 6.0971527, y: -7.7919016}
+      - {x: 7.567505, y: -6.6802363}
+      - {x: 9.251312, y: -4.184289}
+      - {x: 9.632156, y: -1.7463355}
+      - {x: 8.755844, y: -2.4038424}
+      - {x: 8.757446, y: 0.2727359}
+      - {x: 8.49726, y: 1.1873412}
+  m_UseDelaunayMesh: 0

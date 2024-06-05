@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8890320781470370212
+--- !u!114 &-5516411431829635051
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,26 +20,18 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glass
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Name: Puddle
+  m_Shader: {fileID: -6465566751694194690, guid: 363f14a203e30f546890d2398ff20062, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _ALPHAPREMULTIPLY_ON
-  - _ALPHATEST_ON
-  - _ENVIRONMENTREFLECTIONS_OFF
-  - _NORMALMAP
-  - _SURFACE_TYPE_TRANSPARENT
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
-  disabledShaderPasses:
-  - DepthOnly
-  - SHADOWCASTER
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -49,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: c3bb1d5298b924d80959c9f822ffe414, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -68,15 +60,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _GradientMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MaskMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -89,10 +73,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ShadedBaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -114,96 +94,51 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AddLightFallOff: 1
-    - _AlphaClip: 1
-    - _AlphaFromMaskMap: 1
+    - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Anisotropic: 0
-    - _Anisotropy: 0
-    - _ApplyNormal: 0
-    - _ApplyNormalDepthNormal: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Border: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorMask: 15
-    - _ColorizedShadowsAdd: 0
-    - _ColorizedShadowsMain: 0
-    - _CompensateScale: 0
-    - _Coverage: 0
     - _Cull: 2
-    - _CullOutline: 1
-    - _Culling: 0
-    - _Cutoff: 0.506
+    - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DiffuseFallOff: 0
-    - _DiffuseStep: 0
-    - _DstBlend: 10
-    - _DstBlendAlpha: 10
-    - _EnableMaskMap: 0
-    - _EnableToonRim: 0
-    - _EnergyConservation: 1
-    - _EnvironmentReflections: 0
+    - _DstBlend: 0
+    - _DstBlendAlpha: 0
+    - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Help: 0
-    - _LightColorContribution: 1
-    - _LuxSurface: 0
+    - _Metalic: 0.1
     - _Metallic: 0
+    - _Normal_Strenght: 0.12
     - _OcclusionStrength: 1
-    - _OutlineInScreenSpace: 0
     - _Parallax: 0.005
+    - _QueueControl: 0
     - _QueueOffset: 0
-    - _Ramp: 0
-    - _ReadMask: 255
-    - _ReceiveDecals: 1
-    - _ReceiveSSAO: 1
     - _ReceiveShadows: 1
-    - _Rim: 0
-    - _RimFrequency: 0
-    - _RimMinPower: 1
-    - _RimPerPositionFrequency: 1
-    - _RimPower: 2
-    - _ShadoBiasDirectional: 0
-    - _ShadowBiasAdditional: 0
-    - _ShadowFallOff: 0.75
-    - _ShadowOffset: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 1.4
     - _SmoothnessTextureChannel: 0
-    - _SpecularFallOff: 0.01
     - _SpecularHighlights: 1
-    - _SpecularStep: 0.45
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilFail: 0
-    - _StencilOp: 0
-    - _StencilZFail: 0
-    - _Steps: 1
-    - _Surface: 1
-    - _TexMode: 1
-    - _ToonRimAttenuation: 0
-    - _ToonRimFallOff: 1
-    - _ToonRimPower: 0.5
+    - _Surface: 0
+    - _Transparency: 0.15
+    - _TransparencyMask: 1.19
+    - _VoronoiAgitacion: 1.48
+    - _VoronoiPower: 6.28
+    - _VoronoiScale: 2.5
     - _WorkflowMode: 1
-    - _WriteMask: 255
-    - _ZTest: 4
-    - _ZTestOutline: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.58272517, g: 0.88437104, b: 0.9150943, a: 0.5254902}
-    - _Color: {r: 0.58272517, g: 0.88437104, b: 0.9150943, a: 0.5254902}
+    - _BaseColor: {r: 0.2825567, g: 0.79, b: 0.14220001, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0.99607843, g: 0.99607843, b: 0.98039216, a: 0}
-    - _RimColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _ShadedBaseColor: {r: 0.8415094, g: 0.22704872, b: 0.22704872, a: 1}
-    - _ShadedDecalColor: {r: 0.5, g: 5.5000005, b: 0.5, a: 1}
+    - _NormalSpeed: {r: 0, g: 0.2, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SpecColor2nd: {r: 0.4, g: 0.4, b: 0.4, a: 1}
-    - _ToonRimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _VoroniColor: {r: 0.70837605, g: 0.90466136, b: 0.22322798, a: 1}
+    - _VoronoiSpeed: {r: 0, g: 0.1, b: 0, a: 0}
+    - _VoronoiTilling: {r: 1.2, g: 0.6, b: 0, a: 0}
   m_BuildTextureStacks: []
