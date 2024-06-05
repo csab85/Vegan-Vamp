@@ -117,7 +117,7 @@ public class Inventory : MonoBehaviour
     {
         if (camScript.currentMode == ThirdPersonCamera.CameraMode.Exploration)
         {
-            if (Input.GetButtonDown("Inventory") && !playerStats)
+            if (Input.GetButtonDown("Inventory") && !playerStats.dead)
             {
                 if (openMode)
                 {
