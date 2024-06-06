@@ -7,7 +7,7 @@ public class MeshTrail : MonoBehaviour
     public float activeTime = 2f;
 
     [Header("Mesh Related")]
-    public float meshRefrashRate = 0.1f;
+    public float meshRefreshRate = 0.1f;
     public Transform positionToSpawn;
     public float meshDestroyDelay = 3f;
 
@@ -24,15 +24,15 @@ public class MeshTrail : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G) && !isTrailActive)
         {
             isTrailActive = true;
-            StartCoroutine(ActiveTrail(activeTime));
+            StartCoroutine(ActiveTrail());
         }
     }
 
-    IEnumerator ActiveTrail (float timeActive)
+    IEnumerator ActiveTrail ()
     {
         while (activeTime > 0)
         {
-            timeActive -= meshRefrashRate;
+            activeTime -= meshRefreshRate;
 
             if (skinnedMeshRenderers == null)
                 skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -57,10 +57,11 @@ public class MeshTrail : MonoBehaviour
             }
             
 
-            yield return new WaitForSeconds(meshRefrashRate);
+            yield return new WaitForSeconds(meshRefreshRate);
         }
 
         isTrailActive = false;
+        activeTime = 2;
     }
 
     IEnumerator AnimateMaterialFloat (Material mat, float goal, float rate, float refreshRate)

@@ -12,7 +12,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ENVIRONMENTREFLECTIONS_OFF
   - _NORMALINDEPTHNORMALPASS
   - _RECEIVEDECALS
   - _SSAO_ENABLED
@@ -111,7 +110,7 @@ Material:
     - _ApplyNormalDepthNormal: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Border: 10
+    - _Border: 20
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -133,7 +132,7 @@ Material:
     - _EnableMaskMap: 0
     - _EnableToonRim: 0
     - _EnergyConservation: 1
-    - _EnvironmentReflections: 0
+    - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -196,7 +195,7 @@ Material:
     - _SpecColor2nd: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     - _ToonRimColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &4016403199612237455
+--- !u!114 &988450521350009595
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
