@@ -12,11 +12,16 @@ public class RunAway : MonoBehaviour
     //========================
     #region
 
-    [SerializeField] GameObject player;
-    Rigidbody rb;
+    //game objects
+    GameObject player;
+
+    //components
+    Animator animator;
     NavMeshAgent navMeshAgent;
-    RandomWalk randomWalk;
+
+    //scripts
     FieldOfView fov;
+    BasicBehaviour basicBehaviour;
 
     #endregion
     //========================
@@ -26,27 +31,13 @@ public class RunAway : MonoBehaviour
     //========================
     #region
     
-    [Header ("Time Settings")]
+    [Header ("Settings")]
+    [SerializeField] float fleeDistance;
     [SerializeField] float resetTime;
-
-    [Header ("Normal Movement Settings")]
-    [SerializeField] float baseSpeed;
-    [SerializeField] float baseVisionRange;
-    [SerializeField] float baseAttackRange;
-    [SerializeField] float baseVisionAngle;
-
-    [Header ("Chasing Movement Settings")]
-    [SerializeField] float fleeingSpeed;
-    [SerializeField] float fleeingVisionRange;
-    [SerializeField] float fleeingAttackRange;
-    [SerializeField] float fleeingVisionAngle;
 
     //pathfinding and states
     [Header ("Info")]
-    [SerializeField] bool fleeing;
     [SerializeField] bool reseting;
-
-    Vector3 playerPosit;
 
     #endregion
     //========================
@@ -60,7 +51,7 @@ public class RunAway : MonoBehaviour
     {
         reseting = true;
         yield return new WaitForSeconds(resetTime);
-        fleeing = false;
+        basicBehaviour.alertState = BasicBehaviour.AlertState.Chilling;
         reseting = false;
     }
 
@@ -74,39 +65,30 @@ public class RunAway : MonoBehaviour
 
     void Start()
     {
+        //get components
+        animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
-        randomWalk = GetComponent<RandomWalk>();
-        fov = GetComponent<FieldOfView>();
 
-        //get base values
-        baseSpeed = navMeshAgent.speed;
-        baseVisionRange = fov.visionRadius;
-        baseAttackRange = fov.attackRadius;
-        baseVisionAngle = fov.angle;
+        //get scripts
+        fov = GetComponent<FieldOfView>();
+        basicBehaviour = GetComponent<BasicBehaviour>();
+
+        //get game objects
+        player = fov.player;
     }
 
     void Update()
     {
-        if (fleeing)
+        if (basicBehaviour.alertState == BasicBehaviour.AlertState.Fighting)
         {
-            //Enhancements
-            if (navMeshAgent.speed < fleeingSpeed)
-            {
-                    print("enhance");
-                    navMeshAgent.speed = fleeingSpeed;
-                    fov.visionRadius = fleeingVisionRange;
-                    fov.attackRadius = fleeingAttackRange;
-                    fov.angle = fleeingVisionAngle;
-            }
-
-            //run away
-            playerPosit = player.transform.position;
+            Vector3 playerPosit = player.transform.position;
                     
             float distance = Vector3.Distance(playerPosit, transform.position);
 
+            //if player within vision
             if  (distance < fov.visionRadius)
             {
+                //stop reseting if reseting
                 if (reseting)
                 {
                     StopCoroutine(ResetState());
@@ -115,45 +97,20 @@ public class RunAway : MonoBehaviour
 
                 Vector3 direction = (playerPosit - transform.position).normalized;
 
-                float runDistance = fov.visionRadius + 2;
+                float runDistance = fov.visionRadius + fleeDistance;
 
                 navMeshAgent.destination = transform.position - (runDistance * direction);
             }
 
+            //start resetting if not on vision
             else
             {
-                StartCoroutine(ResetState());
+                if (!reseting)
+                {
+                    StartCoroutine(ResetState());
+                }
             }
         }
-
-        //random walk if not fleeing
-        else if (navMeshAgent.remainingDistance <= 0.1f)
-        {
-            randomWalk.MoveToRandomPosit();
-        }
-
-        //start fleeing if seeing
-        if (fov.isSeeingPlayer && !fleeing)
-        {
-            fleeing = true;
-        }
-
-        //go to normal speed if not fighting
-        if (navMeshAgent.speed > baseSpeed && !fleeing)
-        {
-            print("decrease");
-            navMeshAgent.speed = baseSpeed;
-            fov.visionRadius = baseVisionRange;
-            fov.attackRadius = baseAttackRange;
-            fov.angle = baseVisionAngle;
-        }
-
-        //coeficient of speed (from stat manager)
-
-        // if (StatsManager.speedCoeficient != 0 && navMeshAgent.speed != Manager.speedBase * spedCOeficient)
-        // {
-        //     navMeshAgent.speed *= ManagedReferenceMissingType.speedcoeficient
-        // }
     }
 
     #endregion

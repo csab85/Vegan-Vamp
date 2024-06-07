@@ -15,6 +15,7 @@ public class StatsEffects : MonoBehaviour
 
     //VFX
     GameObject fire;
+    MeshTrail meshTrail;
 
     //models
     List<GameObject> iceCubesList = new List<GameObject>();
@@ -77,6 +78,7 @@ public class StatsEffects : MonoBehaviour
         selfStats = GetComponent<StatsManager>();
         TryGetComponent<NavMeshAgent>(out agent);
         TryGetComponent<Animator>(out animator);
+        TryGetComponent<MeshTrail>(out meshTrail);
 
         //Get vfx objects
         Transform VFX = transform.Find("VFX");
@@ -129,7 +131,7 @@ public class StatsEffects : MonoBehaviour
             }
 
             //FIRE
-            if (fire != null)
+            if (fire)
             {
                 if (selfStats.fire[StatsConst.SELF_INTENSITY] > 0)
                 {
@@ -239,6 +241,44 @@ public class StatsEffects : MonoBehaviour
                     }
                 }
         }
+
+
+            //SPEED
+            if (meshTrail)
+            {
+                if (selfStats.speed[StatsConst.SELF_INTENSITY] > 1)
+                {
+                    //update speed multiplier on stats manager
+                    float bonusSpeed = selfStats.speed[StatsConst.SELF_INTENSITY];
+
+                    if (selfStats.speedMultiplier != bonusSpeed)
+                    {
+                        selfStats.speedMultiplier = bonusSpeed;
+                    }
+
+                    //enable mesh trail
+                    if (!meshTrail.isTrailActive)
+                    {
+                        StartCoroutine(meshTrail.ActivateTrail());
+                    }
+
+                    //set trail rate
+                    meshTrail.meshRefreshRate = 0.1f / selfStats.speed[StatsConst.SELF_INTENSITY];
+                }
+
+                else if(selfStats.speed[StatsConst.SELF_INTENSITY] < 1)
+                {
+                    if (selfStats.speedMultiplier != 1)
+                    {
+                        selfStats.speedMultiplier = 1;
+                    }
+
+                    if (meshTrail.isTrailActive)
+                    {
+                        meshTrail.isTrailActive = false;
+                    }
+                }
+            }
         }
     }
 

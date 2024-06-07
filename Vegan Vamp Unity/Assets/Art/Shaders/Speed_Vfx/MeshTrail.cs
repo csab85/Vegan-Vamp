@@ -13,24 +13,18 @@ public class MeshTrail : MonoBehaviour
 
     [Header("Shader Related")]
     public Material mat;
-    public string shaderVarRef;
+    public string shaderVarRef = "_Alpha";
     public float shaderVarRate = 0.1f;
-    public float shaderVarRefreshRate = 0.05f;
+    [HideInInspector] public float shaderVarRefreshRate;
 
-    private bool isTrailActive;
+    [HideInInspector] public bool isTrailActive;
     private SkinnedMeshRenderer[] skinnedMeshRenderers;
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G) && !isTrailActive)
-        {
-            isTrailActive = true;
-            StartCoroutine(ActiveTrail());
-        }
-    }
+    
 
-    IEnumerator ActiveTrail ()
+    public IEnumerator ActivateTrail ()
     {
-        while (activeTime > 0)
+        isTrailActive = true;
+        while (isTrailActive)
         {
             activeTime -= meshRefreshRate;
 
@@ -59,9 +53,6 @@ public class MeshTrail : MonoBehaviour
 
             yield return new WaitForSeconds(meshRefreshRate);
         }
-
-        isTrailActive = false;
-        activeTime = 2;
     }
 
     IEnumerator AnimateMaterialFloat (Material mat, float goal, float rate, float refreshRate)

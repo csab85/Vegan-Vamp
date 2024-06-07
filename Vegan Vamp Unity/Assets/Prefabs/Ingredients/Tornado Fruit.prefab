@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
+  speedMultiplier: 0
   health:
   - 0
   - 0
@@ -422,21 +423,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  speedy:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  speed: []
   noGravity:
   - 0
   - 0
@@ -1023,6 +1010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
+  speedMultiplier: 0
   health:
   - 10
   - 10
@@ -1083,7 +1071,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  speedy:
+  speed:
   - 0
   - 0
   - 0

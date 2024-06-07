@@ -56,6 +56,7 @@ public class StatsManager : MonoBehaviour
     #region
 
     [HideInInspector] public bool dead = false;
+    [HideInInspector] public float speedMultiplier;
 
     //Stats list of the game object
     #region
@@ -73,7 +74,7 @@ public class StatsManager : MonoBehaviour
     public float[] tornado;
     
     [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
-    public float[] speedy;
+    public float[] speed;
 
     [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
     public float[] noGravity;
@@ -261,7 +262,7 @@ public class StatsManager : MonoBehaviour
     {
         if (statsArray == null)
         {
-            statsArray = new float[][] {health, fire, ice, tornado, speedy, noGravity, teleport, grow, shrink, dunno};
+            statsArray = new float[][] {health, fire, ice, tornado, speed, noGravity, teleport, grow, shrink, dunno};
         }   
     }
 

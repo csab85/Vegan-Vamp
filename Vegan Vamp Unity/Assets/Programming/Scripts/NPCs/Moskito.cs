@@ -8,14 +8,19 @@ public class Moskito : MonoBehaviour
     //========================
     #region
 
-    [SerializeField] GameObject player;
+    //Game objects
+    GameObject player;
     [SerializeField] GameObject projectile;
-    Rigidbody rb;
-    NavMeshAgent agent;
-    RandomFlight randomFlight;
-    RandomWalk randomWalk;
-    FieldOfView fov;
+
+    //components
     Animator animator;
+    NavMeshAgent agent;
+
+    //script
+    RandomWalk randomWalk;
+    RandomFlight randomFlight;
+    FieldOfView fov;
+    BasicBehaviour basicBehaviour;
 
     #endregion
     //========================
@@ -40,16 +45,10 @@ public class Moskito : MonoBehaviour
     [SerializeField] bool aiming;
     [SerializeField] bool waiting;
 
-    float baseSpeed;
-    float baseVisionRange;
-    float baseAttackRange;
-    float baseVisionAngle;
-
     Vector3 playerPosit;
 
     enum State
     {
-        Searching,
         Aim,
         Flying,
         Dragging,
@@ -89,7 +88,8 @@ public class Moskito : MonoBehaviour
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(waitTime);
-        actualState = State.Searching;
+        basicBehaviour.alertState = BasicBehaviour.AlertState.Searching;
+        actualState = State.Aim;
     }
 
     #endregion
@@ -102,33 +102,24 @@ public class Moskito : MonoBehaviour
 
     void Start()
     {
+        //get components
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
+
+        //get scripts
+        randomWalk = GetComponent<RandomWalk>();
         randomFlight = GetComponent<RandomFlight>();
         fov = GetComponent<FieldOfView>();
-        animator = GetComponent<Animator>();
+        basicBehaviour = GetComponent<BasicBehaviour>();
 
-        //get base values
-        baseSpeed = agent.speed;
-        baseVisionRange = fov.visionRadius;
-        baseAttackRange = fov.attackRadius;
-        baseVisionAngle = fov.angle;
+        //get game objects
+        player = fov.player;
     }
 
     void Update()
     {
-        if (fighting)
+        if (basicBehaviour.alertState == BasicBehaviour.AlertState.Fighting)
         {
-            //Enhancements
-            if (agent.speed < chasingSpeed)
-            {
-                    print("enhance");
-                    agent.speed = chasingSpeed;
-                    fov.visionRadius = chasingVisionRange;
-                    fov.attackRadius = chasingAttackRange;
-                    fov.angle = chasingVisionAngle;
-            }
-
             playerPosit = player.transform.position;
 
             //focus on flying around player
@@ -136,31 +127,6 @@ public class Moskito : MonoBehaviour
 
             switch (actualState)
             {
-                case State.Searching:
-
-                    if (fov.isSeeingPlayer)
-                    {   
-                        //attack player if seeing and close enough
-                        if (fov.isInAttackRange)
-                        {
-                            actualState = State.Aim;
-                        }
-
-                        //if not close go to player
-                        else
-                        {
-                            agent.destination = playerPosit;
-                        }
-                    }
-
-                    //if not seeing and on last seen posit, walk randomly
-                    else if (agent.remainingDistance < 0.1f)
-                    {
-                        fighting = false;
-                    }
-
-                    break;
-
                 case State.Aim:
 
                     if (flying)
@@ -238,39 +204,6 @@ public class Moskito : MonoBehaviour
 
                     break;
             }
-        }
-
-    //random walk if not fighting
-        else if (agent.remainingDistance <= 0.1f)
-        {
-            if (flying)
-            {
-                randomFlight.areaCenter = transform.position + randomFlight.offset;
-                randomFlight.MoveToRandomPosit();
-            }
-
-            else
-            {
-                randomWalk.MoveToRandomPosit();
-            }
-            
-        }
-
-        //start searching if seeing
-        if (fov.isSeeingPlayer && !fighting)
-        {
-            fighting = true;
-            actualState = State.Searching;
-        }
-
-        //go to normal speed if not fighting
-        if (agent.speed > baseSpeed && !fighting)
-        {
-            print("decrease");
-            agent.speed = baseSpeed;
-            fov.visionRadius = baseVisionRange;
-            fov.attackRadius = baseAttackRange;
-            fov.angle = baseVisionAngle;
         }
     }
 

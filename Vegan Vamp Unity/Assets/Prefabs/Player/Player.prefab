@@ -2150,6 +2150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
+  speedMultiplier: 0
   health:
   - 0
   - 0
@@ -2210,21 +2211,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  speedy:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  speed: []
   noGravity:
   - 0
   - 0
@@ -8489,7 +8476,6 @@ GameObject:
   - component: {fileID: 4856822152552693663}
   - component: {fileID: 2263143811218729758}
   - component: {fileID: 1197826924267287941}
-  - component: {fileID: 5746613009733521310}
   - component: {fileID: 2190120469391700226}
   - component: {fileID: 391737219539120668}
   m_Layer: 8
@@ -8624,6 +8610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
+  speedMultiplier: 0
   health:
   - 10
   - 10
@@ -8684,16 +8671,16 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  speedy:
+  speed:
+  - 5
+  - 5
+  - 5
   - 0
   - 0
   - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 1
+  - -1
+  - -1
   - 0
   - 0
   - 0
@@ -8788,18 +8775,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireProof: 0
---- !u!114 &5746613009733521310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7291324401332410514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9faa6e7ced5b14c4085fa49a7afdb3ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2190120469391700226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8826,13 +8801,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 2
-  meshRefrashRate: 0.1
+  meshRefreshRate: 0.1
   positionToSpawn: {fileID: 2738054663653988900}
   meshDestroyDelay: 3
   mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
   shaderVarRef: _Alpha
   shaderVarRate: 0.1
   shaderVarRefreshRate: 0.05
+  isTrailActive: 0
 --- !u!1 &7292006846606806682
 GameObject:
   m_ObjectHideFlags: 0
@@ -9415,6 +9391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
+  speedMultiplier: 0
   health:
   - 0
   - 0
@@ -9475,7 +9452,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  speedy:
+  speed:
   - 0
   - 0
   - 0

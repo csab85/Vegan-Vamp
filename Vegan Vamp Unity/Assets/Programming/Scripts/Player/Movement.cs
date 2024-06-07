@@ -69,12 +69,12 @@ public class Movement : MonoBehaviour
 
             if (grounded)
             {
-                rb.AddForce(moveDirection.normalized * moveSpeed * 10, ForceMode.Force);
+                rb.AddForce(moveDirection.normalized * (moveSpeed * selfStats.speedMultiplier) * 10, ForceMode.Force);
             }
 
             else if (!grounded)
             {
-                rb.AddForce(moveDirection.normalized * moveSpeed * airMultiplier * 10, ForceMode.Force);
+                rb.AddForce(moveDirection.normalized * (moveSpeed * selfStats.speedMultiplier) * airMultiplier * 10, ForceMode.Force);
             }
 
             if (rb.velocity.magnitude > 2f && grounded)
@@ -93,7 +93,7 @@ public class Movement : MonoBehaviour
     {
         Vector3 horizontalVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-        if (horizontalVel.magnitude > moveSpeed)
+        if (horizontalVel.magnitude > (moveSpeed * selfStats.speedMultiplier))
         {
             Vector3 cappedVel = horizontalVel.normalized * moveSpeed;
             rb.velocity = new Vector3(cappedVel.x, rb.velocity.y, cappedVel.z);

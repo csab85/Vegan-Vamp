@@ -5464,15 +5464,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.541
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.6883712
+      value: -4.16
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.566
+      value: 16.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5577,29 +5577,35 @@ PrefabInstance:
       addedObject: {fileID: 5256241628988559638}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
-      insertIndex: 1
+      insertIndex: -1
       addedObject: {fileID: 3801232047030179802}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
-      insertIndex: 2
+      insertIndex: -1
       addedObject: {fileID: 9128804789414154771}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1436710580322867726}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3986301337852482670}
+      addedObject: {fileID: 5998044821651739665}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6375928278430439703}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5998044821651739665}
+      addedObject: {fileID: 8152517536780987005}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8887536624253755236}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 3986301337852482670}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 90194247156985813}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4477828362722396946}
   m_SourcePrefab: {fileID: 100100000, guid: 67b1941abeec1e14b9d79452e2b3df68, type: 3}
 --- !u!4 &1670474048418723746 stripped
 Transform:
@@ -5683,6 +5689,86 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5998044821651739665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046155849628511512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45eb7747b1aef034cbf3660e3240d17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaRadius: 50
+  areaCenter: {x: 0, y: 0, z: 0}
+--- !u!114 &6375928278430439703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046155849628511512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045e9234a273b514d881425ee5bd186a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 256
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 128
+  visionRadius: 12
+  attackRadius: 8
+  angle: 90
+  isSeeingPlayer: 0
+  isInAttackRange: 0
+--- !u!114 &8152517536780987005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046155849628511512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99439188c89efd54e85b0fccf49f2c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chasingSpeed: 7
+  chasingVisionRange: 14
+  chasingAttackRange: 10
+  chasingVisionAngle: 100
+  flying: 0
+  alertState: 0
+--- !u!114 &8887536624253755236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046155849628511512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8410d3afbe6f2ee4b9925dbed3e0e215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimTime: 2
+  stunTime: 4
+  headbuttForce: 20
+  headbuttDistance: 5
+  headbuttingSpeed: 25
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  fightState: 0
+  fighting: 0
+  aiming: 0
+  waiting: 0
 --- !u!114 &3986301337852482670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5696,6 +5782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
+  speedMultiplier: 0
   health:
   - 20
   - 20
@@ -5756,7 +5843,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  speedy:
+  speed:
   - 0
   - 0
   - 0
@@ -5847,73 +5934,6 @@ MonoBehaviour:
   - 0
   - 0
   objectType: 2
---- !u!114 &6375928278430439703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046155849628511512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 045e9234a273b514d881425ee5bd186a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 256
-  obstructionMask:
-    serializedVersion: 2
-    m_Bits: 128
-  visionRadius: 12
-  attackRadius: 8
-  angle: 90
-  isSeeingPlayer: 0
-  isInAttackRange: 0
---- !u!114 &5998044821651739665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046155849628511512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45eb7747b1aef034cbf3660e3240d17a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  areaRadius: 50
-  areaCenter: {x: 0, y: 0, z: 0}
---- !u!114 &8887536624253755236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046155849628511512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8410d3afbe6f2ee4b9925dbed3e0e215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  aimTime: 2
-  stunTime: 4
-  chasingSpeed: 7
-  chasingVisionRange: 14
-  chasingAttackRange: 10
-  chasingVisionAngle: 100
-  headbuttForce: 20
-  headbuttDistance: 5
-  headbuttingSpeed: 25
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  actualState: 0
-  fighting: 0
-  aiming: 0
-  waiting: 0
 --- !u!114 &90194247156985813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5927,3 +5947,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireProof: 0
+--- !u!114 &4477828362722396946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046155849628511512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3f8889bbee1a94998de7971782275f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeTime: 2
+  meshRefreshRate: 0.1
+  positionToSpawn: {fileID: 1670474048418723746}
+  meshDestroyDelay: 3
+  mat: {fileID: 2100000, guid: 0d6a4279292024e43939433bfc6735d2, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  shaderVarRefreshRate: 0
+  isTrailActive: 0

@@ -5683,6 +5683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21fd6e9e6da6dc48b35598cda00c70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
+  speedMultiplier: 0
   health:
   - 0
   - 0
@@ -5743,7 +5745,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  speedy:
+  speed:
   - 0
   - 0
   - 0
@@ -5846,3 +5848,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireProof: 0
