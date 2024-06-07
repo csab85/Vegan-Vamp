@@ -20,7 +20,7 @@ public class Gun: MonoBehaviour
     [SerializeField] GameObject grapesObj;
     [SerializeField] GameObject gunBody;
 
-    List<GameObject> grapes = new List<GameObject>();
+    public List<GameObject> grapes = new List<GameObject>();
 
     //components
     MeshRenderer meshRenderer;
@@ -41,7 +41,7 @@ public class Gun: MonoBehaviour
     #region
 
     [Header("Settings")]
-    [SerializeField] public int capacity;
+    [SerializeField] int capacity;
     [SerializeField] float shotCooldown;
     [SerializeField] public float shotPower;
     [SerializeField] float reloadTime;
@@ -78,8 +78,8 @@ public class Gun: MonoBehaviour
         {
             if (playerStats.ice[StatsConst.SELF_INTENSITY] <= 0)
             {
-                //shoot and reload if gund drawn
-                if (meshRenderer)
+                //shoot and reload if gun drawn
+                if (meshRenderer.enabled)
                 {
                     //shoot
                     if (automatic)
@@ -127,12 +127,12 @@ public class Gun: MonoBehaviour
                             }
                         }
                     }
-                }
 
-                //reload
-                if (Input.GetButtonDown("Reload"))
-                {
-                    StartCoroutine(Reload());
+                    //reload
+                    if (Input.GetButtonDown("Reload") && shotCounter != 0)
+                    {
+                        StartCoroutine(Reload());
+                    }
                 }
             }
 

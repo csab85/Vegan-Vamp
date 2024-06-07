@@ -44,7 +44,6 @@ public class ThirdPersonCamera : MonoBehaviour
     [Header ("Settings")]
     [SerializeField] float rotationSpeed;
 
-    int CameraModeNumber = 0;
     float playerBaseSpeed;
 
     #endregion
