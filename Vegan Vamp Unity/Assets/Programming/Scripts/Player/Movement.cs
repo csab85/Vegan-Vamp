@@ -143,7 +143,7 @@ public class Movement : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         MovePlayer();
 

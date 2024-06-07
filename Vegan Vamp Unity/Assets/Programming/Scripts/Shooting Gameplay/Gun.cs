@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -9,13 +11,25 @@ public class Gun: MonoBehaviour
     //========================
     #region
     [Header("Imports")]
+    //game objects
     [SerializeField] GameObject player;
     [SerializeField] GameObject bulletPool;
     [SerializeField] GameObject aimColliders;
     [SerializeField] GameObject muzzle;
+    [SerializeField] GameObject holsteredGun;
+    [SerializeField] GameObject grapesObj;
+    [SerializeField] GameObject gunBody;
 
+    List<GameObject> grapes = new List<GameObject>();
+
+    //components
+    MeshRenderer meshRenderer;
     Animator animator;
     VisualEffect muzzleFX;
+
+    //scripts
+    [SerializeField] Inventory inventory;
+    Movement playerMovement;
 
     #endregion
     //========================
@@ -26,7 +40,7 @@ public class Gun: MonoBehaviour
     #region
 
     [Header("Settings")]
-    [SerializeField] int capacity;
+    [SerializeField] public int capacity;
     [SerializeField] float shotCooldown;
     [SerializeField] public float shotPower;
     [SerializeField] float reloadTime;
@@ -34,12 +48,15 @@ public class Gun: MonoBehaviour
     [SerializeField] bool hitscan;
 
     [Header("Info")]
-    [SerializeField] int shotCounter;
+    [SerializeField] public int shotCounter;
     [SerializeField] public bool shooting;
+    
+    float playerBaseSpeed;
 
     Ray aimRay;
     public RaycastHit aimHit;
     bool aiming;
+    bool switchCooldown = false;
 
 
     #endregion
@@ -58,32 +75,99 @@ public class Gun: MonoBehaviour
         //Shooting
         if (Cursor.visible == false)
         {
-            if (automatic)
+            //shoot and reload if gund drawn
+            if (meshRenderer)
             {
-                if (Input.GetButton("Shoot"))
+                //shoot
+                if (automatic)
                 {
-                    if (shotCounter < capacity && !shooting)
+                    if (Input.GetButton("Shoot"))
                     {
-                        StartCoroutine(Shoot());
+                        if (shotCounter < capacity && !shooting)
+                        {
+                            StartCoroutine(Shoot());
+                        }
                     }
+                }
+
+                if (!automatic)
+                {
+                    if (Input.GetButtonDown("Shoot"))
+                    {
+                        //check if inventory aint open
+                        if (!inventory.openMode)
+                        {
+                            //check ammo and shooting cooldown
+                            if (shotCounter < capacity && !shooting)
+                            {
+                                //shoot if gun drawn
+                                if (meshRenderer.enabled)
+                                {
+                                    StartCoroutine(Shoot());
+                                }
+
+                                //draw gun if not
+                                else
+                                {
+                                    //visuals
+                                    meshRenderer.enabled = true;
+                                    grapesObj.SetActive(true);
+                                    holsteredGun.SetActive(false);
+
+                                    //layer animations
+                                    animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 1);
+
+                                    //slow down movement
+                                    playerMovement.moveSpeed = playerBaseSpeed * 0.70f;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //reload
+                if (Input.GetButtonDown("Reload"))
+                {
+                    StartCoroutine(Reload());
                 }
             }
 
-            if (!automatic)
+            //holster/withdraw
+            if (Input.mouseScrollDelta.y != 0 && !switchCooldown)
             {
-                if (Input.GetButtonDown("Shoot"))
+                if (meshRenderer.enabled == false)
                 {
-                    if (shotCounter < capacity && !shooting)
-                    {
-                        StartCoroutine(Shoot());
-                    }
-                }
-            }
+                    //visuals
+                    meshRenderer.enabled = true;
+                    grapesObj.SetActive(true);
+                    holsteredGun.SetActive(false);
 
-            //reload
-            if (Input.GetButtonDown("Reload"))
-            {
-                StartCoroutine(Reload());
+                    //layer animations
+                    animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 1);
+
+                    //slow down movement
+                    playerMovement.moveSpeed = playerBaseSpeed * 0.70f;
+
+                    //switch cooldown
+                    StartCoroutine(SwitchCooldown());
+                }
+
+                else
+                {
+                    //visuals
+                    meshRenderer.enabled = false;
+                    grapesObj.SetActive(false);
+                    holsteredGun.SetActive(true);
+
+                    //unlayer animations
+                    animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 0);
+
+                    //set movement to normal speed
+                    playerMovement.moveSpeed = playerBaseSpeed;
+
+                    //switch cooldown
+                    StartCoroutine(SwitchCooldown());
+                }
             }
         }
     }
@@ -116,6 +200,12 @@ public class Gun: MonoBehaviour
             }
         }
 
+        //remove grapes
+        if (gameObject.name == "Grape Shooter")
+        {
+            grapes[shotCounter].SetActive(false);
+        }
+
         //manage ammo
         shooting = true;
         shotCounter++;
@@ -137,8 +227,24 @@ public class Gun: MonoBehaviour
     /// <returns></returns>
     IEnumerator Reload()
     {
-        yield return new WaitForSeconds(reloadTime);
-        shotCounter = 0;
+        while (shotCounter != 0)
+        {
+            //bring grapes back
+            if (gameObject.name == "Grape Shooter")
+            {
+                grapes[shotCounter - 1].SetActive(true);
+            }
+
+            yield return new WaitForSeconds(reloadTime/capacity);
+            shotCounter -= 1;
+        }
+    }
+
+    IEnumerator SwitchCooldown()
+    {
+        switchCooldown = true;
+        yield return new WaitForSeconds(0.35f);
+        switchCooldown = false;
     }
 
     #endregion
@@ -151,9 +257,23 @@ public class Gun: MonoBehaviour
 
     void Start()
     {
+        //get game objects
+        foreach (Transform grape in grapesObj.transform)
+        {
+            grapes.Add(grape.gameObject);
+        }
+
+        //get components
         aimColliders.SetActive(true);
         animator = player.GetComponent<Animator>();
         muzzleFX = muzzle.GetComponent<VisualEffect>();
+        meshRenderer = gunBody.GetComponent<MeshRenderer>();
+
+        //get scripts
+        playerMovement = player.GetComponent<Movement>();
+
+        //get values
+        playerBaseSpeed = playerMovement.moveSpeed;
     }
 
     void Update()

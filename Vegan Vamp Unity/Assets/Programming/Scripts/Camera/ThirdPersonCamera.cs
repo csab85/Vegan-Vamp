@@ -1,3 +1,4 @@
+using Cinemachine;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -9,18 +10,28 @@ public class ThirdPersonCamera : MonoBehaviour
     #region
 
     [Header ("Imports")]
+    //game objects
+    GameObject player;
+    [SerializeField] GameObject crosshair;
+
+    //components
     [SerializeField] Transform playerTransf;
     [SerializeField] Transform orientTransf;
     [SerializeField] Transform combatLookAt;
     [SerializeField] Rigidbody playerRb;
-    [SerializeField] GameObject crosshair;
+    [HideInInspector] public CinemachineFreeLook combatCinemachine;
+    [HideInInspector] public CinemachineFreeLook explorationCinemachine;
+    Animator animator;
+
+    //scripts
     [SerializeField] Inventory inventory;
+    StatsManager playerStats;
+    Movement playerMovement;
 
     [Header ("Cameras")]
-    [SerializeField] GameObject explorationCamera;
-    [SerializeField] GameObject combatCamera;
-
-    StatsManager playerStats;
+    //game objects
+    [SerializeField] public GameObject explorationCamera;
+    [SerializeField] public GameObject combatCamera;
 
     #endregion
     //========================
@@ -32,15 +43,9 @@ public class ThirdPersonCamera : MonoBehaviour
 
     [Header ("Settings")]
     [SerializeField] float rotationSpeed;
-    [SerializeField] public CameraMode currentMode;
 
     int CameraModeNumber = 0;
-
-    public enum CameraMode
-    {
-        Exploration,
-        Combat
-    }
+    float playerBaseSpeed;
 
     #endregion
     //========================
@@ -50,26 +55,19 @@ public class ThirdPersonCamera : MonoBehaviour
     //========================
     #region
 
-    public void SwitchCameraMode(int modeNumber)
+    public void SwitchCameraMode()
     {
-        CameraMode[] modes = {CameraMode.Exploration, CameraMode.Combat};
-
-        explorationCamera.SetActive(false);
-        combatCamera.SetActive(false);
-
-        if(modes[modeNumber] == CameraMode.Exploration)
+        if (explorationCinemachine.Priority > combatCinemachine.Priority)
         {
-            explorationCamera.SetActive(true);
-            crosshair.SetActive(false);
+            explorationCinemachine.Priority = 0;
+            combatCinemachine.Priority = 1;
         }
 
-        if(modes[modeNumber] == CameraMode.Combat)
+        else
         {
-            combatCamera.SetActive(true);
-            crosshair.SetActive(true);
+            explorationCinemachine.Priority = 1;
+            combatCinemachine.Priority = 0;
         }
-
-        currentMode = modes[modeNumber];
     }
 
     #endregion
@@ -84,7 +82,20 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        playerStats = playerTransf.gameObject.GetComponent<StatsManager>();
+
+        //get game objects
+        player = playerTransf.gameObject;
+
+        //get components
+        animator = player.GetComponent<Animator>();
+        combatCinemachine = combatCamera.GetComponent<CinemachineFreeLook>();
+        explorationCinemachine = explorationCamera.GetComponent<CinemachineFreeLook>();
+
+         //get scripts
+        playerStats = player.GetComponent<StatsManager>();
+        playerMovement = player.GetComponent<Movement>();
+
+        playerBaseSpeed = playerMovement.moveSpeed;
     }
 
     private void FixedUpdate()
@@ -97,7 +108,7 @@ public class ThirdPersonCamera : MonoBehaviour
             orientTransf.forward = viewDirection.normalized;
 
             //rotate player
-            if (currentMode == CameraMode.Exploration)
+            if (explorationCinemachine.Priority > combatCinemachine.Priority)
             {
                 float horizontalInput = Input.GetAxis ("Horizontal");
                 float verticalInput = Input.GetAxis ("Vertical");
@@ -112,30 +123,43 @@ public class ThirdPersonCamera : MonoBehaviour
             }
 
             //fix player look forward
-            else if (currentMode == CameraMode.Combat)
+            else if (explorationCinemachine.Priority < combatCinemachine.Priority)
             {
                 Vector3 combatViewDirection = combatLookAt.position - new Vector3(transform.position.x, combatLookAt.position.y , transform.position.z);
 
                 playerTransf.forward = combatViewDirection.normalized;
             }
 
-            //Switch camera
-            if (Input.GetButtonDown("Switch Camera"))
+            //Select right camera mode
+            if (animator.GetLayerWeight(AnimationConsts.GUN_LAYER) == 1 | animator.GetLayerWeight(AnimationConsts.BOTTLE_LAYER) == 1)
             {
-                CameraModeNumber = (CameraModeNumber + 1) % 2;
+                if (combatCinemachine.Priority < explorationCinemachine.Priority)
+                {
+                    crosshair.SetActive(true);
+                    combatCinemachine.Priority = 1;
+                    explorationCinemachine.Priority = 0;
+                }
+            }
 
-                SwitchCameraMode(CameraModeNumber);
+            else
+            {
+                if (combatCinemachine.Priority > explorationCinemachine.Priority)
+                {
+                    crosshair.SetActive(false);
+                    combatCinemachine.Priority = 0;
+                    explorationCinemachine.Priority = 1;
+                }
             }
 
             //Stop movement while on inventory
             if (inventory.openMode)
             {
-                explorationCamera.SetActive(false);
+                playerMovement.moveSpeed = 0;
             }
 
-            else if (currentMode == CameraMode.Exploration && !explorationCamera.activeSelf)
+            else if (playerMovement.moveSpeed != playerBaseSpeed)
             {
-                explorationCamera.SetActive(true);
+                playerMovement.moveSpeed = playerBaseSpeed;
             }
         }
     }

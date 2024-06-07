@@ -4,114 +4,94 @@ public class WeaponWheel : MonoBehaviour
 {
     //IMPORTS
     //========================
-    #region
+    //#region
 
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject[] guns;
-    [SerializeField] ThirdPersonCamera camScript;
+    // [SerializeField] GameObject player;
+    // [SerializeField] GameObject[] guns;
+    // [SerializeField] ThirdPersonCamera camScript;
 
-    GameObject weaponWheelUI;
-    Animator animator;
-    StatsManager playerStats;
+    // GameObject weaponWheelUI;
+    // Animator animator;
+    // StatsManager playerStats;
 
-    #endregion
-    //========================
+    // #endregion
+    // //========================
 
 
-    //STATS AND VALUES
-    //========================
-    #region
+    // //STATS AND VALUES
+    // //========================
+    // #region
 
     
 
-    #endregion
-    //========================
+    // #endregion
+    // //========================
 
 
-    //FUNCTIONS
-    //========================
-    #region
+    // //FUNCTIONS
+    // //========================
+    // #region
 
-    /// <summary>
-    /// Iterates list, activates the selected gun and deactivates the others
-    /// </summary>
-    /// <param name="gunNumber">The gun to be activated</param>
-    public void SelectGun(int gunNumber)
-    {
-        if (camScript.currentMode == ThirdPersonCamera.CameraMode.Combat)
-        {
-            foreach (GameObject gun in guns)
-            {
-                if (gun == guns[gunNumber])
-                {
-                    gun.SetActive(true);
-                }
+    // /// <summary>
+    // /// Iterates list, activates the selected gun and deactivates the others
+    // /// </summary>
+    // /// <param name="gunNumber">The gun to be activated</param>
+    // public void SelectGun(int gunNumber)
+    // {
+    //     if (camScript.currentMode == ThirdPersonCamera.CameraMode.Combat)
+    //     {
+    //         foreach (GameObject gun in guns)
+    //         {
+    //             if (gun == guns[gunNumber])
+    //             {
+    //                 gun.SetActive(true);
+    //                 animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 1);
+    //             }
 
-                else
-                {
-                    gun.SetActive(false);
-                }
-            }
-        }
-    }
+    //             else
+    //             {
+    //                 gun.SetActive(false);
+    //             }
+    //         }
+    //     }
+    // }
 
-    #endregion
-    //========================
-
-
-    //RUNNING
-    //========================
-    #region
-
-    void Start()
-    {
-        weaponWheelUI = transform.GetChild(0).gameObject;
-        animator = player.GetComponent<Animator>();
-        playerStats = player.GetComponent<StatsManager>();
-    }
-
-    void Update()
-    {
-        //open wheel if on combat mode
-        if(camScript.currentMode == ThirdPersonCamera.CameraMode.Combat)
-        {
-            if (Input.GetButton("Weapon Wheel") && !weaponWheelUI.activeSelf && !playerStats.dead)
-            {
-                weaponWheelUI.SetActive(true);
-
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
-
-            if (!Input.GetButton("Weapon Wheel") && weaponWheelUI.activeSelf)
-            {
-                weaponWheelUI.SetActive(false);
-
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-
-            animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 1);
-        }
+    // #endregion
+    // //========================
 
 
-        //deactivate all guns if on exploration mode
-        if (camScript.currentMode == ThirdPersonCamera.CameraMode.Exploration)
-        {
-            foreach(GameObject gun in guns)
-            {
-                if (gun.activeSelf)
-                {
-                    gun.SetActive(false);
-                }    
-            }
+    // //RUNNING
+    // //========================
+    // #region
 
-            animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 0);
-        }
-    }
+    // void Start()
+    // {
+    //     weaponWheelUI = transform.GetChild(0).gameObject;
+    //     animator = player.GetComponent<Animator>();
+    //     playerStats = player.GetComponent<StatsManager>();
+    // }
 
-    #endregion
-    //========================
+    // void Update()
+    // {
+    //     //open wheel if holding tab
+    //     if (Input.GetButton("Weapon Wheel") && !weaponWheelUI.activeSelf && !playerStats.dead)
+    //     {
+    //         weaponWheelUI.SetActive(true);
 
+    //         Cursor.visible = true;
+    //         Cursor.lockState = CursorLockMode.None;
+    //     }
+
+    //     if (!Input.GetButton("Weapon Wheel") && weaponWheelUI.activeSelf)
+    //     {
+    //         weaponWheelUI.SetActive(false);
+
+    //         Cursor.visible = false;
+    //         Cursor.lockState = CursorLockMode.Locked;
+    //     }
+    // }
+
+    // #endregion
+    // //========================
 
 }
