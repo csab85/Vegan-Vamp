@@ -30,6 +30,7 @@ public class Gun: MonoBehaviour
     //scripts
     [SerializeField] Inventory inventory;
     Movement playerMovement;
+    StatsManager playerStats;
 
     #endregion
     //========================
@@ -75,50 +76,53 @@ public class Gun: MonoBehaviour
         //Shooting
         if (Cursor.visible == false)
         {
-            //shoot and reload if gund drawn
-            if (meshRenderer)
+            if (playerStats.ice[StatsConst.SELF_INTENSITY] <= 0)
             {
-                //shoot
-                if (automatic)
+                //shoot and reload if gund drawn
+                if (meshRenderer)
                 {
-                    if (Input.GetButton("Shoot"))
+                    //shoot
+                    if (automatic)
                     {
-                        if (shotCounter < capacity && !shooting)
+                        if (Input.GetButton("Shoot"))
                         {
-                            StartCoroutine(Shoot());
-                        }
-                    }
-                }
-
-                if (!automatic)
-                {
-                    if (Input.GetButtonDown("Shoot"))
-                    {
-                        //check if inventory aint open
-                        if (!inventory.openMode)
-                        {
-                            //check ammo and shooting cooldown
                             if (shotCounter < capacity && !shooting)
                             {
-                                //shoot if gun drawn
-                                if (meshRenderer.enabled)
+                                StartCoroutine(Shoot());
+                            }
+                        }
+                    }
+
+                    if (!automatic)
+                    {
+                        if (Input.GetButtonDown("Shoot"))
+                        {
+                            //check if inventory aint open
+                            if (!inventory.openMode)
+                            {
+                                //check ammo and shooting cooldown
+                                if (shotCounter < capacity && !shooting)
                                 {
-                                    StartCoroutine(Shoot());
-                                }
+                                    //shoot if gun drawn
+                                    if (meshRenderer.enabled)
+                                    {
+                                        StartCoroutine(Shoot());
+                                    }
 
-                                //draw gun if not
-                                else
-                                {
-                                    //visuals
-                                    meshRenderer.enabled = true;
-                                    grapesObj.SetActive(true);
-                                    holsteredGun.SetActive(false);
+                                    //draw gun if not
+                                    else
+                                    {
+                                        //visuals
+                                        meshRenderer.enabled = true;
+                                        grapesObj.SetActive(true);
+                                        holsteredGun.SetActive(false);
 
-                                    //layer animations
-                                    animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 1);
+                                        //layer animations
+                                        animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 1);
 
-                                    //slow down movement
-                                    playerMovement.moveSpeed = playerBaseSpeed * 0.70f;
+                                        //slow down movement
+                                        playerMovement.moveSpeed = playerBaseSpeed * 0.70f;
+                                    }
                                 }
                             }
                         }
@@ -271,6 +275,7 @@ public class Gun: MonoBehaviour
 
         //get scripts
         playerMovement = player.GetComponent<Movement>();
+        playerStats = player.GetComponent<StatsManager>();
 
         //get values
         playerBaseSpeed = playerMovement.moveSpeed;
