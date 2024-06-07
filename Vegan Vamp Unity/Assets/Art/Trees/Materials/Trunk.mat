@@ -16,10 +16,10 @@ Material:
   - _NORMALINDEPTHNORMALPASS
   - _RECEIVEDECALS
   - _SSAO_ENABLED
-  - _TEXMODE_ONE
   m_InvalidKeywords:
   - _ENERGYCONSERVATION_ON
   - _RAMP_OFF
+  - _TEXMODE_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -111,7 +111,7 @@ Material:
     - _ApplyNormalDepthNormal: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Border: 10
+    - _Border: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -126,8 +126,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DiffuseFallOff: 0.01
-    - _DiffuseStep: 0
+    - _DiffuseFallOff: 1
+    - _DiffuseStep: -0.355
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnableMaskMap: 0
@@ -171,9 +171,9 @@ Material:
     - _StencilFail: 0
     - _StencilOp: 0
     - _StencilZFail: 0
-    - _Steps: 1
+    - _Steps: 8
     - _Surface: 0
-    - _TexMode: 1
+    - _TexMode: 0
     - _ToonRimAttenuation: 0
     - _ToonRimFallOff: 1
     - _ToonRimPower: 0.5
@@ -183,7 +183,7 @@ Material:
     - _ZTestOutline: 4
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.3433962, g: 0.26275688, b: 0.035635415, a: 1}
+    - _BaseColor: {r: 0.3207547, g: 0.21127538, b: 0.09834461, a: 1}
     - _Color: {r: 0.34339616, g: 0.26275685, b: 0.035635415, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
