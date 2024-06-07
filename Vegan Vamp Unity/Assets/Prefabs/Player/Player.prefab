@@ -8678,11 +8678,11 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  - 1
-  - -1
-  - -1
   - 0
   - 0
+  - -1
+  - -1
+  - -1
   - 0
   - 0
   - 0
@@ -9302,8 +9302,8 @@ GameObject:
   - component: {fileID: 7094000180331517474}
   - component: {fileID: 2475283405227329169}
   - component: {fileID: 3107966690811556188}
-  - component: {fileID: 9145960729518809489}
   - component: {fileID: 6528787239560788025}
+  - component: {fileID: 9145960729518809489}
   m_Layer: 0
   m_Name: Base Juice
   m_TagString: Untagged
@@ -9378,6 +9378,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.17416382, y: 0.43544555, z: 0.17056274}
   m_Center: {x: 0.0017852783, y: -0.19610846, z: 0.000015258789}
+--- !u!114 &6528787239560788025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7862106828954697930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff077ac0ca9a364eb2f2377170f69b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 7291324401332410514}
+  actualJuice: {fileID: 0}
+  Intact: {fileID: 5801692520601460711}
+  Broken: {fileID: 2878369206100429444}
+  splash: {fileID: 6219979283168409204}
+  rb: {fileID: 2475283405227329169}
+  throwPower: 15
+  splashRange: 50
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 5632
 --- !u!114 &9145960729518809489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9543,29 +9566,6 @@ MonoBehaviour:
   - 0
   - 0
   objectType: 0
---- !u!114 &6528787239560788025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7862106828954697930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff077ac0ca9a364eb2f2377170f69b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 7291324401332410514}
-  actualJuice: {fileID: 0}
-  Intact: {fileID: 5801692520601460711}
-  Broken: {fileID: 2878369206100429444}
-  splash: {fileID: 6219979283168409204}
-  rb: {fileID: 2475283405227329169}
-  throwPower: 15
-  splashRange: 50
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 5632
 --- !u!1 &8025801358982909568
 GameObject:
   m_ObjectHideFlags: 0

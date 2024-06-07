@@ -66,6 +66,7 @@ public class JuiceBottle : MonoBehaviour
         foreach (Collider targetCollider in targets)
         {
             GameObject target = targetCollider.gameObject;
+            print(targetCollider.name);
 
             //apply every stat on the object (if the stat has any spply intensity)
             for (int i = 0; i < selfStats.statsArray.Count(); i++)
