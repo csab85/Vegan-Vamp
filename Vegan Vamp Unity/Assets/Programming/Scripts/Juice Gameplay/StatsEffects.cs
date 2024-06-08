@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 //VFX container gotta be the third object
 
@@ -15,6 +16,7 @@ public class StatsEffects : MonoBehaviour
 
     //VFX
     GameObject fire;
+    GameObject gravityParticles;
     MeshTrail meshTrail;
 
     //models
@@ -85,7 +87,12 @@ public class StatsEffects : MonoBehaviour
 
         if (selfStats.fire[StatsConst.CAP_INTENSITY] != 0 && selfStats.objectType != StatsManager.Type.None)
         {
-            fire = VFX.GetChild(0).gameObject;
+            fire = VFX.transform.Find("VFX Fire").gameObject;
+        }
+
+        if (selfStats.noGravity[StatsConst.CAP_INTENSITY] != 0 && selfStats.objectType != StatsManager.Type.None)
+        {
+            gravityParticles = VFX.transform.Find("VFX No Gravity").gameObject;
         }
 
         //get models
@@ -279,6 +286,47 @@ public class StatsEffects : MonoBehaviour
                     }
                 }
             }
+
+            //NO GRAVITY
+            if (gravityParticles)
+            {
+                if (selfStats.noGravity[StatsConst.SELF_INTENSITY] > 1)
+                {
+                    Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+
+                    rb.mass = 1 / selfStats.noGravity[StatsConst.SELF_INTENSITY];
+
+                    if (!gravityParticles.activeSelf)
+                    {
+                        gravityParticles.SetActive(true);
+                    }
+
+                    //set particles spawn
+
+                    //to make particle not disappear suddenly
+                    float multiplier = Mathf.Clamp(selfStats.noGravity[StatsConst.SELF_INTENSITY] - 1, 0, 1);
+
+
+                    int spawnRate = Shader.PropertyToID("Spawn Rate");
+                    gravityParticles.GetComponent<VisualEffect>().SetFloat(spawnRate, selfStats.noGravity[StatsConst.SELF_INTENSITY] * 100 * multiplier);
+                }
+
+                else
+                {
+                    Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+
+                    if (rb.mass != 1)
+                    {
+                        rb.mass = 1;
+                    }
+
+                    if (gravityParticles.activeSelf)
+                    {
+                        gravityParticles.SetActive(false);
+                    }
+                }
+            }
+
         }
     }
 
