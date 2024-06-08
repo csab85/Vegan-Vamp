@@ -242,6 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6668801041251608615}
   - component: {fileID: 1195573025433407203}
+  - component: {fileID: 6877080459370943760}
   m_Layer: 7
   m_Name: Lod_Red
   m_TagString: Untagged
@@ -291,12 +292,33 @@ LODGroup:
     renderers:
     - renderer: {fileID: 8593846767352497237}
     - renderer: {fileID: 3682630774808149459}
-  - screenRelativeHeight: 0.15193838
+  - screenRelativeHeight: 0.15696615
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 92014640135577727}
     - renderer: {fileID: 5005830844241084933}
   m_Enabled: 1
+--- !u!65 &6877080459370943760
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5517254421378451596}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6268455962203569653
 GameObject:
   m_ObjectHideFlags: 0
