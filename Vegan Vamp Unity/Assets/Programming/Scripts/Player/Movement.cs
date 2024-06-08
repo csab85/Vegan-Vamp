@@ -52,12 +52,15 @@ public class Movement : MonoBehaviour
 
     void GetInputs()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
-        if (Input.GetButtonDown("Jump") && grounded && !selfStats.dead)
+        if (selfStats.ice[StatsConst.SELF_INTENSITY] <= 0)
         {
-            Jump();
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
+
+            if (Input.GetButtonDown("Jump") && grounded && !selfStats.dead)
+            {
+                Jump();
+            }
         }
     }
 
@@ -143,7 +146,7 @@ public class Movement : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         MovePlayer();
 

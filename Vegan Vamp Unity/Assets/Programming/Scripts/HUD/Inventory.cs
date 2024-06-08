@@ -115,31 +115,7 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if (camScript.currentMode == ThirdPersonCamera.CameraMode.Exploration)
-        {
-            if (Input.GetButtonDown("Inventory") && !playerStats.dead)
-            {
-                if (openMode)
-                {
-                    bagRectTransform.localScale = smallScale;
-                    bagRectTransform.anchoredPosition = smallPosit;
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                    openMode = false;
-                }
-
-                else
-                {
-                    bagRectTransform.localScale = bigScale;
-                    bagRectTransform.anchoredPosition = bigPosit;
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.None;
-                    openMode = true;
-                }
-            }
-        }
-
-        else
+        if (Input.GetButtonDown("Inventory") && !playerStats.dead)
         {
             if (openMode)
             {
@@ -148,6 +124,20 @@ public class Inventory : MonoBehaviour
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 openMode = false;
+
+                camScript.explorationCamera.SetActive(true);
+                camScript.combatCamera.SetActive(true);
+            }
+
+            else
+            {
+                bagRectTransform.localScale = bigScale;
+                bagRectTransform.anchoredPosition = bigPosit;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                openMode = true;
+                camScript.explorationCamera.SetActive(false);
+                camScript.combatCamera.SetActive(false);
             }
         }
     }

@@ -96,7 +96,10 @@ public class Interactions : MonoBehaviour
                 //get if interact button is pressed
                 if (Input.GetButtonDown("Interact") && !playerStats.dead)
                 {
-                    Interact(interactObject);
+                    if (playerStats.ice[StatsConst.SELF_INTENSITY] <= 0)
+                    {
+                        Interact(interactObject);
+                    }
                 }
             }
         }

@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -10,22 +11,24 @@ public class JuiceBottle : MonoBehaviour
     #region
 
     [Header ("Imports")]
+    //game objects
     [SerializeField] GameObject player;
-    [SerializeField] GameObject actualJuice;
     [SerializeField] public GameObject Intact;
     [SerializeField] GameObject Broken;
     [SerializeField] GameObject splash;
-    [SerializeField] Rigidbody rb;
+    [SerializeField] GameObject tornado;
+    [SerializeField] GameObject portal;
 
-    GameObject tornado;
-
+    //components
     Animator animator;
     BoxCollider bc;
+
+    //scripts
+    StatsManager selfStats;
+
+    //extras
     Ray aimRay;
     RaycastHit aimHit;
-
-    StatsManager selfStats;
-    bool smashable = false;
 
     #endregion
     //========================
@@ -39,6 +42,8 @@ public class JuiceBottle : MonoBehaviour
     [SerializeField] float throwPower;
     [SerializeField] public float splashRange;
     [SerializeField] LayerMask targetLayers;
+
+    bool smashable = false;
 
     #endregion
     //========================
@@ -87,16 +92,18 @@ public class JuiceBottle : MonoBehaviour
         //activate tornado
         if (selfStats.tornado[StatsConst.APPLY_INTENSITY] > 0)
         {
-            tornado.transform.parent = null;
-            tornado.transform.rotation = Quaternion.identity;
-            tornado.SetActive(true);
+            GameObject newTornado = Instantiate(tornado, transform.position, Quaternion.identity, null);
+            newTornado.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            // tornado.transform.parent = null;
+            // tornado.transform.rotation = Quaternion.identity;
+            // tornado.SetActive(true);
 
             //apply tornado ice and fire
-            tornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TORNADO, selfStats.tornado[StatsConst.APPLY_INTENSITY], selfStats.tornado[StatsConst.APPLY_REACH_TIME], selfStats.tornado[StatsConst.APPLY_RETURN_TIME]);
+            newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TORNADO, selfStats.tornado[StatsConst.APPLY_INTENSITY], selfStats.tornado[StatsConst.APPLY_REACH_TIME], selfStats.tornado[StatsConst.APPLY_RETURN_TIME]);
 
-            tornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.ICE, selfStats.ice[StatsConst.APPLY_INTENSITY], selfStats.ice[StatsConst.APPLY_REACH_TIME], selfStats.ice[StatsConst.APPLY_RETURN_TIME]);
+            newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.ICE, selfStats.ice[StatsConst.APPLY_INTENSITY], selfStats.ice[StatsConst.APPLY_REACH_TIME], selfStats.ice[StatsConst.APPLY_RETURN_TIME]);
 
-            tornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.FIRE, selfStats.fire[StatsConst.APPLY_INTENSITY], selfStats.fire[StatsConst.APPLY_REACH_TIME], selfStats.fire[StatsConst.APPLY_RETURN_TIME]);
+            newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.FIRE, selfStats.fire[StatsConst.APPLY_INTENSITY], selfStats.fire[StatsConst.APPLY_REACH_TIME], selfStats.fire[StatsConst.APPLY_RETURN_TIME]);
         }
     }
 
@@ -130,7 +137,7 @@ public class JuiceBottle : MonoBehaviour
         //make not throwable if you're dead
         if (Intact.activeSelf && gameObject.name == "Base Juice")
         {   
-            Vector3 spawnPoint = transform.position + transform.forward * 0.15f;
+            Vector3 spawnPoint = transform.position + Camera.main.transform.forward * 0.2f;
             GameObject copyJuice = Instantiate(gameObject, spawnPoint, gameObject.transform.rotation, null);
 
             Vector3 aimDirection = aimHit.point - transform.position;
@@ -169,16 +176,15 @@ public class JuiceBottle : MonoBehaviour
         // Intact.SetActive(true);
         // Broken.SetActive(false);
 
+        //get components
         animator = player.GetComponent<Animator>();
-
-        tornado = transform.Find("VFX Tornado").gameObject;
-
         bc = GetComponent<BoxCollider>();
 
+        //get scripts
         selfStats = GetComponent<StatsManager>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //throw bottle
         if (Input.GetButtonDown("Throw"))
