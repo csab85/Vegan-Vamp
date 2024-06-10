@@ -9,7 +9,7 @@ public class BeltSlot : MonoBehaviour, IPointerDownHandler
 
     //game objects
     [SerializeField] GameObject baseJuice;
-    GameObject juiceIcon;
+    public GameObject juiceIcon = null;
 
     //components
     CapsuleCollider2D selfCollider;
@@ -37,8 +37,8 @@ public class BeltSlot : MonoBehaviour, IPointerDownHandler
     //========================
     #region
 
-    [ContextMenu ("SelectSelf")]
-    public void SelectSelf()
+    [ContextMenu ("SelectBottle")]
+    public void SelectBottle()
     {   
         //activate selection
         GameObject selection = juiceIcon.transform.Find("Selection").gameObject;
@@ -48,7 +48,7 @@ public class BeltSlot : MonoBehaviour, IPointerDownHandler
         selfStats.PasteStats(juiceStats);
     }
 
-    public void DeselectSelf()
+    public void DeselectBottle()
     {
         //deactivate selection
         GameObject selection = juiceIcon.transform.Find("Selection").gameObject;
@@ -57,7 +57,7 @@ public class BeltSlot : MonoBehaviour, IPointerDownHandler
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag != "Ingredient")
+        if (collider.tag == "Juice")
         {   
             juiceIcon = collider.gameObject;
             selfStats.CopyStats(collider.gameObject.GetComponent<StatsManager>());
@@ -71,8 +71,12 @@ public class BeltSlot : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        print("AAAAAAAAAAAAAAAAAA");
-        SelectSelf();
+        if (juiceIcon != null)
+        {
+            SelectBottle();
+        }
+
+        print("click");
     }
 
     #endregion
@@ -90,6 +94,7 @@ public class BeltSlot : MonoBehaviour, IPointerDownHandler
 
         //get scripts
         selfStats = GetComponent<StatsManager>();
+        juiceStats = baseJuice.GetComponent<StatsManager>();
     }
 
     #endregion

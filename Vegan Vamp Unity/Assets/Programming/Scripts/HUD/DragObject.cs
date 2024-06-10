@@ -8,7 +8,6 @@ public class DragObject : MonoBehaviour
     #region
 
     Rigidbody2D rb;
-    float baseGravity;
 
     #endregion
     //========================
@@ -18,7 +17,7 @@ public class DragObject : MonoBehaviour
     //========================
     #region
 
-
+    float baseGravity;
 
     #endregion
     //========================
