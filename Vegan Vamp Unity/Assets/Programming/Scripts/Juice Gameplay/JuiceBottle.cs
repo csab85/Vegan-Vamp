@@ -118,13 +118,7 @@ public class JuiceBottle : MonoBehaviour
     public void GrabJuice(GameObject juice)
     {   
         //copy stats
-        for (int i = 0; i < selfStats.statsArray.Count(); i++)
-        {
-            for(int j = 0; j < 9; j++)
-            {
-                selfStats.statsArray[i][j] = juice.GetComponent<StatsManager>().statsArray[i][j];
-            }
-        }
+        selfStats.CopyStats(juice.GetComponent<StatsManager>());
 
         Destroy(juice);
 

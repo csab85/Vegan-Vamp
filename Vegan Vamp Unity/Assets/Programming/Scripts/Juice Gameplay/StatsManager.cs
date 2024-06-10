@@ -93,6 +93,8 @@ public class StatsManager : MonoBehaviour
     
     #endregion
 
+    [SerializeField] public Color[] colors;
+
     //Create jagged array
     public float[][] statsArray;
 
@@ -159,6 +161,32 @@ public class StatsManager : MonoBehaviour
         statsArray[statNum][StatsConst.APPLY_REACH_TIME] += reachTime;
         statsArray[statNum][StatsConst.APPLY_RETURN_TIME] += returnTime;
     } 
+
+    public void CopyStats(StatsManager copyStats)
+    {
+        for (int i = 0; i < statsArray.Length; i++)
+        {
+            for(int j = 0; j < statsArray[i].Length; j++)
+            {
+                statsArray[i][j] = copyStats.statsArray[i][j];
+            }
+        }
+
+        colors = copyStats.colors;
+    }
+
+    public void PasteStats(StatsManager targetStats)
+    {
+        for (int i = 0; i < statsArray.Length; i++)
+        {
+            for(int j = 0; j < statsArray[i].Length; j++)
+            {
+                targetStats.statsArray[i][j] = statsArray[i][j];
+            }
+        }
+
+        colors = targetStats.colors;
+    }
 
     void DriftTowardsBase()
     {
