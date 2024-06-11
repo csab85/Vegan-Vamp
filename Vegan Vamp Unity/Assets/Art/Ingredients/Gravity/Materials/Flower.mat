@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Teleport Purple
+  m_Name: Flower
   m_Shader: {fileID: 4800000, guid: 589366c8d179a91428574ab8bc5cf021, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -32,11 +32,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9c50ce22d3efb664a8c6a6e1fef6fd5d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: c3bb1d5298b924d80959c9f822ffe414, type: 3}
+        m_Texture: {fileID: 2800000, guid: ea96ce44a7b527141befcb8f880b3423, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -111,7 +111,7 @@ Material:
     - _ApplyNormalDepthNormal: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Border: 10
+    - _Border: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -126,7 +126,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DiffuseFallOff: 0.01
+    - _DiffuseFallOff: 1
     - _DiffuseStep: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
@@ -172,7 +172,7 @@ Material:
     - _StencilFail: 0
     - _StencilOp: 0
     - _StencilZFail: 0
-    - _Steps: 1
+    - _Steps: 8
     - _Surface: 0
     - _TexMode: 1
     - _ToonRimAttenuation: 0
@@ -185,10 +185,10 @@ Material:
     - _ZTestOutline: 4
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.4352938, g: 0.2392146, b: 0.67842805, a: 1}
-    - _Color: {r: 0.43529376, g: 0.23921457, b: 0.67842805, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _ShadedBaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadedDecalColor: {r: 0.5, g: 5.5000005, b: 0.5, a: 1}
@@ -196,7 +196,7 @@ Material:
     - _SpecColor2nd: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     - _ToonRimColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &4773678465737781177
+--- !u!114 &2979684357974053662
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
