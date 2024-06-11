@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class BeltSlot : MonoBehaviour, IPointerDownHandler
+public class BeltSlot : MonoBehaviour
 {
     //IMPORTS
     //========================
@@ -15,6 +14,7 @@ public class BeltSlot : MonoBehaviour, IPointerDownHandler
     CapsuleCollider2D selfCollider;
 
     //scripts
+    [SerializeField] Hotbar hotbar;
     StatsManager selfStats;
     StatsManager juiceStats;
 
@@ -27,7 +27,7 @@ public class BeltSlot : MonoBehaviour, IPointerDownHandler
     //========================
     #region
 
-
+    [SerializeField] int slotIndex;
 
     #endregion
     //========================
@@ -39,20 +39,40 @@ public class BeltSlot : MonoBehaviour, IPointerDownHandler
 
     [ContextMenu ("SelectBottle")]
     public void SelectBottle()
-    {   
-        //activate selection
-        GameObject selection = juiceIcon.transform.Find("Selection").gameObject;
-        selection.SetActive(true);
+    {
+        if (juiceIcon != null)
+        {
+            //deselected if already slected
+            if (juiceIcon.transform.Find("Selection").gameObject.activeSelf)
+            {
+                print("deselect");
+                hotbar.DeselectAll();
+                hotbar.selectedSlot = -1;
+            }
 
-        //update juice stats
-        selfStats.PasteStats(juiceStats);
+            //run normally
+            else
+            {
+                hotbar.DeselectAll();
+                print("Select");
+                //activate selection
+                GameObject selection = juiceIcon.transform.Find("Selection").gameObject;
+                selection.SetActive(true);
+
+                //update juice stats
+                selfStats.PasteStats(juiceStats);
+            }
+        }
     }
 
     public void DeselectBottle()
     {
-        //deactivate selection
-        GameObject selection = juiceIcon.transform.Find("Selection").gameObject;
-        selection.SetActive(false);
+        if (juiceIcon != null)
+        {
+            //deactivate selection
+            GameObject selection = juiceIcon.transform.Find("Selection").gameObject;
+            selection.SetActive(false);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -67,16 +87,6 @@ public class BeltSlot : MonoBehaviour, IPointerDownHandler
     void OnTriggerExit2D()
     {
         juiceIcon = null;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (juiceIcon != null)
-        {
-            SelectBottle();
-        }
-
-        print("click");
     }
 
     #endregion
