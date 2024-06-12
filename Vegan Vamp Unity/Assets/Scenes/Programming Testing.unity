@@ -677,6 +677,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &349305100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3726803063188237219, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+  m_PrefabInstance: {fileID: 1900416358203743885}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &365928941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1167,11 +1172,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!1 &670867620 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7932817793032870762, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
-  m_PrefabInstance: {fileID: 1900416358203743885}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &691982676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,6 +1793,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8a7aa3134b0dbd4088eaf2a72919b7f, type: 3}
+--- !u!114 &898527892 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2734466293824470652, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+  m_PrefabInstance: {fileID: 1900416358203743885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8a70743f1a4fb49a46b3528f751cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &971418999 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3290974584933970820, guid: cf2f307aeaf2dc54fbf90cf08b930d11, type: 3}
@@ -5101,6 +5112,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 19877910535093627, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1195685325}
+    - target: {fileID: 19877910535093627, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: baseJuice
+      value: 
+      objectReference: {fileID: 349305100}
+    - target: {fileID: 19877910535093627, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: juiceIcon
+      value: 
+      objectReference: {fileID: 6333019167157133413, guid: c503627a6e7a127479205606f5b5752c, type: 3}
+    - target: {fileID: 586012209864038329, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1195685325}
+    - target: {fileID: 586012209864038329, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: juiceBottle
+      value: 
+      objectReference: {fileID: 8217102322277139337, guid: 2fa5ae28ac488e14c8df557a1e2bfc20, type: 3}
     - target: {fileID: 586012209864038329, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: blenderJuice
       value: 
@@ -5146,21 +5177,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1277048322238672795, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
-      propertyPath: worldItemsArray.Array.data[3]
+      propertyPath: player
       value: 
-      objectReference: {fileID: 5010319321751550842, guid: 2fa5ae28ac488e14c8df557a1e2bfc20, type: 3}
-    - target: {fileID: 1540443877360826609, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786986429147702038, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
-      propertyPath: bag
+      objectReference: {fileID: 1195685325}
+    - target: {fileID: 1277048322238672795, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: camScript
       value: 
-      objectReference: {fileID: 670867620}
-    - target: {fileID: 1909164922907884283, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 898527892}
+    - target: {fileID: 1585592088569368781, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1195685325}
+    - target: {fileID: 1585592088569368781, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: baseJuice
+      value: 
+      objectReference: {fileID: 349305100}
+    - target: {fileID: 1585592088569368781, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: juiceIcon
+      value: 
+      objectReference: {fileID: 6333019167157133413, guid: c503627a6e7a127479205606f5b5752c, type: 3}
+    - target: {fileID: 1787395491981625383, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1195685325}
     - target: {fileID: 2252431239455984374, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_Name
       value: Player Pack
@@ -5171,20 +5210,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3846622140719747751, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000051580304
+      value: -3.766446e-15
       objectReference: {fileID: 0}
     - target: {fileID: 3846622140719747751, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000010946078
+      value: 5.162565e-16
       objectReference: {fileID: 0}
-    - target: {fileID: 4088356407349976689, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5040362684790202638, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 4509191674016428479, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1195685325}
+    - target: {fileID: 4509191674016428479, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: baseJuice
+      value: 
+      objectReference: {fileID: 349305100}
+    - target: {fileID: 4509191674016428479, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: juiceIcon
+      value: 
+      objectReference: {fileID: 6333019167157133413, guid: c503627a6e7a127479205606f5b5752c, type: 3}
+    - target: {fileID: 4881718870165487050, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1195685325}
+    - target: {fileID: 4881718870165487050, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: baseJuice
+      value: 
+      objectReference: {fileID: 349305100}
+    - target: {fileID: 4881718870165487050, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: juiceIcon
+      value: 
+      objectReference: {fileID: 6333019167157133413, guid: c503627a6e7a127479205606f5b5752c, type: 3}
     - target: {fileID: 5101802774904297573, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.8611653
@@ -5201,10 +5256,18 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.05322875
       objectReference: {fileID: 0}
-    - target: {fileID: 5104486448863494414, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 5428400887437573931, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1195685325}
+    - target: {fileID: 5428400887437573931, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: baseJuice
+      value: 
+      objectReference: {fileID: 349305100}
+    - target: {fileID: 5428400887437573931, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: juiceIcon
+      value: 
+      objectReference: {fileID: 6333019167157133413, guid: c503627a6e7a127479205606f5b5752c, type: 3}
     - target: {fileID: 6013317139716263469, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.00000003390039
@@ -5213,6 +5276,18 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.000000005916272
       objectReference: {fileID: 0}
+    - target: {fileID: 6717539405866270345, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1195685325}
+    - target: {fileID: 6717539405866270345, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: baseJuice
+      value: 
+      objectReference: {fileID: 349305100}
+    - target: {fileID: 6717539405866270345, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: juiceIcon
+      value: 
+      objectReference: {fileID: 6333019167157133413, guid: c503627a6e7a127479205606f5b5752c, type: 3}
     - target: {fileID: 8593096412894823295, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.08994421
@@ -5221,11 +5296,8 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.056993503
       objectReference: {fileID: 0}
-    - target: {fileID: 8791974374584938363, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6197687189452185557, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
