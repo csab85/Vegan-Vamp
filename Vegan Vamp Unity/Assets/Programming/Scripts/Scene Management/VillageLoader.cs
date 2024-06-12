@@ -10,6 +10,7 @@ public class VillageLoader: MonoBehaviour
     #region
 
     [SerializeField] GameObject player;
+    [SerializeField] GameObject[] deactivateArray;
 
     #endregion
     //========================
@@ -21,8 +22,6 @@ public class VillageLoader: MonoBehaviour
 
     [SerializeField] public float activationRadius;
     [SerializeField] float playerDistance;
-    [SerializeField] string sceneName;
-    bool loaded = false;
 
     #endregion
     //========================
@@ -45,16 +44,21 @@ public class VillageLoader: MonoBehaviour
     private void Update()
     {
         playerDistance = Vector3.Distance(player.transform.position, transform.position);
-        if (playerDistance < activationRadius && !loaded)
+
+        if (playerDistance < activationRadius && !deactivateArray[0].activeSelf)
         {
-            SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-            Scene villageScene = SceneManager.GetSceneByName(sceneName);
+            foreach (GameObject obj in deactivateArray)
+            {
+                obj.SetActive(true);
+            }
         }
 
-        else if (playerDistance > activationRadius && loaded)
+        else if (playerDistance > activationRadius && deactivateArray[0].activeSelf)
         {
-            SceneManager.UnloadSceneAsync(sceneName);
-            loaded = false;
+            foreach (GameObject obj in deactivateArray)
+            {
+                obj.SetActive(false);
+            }
         }
     }
 
