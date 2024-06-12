@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ public class ColorSwitch: MonoBehaviour
     [SerializeField] Image icon;
 
     //materials
-    [SerializeField] Material liquid;
+    Material liquid;
 
     #endregion
     //========================
@@ -26,12 +27,12 @@ public class ColorSwitch: MonoBehaviour
     //STATS AND VALUES
     //========================
     #region
-
-    readonly float colorIndex;
+    
+    int colorIndex = 0;
 
     //colors
-    [SerializeField] Color color1;
-    [SerializeField] Color color2;
+    List<Color> colors = new List<Color>();
+    Color selfColor;
 
     //object type
     enum Dimension
@@ -50,7 +51,18 @@ public class ColorSwitch: MonoBehaviour
     //========================
     #region
 
+    void ChangeColor()
+    {
+        if (selfColor != colors[colorIndex])
+        {
+            selfColor = Vector4.MoveTowards(selfColor, colors[colorIndex], Time.deltaTime * 5);
+        }
 
+        else
+        {
+            colorIndex = (colorIndex + 1) % colors.Count;
+        }
+    }
 
     #endregion
     //========================
@@ -62,29 +74,42 @@ public class ColorSwitch: MonoBehaviour
 
     private void Start()
     {
-        liquid = liquidObj.GetComponent<Renderer>().material;
-        Renderer renderer = liquidObj.GetComponent<Renderer>();
-        liquid = new Material(liquid);
-        renderer.material = liquid;
-        
-        
+        //get scripts
+        selfStats = GetComponent<StatsManager>();
 
+        //get colors from stats
+        foreach (Color color in selfStats.colors)
+        {
+            colors.Add(color);
+        }
+
+        selfColor = colors[0];        
+
+        //get material if 3d
+        if (dimension == Dimension.obj3D)
+        {
+            liquid = liquidObj.GetComponent<Renderer>().material;
+        }
     }
 
     private void Update()
     {
+        //get color value
+        ChangeColor();
+
+
+        //update image
         if (dimension == Dimension.obj2D)
         {
-            icon.color = color1;
+            icon.color = selfColor;
         }
 
-        
-            
-            liquid.SetColor("_Fresnel_Color2", color1);
-            liquid.SetColor("_Surface_Color", color2);
-           
-            
-        
+        //update model
+        if (dimension == Dimension.obj3D)
+        {
+            liquid.SetColor("_Fresnel_Color2", selfColor);
+            liquid.SetColor("_Surface_Color", selfColor);
+        }
     }
 
     #endregion

@@ -93,7 +93,7 @@ public class StatsManager : MonoBehaviour
     
     #endregion
 
-    [SerializeField] public Color[] colors;
+    [SerializeField] public List<Color> colors;
 
     //Create jagged array
     public float[][] statsArray;
@@ -164,6 +164,7 @@ public class StatsManager : MonoBehaviour
 
     public void CopyStats(StatsManager copyStats)
     {
+        //stats
         for (int i = 0; i < statsArray.Length; i++)
         {
             for(int j = 0; j < statsArray[i].Length; j++)
@@ -172,11 +173,18 @@ public class StatsManager : MonoBehaviour
             }
         }
 
-        colors = copyStats.colors;
+        //colors
+        colors = new List<Color>();
+
+        foreach (Color color in copyStats.colors)
+        {
+            colors.Add(color);
+        }
     }
 
     public void PasteStats(StatsManager targetStats)
     {
+        //stats
         for (int i = 0; i < statsArray.Length; i++)
         {
             for(int j = 0; j < statsArray[i].Length; j++)
@@ -185,7 +193,13 @@ public class StatsManager : MonoBehaviour
             }
         }
 
-        colors = targetStats.colors;
+        //colors
+        targetStats.colors = new List<Color>();
+
+        foreach (Color color in colors)
+        {
+            targetStats.colors.Add(color);
+        }
     }
 
     void DriftTowardsBase()
