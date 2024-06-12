@@ -51,6 +51,7 @@ public class Gun: MonoBehaviour
     [Header("Info")]
     [SerializeField] public int shotCounter;
     [SerializeField] public bool shooting;
+    bool reloading = false;
     
     float playerBaseSpeed;
 
@@ -76,68 +77,69 @@ public class Gun: MonoBehaviour
         //Shooting
         if (Cursor.visible == false)
         {
+            //check if player aint frozen
             if (playerStats.ice[StatsConst.SELF_INTENSITY] <= 0)
             {
-                //shoot and reload if gun drawn
-                if (meshRenderer.enabled)
+                //shoot
+                if (automatic)
                 {
-                    //shoot
-                    if (automatic)
+                    if (Input.GetButton("Shoot"))
                     {
-                        if (Input.GetButton("Shoot"))
+                        if (shotCounter < capacity && !shooting)
                         {
-                            if (shotCounter < capacity && !shooting)
-                            {
-                                StartCoroutine(Shoot());
-                            }
+                            StartCoroutine(Shoot());
                         }
                     }
+                }
 
-                    if (!automatic)
+                if (!automatic)
+                {
+                    if (Input.GetButtonDown("Shoot"))
                     {
-                        if (Input.GetButtonDown("Shoot"))
+                        //check if inventory aint open
+                        if (!inventory.openMode)
                         {
-                            //check if inventory aint open
-                            if (!inventory.openMode)
+                            //check ammo and shooting cooldown
+                            if (shotCounter < capacity && !shooting && !reloading)
                             {
-                                //check ammo and shooting cooldown
-                                if (shotCounter < capacity && !shooting)
+                                //shoot if gun drawn
+                                if (meshRenderer.enabled)
                                 {
-                                    //shoot if gun drawn
-                                    if (meshRenderer.enabled)
-                                    {
-                                        StartCoroutine(Shoot());
-                                    }
+                                    StartCoroutine(Shoot());
+                                }
 
-                                    //draw gun if not
-                                    else
-                                    {
-                                        //visuals
-                                        meshRenderer.enabled = true;
-                                        grapesObj.SetActive(true);
-                                        holsteredGun.SetActive(false);
+                                //draw gun if not
+                                else
+                                {
+                                    print("irrinhó");
+                                    //visuals
+                                    meshRenderer.enabled = true;
+                                    grapesObj.SetActive(true);
+                                    holsteredGun.SetActive(false);
 
-                                        //layer animations
-                                        animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 1);
+                                    //layer animations
+                                    animator.SetLayerWeight(AnimationConsts.GUN_LAYER, 1);
 
-                                        //slow down movement
-                                        playerMovement.moveSpeed = playerBaseSpeed * 0.70f;
-                                    }
+                                    //slow down movement
+                                    playerMovement.moveSpeed = playerBaseSpeed * 0.70f;
                                 }
                             }
                         }
                     }
 
-                    //reload
-                    if (Input.GetButtonDown("Reload") && shotCounter != 0)
+                    if (meshRenderer.enabled && !reloading)
                     {
-                        StartCoroutine(Reload());
+                        //reload
+                        if (Input.GetButtonDown("Reload") && shotCounter != 0)
+                        {
+                            StartCoroutine(Reload());
+                        }
                     }
                 }
             }
 
             //holster/withdraw
-            if (Input.mouseScrollDelta.y != 0 && !switchCooldown)
+            if (Input.GetKeyDown(KeyCode.Tab) && !switchCooldown)
             {
                 if (meshRenderer.enabled == false)
                 {
@@ -156,7 +158,7 @@ public class Gun: MonoBehaviour
                     StartCoroutine(SwitchCooldown());
                 }
 
-                else
+                else if (!shooting | !reloading)
                 {
                     //visuals
                     meshRenderer.enabled = false;
@@ -231,6 +233,8 @@ public class Gun: MonoBehaviour
     /// <returns></returns>
     IEnumerator Reload()
     {
+        reloading = true;
+
         while (shotCounter != 0)
         {
             //bring grapes back
@@ -242,6 +246,8 @@ public class Gun: MonoBehaviour
             yield return new WaitForSeconds(reloadTime/capacity);
             shotCounter -= 1;
         }
+
+        reloading = false;
     }
 
     IEnumerator SwitchCooldown()
