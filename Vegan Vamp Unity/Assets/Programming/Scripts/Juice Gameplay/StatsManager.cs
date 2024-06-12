@@ -144,13 +144,11 @@ public class StatsManager : MonoBehaviour
 
         if (returnTime >= 0)
         {
-            print("sim fi");
             statsArray[statNum][StatsConst.SELF_RETURN_TIME] = returnTime;
         }
 
         else
         {
-            print("dueuid");
             statsArray[statNum][StatsConst.SELF_RETURN_TIME] = 0.001f;
         }
     }

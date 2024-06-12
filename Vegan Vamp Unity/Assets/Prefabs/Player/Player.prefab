@@ -10482,6 +10482,7 @@ GameObject:
   - component: {fileID: 3107966690811556188}
   - component: {fileID: 6528787239560788025}
   - component: {fileID: 9145960729518809489}
+  - component: {fileID: 8613573618166727783}
   m_Layer: 0
   m_Name: Base Juice
   m_TagString: Untagged
@@ -10567,13 +10568,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ff077ac0ca9a364eb2f2377170f69b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7291324401332410514}
   Intact: {fileID: 5801692520601460711}
   Broken: {fileID: 2878369206100429444}
   splash: {fileID: 6219979283168409204}
   tornado: {fileID: 9131918081954376367, guid: 3ba412533441bb64194b1bd904ed2b59, type: 3}
   portal: {fileID: 4953359166628225200, guid: 3e816ca48d2012642be5d850f4a13e54, type: 3}
-  hotbar: {fileID: 0}
   throwPower: 25
   splashRange: 50
   targetLayers:
@@ -10743,8 +10742,24 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  colors: []
+  colors:
+  - {r: 0, g: 0, b: 0, a: 0}
   objectType: 0
+--- !u!114 &8613573618166727783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7862106828954697930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0094261f450ffc1499fc5bdd0a4e19de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  liquidObj: {fileID: 4737366254157599318}
+  icon: {fileID: 0}
+  dimension: 1
 --- !u!1 &7895959707626062014
 GameObject:
   m_ObjectHideFlags: 0

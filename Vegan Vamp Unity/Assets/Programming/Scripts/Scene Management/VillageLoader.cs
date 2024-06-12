@@ -41,6 +41,11 @@ public class VillageLoader: MonoBehaviour
     //========================
     #region
 
+    void Start()
+    {
+        player = GameObject.Find("Player");
+    }
+
     private void Update()
     {
         playerDistance = Vector3.Distance(player.transform.position, transform.position);

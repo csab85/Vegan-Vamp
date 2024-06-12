@@ -56,6 +56,11 @@ public class Interactions : MonoBehaviour
             blenderJuice.BlendJuice();
         }
 
+        if (interactObj.name == "Blender Juice")
+        {
+            blenderJuice.FillBottle();
+        }
+
         if (interactObj.tag == "Juice")
         {
             Destroy(interactObj);

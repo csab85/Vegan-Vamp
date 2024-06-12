@@ -5,6 +5,8 @@ using System.Transactions;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using System.Diagnostics;
 
 public class BlenderJuice : MonoBehaviour
 {
@@ -12,8 +14,15 @@ public class BlenderJuice : MonoBehaviour
     //========================
     #region
 
-    [SerializeField] Material juiceMaterial;
+    //game objects
     [SerializeField] GameObject baseJuice;
+    GameObject blender;
+
+    //scripts
+    [SerializeField] Inventory inventory;
+
+    //materials
+    Material juiceMaterial;
 
     StatsManager selfStats;
 
@@ -26,6 +35,14 @@ public class BlenderJuice : MonoBehaviour
     #region
 
     Color initialColor;
+
+    [SerializeField] int maxBottles;
+    [SerializeField] float maxFilling;
+    [SerializeField] float minFilling;
+
+    float targetFill;
+    float fill;
+    bool filling;
 
     List<GameObject> ingredientsInside = new List<GameObject>{};
 
@@ -44,7 +61,7 @@ public class BlenderJuice : MonoBehaviour
             ingredientsInside.Add(collider.gameObject);
             StatsManager ingredientStats = collider.gameObject.GetComponent<StatsManager>();
 
-            //get only apply values (see if I cant get em all. Prolly not)
+            //get only apply values
             for (int i = 0; i < selfStats.statsArray.Count(); i++)
             {
                 selfStats.AddToSelfApply(i, ingredientStats.statsArray[i][StatsConst.APPLY_INTENSITY], ingredientStats.statsArray[i][StatsConst.APPLY_REACH_TIME], ingredientStats.statsArray[i][StatsConst.APPLY_RETURN_TIME]);
@@ -72,47 +89,51 @@ public class BlenderJuice : MonoBehaviour
             {
                 Destroy(ingredient);
             }
-
-            //reset to default white color
-            selfStats.colors = new List<Color>() {initialColor};
-        }
-        
-
-        //spawn and set juice stats
-        Vector3 spawnPoint = transform.position + new Vector3(0, 1, 0);
-        GameObject newJuice = Instantiate(baseJuice, spawnPoint, Quaternion.identity, null);
-        newJuice.name = "Juice Bottle";
-
-        for (int i = 0; i < selfStats.statsArray.Count(); i++)
-        {
-            for(int j = 0; j < 9; j++)
-            {
-                newJuice.GetComponent<StatsManager>().statsArray[i][j] = selfStats.statsArray[i][j];
-            }
         }
 
-        newJuice.layer = LayerMask.NameToLayer("Interactable");
-        newJuice.transform.localScale = Vector3.one;
-    
-        //throw juice from blender
-        Vector3 throwDirection = (transform.forward + transform.up) * 5;
-        newJuice.GetComponent<JuiceBottle>().Intact.SetActive(true);
-        newJuice.GetComponent<BoxCollider>().isTrigger = false;
-        newJuice.GetComponent<Rigidbody>().isKinematic = false;
-        newJuice.GetComponent<Rigidbody>().AddForce(throwDirection, ForceMode.Impulse);
+        ingredientsInside = new List<GameObject>();
 
+        filling = true;
+    }
 
-
-        //reset juice stats
-        foreach (float[] stat in selfStats.statsArray)
+    public void FillBottle()
+    {
+        if (!filling)
         {
-            for (int i = 0; i < 9; i++)
+            //spawn and set juice stats
+            GameObject newJuice = Instantiate(baseJuice, transform.position, Quaternion.identity);
+            newJuice.name = "Juice Bottle";
+
+            newJuice.GetComponent<StatsManager>().CopyStats(selfStats);
+
+            //add it to inventory
+            inventory.AddItem(newJuice);
+
+            //DESTROY new juice
+            Destroy(newJuice);
+
+            //drain juice
+            targetFill -= (maxFilling + Mathf.Abs(minFilling))/maxBottles;
+
+        }
+
+        //reset juice if empty
+        if (fill <= -2)
+        {
+            //reset stats
+            foreach (float[] stat in selfStats.statsArray)
             {
-                if (stat[i] != 0)
+                for (int i = 0; i < 9; i++)
                 {
-                    stat[i] = 0;
+                    if (stat[i] != 0)
+                    {
+                        stat[i] = 0;
+                    }
                 }
             }
+
+            //reset to default color
+            selfStats.colors = new List<Color>() {initialColor, Color.green};
         }
     }
 
@@ -126,9 +147,82 @@ public class BlenderJuice : MonoBehaviour
 
     void Start()
     {
+        //get game objects
+        blender = transform.parent.gameObject;
+
+        // get scripts
         selfStats = GetComponent<StatsManager>();
 
+        //get materials
+        juiceMaterial = GetComponent<Renderer>().material;
+
+        //get initial color
         initialColor = selfStats.colors[0];
+
+        fill = minFilling;
+        targetFill = minFilling;
+    }
+
+    void Update()
+    {
+        //manage filling
+        if (filling)
+        {
+            if (targetFill < maxFilling)
+            {
+                targetFill = Mathf.MoveTowards(targetFill, maxFilling, Time.deltaTime * 5);
+            }
+
+            else
+            {
+                filling = false;
+            }
+        }
+    
+        //update material
+        if (fill != targetFill)
+        {
+            fill = Mathf.MoveTowards(fill, targetFill, Time.deltaTime * 5);
+        }
+
+        if (juiceMaterial.GetFloat("_fill") != fill)
+        {
+            juiceMaterial.SetFloat("_fill", fill);
+        }
+
+        //set if juice interactable or not
+        if (fill > minFilling)
+        {
+            if (gameObject.layer != LayerMask.NameToLayer("Interactable"))
+            {
+                gameObject.layer = LayerMask.NameToLayer("Interactable");
+            }
+        }
+
+        else
+        {
+            if (gameObject.layer == LayerMask.NameToLayer("Interactable"))
+            {
+                gameObject.layer = LayerMask.NameToLayer("Default");
+            }
+        }
+
+        //set if blender interactable or not
+        if (ingredientsInside.Count > 0)
+        {
+            if (blender.layer != LayerMask.NameToLayer("Interactable"))
+            {
+                blender.layer = LayerMask.NameToLayer("Interactable");
+            }
+        }
+
+        else
+        {
+            if (blender.layer == LayerMask.NameToLayer("Interactable"))
+            {
+                blender.layer = LayerMask.NameToLayer("Default");
+            }
+        }
     }
 
     #endregion

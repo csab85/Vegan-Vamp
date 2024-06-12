@@ -105,6 +105,17 @@ public class ColorSwitch: MonoBehaviour
             }
         }
 
+        else
+        {
+            for (int i = 0; i < colors.Count; i++)
+            {
+                if (colors[i] != selfStats.colors[i])
+                {
+                    colors[i] = selfStats.colors[i];
+                }
+            }
+        }
+
         //get color value
         ChangeColor();
 
