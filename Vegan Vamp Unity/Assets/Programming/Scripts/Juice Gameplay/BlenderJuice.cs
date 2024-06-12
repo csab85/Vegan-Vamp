@@ -25,6 +25,8 @@ public class BlenderJuice : MonoBehaviour
     //========================
     #region
 
+    Color initialColor;
+
     List<GameObject> ingredientsInside = new List<GameObject>{};
 
     #endregion
@@ -47,6 +49,17 @@ public class BlenderJuice : MonoBehaviour
             {
                 selfStats.AddToSelfApply(i, ingredientStats.statsArray[i][StatsConst.APPLY_INTENSITY], ingredientStats.statsArray[i][StatsConst.APPLY_REACH_TIME], ingredientStats.statsArray[i][StatsConst.APPLY_RETURN_TIME]);
             }
+
+            //reset if only color is initial white
+            if (selfStats.colors[0] == initialColor)
+            {
+                selfStats.colors = new List<Color>();
+            }            
+
+            foreach (Color color in ingredientStats.colors)
+            {
+                selfStats.colors.Add(color);
+            }
         }
     }
 
@@ -59,6 +72,9 @@ public class BlenderJuice : MonoBehaviour
             {
                 Destroy(ingredient);
             }
+
+            //reset to default white color
+            selfStats.colors = new List<Color>() {initialColor};
         }
         
 
@@ -111,6 +127,8 @@ public class BlenderJuice : MonoBehaviour
     void Start()
     {
         selfStats = GetComponent<StatsManager>();
+
+        initialColor = selfStats.colors[0];
     }
 
     #endregion

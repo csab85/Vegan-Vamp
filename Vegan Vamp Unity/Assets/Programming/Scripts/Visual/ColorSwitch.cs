@@ -94,6 +94,17 @@ public class ColorSwitch: MonoBehaviour
 
     private void Update()
     {
+        //update if colors change
+        if (colors.Count != selfStats.colors.Count)
+        {
+            colors = new List<Color>();
+
+            foreach (Color color in selfStats.colors)
+            {
+                colors.Add(color);
+            }
+        }
+
         //get color value
         ChangeColor();
 
