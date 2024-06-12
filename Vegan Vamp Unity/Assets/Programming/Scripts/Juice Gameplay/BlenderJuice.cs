@@ -65,6 +65,7 @@ public class BlenderJuice : MonoBehaviour
         //spawn and set juice stats
         Vector3 spawnPoint = transform.position + new Vector3(0, 1, 0);
         GameObject newJuice = Instantiate(baseJuice, spawnPoint, Quaternion.identity, null);
+        newJuice.name = "Juice Bottle";
 
         for (int i = 0; i < selfStats.statsArray.Count(); i++)
         {

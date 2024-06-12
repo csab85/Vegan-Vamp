@@ -7,11 +7,12 @@ public class BeltSlot : MonoBehaviour
     #region
 
     //game objects
+    [SerializeField] GameObject player;
     [SerializeField] GameObject baseJuice;
     public GameObject juiceIcon = null;
 
     //components
-    CapsuleCollider2D selfCollider;
+    Animator animator;
 
     //scripts
     [SerializeField] Hotbar hotbar;
@@ -45,21 +46,30 @@ public class BeltSlot : MonoBehaviour
             //deselected if already slected
             if (juiceIcon.transform.Find("Selection").gameObject.activeSelf)
             {
-                print("deselect");
                 hotbar.DeselectAll();
                 hotbar.selectedSlot = -1;
+
+                //manage juice
+                baseJuice.GetComponent<JuiceBottle>().DeactivateBottle();
+                animator.SetLayerWeight(AnimationConsts.BOTTLE_LAYER, 0);
             }
 
             //run normally
             else
             {
                 hotbar.DeselectAll();
-                print("Select");
+
                 //activate selection
                 GameObject selection = juiceIcon.transform.Find("Selection").gameObject;
                 selection.SetActive(true);
 
-                //update juice stats
+                //update base juice stats
+                if (!baseJuice.transform.Find("Intact").gameObject.activeSelf)
+                {
+                    baseJuice.GetComponent<JuiceBottle>().ActivateBottle();
+                    animator.SetLayerWeight(AnimationConsts.BOTTLE_LAYER, 1);
+                }
+
                 selfStats.PasteStats(juiceStats);
             }
         }
@@ -75,6 +85,17 @@ public class BeltSlot : MonoBehaviour
         }
     }
 
+    public void DeleteBottle()
+    {
+        if (juiceIcon != null)
+        {
+            if (juiceIcon.transform.Find("Selection").gameObject.activeSelf)
+            {
+                Destroy(juiceIcon);
+            }
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.tag == "Juice")
@@ -86,6 +107,7 @@ public class BeltSlot : MonoBehaviour
 
     void OnTriggerExit2D()
     {
+        DeselectBottle();
         juiceIcon = null;
     }
 
@@ -100,7 +122,7 @@ public class BeltSlot : MonoBehaviour
     void Start()
     {
         //get components
-        selfCollider = GetComponent<CapsuleCollider2D>();
+        animator = player.GetComponent<Animator>();
 
         //get scripts
         selfStats = GetComponent<StatsManager>();

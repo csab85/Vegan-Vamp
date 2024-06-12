@@ -48,15 +48,20 @@ public class Inventory : MonoBehaviour
     //========================
     #region
 
-    public void AddItem(GameObject AddedItem)
+    public void AddItem(GameObject addedItem)
     {
         foreach (GameObject item in inventoryItemsArray)
         {
-            if ((AddedItem.name + " 2D") == item.name)
+            if ((addedItem.name + " 2D") == item.name)
             {
                 GameObject newItem = Instantiate(item, spawnPoint.transform.position, Quaternion.identity, bag.transform);
 
                 newItem.name = item.name;
+
+                if (item.tag == "Juice")
+                {
+                    addedItem.GetComponent<StatsManager>().PasteStats(newItem.GetComponent<StatsManager>());
+                }
 
                 break;
             }
@@ -76,6 +81,13 @@ public class Inventory : MonoBehaviour
                 GameObject newItem = Instantiate(worldItem, player.transform.position + spawnDistance, Quaternion.identity);
 
                 newItem.name = worldName;
+
+                if (item.tag == "Juice")
+                {
+                    print("rapaiz");
+                    item.GetComponent<StatsManager>().PasteStats(newItem.GetComponent<StatsManager>());
+                }
+
 
                 Destroy(item);
 

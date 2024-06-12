@@ -46,6 +46,15 @@ public class Hotbar : MonoBehaviour
         slots[slotIndex].SelectBottle();
     }
 
+
+    public void SeekAndDestroyBottles()
+    {
+        foreach (BeltSlot slot in slots)
+        {
+            slot.DeleteBottle();
+        }
+    }
+
     #endregion
     //========================
 
@@ -65,17 +74,17 @@ public class Hotbar : MonoBehaviour
         //inputs
         if (Input.mouseScrollDelta.y != 0)
         {
-            while (true)
+            foreach (BeltSlot slot in slots)
             {
                 selectedSlot = (selectedSlot + 1) % slots.Length;
 
                 //stop going to next if the slot has a bottle in it
                 if (slots[selectedSlot].juiceIcon != null)
                 {
+                    SelectSlot(selectedSlot);
                     break;
                 }
             }
-            SelectSlot(selectedSlot);
         }
 
         //hotbar

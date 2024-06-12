@@ -1,4 +1,5 @@
 using System.Collections.Specialized;
+using System.Data;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -55,9 +56,10 @@ public class Interactions : MonoBehaviour
             blenderJuice.BlendJuice();
         }
 
-        if (interactObj.name == "Base Juice(Clone)")
+        if (interactObj.tag == "Juice")
         {
-            juiceBottle.GrabJuice(interactObj);
+            Destroy(interactObj);
+            inventory.AddItem(interactObj);
         }
     }
 
@@ -90,6 +92,7 @@ public class Interactions : MonoBehaviour
             
             if (pointOnScreen.x > 0 && pointOnScreen.y > 0)
             {
+                //show ui over object
                 interactionUI.SetActive(true);
                 interactText.GetComponent<RectTransform>().position = pointOnScreen + textOffset;
 

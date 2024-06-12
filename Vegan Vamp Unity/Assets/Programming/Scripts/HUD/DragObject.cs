@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class DragObject : MonoBehaviour
 {
@@ -7,6 +8,10 @@ public class DragObject : MonoBehaviour
     //========================
     #region
 
+    //game objects
+    Inventory inventory;
+
+    //components
     Rigidbody2D rb;
 
     #endregion
@@ -17,7 +22,7 @@ public class DragObject : MonoBehaviour
     //========================
     #region
 
-    float baseGravity;
+    bool dragging = false;
 
     #endregion
     //========================
@@ -29,18 +34,17 @@ public class DragObject : MonoBehaviour
 
     public void Drag()
     {
-        transform.position = Input.mousePosition;
-        
-        if (rb.simulated)
-        {
-            rb.gravityScale = 0;
-            rb.velocity = Vector2.zero;
-        }
+        dragging = true;
+    }
+
+    public void BeginDrag()
+    {
+        rb.velocity = new Vector2(10, 10);
     }
 
     public void Drop()
     {
-        rb.gravityScale = baseGravity;
+        dragging = false;
     }
 
     #endregion
@@ -53,8 +57,24 @@ public class DragObject : MonoBehaviour
 
     void Start()
     {
+        //get components
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+
+        //get components
         rb = GetComponent<Rigidbody2D>();
-        baseGravity = rb.gravityScale;
+    }
+
+    void Update()
+    {
+        if (dragging)
+        {
+            rb.MovePosition(Input.mousePosition);
+
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                inventory.DropItem(gameObject);
+            }
+        }
     }
 
     #endregion

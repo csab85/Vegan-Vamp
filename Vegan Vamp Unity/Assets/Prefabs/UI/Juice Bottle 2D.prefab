@@ -85,14 +85,15 @@ GameObject:
   m_Component:
   - component: {fileID: 2326063281045522678}
   - component: {fileID: 3159533562423197982}
-  - component: {fileID: 7115738707781370353}
-  - component: {fileID: 838345366095554288}
   - component: {fileID: 5939899804753252627}
+  - component: {fileID: 7115738707781370353}
+  - component: {fileID: 3042988681390252515}
   - component: {fileID: 6896524445742563985}
   - component: {fileID: -5902937496358610570}
+  - component: {fileID: -3987537209075340870}
   - component: {fileID: -5203921352966019181}
   m_Layer: 0
-  m_Name: Juice
+  m_Name: Juice Bottle 2D
   m_TagString: Juice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +108,7 @@ RectTransform:
   m_GameObject: {fileID: 6333019167157133413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.17, y: 0.17, z: 0.17}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8721083461150314803}
@@ -126,95 +127,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6333019167157133413}
   m_CullTransparentMesh: 1
---- !u!50 &7115738707781370353
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6333019167157133413}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 10
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!60 &838345366095554288
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6333019167157133413}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 65.961716, y: 123.07664}
-      - {x: 60.23338, y: 129.86673}
-      - {x: 51.93348, y: 133.47319}
-      - {x: -48.052967, y: 135.07146}
-      - {x: -60.71412, y: 129.7507}
-      - {x: -65.45957, y: 122.201126}
-      - {x: -68.72121, y: 115.0786}
-      - {x: -69.1763, y: -114.745804}
-      - {x: -64.22258, y: -124.9391}
-      - {x: -57.129913, y: -130.87854}
-      - {x: -49.759064, y: -134.48291}
-      - {x: 49.35444, y: -134.5725}
-      - {x: 61.157314, y: -128.10924}
-      - {x: 66.40382, y: -119.48592}
-      - {x: 68.44649, y: -109.95567}
-      - {x: 69.29781, y: -4.0048256}
-      - {x: 67.5502, y: 115.95394}
-  m_UseDelaunayMesh: 0
 --- !u!114 &5939899804753252627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +157,68 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!50 &7115738707781370353
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6333019167157133413}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 10
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!70 &3042988681390252515
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6333019167157133413}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.4655366, y: 1.2521518}
+  m_Size: {x: 137.92047, y: 265.50998}
+  m_Direction: 0
 --- !u!114 &6896524445742563985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,9 +254,9 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  - 0
-  - 0
-  - 0
+  - 1
+  - 1
+  - 5
   - 0
   - 0
   - 0
@@ -423,6 +397,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a30f6c57f031247baae8e944b16f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3987537209075340870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6333019167157133413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e87406daa150c43b95a6218d12d87f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smallSize: 0.1
+  largeSize: 0.17
+  placeInBag: 1
 --- !u!114 &-5203921352966019181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +441,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 6
+  - eventID: 3
     callback:
       m_PersistentCalls:
         m_Calls:

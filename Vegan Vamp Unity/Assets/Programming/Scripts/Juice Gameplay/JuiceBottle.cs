@@ -12,7 +12,7 @@ public class JuiceBottle : MonoBehaviour
 
     [Header ("Imports")]
     //game objects
-    [SerializeField] GameObject player;
+    GameObject player;
     [SerializeField] public GameObject Intact;
     [SerializeField] GameObject Broken;
     [SerializeField] GameObject splash;
@@ -24,6 +24,7 @@ public class JuiceBottle : MonoBehaviour
     BoxCollider bc;
 
     //scripts
+    Hotbar hotbar;
     StatsManager selfStats;
 
     //extras
@@ -52,6 +53,34 @@ public class JuiceBottle : MonoBehaviour
     //FUNCTIONS
     //========================
     #region
+
+    public void ActivateBottle()
+    {
+        Intact.SetActive(true);
+        Broken.SetActive(false);
+
+        //update hold animation
+        animator.SetLayerWeight(AnimationConsts.BOTTLE_LAYER, 1);
+    }
+
+    public void DeactivateBottle()
+    {
+        Intact.SetActive(false);
+        Broken.SetActive(false);
+    }
+
+    //ISSO AQUI É PROVISORIO
+    public void GrabJuice(GameObject juice)
+    {   
+        //Add to bag
+        //cody things go here
+
+        Destroy(juice);
+
+        //make it visible if not
+        ActivateBottle();
+
+    }
 
     void Break()
     {
@@ -114,30 +143,12 @@ public class JuiceBottle : MonoBehaviour
         }
     }
 
-    //ISSO AQUI É PROVISORIO
-    public void GrabJuice(GameObject juice)
-    {   
-        //copy stats
-        selfStats.CopyStats(juice.GetComponent<StatsManager>());
-
-        Destroy(juice);
-
-        //make it visible if not
-        if (!Intact.activeSelf)
-        {
-            Intact.SetActive(true);
-            Broken.SetActive(false);
-
-            //update hold animation
-            animator.SetLayerWeight(AnimationConsts.BOTTLE_LAYER, 1);
-        }
-    }
-
     public void ThrowBottle()
     {
         //make not throwable if you're dead
         if (Intact.activeSelf && gameObject.name == "Base Juice")
         {   
+            //create and throw juice
             Vector3 spawnPoint = transform.position + Camera.main.transform.forward * 0.2f;
             GameObject copyJuice = Instantiate(gameObject, spawnPoint, gameObject.transform.rotation, null);
 
@@ -150,6 +161,9 @@ public class JuiceBottle : MonoBehaviour
             copyJuice.GetComponent<Rigidbody>().AddForce(aimDirection.normalized * throwPower, ForceMode.Impulse);
 
             Intact.SetActive(false);
+
+            //delete juice on hotbar
+            hotbar.SeekAndDestroyBottles();
 
             //deactivate animation layer
             animator.SetLayerWeight(AnimationConsts.BOTTLE_LAYER, 0);
@@ -174,14 +188,15 @@ public class JuiceBottle : MonoBehaviour
 
     private void Awake()
     {
-        // Intact.SetActive(true);
-        // Broken.SetActive(false);
+        //get game object
+        player = GameObject.Find("Player").gameObject;
 
         //get components
         animator = player.GetComponent<Animator>();
         bc = GetComponent<BoxCollider>();
 
         //get scripts
+        hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
         selfStats = GetComponent<StatsManager>();
     }
 
