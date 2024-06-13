@@ -55,7 +55,7 @@ public class ColorSwitch: MonoBehaviour
     {
         if (selfColor != colors[colorIndex])
         {
-            selfColor = Vector4.MoveTowards(selfColor, colors[colorIndex], Time.deltaTime * 5);
+            selfColor = Vector4.MoveTowards(selfColor, colors[colorIndex], Time.deltaTime);
         }
 
         else

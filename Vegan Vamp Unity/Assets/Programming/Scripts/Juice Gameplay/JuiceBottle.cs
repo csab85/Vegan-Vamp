@@ -10,8 +10,8 @@ public class JuiceBottle : MonoBehaviour
     //========================
     #region
 
-    [Header ("Imports")]
     //game objects
+    [Header ("Game Objects")]
     GameObject player;
     [SerializeField] public GameObject Intact;
     [SerializeField] GameObject Broken;
@@ -24,6 +24,8 @@ public class JuiceBottle : MonoBehaviour
     BoxCollider bc;
 
     //scripts
+    [Header ("Scripts")]
+    [SerializeField] Inventory inventory;
     Hotbar hotbar;
     StatsManager selfStats;
 
@@ -73,13 +75,9 @@ public class JuiceBottle : MonoBehaviour
     public void GrabJuice(GameObject juice)
     {   
         //Add to bag
-        //cody things go here
+        inventory.AddItem(juice);
 
         Destroy(juice);
-
-        //make it visible if not
-        ActivateBottle();
-
     }
 
     void Break()
@@ -105,13 +103,26 @@ public class JuiceBottle : MonoBehaviour
             //apply every stat on the object (if the stat has any spply intensity)
             for (int i = 0; i < selfStats.statsArray.Count(); i++)
             {
-                float applyIntensity = selfStats.statsArray[i][StatsConst.APPLY_INTENSITY];
-                float applyReachTime = selfStats.statsArray[i][StatsConst.APPLY_REACH_TIME];
-                float applyReturnTime = selfStats.statsArray[i][StatsConst.APPLY_RETURN_TIME];
-
-                if (applyIntensity != 0)
+                //run normally if it isnt health effect
+                if (i != StatsConst.HEALTH)
                 {
-                    target.GetComponent<StatsManager>().ApplyStatSelf(i, applyIntensity, applyReachTime, applyReturnTime);
+                    float applyIntensity = selfStats.statsArray[i][StatsConst.APPLY_INTENSITY];
+                    float applyReachTime = selfStats.statsArray[i][StatsConst.APPLY_REACH_TIME];
+                    float applyReturnTime = selfStats.statsArray[i][StatsConst.APPLY_RETURN_TIME];
+                    
+                    if (applyIntensity != 0)
+                    {
+                        target.GetComponent<StatsManager>().ApplyStatSelf(i, applyIntensity, applyReachTime, applyReturnTime);
+                    }
+                }
+
+                //apply to base if health
+                else
+                {
+                    float applyIntensity = selfStats.statsArray[i][StatsConst.APPLY_INTENSITY];
+                    float applyReturnTime = selfStats.statsArray[i][StatsConst.APPLY_RETURN_TIME];
+
+                    target.GetComponent<StatsManager>().ApplyToBase(i, applyIntensity);
                 }
             }
         }
