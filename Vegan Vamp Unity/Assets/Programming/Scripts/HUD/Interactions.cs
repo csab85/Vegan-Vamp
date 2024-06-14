@@ -13,10 +13,10 @@ public class Interactions : MonoBehaviour
 
     [Header ("Imports")]
     [SerializeField] Inventory inventory;
-    [SerializeField] BlenderJuice blenderJuice;
     [SerializeField] GameObject waterBottle;
     [SerializeField] public GameObject player;
-    
+
+    BlenderJuice blenderJuice;
     GameObject interactionUI;
     GameObject interactText; 
     Collider[] nearbyInteractions;
@@ -89,6 +89,7 @@ public class Interactions : MonoBehaviour
         interactionUI = transform.GetChild(0).gameObject;
         interactText = interactionUI.transform.GetChild(0).gameObject;
         playerStats = player.GetComponent<StatsManager>();
+        blenderJuice = GameObject.Find("Blender Juice").GetComponent<BlenderJuice>();
     }
 
     void Update()

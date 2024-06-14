@@ -354,7 +354,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
-  maxHealth: 20
 --- !u!1 &1465733990797093905
 GameObject:
   m_ObjectHideFlags: 0
@@ -3838,7 +3837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 4998168799914428713}
   blenderJuice: {fileID: 0}
-  juiceBottle: {fileID: 8217102322277139337, guid: 2fa5ae28ac488e14c8df557a1e2bfc20, type: 3}
+  waterBottle: {fileID: 5010319321751550842, guid: cdde8b6cc8992664593eca1944b6fe1c, type: 3}
   player: {fileID: 0}
   interactionRange: 2
   targetLayers:
@@ -4903,13 +4902,21 @@ MonoBehaviour:
   - {fileID: 3642176660711944569, guid: b8ecc9cd55d35cc4d8b847f0a7aeabec, type: 3}
   - {fileID: 6751693394272966389, guid: 6c8c66cb1f4928d4eafbe83d174fbb69, type: 3}
   - {fileID: 8036862644267875125, guid: 6dc141cabcf3eaa4795b1dcb22e5ecd0, type: 3}
+  - {fileID: 4038816564768216580, guid: 8368102dc2347784b994d3c170610729, type: 3}
+  - {fileID: 81282940766085576, guid: f66520703a5af4542be4df38c22d7ef9, type: 3}
+  - {fileID: 3112193353953145963, guid: fa167f797e817824ba8a29dad7b9e0d7, type: 3}
   - {fileID: 5010319321751550842, guid: 2fa5ae28ac488e14c8df557a1e2bfc20, type: 3}
+  - {fileID: 5010319321751550842, guid: cdde8b6cc8992664593eca1944b6fe1c, type: 3}
   inventoryItemsArray:
   - {fileID: 6569667940618654670, guid: e8034e85b719f204c93926c3c4ef4271, type: 3}
   - {fileID: 6569667940618654670, guid: 3733044efd432434fab2033a936a366d, type: 3}
   - {fileID: 6569667940618654670, guid: dec798676856be043896f092f39aeeb2, type: 3}
   - {fileID: 6569667940618654670, guid: d34e305a30575ff46b17cbf856d1a066, type: 3}
+  - {fileID: 6569667940618654670, guid: 93ba31cab9468ce4bb25a581677d1dce, type: 3}
+  - {fileID: 6569667940618654670, guid: 42208307c6eb79f41835e3ac18fdff6e, type: 3}
+  - {fileID: 6569667940618654670, guid: 84b6c599c659ead4e87e4c86954e9c66, type: 3}
   - {fileID: 6333019167157133413, guid: c503627a6e7a127479205606f5b5752c, type: 3}
+  - {fileID: 6333019167157133413, guid: 4c7c22cf32ad07b458e8109bbde7afa2, type: 3}
   bigScale: {x: 0.9, y: 0.9, z: 0.9}
   bigPosit: {x: 100, y: 30, z: 0}
   collisionBarMax: -360
