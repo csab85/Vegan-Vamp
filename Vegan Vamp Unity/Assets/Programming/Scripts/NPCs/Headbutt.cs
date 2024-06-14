@@ -68,18 +68,24 @@ public class Headbutt : MonoBehaviour
     //========================
     #region
 
-    /// <summary>
-    /// The object will look at the table for aim time seconds then go to state headbutting
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator Aim()
+    // /// <summary>
+    // /// The object will look at the table for aim time seconds then go to state headbutting
+    // /// </summary>
+    // /// <returns></returns>
+    // IEnumerator Aim()
+    // {
+    //     aiming = true;
+    //     animator.SetBool ("Aiming", true);
+    //     yield return new WaitForSeconds(aimTime); 
+    //     fightState = FightState.Headbutting;      
+    //     aiming = false;
+    //     animator.SetBool ("Aiming", false);
+    // }
+
+    void Attack()
     {
-        aiming = true;
-        animator.SetBool ("Aiming", true);
-        yield return new WaitForSeconds(aimTime); 
-        fightState = FightState.Headbutting;      
+        fightState = FightState.Headbutting;
         aiming = false;
-        animator.SetBool ("Aiming", false);
     }
 
     /// <summary>
@@ -111,12 +117,6 @@ public class Headbutt : MonoBehaviour
 
                 other.gameObject.GetComponent<Rigidbody>().AddForce(headbuttDirection * headbuttForce / 2, ForceMode.Impulse);
             }
-
-            //get stunned
-            else if (other.gameObject.layer == obstacleLayer)
-            {
-                fightState = FightState.Stunned;
-            }
         }
         
     }
@@ -147,7 +147,7 @@ public class Headbutt : MonoBehaviour
 
     void Update()
     {
-        if (basicBehaviour.alertState == BasicBehaviour.AlertState.Fighting)
+        if (basicBehaviour.alertState == BasicBehaviour.AlertState.Fighting && !selfStats.dead)
         {
             playerPosit = player.transform.position;
 
@@ -159,50 +159,49 @@ public class Headbutt : MonoBehaviour
                     if (!aiming)
                     {
                         agent.destination = transform.position;
-                        StartCoroutine(Aim());
+                        animator.Play("Startup");
+                        aiming = true;
                     }
 
                     transform.LookAt(playerPosit);
+
+                    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+                    //reset if stuck on a animation
+                    if (stateInfo.IsName("Idle") | stateInfo.IsName("Walking"))
+                    {
+                        aiming = false;
+                        animator.SetBool("Walking", false);
+                    }
 
                     break;
 
                 case FightState.Headbutting:
 
                     //set to headbutt speed and set destination past player
-                    animator.SetBool("Attacking", true);
-
                     if (agent.speed != headbuttingSpeed * selfStats.speedMultiplier)
                     {
                         agent.speed = headbuttingSpeed * selfStats.speedMultiplier;
-                        agent.destination = playerPosit + (headbuttDistance * transform.forward);
+                        agent.destination = playerPosit + (headbuttDistance * transform.forward * 1.5f);
+
+                        //play animation
+                        animator.Play("Attacking");
                     }
 
-                    if (agent.remainingDistance < 0.1f)
+                    if (agent.remainingDistance < 0.05f)
                     {
                         fightState = FightState.Waiting;
-                        animator.SetBool("Attacking", false);
+
                     }
 
                     break;
 
                 case FightState.Waiting:
 
-                    animator.SetBool("Idle", true);
-
                     if (!waiting)
                     {
+                        animator.Play("Idle");
                         StartCoroutine(Wait(1));
-                    }
-
-                    break;
-
-                case FightState.Stunned:
-
-                    animator.SetBool("Breaking", true);
-
-                    if (!waiting)
-                    {
-                        StartCoroutine(Wait(stunTime));
                     }
 
                     break;

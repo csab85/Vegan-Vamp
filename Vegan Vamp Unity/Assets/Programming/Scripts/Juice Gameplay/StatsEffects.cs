@@ -71,15 +71,18 @@ public class StatsEffects : MonoBehaviour
 
     public void DamageSelf(Vector3 knockbackDir, float dmg)
     {
-        rb.AddForce(knockbackDir * 15, ForceMode.Impulse);
-        selfStats.ApplyToBase(StatsConst.HEALTH, dmg);
-
-        if (gameObject.tag == "Player")
+        if (!selfStats.dead)
         {
-            animator.SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 1);
-        }
+            rb.AddForce(knockbackDir * 5, ForceMode.Impulse);
+            selfStats.ApplyToBase(StatsConst.HEALTH, -dmg);
 
-        animator.Play("Damage");
+            if (gameObject.tag == "Player")
+            {
+                animator.SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 1);
+            }
+
+            animator.Play("Damage");   
+        }
     }
 
     #endregion
@@ -142,6 +145,7 @@ public class StatsEffects : MonoBehaviour
                 if (selfStats.objectType == StatsManager.Type.NPC)
                 {
                     GetComponent<FieldOfView>().enabled = false;
+
                     animator.Play("Death");
                 }
 
@@ -149,8 +153,6 @@ public class StatsEffects : MonoBehaviour
                 {
                     animator.SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 1);
                     animator.Play("Death", AnimationConsts.DAMAGE_LAYER);
-                    gameObject.GetComponent<CapsuleCollider>().height = 0.5f;
-                    gameObject.GetComponent<CapsuleCollider>().center = new Vector3(0, -1.5f, 0);
                 }
             }
 

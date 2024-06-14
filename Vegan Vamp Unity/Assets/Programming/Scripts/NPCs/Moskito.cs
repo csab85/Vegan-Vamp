@@ -113,7 +113,7 @@ public class Moskito : MonoBehaviour
         basicBehaviour = GetComponent<BasicBehaviour>();
 
         //get game objects
-        player = fov.player;
+        player = GameObject.Find("Player");
     }
 
     void Update()

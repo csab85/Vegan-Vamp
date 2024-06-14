@@ -8,7 +8,7 @@ public class FieldOfView : MonoBehaviour
     //========================
     #region
 
-    [SerializeField] public GameObject player;
+    public GameObject player;
     [SerializeField] LayerMask targetMask;
     [SerializeField] LayerMask obstructionMask;
 
@@ -104,6 +104,7 @@ public class FieldOfView : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        print(player);
         StartCoroutine(FOVRoutine());
     }
 

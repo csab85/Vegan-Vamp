@@ -100,7 +100,7 @@ public class BasicBehaviour : MonoBehaviour
         selfStats = GetComponent<StatsManager>();
 
         //get game objects
-        player = fov.player;
+        player = GameObject.Find("Player");
 
         //get base values
         baseSpeed = agent.speed;
@@ -153,9 +153,9 @@ public class BasicBehaviour : MonoBehaviour
                 {
                     print("enhance");
                     agent.speed = chasingSpeed;
-                    fov.visionRadius = baseVisionRange;
-                    fov.attackRadius = baseAttackRange;
-                    fov.angle = baseVisionAngle;
+                    fov.visionRadius = chasingVisionRange;
+                    fov.attackRadius = chasingAttackRange;
+                    fov.angle = chasingVisionAngle;
                 }
 
                 playerPosit = player.transform.position;
