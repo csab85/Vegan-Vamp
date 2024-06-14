@@ -38,6 +38,7 @@ public class BasicBehaviour : MonoBehaviour
     [SerializeField] float chasingAttackRange;
     [SerializeField] float chasingVisionAngle;
     [SerializeField] bool flying;
+    [SerializeField] float damage;
 
     //pathfinding and states
     [Header ("Info")]
@@ -65,17 +66,28 @@ public class BasicBehaviour : MonoBehaviour
     //========================
     #region
 
-    
+    void OnCollisionEnter(Collision collision)
+    {
+        //apply dmg
+        StatsEffects enemyEffects = collision.gameObject.GetComponent<StatsEffects>();
 
-    #endregion
-    //========================
+        if (enemyEffects != null)
+        {
+            Vector3 direction = (collision.transform.position - transform.position).normalized;
+
+            enemyEffects.DamageSelf(direction, damage);
+        }
+    }
+
+        #endregion
+        //========================
 
 
-    //RUNNING
-    //========================
-    #region
+        //RUNNING
+        //========================
+        #region
 
-    void Start()
+        void Start()
     {
         //get components
         animator = GetComponent<Animator>();
