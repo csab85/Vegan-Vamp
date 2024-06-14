@@ -55,6 +55,15 @@ public class Coconut : MonoBehaviour
         StartCoroutine(WaitToSpin());
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (spinning)
+        {
+            spinning = false;
+            rb.useGravity = true;
+        }
+    }
+
     void Update()
     {
         if (spinning)
