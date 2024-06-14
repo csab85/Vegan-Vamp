@@ -35,6 +35,7 @@ public class AnimationEvents : MonoBehaviour
     public void ReturnFromDamage()
     {
         GetComponent<Animator>().SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 0);
+        print("sdqetgvsd");
     }
 
     #endregion

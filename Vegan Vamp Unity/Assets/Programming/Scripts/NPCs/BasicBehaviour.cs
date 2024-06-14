@@ -12,7 +12,7 @@ public class BasicBehaviour : MonoBehaviour
     #region
 
     //game objects
-    GameObject player;
+    [HideInInspector] public GameObject player;
 
     //components
     Animator animator;
