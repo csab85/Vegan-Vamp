@@ -8,6 +8,7 @@ public class RandomWalk : MonoBehaviour
     #region
 
     NavMeshAgent navMeshAgent;
+    Animator animator;
 
     #endregion
     //========================
@@ -31,6 +32,8 @@ public class RandomWalk : MonoBehaviour
 
     public void MoveToRandomPosit()
     {
+        animator.SetBool("Walking", true);
+
         float angle = Random.Range(0, Mathf.PI * 2);
         float distance = Random.Range(0, areaRadius);
 
@@ -53,6 +56,7 @@ public class RandomWalk : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         
         areaCenter = transform.position;
     }

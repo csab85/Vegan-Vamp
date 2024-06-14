@@ -25,7 +25,8 @@ public class BaseBullet : MonoBehaviour
     //========================
     #region
 
-    [Header ("Settings")]
+    [Header("Settings")]
+    [SerializeField] float damage;
     [SerializeField] float maxDistance;
     [SerializeField] bool returnOnCollision;
     [SerializeField] float returnDelay;
@@ -72,6 +73,16 @@ public class BaseBullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        //apply dmg
+        StatsEffects enemyEffects = collision.gameObject.GetComponent<StatsEffects>();
+
+        if (enemyEffects != null)
+        {
+            Vector3 direction = (collision.transform.position - transform.position).normalized;
+
+            enemyEffects.DamageSelf(direction, damage);
+        }
+
         rb.isKinematic = true;
 
         if (playFxOnCollision)

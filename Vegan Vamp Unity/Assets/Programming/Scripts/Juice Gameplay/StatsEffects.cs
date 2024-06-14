@@ -22,6 +22,8 @@ public class StatsEffects : MonoBehaviour
     //models
     List<GameObject> iceCubesList = new List<GameObject>();
 
+    //components
+    Rigidbody rb;
     Animator animator;
     NavMeshAgent agent;
 
@@ -67,6 +69,19 @@ public class StatsEffects : MonoBehaviour
         }
     }
 
+    public void DamageSelf(Vector3 knockbackDir, float dmg)
+    {
+        rb.AddForce(knockbackDir * 15, ForceMode.Impulse);
+        selfStats.ApplyToBase(StatsConst.HEALTH, dmg);
+
+        if (gameObject.tag == "Player")
+        {
+            animator.SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 1);
+        }
+
+        animator.Play("Damage");
+    }
+
     #endregion
     //========================
 
@@ -81,6 +96,7 @@ public class StatsEffects : MonoBehaviour
         TryGetComponent<NavMeshAgent>(out agent);
         TryGetComponent<Animator>(out animator);
         TryGetComponent<MeshTrail>(out meshTrail);
+        TryGetComponent<Rigidbody>(out rb);
 
         //Get vfx objects
         Transform VFX = transform.Find("VFX");
@@ -125,7 +141,8 @@ public class StatsEffects : MonoBehaviour
 
                 if (selfStats.objectType == StatsManager.Type.NPC)
                 {
-                    Destroy(gameObject);
+                    GetComponent<FieldOfView>().enabled = false;
+                    animator.Play("Death");
                 }
 
                 if (selfStats.objectType == StatsManager.Type.Player)

@@ -7,6 +7,7 @@ public class AnimationEvents : MonoBehaviour
     #region
 
     [SerializeField] JuiceBottle juiceBottle;
+    Animator animator;
 
     #endregion
     //========================
@@ -29,6 +30,12 @@ public class AnimationEvents : MonoBehaviour
     void Throw()
     {
         juiceBottle.ThrowBottle();
+    }
+
+    public void ReturnFromDamage()
+    {
+        GetComponent<Animator>().SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 0);
+        print("sdqetgvsd");
     }
 
     #endregion

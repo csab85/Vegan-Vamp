@@ -20,14 +20,14 @@ public class FieldOfView : MonoBehaviour
     //========================
     #region
 
-    [Header ("Settings")]
-     [SerializeField] public float visionRadius;
-     [SerializeField] public float attackRadius;
+    [Header("Settings")]
+    [SerializeField] public float visionRadius;
+    [SerializeField] public float attackRadius;
 
-     [Range (0, 360)]
-     [SerializeField] public float angle;
-    
-    [Header ("Info")]
+    [Range(0, 360)]
+    [SerializeField] public float angle;
+
+    [Header("Info")]
     [SerializeField] public bool isSeeingPlayer;
     [SerializeField] public bool isInAttackRange;
 
@@ -38,7 +38,7 @@ public class FieldOfView : MonoBehaviour
     //FUNCTIONS
     //========================
     #region
-    
+
     void FieldOfViewCheck()
     {
         //get colliders within range (only returns player collider) *THIS ONLY WORKS IF VISION RADIUS >= ATTACK RADIUS
@@ -59,7 +59,7 @@ public class FieldOfView : MonoBehaviour
                 {
                     isSeeingPlayer = true;
 
-                    if (distanceToTarget<= attackRadius)
+                    if (distanceToTarget <= attackRadius)
                     {
                         isInAttackRange = true;
                     }
@@ -103,6 +103,7 @@ public class FieldOfView : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.Find("Player");
         StartCoroutine(FOVRoutine());
     }
 

@@ -169,6 +169,8 @@ public class Headbutt : MonoBehaviour
                 case FightState.Headbutting:
 
                     //set to headbutt speed and set destination past player
+                    animator.SetBool("Attacking", true);
+
                     if (agent.speed != headbuttingSpeed * selfStats.speedMultiplier)
                     {
                         agent.speed = headbuttingSpeed * selfStats.speedMultiplier;
@@ -178,11 +180,14 @@ public class Headbutt : MonoBehaviour
                     if (agent.remainingDistance < 0.1f)
                     {
                         fightState = FightState.Waiting;
+                        animator.SetBool("Attacking", false);
                     }
 
                     break;
 
                 case FightState.Waiting:
+
+                    animator.SetBool("Idle", true);
 
                     if (!waiting)
                     {
@@ -192,6 +197,8 @@ public class Headbutt : MonoBehaviour
                     break;
 
                 case FightState.Stunned:
+
+                    animator.SetBool("Breaking", true);
 
                     if (!waiting)
                     {
