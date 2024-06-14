@@ -21,7 +21,7 @@ public class HealthBar : MonoBehaviour
     //========================
     #region
 
-    [SerializeField] public float maxHealth;
+    float maxHealth;
 
     #endregion
     //========================
@@ -48,7 +48,15 @@ public class HealthBar : MonoBehaviour
 
     void Update()
     {
-        barFill.fillAmount = playerStats.health[StatsConst.SELF_INTENSITY] / maxHealth;
+        if (maxHealth != playerStats.health[StatsConst.CAP_INTENSITY])
+        {
+            maxHealth = playerStats.health[StatsConst.CAP_INTENSITY];
+        }
+
+        if (barFill.fillAmount != (playerStats.health[StatsConst.SELF_INTENSITY] / maxHealth))
+        {
+            barFill.fillAmount = playerStats.health[StatsConst.SELF_INTENSITY] / maxHealth;
+        }
     }
 
     #endregion
