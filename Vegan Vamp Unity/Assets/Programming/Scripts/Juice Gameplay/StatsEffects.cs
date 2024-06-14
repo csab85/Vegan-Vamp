@@ -321,7 +321,7 @@ public class StatsEffects : MonoBehaviour
                     //set particles spawn
 
                     //to make particle not disappear suddenly
-                    float multiplier = Mathf.Clamp(selfStats.noGravity[StatsConst.SELF_INTENSITY] - 2, 0, 1);
+                    float multiplier = Mathf.Clamp(selfStats.noGravity[StatsConst.SELF_INTENSITY], 0, 1);
 
 
                     int spawnRate = Shader.PropertyToID("Spawn Rate");

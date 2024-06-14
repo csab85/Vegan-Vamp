@@ -31,13 +31,12 @@ public class Inventory : MonoBehaviour
     #region
 
     [Header ("Settings")]
-    [SerializeField] Vector3 bigScale;
-    [SerializeField] Vector3 bigPosit;
-    [SerializeField] float collisionBarMax;
-    [SerializeField] Vector3 smallScale;
-    [SerializeField] Vector3 smallPosit;
-    [SerializeField] float collisionBarMin;
+    [SerializeField] float bigScale;
+    [SerializeField] Vector2 bigPosit;
 
+
+    Vector2 basePosit;
+    Vector2 baseScale;
     public bool openMode = false;
 
     #endregion
@@ -119,10 +118,17 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
+        //game objects
         bag = FindChild(transform, "Bag");
-        bagRectTransform = bag.GetComponent<RectTransform>();
         spawnPoint = bag.transform.GetChild(0).gameObject;
+
+        //components
+        bagRectTransform = bag.GetComponent<RectTransform>();
         playerStats = player.GetComponent<StatsManager>();
+
+        //values
+        basePosit = bagRectTransform.anchoredPosition;
+        baseScale = bagRectTransform.localScale;
     }
 
     void Update()
@@ -131,8 +137,8 @@ public class Inventory : MonoBehaviour
         {
             if (openMode)
             {
-                bagRectTransform.localScale = smallScale;
-                bagRectTransform.anchoredPosition = smallPosit;
+                bagRectTransform.localScale = baseScale;
+                bagRectTransform.anchoredPosition = basePosit;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 openMode = false;
@@ -143,7 +149,7 @@ public class Inventory : MonoBehaviour
 
             else
             {
-                bagRectTransform.localScale = bigScale;
+                bagRectTransform.localScale = new Vector3(bigScale, bigScale, bigScale);
                 bagRectTransform.anchoredPosition = bigPosit;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;

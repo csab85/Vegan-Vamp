@@ -41,7 +41,7 @@ public class Gun: MonoBehaviour
     #region
 
     [Header("Settings")]
-    [SerializeField] int capacity;
+    [SerializeField] public int capacity;
     [SerializeField] float shotCooldown;
     [SerializeField] public float shotPower;
     [SerializeField] float reloadTime;

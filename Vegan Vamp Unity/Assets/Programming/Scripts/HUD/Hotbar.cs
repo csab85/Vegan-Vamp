@@ -21,6 +21,9 @@ public class Hotbar : MonoBehaviour
     //========================
     #region
 
+    [SerializeField] Vector2 largePosit;
+    [SerializeField] float largeScale;
+
     [HideInInspector] public int selectedSlot = -1;
     Vector2 basePosit;
     Vector3 baseScale;
@@ -129,8 +132,8 @@ public class Hotbar : MonoBehaviour
         {
             if (rect.localScale != Vector3.one || rect.anchoredPosition != Vector2.zero)
             {
-                rect.localScale = new Vector3(0.75f, 0.75f, 0.75f);
-                rect.anchoredPosition = new Vector2(0, -150);
+                rect.localScale = new Vector3(largeScale, largeScale, largeScale);
+                rect.anchoredPosition = largePosit;
             }
         }
         else
