@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.74509805, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -240,10 +240,10 @@ GameObject:
   - component: {fileID: 6896524445742563985}
   - component: {fileID: -5902937496358610570}
   - component: {fileID: -3987537209075340870}
-  - component: {fileID: 9150709927071514780}
   - component: {fileID: -5203921352966019181}
+  - component: {fileID: 893683023032004092}
   m_Layer: 0
-  m_Name: Juice Bottle 2D
+  m_Name: Water Bottle 2D
   m_TagString: Juice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -505,7 +505,8 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  colors: []
+  colors:
+  - {r: 0, g: 0.74509805, b: 1, a: 1}
   objectType: 0
 --- !u!114 &-5902937496358610570
 MonoBehaviour:
@@ -534,21 +535,6 @@ MonoBehaviour:
   smallSize: 0.1
   largeSize: 0.17
   placeInBag: 1
---- !u!114 &9150709927071514780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6333019167157133413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0094261f450ffc1499fc5bdd0a4e19de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liquidObj: {fileID: 0}
-  icon: {fileID: 3556168979937428300}
-  dimension: 0
 --- !u!114 &-5203921352966019181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,3 +580,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &893683023032004092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6333019167157133413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0094261f450ffc1499fc5bdd0a4e19de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  liquidObj: {fileID: 0}
+  icon: {fileID: 3556168979937428300}
+  dimension: 0

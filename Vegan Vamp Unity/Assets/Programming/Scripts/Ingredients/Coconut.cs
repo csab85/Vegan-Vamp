@@ -9,6 +9,7 @@ public class Coconut : MonoBehaviour
 
     //components
     Rigidbody rb;
+    SphereCollider sphereCollider;
 
     #endregion
     //========================
@@ -37,6 +38,7 @@ public class Coconut : MonoBehaviour
     IEnumerator WaitToSpin()
     {
         yield return new WaitForSeconds(startDelay);
+        sphereCollider.isTrigger = false;
         spinning = true;
     }
 
@@ -51,6 +53,7 @@ public class Coconut : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        sphereCollider = GetComponent<SphereCollider>();
 
         StartCoroutine(WaitToSpin());
     }

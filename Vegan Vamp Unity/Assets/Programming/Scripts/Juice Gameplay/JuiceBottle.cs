@@ -95,62 +95,65 @@ public class JuiceBottle : MonoBehaviour
 
         targets = Physics.OverlapSphere(transform.position, splashRange, targetLayers);
 
-        foreach (Collider targetCollider in targets)
+        if (targets.Length > 0)
         {
-            GameObject target = targetCollider.gameObject;
-            print(targetCollider.name);
-
-            //apply every stat on the object (if the stat has any spply intensity)
-            for (int i = 0; i < selfStats.statsArray.Count(); i++)
+            foreach (Collider targetCollider in targets)
             {
-                //run normally if it isnt health effect
-                if (i != StatsConst.HEALTH)
+                GameObject target = targetCollider.gameObject;
+                print(targetCollider.name);
+
+                //apply every stat on the object (if the stat has any spply intensity)
+                for (int i = 0; i < selfStats.statsArray.Count(); i++)
                 {
-                    float applyIntensity = selfStats.statsArray[i][StatsConst.APPLY_INTENSITY];
-                    float applyReachTime = selfStats.statsArray[i][StatsConst.APPLY_REACH_TIME];
-                    float applyReturnTime = selfStats.statsArray[i][StatsConst.APPLY_RETURN_TIME];
-                    
-                    if (applyIntensity != 0)
+                    //run normally if it isnt health effect
+                    if (i != StatsConst.HEALTH)
                     {
-                        target.GetComponent<StatsManager>().ApplyStatSelf(i, applyIntensity, applyReachTime, applyReturnTime);
+                        float applyIntensity = selfStats.statsArray[i][StatsConst.APPLY_INTENSITY];
+                        float applyReachTime = selfStats.statsArray[i][StatsConst.APPLY_REACH_TIME];
+                        float applyReturnTime = selfStats.statsArray[i][StatsConst.APPLY_RETURN_TIME];
+                        
+                        if (applyIntensity != 0)
+                        {
+                            target.GetComponent<StatsManager>().ApplyStatSelf(i, applyIntensity, applyReachTime, applyReturnTime);
+                        }
+                    }
+
+                    //apply to base if health
+                    else
+                    {
+                        float applyIntensity = selfStats.statsArray[i][StatsConst.APPLY_INTENSITY];
+                        float applyReturnTime = selfStats.statsArray[i][StatsConst.APPLY_RETURN_TIME];
+
+                        target.GetComponent<StatsManager>().ApplyToBase(i, applyIntensity);
                     }
                 }
-
-                //apply to base if health
-                else
-                {
-                    float applyIntensity = selfStats.statsArray[i][StatsConst.APPLY_INTENSITY];
-                    float applyReturnTime = selfStats.statsArray[i][StatsConst.APPLY_RETURN_TIME];
-
-                    target.GetComponent<StatsManager>().ApplyToBase(i, applyIntensity);
-                }
             }
-        }
 
-        //Juice effects that don't need a target
+            //Juice effects that don't need a target
 
-        //spawn tornado
-        if (selfStats.tornado[StatsConst.APPLY_INTENSITY] > 0)
-        {
-            GameObject newTornado = Instantiate(tornado, transform.position, Quaternion.identity, null);
-            newTornado.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            //spawn tornado
+            if (selfStats.tornado[StatsConst.APPLY_INTENSITY] > 0)
+            {
+                GameObject newTornado = Instantiate(tornado, transform.position, Quaternion.identity, null);
+                newTornado.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
-            //apply tornado ice and fire
-            newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TORNADO, selfStats.tornado[StatsConst.APPLY_INTENSITY], selfStats.tornado[StatsConst.APPLY_REACH_TIME], selfStats.tornado[StatsConst.APPLY_RETURN_TIME]);
+                //apply tornado ice and fire
+                newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TORNADO, selfStats.tornado[StatsConst.APPLY_INTENSITY], selfStats.tornado[StatsConst.APPLY_REACH_TIME], selfStats.tornado[StatsConst.APPLY_RETURN_TIME]);
 
-            newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.ICE, selfStats.ice[StatsConst.APPLY_INTENSITY], selfStats.ice[StatsConst.APPLY_REACH_TIME], selfStats.ice[StatsConst.APPLY_RETURN_TIME]);
+                newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.ICE, selfStats.ice[StatsConst.APPLY_INTENSITY], selfStats.ice[StatsConst.APPLY_REACH_TIME], selfStats.ice[StatsConst.APPLY_RETURN_TIME]);
 
-            newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.FIRE, selfStats.fire[StatsConst.APPLY_INTENSITY], selfStats.fire[StatsConst.APPLY_REACH_TIME], selfStats.fire[StatsConst.APPLY_RETURN_TIME]);
-        }
+                newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.FIRE, selfStats.fire[StatsConst.APPLY_INTENSITY], selfStats.fire[StatsConst.APPLY_REACH_TIME], selfStats.fire[StatsConst.APPLY_RETURN_TIME]);
+            }
 
-        //spawn teleport
-        if (selfStats.teleport[StatsConst.APPLY_INTENSITY] > 0)
-        {
-            GameObject newPortal = Instantiate(portal, transform.position, Quaternion.identity, null);
-            newPortal.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            //spawn teleport
+            if (selfStats.teleport[StatsConst.APPLY_INTENSITY] > 0)
+            {
+                GameObject newPortal = Instantiate(portal, transform.position, Quaternion.identity, null);
+                newPortal.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
-            //apply teleport
-            newPortal.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TELEPORT, selfStats.teleport[StatsConst.APPLY_INTENSITY], selfStats.teleport[StatsConst.APPLY_REACH_TIME], selfStats.teleport[StatsConst.APPLY_RETURN_TIME]);
+                //apply teleport
+                newPortal.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TELEPORT, selfStats.teleport[StatsConst.APPLY_INTENSITY], selfStats.teleport[StatsConst.APPLY_REACH_TIME], selfStats.teleport[StatsConst.APPLY_RETURN_TIME]);
+            }
         }
     }
 

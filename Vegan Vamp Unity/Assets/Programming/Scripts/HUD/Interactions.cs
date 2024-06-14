@@ -14,7 +14,7 @@ public class Interactions : MonoBehaviour
     [Header ("Imports")]
     [SerializeField] Inventory inventory;
     [SerializeField] BlenderJuice blenderJuice;
-    [SerializeField] JuiceBottle juiceBottle;
+    [SerializeField] GameObject waterBottle;
     [SerializeField] public GameObject player;
     
     GameObject interactionUI;
@@ -65,6 +65,14 @@ public class Interactions : MonoBehaviour
         {
             Destroy(interactObj);
             inventory.AddItem(interactObj);
+        }
+
+        if (interactObj.tag == "Water")
+        {
+            GameObject newWaterBottle = Instantiate(waterBottle);
+            newWaterBottle.name = "Water Bottle";
+            inventory.AddItem(newWaterBottle);
+            Destroy(newWaterBottle);
         }
     }
 
