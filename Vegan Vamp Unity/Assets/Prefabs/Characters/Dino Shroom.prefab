@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.48
+      value: -5.45
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.228349
+      value: -23.52
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.61
+      value: 56.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99439188c89efd54e85b0fccf49f2c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   chasingSpeed: 7
   chasingVisionRange: 14
   chasingAttackRange: 10

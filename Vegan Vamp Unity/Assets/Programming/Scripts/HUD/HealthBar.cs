@@ -53,10 +53,7 @@ public class HealthBar : MonoBehaviour
             maxHealth = playerStats.health[StatsConst.CAP_INTENSITY];
         }
 
-        if (barFill.fillAmount != (playerStats.health[StatsConst.SELF_INTENSITY] / maxHealth))
-        {
-            barFill.fillAmount = playerStats.health[StatsConst.SELF_INTENSITY] / maxHealth;
-        }
+        barFill.fillAmount = playerStats.health[StatsConst.SELF_INTENSITY] / maxHealth;
     }
 
     #endregion
