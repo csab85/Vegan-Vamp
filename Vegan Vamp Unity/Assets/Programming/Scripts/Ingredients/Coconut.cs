@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Coconut : MonoBehaviour
@@ -21,9 +22,10 @@ public class Coconut : MonoBehaviour
     [SerializeField] float radius;
     [SerializeField] float translationSpeed;
     [SerializeField] float rotationSpeed;
+    [SerializeField] float startDelay;
 
-    float angle = 0.0f;
-
+    float angle;
+    bool spinning = false;
     #endregion
     //========================
 
@@ -32,7 +34,11 @@ public class Coconut : MonoBehaviour
     //========================
     #region
 
-
+    IEnumerator WaitToSpin()
+    {
+        yield return new WaitForSeconds(startDelay);
+        spinning = true;
+    }
 
     #endregion
     //========================
@@ -45,21 +51,26 @@ public class Coconut : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        StartCoroutine(WaitToSpin());
     }
 
     void Update()
     {
-        // Increment the angle based on angular speed and time
-        angle += translationSpeed * Time.deltaTime;
+        if (spinning)
+        {
+            // Increment the angle based on angular speed and time
+            angle += translationSpeed * Time.deltaTime;
 
-        // Calculate the new position
-        float x = centerPoint.position.x + Mathf.Cos(angle) * radius;
-        float z = centerPoint.position.z + Mathf.Sin(angle) * radius;
+            // Calculate the new position
+            float x = centerPoint.position.x + Mathf.Cos(angle) * radius;
+            float z = centerPoint.position.z + Mathf.Sin(angle) * radius;
 
-        // Update the object's position
-        rb.MovePosition(new Vector3(x, transform.position.y, z));
+            // Update the object's position
+            rb.MovePosition(new Vector3(x, transform.position.y, z));
 
-        rb.AddTorque(new Vector3(0, transform.position.y, 0));
+            rb.AddTorque(new Vector3(0, transform.position.y, 0));
+        }
     }
 
     #endregion

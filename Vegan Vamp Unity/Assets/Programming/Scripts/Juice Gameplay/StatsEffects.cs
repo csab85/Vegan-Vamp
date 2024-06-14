@@ -253,10 +253,10 @@ public class StatsEffects : MonoBehaviour
             //SPEED
             if (meshTrail)
             {
-                if (selfStats.speed[StatsConst.SELF_INTENSITY] > 1)
+                if (selfStats.speed[StatsConst.SELF_INTENSITY] > 0)
                 {
                     //update speed multiplier on stats manager
-                    float bonusSpeed = selfStats.speed[StatsConst.SELF_INTENSITY];
+                    float bonusSpeed = selfStats.speed[StatsConst.SELF_INTENSITY] + 1;
 
                     if (selfStats.speedMultiplier != bonusSpeed)
                     {
@@ -270,10 +270,10 @@ public class StatsEffects : MonoBehaviour
                     }
 
                     //set trail rate
-                    meshTrail.meshRefreshRate = 0.1f / selfStats.speed[StatsConst.SELF_INTENSITY];
+                    meshTrail.meshRefreshRate = 0.1f / (selfStats.speed[StatsConst.SELF_INTENSITY] + 1);
                 }
 
-                else if(selfStats.speed[StatsConst.SELF_INTENSITY] < 1)
+                else if(selfStats.speed[StatsConst.SELF_INTENSITY] <= 0)
                 {
                     if (selfStats.speedMultiplier != 1)
                     {
@@ -290,11 +290,11 @@ public class StatsEffects : MonoBehaviour
             //NO GRAVITY
             if (gravityParticles)
             {
-                if (selfStats.noGravity[StatsConst.SELF_INTENSITY] > 1)
+                if (selfStats.noGravity[StatsConst.SELF_INTENSITY] > 0)
                 {
                     Rigidbody rb = gameObject.GetComponent<Rigidbody>();
 
-                    rb.mass = 1 / selfStats.noGravity[StatsConst.SELF_INTENSITY];
+                    rb.mass = 1 / (selfStats.noGravity[StatsConst.SELF_INTENSITY] + 1);
 
                     if (!gravityParticles.activeSelf)
                     {
@@ -304,7 +304,7 @@ public class StatsEffects : MonoBehaviour
                     //set particles spawn
 
                     //to make particle not disappear suddenly
-                    float multiplier = Mathf.Clamp(selfStats.noGravity[StatsConst.SELF_INTENSITY] - 1, 0, 1);
+                    float multiplier = Mathf.Clamp(selfStats.noGravity[StatsConst.SELF_INTENSITY] - 2, 0, 1);
 
 
                     int spawnRate = Shader.PropertyToID("Spawn Rate");
