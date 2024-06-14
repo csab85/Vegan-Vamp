@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AnimationEvents : MonoBehaviour
 {
@@ -34,8 +35,10 @@ public class AnimationEvents : MonoBehaviour
 
     public void ReturnFromDamage()
     {
-        GetComponent<Animator>().SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 0);
-        print("sdqetgvsd");
+        if (animator.GetLayerWeight(AnimationConsts.DAMAGE_LAYER) > 0)
+        {
+            animator.SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 0);
+        }
     }
 
     #endregion
@@ -46,7 +49,10 @@ public class AnimationEvents : MonoBehaviour
     //========================
     #region
 
-
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     #endregion
     //========================

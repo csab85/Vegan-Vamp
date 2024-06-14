@@ -52,6 +52,7 @@ public class TransitionCollider: MonoBehaviour
             if (collider.transform.parent.gameObject != hotbar)
             {
                 collider.transform.SetParent(hotbar.transform);
+                collider.transform.SetSiblingIndex(1);
             }
 
             //fix bottle icon changing size
