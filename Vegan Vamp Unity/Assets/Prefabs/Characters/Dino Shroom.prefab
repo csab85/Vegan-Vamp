@@ -10,19 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.45
+      value: 504.33
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.52
+      value: 0.068371296
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 56.02
+      value: 531.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.44997793
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalRotation.x
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.8930397
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalRotation.z
@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 126.515
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -168,7 +168,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!136 &9128804789414154771
 CapsuleCollider:
@@ -248,9 +248,9 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 128
-  visionRadius: 12
-  attackRadius: 8
-  angle: 90
+  visionRadius: 25
+  attackRadius: 20
+  angle: 260
   isSeeingPlayer: 0
   isInAttackRange: 0
 --- !u!114 &8152517536780987005
@@ -267,9 +267,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   chasingSpeed: 7
-  chasingVisionRange: 14
-  chasingAttackRange: 10
-  chasingVisionAngle: 100
+  chasingVisionRange: 30
+  chasingAttackRange: 25
+  chasingVisionAngle: 360
   flying: 0
   damage: 3
   alertState: 0

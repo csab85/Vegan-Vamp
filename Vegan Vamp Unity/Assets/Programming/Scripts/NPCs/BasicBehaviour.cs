@@ -123,6 +123,12 @@ public class BasicBehaviour : MonoBehaviour
                     fov.visionRadius = baseVisionRange;
                     fov.attackRadius = baseAttackRange;
                     fov.angle = baseVisionAngle;
+
+                    if (name == "Le Buge")
+                    {
+                        animator.SetBool("Walking", true);
+                        animator.SetBool("Running", false);
+                    }
                 }
 
                 //walk or fly randomly
@@ -156,6 +162,12 @@ public class BasicBehaviour : MonoBehaviour
                     fov.visionRadius = chasingVisionRange;
                     fov.attackRadius = chasingAttackRange;
                     fov.angle = chasingVisionAngle;
+
+                    if (name == "Le Buge")
+                    {
+                        animator.SetBool("Walking", false);
+                        animator.SetBool("Running", true);
+                    }
                 }
 
                 playerPosit = player.transform.position;

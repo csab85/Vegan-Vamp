@@ -28,7 +28,8 @@ public class ScaredBug : MonoBehaviour
 
     public void SpawnIngredient()
     {
-        Instantiate(speedIngredient, transform.position, Quaternion.identity, null);
+        GameObject newIngredient = Instantiate(speedIngredient, transform.position, Quaternion.identity, null);
+        newIngredient.name = "Speed Ingredient";
     }
 
     #endregion

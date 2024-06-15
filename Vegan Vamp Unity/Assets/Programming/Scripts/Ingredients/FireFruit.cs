@@ -6,6 +6,7 @@ public class FireFruit : MonoBehaviour
     //========================
     #region
 
+    Rigidbody rb;
     StatsManager selfStats;
 
 
@@ -40,6 +41,15 @@ public class FireFruit : MonoBehaviour
     void Start()
     {
         selfStats = GetComponent<StatsManager>();
+        TryGetComponent<Rigidbody>(out rb);
+    }
+
+    void OnEnable()
+    {
+        if (rb != null)
+        {
+            selfStats.ApplyToBase(StatsConst.FIRE, 0.8f);
+        }
     }
 
     void Update()
