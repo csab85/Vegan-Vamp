@@ -102,7 +102,7 @@ public class Interactions : MonoBehaviour
             GameObject interactObject = nearbyInteractions[0].gameObject;
 
             //get where on screen the ingredient is (origin bottom left)
-            Vector2 pointOnScreen = Camera.main.WorldToScreenPoint(interactObject.transform.position);
+            Vector2 pointOnScreen = Camera.main.WorldToScreenPoint(nearbyInteractions[0].ClosestPoint(player.transform.position));
             
             if (pointOnScreen.x > 0 && pointOnScreen.y > 0)
             {
