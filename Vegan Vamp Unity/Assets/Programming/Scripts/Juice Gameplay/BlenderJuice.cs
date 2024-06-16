@@ -19,6 +19,7 @@ public class BlenderJuice : MonoBehaviour
     GameObject blender;
 
     //scripts
+    [SerializeField] StatsManager defaultStats;
     [SerializeField] Inventory inventory;
 
     //materials
@@ -90,13 +91,10 @@ public class BlenderJuice : MonoBehaviour
                 //add to description dict if name is the same
                 foreach (string ingredientName in selfStats.descriptionDict.Keys)
                 {
-                    print($"{ingredientName} e {ingredient.name}");
 
                     if (ingredientName == ingredient.name)
                     {
                         selfStats.descriptionDict[ingredientName] ++;
-
-                        print(selfStats.descriptionDict[ingredientName]);
                         break;
                     }
                 }
@@ -132,8 +130,10 @@ public class BlenderJuice : MonoBehaviour
         }
 
         //reset juice if empty
-        if (fill <= -2)
+        if (targetFill <= -2)
         {
+
+            print("uifbdeuyihf");
             //reset stats
             foreach (float[] stat in selfStats.statsArray)
             {
@@ -147,7 +147,7 @@ public class BlenderJuice : MonoBehaviour
             }
 
             //reset to default color
-            selfStats.colors = new List<Color>() {initialColor, Color.green};
+            selfStats.colors = new List<Color>() {initialColor};
         }
     }
 

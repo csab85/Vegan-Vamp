@@ -79,7 +79,6 @@ public class BottleIcon : MonoBehaviour
 
             foreach (string ingredientName in selfStats.descriptionDict.Keys)
             {
-                print($"{ingredientName}: {selfStats.descriptionDict[ingredientName]}");
                 if (selfStats.descriptionDict[ingredientName] > 0)
                 {
                     descriptionText += $"{ingredientName} ({selfStats.descriptionDict[ingredientName]})\n";
