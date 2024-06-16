@@ -104,7 +104,6 @@ public class FieldOfView : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        print(player);
         StartCoroutine(FOVRoutine());
     }
 
