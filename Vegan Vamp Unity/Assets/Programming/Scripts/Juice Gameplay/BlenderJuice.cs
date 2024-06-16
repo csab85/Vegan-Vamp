@@ -87,6 +87,20 @@ public class BlenderJuice : MonoBehaviour
         {
             foreach (GameObject ingredient in ingredientsInside)
             {
+                //add to description dict if name is the same
+                foreach (string ingredientName in selfStats.descriptionDict.Keys)
+                {
+                    print($"{ingredientName} e {ingredient.name}");
+
+                    if (ingredientName == ingredient.name)
+                    {
+                        selfStats.descriptionDict[ingredientName] ++;
+
+                        print(selfStats.descriptionDict[ingredientName]);
+                        break;
+                    }
+                }
+
                 Destroy(ingredient);
             }
         }

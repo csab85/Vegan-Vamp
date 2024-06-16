@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class StatsManager : MonoBehaviour
 {
@@ -95,6 +96,16 @@ public class StatsManager : MonoBehaviour
 
     [SerializeField] public List<Color> colors;
 
+    public Dictionary<string, int> descriptionDict = new Dictionary<string, int>() {
+        { "Health Ingredient", 0 },
+        { "Fire Ingredient", 0 },
+        { "Ice Ingredient", 0 },
+        { "Tornado Ingredient", 0 },
+        { "Speed Ingredient", 0 },
+        { "Gravity Ingredient", 0 },
+        { "Teleport Ingredient", 0 },
+    };
+
     //Create jagged array
     public float[][] statsArray;
 
@@ -178,6 +189,14 @@ public class StatsManager : MonoBehaviour
         {
             colors.Add(color);
         }
+
+        //description
+        descriptionDict = new Dictionary<string, int>();
+
+        foreach (KeyValuePair<string, int> pair in copyStats.descriptionDict)
+        {
+            descriptionDict.Add(pair.Key, pair.Value);
+        }
     }
 
     public void PasteStats(StatsManager targetStats)
@@ -197,6 +216,14 @@ public class StatsManager : MonoBehaviour
         foreach (Color color in colors)
         {
             targetStats.colors.Add(color);
+        }
+
+        //description
+        targetStats.descriptionDict = new Dictionary<string, int>();
+
+        foreach (KeyValuePair<string, int> pair in descriptionDict)
+        {
+            targetStats.descriptionDict.Add(pair.Key, pair.Value);
         }
     }
 
