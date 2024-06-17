@@ -16,6 +16,8 @@ public class BlenderJuice : MonoBehaviour
 
     //game objects
     [SerializeField] GameObject baseJuice;
+    [SerializeField] GameObject cover;
+    [SerializeField] GameObject coverTop;
     GameObject blender;
 
     //scripts
@@ -130,7 +132,7 @@ public class BlenderJuice : MonoBehaviour
         }
 
         //reset juice if empty
-        if (targetFill <= -2)
+        if (targetFill <= minFilling)
         {
 
             print("uifbdeuyihf");
@@ -210,6 +212,10 @@ public class BlenderJuice : MonoBehaviour
             if (gameObject.layer != LayerMask.NameToLayer("Interactable"))
             {
                 gameObject.layer = LayerMask.NameToLayer("Interactable");
+
+                //activate cover
+                cover.SetActive(true);
+                coverTop.SetActive(true);
             }
         }
 
@@ -218,6 +224,10 @@ public class BlenderJuice : MonoBehaviour
             if (gameObject.layer == LayerMask.NameToLayer("Interactable"))
             {
                 gameObject.layer = LayerMask.NameToLayer("Default");
+
+                //deactivate cover
+                cover.SetActive(false);
+                coverTop.SetActive(false);
             }
         }
 
