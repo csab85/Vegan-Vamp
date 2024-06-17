@@ -36,7 +36,13 @@ public class SpeedIngredient : MonoBehaviour
     //========================
     #region
 
-
+    void Update()
+    {
+        if (transform.localScale.x <= 0.01f)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     #endregion
     //========================
