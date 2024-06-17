@@ -47,6 +47,7 @@ public class StatsEffects : MonoBehaviour
     bool frozen;
 
     float baseSpeed;
+    float baseHealth;
 
     //extras
     int iceNumber;
@@ -134,7 +135,13 @@ public class StatsEffects : MonoBehaviour
             {
                 if (selfStats.objectType == StatsManager.Type.Ingredient)
                 {
-                    Destroy(gameObject);
+                    //reset health
+                    selfStats.health[StatsConst.DEFAULT_BASE] = baseHealth;
+                    selfStats.health[StatsConst.CURRENT_BASE] = baseHealth;
+                    selfStats.health[StatsConst.SELF_INTENSITY] = baseHealth;
+
+                    //set small
+                    transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
                 }
 
                 if (selfStats.objectType == StatsManager.Type.Other)

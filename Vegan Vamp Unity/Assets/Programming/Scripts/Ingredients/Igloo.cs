@@ -6,6 +6,8 @@ public class Igloo : MonoBehaviour
     //========================
     #region
 
+    [SerializeField] Transform[] iceFlowers;
+
     StatsManager selfStats;
 
     #endregion
@@ -36,6 +38,12 @@ public class Igloo : MonoBehaviour
     //========================
     #region
 
+    void OnEnable()
+    {
+        //grow ice again
+        selfStats.ice[StatsConst.DEFAULT_BASE] = 1;
+    }
+
     void Start()
     {
         selfStats = GetComponent<StatsManager>();
@@ -47,22 +55,33 @@ public class Igloo : MonoBehaviour
         if (selfStats.ice[StatsConst.SELF_INTENSITY] > 0.1f)
         {
             transform.localScale = new Vector3(transform.localScale.x, selfStats.ice[StatsConst.SELF_INTENSITY], transform.localScale.z);
+
+            foreach (Transform ingredient in iceFlowers)
+            {
+                if (ingredient.tag != "Untagged")
+                {
+                    ingredient.tag = "Untagged";
+                    ingredient.GetComponent<Collider>().enabled = false;
+                }
+            }
         }
 
         if (selfStats.ice[StatsConst.SELF_INTENSITY] <= 0.1f)
         {
-            foreach (Transform ingredient in transform.parent)
+            //keep ice melt
+            selfStats.ice[StatsConst.DEFAULT_BASE] = 0.01f;
+
+            //make flowers harvestable
+            if (selfStats.fire[StatsConst.SELF_INTENSITY] <= 0)
             {
-                if (ingredient.name == "Ice Ingredient")
+                foreach (Transform ingredient in iceFlowers)
                 {
-                    ingredient.gameObject.GetComponent<SphereCollider>().enabled = true;
+                    if (ingredient.tag != "Ingredient")
+                    {
+                        ingredient.tag = "Ingredient";
+                    }
                 }
-            }
-
-            //zero health stat
-            selfStats.ApplyToBase(0, 0, 0);
-
-            selfStats.ice[StatsConst.DEFAULT_BASE] = 0.1f;
+            }            
         }
     }
 

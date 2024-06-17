@@ -47,7 +47,7 @@ public class Interactions : MonoBehaviour
     {
         if (interactObj.layer == LayerMask.NameToLayer("Ingredient"))
         {
-            interactObj.SetActive(false);
+            interactObj.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
             inventory.AddItem(interactObj);
         }
 

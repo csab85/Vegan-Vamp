@@ -456,15 +456,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 88be4bab552c9c848ab328825092cbf8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 516.56
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88be4bab552c9c848ab328825092cbf8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88be4bab552c9c848ab328825092cbf8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 521.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88be4bab552c9c848ab328825092cbf8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -526,6 +526,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 88be4bab552c9c848ab328825092cbf8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1097604402957092848}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 88be4bab552c9c848ab328825092cbf8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7646452583908011013}
   m_SourcePrefab: {fileID: 100100000, guid: 88be4bab552c9c848ab328825092cbf8, type: 3}
 --- !u!4 &1354827273126003466 stripped
 Transform:
@@ -563,6 +566,28 @@ MonoBehaviour:
   - {fileID: 4253977414694021926}
   activationRadius: 70
   playerDistance: 0
+--- !u!114 &7646452583908011013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839298881978866096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce826e8ca83ce944dbd434a84fb4f5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredients:
+  - {fileID: 1011416769600368705}
+  - {fileID: 4253977414694021926}
+  - {fileID: 2657909628801294720}
+  timers:
+  - 0
+  - 0
+  - 0
+  growthTime: 180
+  harvestSize: 0.8
 --- !u!1 &6429495603085208740 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5511774174995466309, guid: 88be4bab552c9c848ab328825092cbf8, type: 3}
