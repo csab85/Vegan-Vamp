@@ -38,7 +38,7 @@ public class TeleportShroom : MonoBehaviour
         float circleX = areaCenter.x + Mathf.Cos(angle) * distance;
         float circleZ = areaCenter.z + Mathf.Sin(angle) * distance;
 
-        transform.position = new Vector3(circleX, 0, circleZ);
+        transform.position = new Vector3(circleX, transform.position.y, circleZ);
         particles.Play();
 
         yield return new WaitForSeconds(tpCooldown);

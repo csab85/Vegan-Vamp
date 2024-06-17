@@ -69,11 +69,11 @@ public class DragObject : MonoBehaviour
         if (dragging)
         {
             rb.MovePosition(Input.mousePosition);
+        }
 
-            if (Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                inventory.DropItem(gameObject);
-            }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            inventory.DropItem(gameObject);
         }
     }
 

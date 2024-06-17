@@ -128,32 +128,32 @@ public class JuiceBottle : MonoBehaviour
                     }
                 }
             }
+        }
 
-            //Juice effects that don't need a target
+        //Juice effects that don't need a target
 
-            //spawn tornado
-            if (selfStats.tornado[StatsConst.APPLY_INTENSITY] > 0)
-            {
-                GameObject newTornado = Instantiate(tornado, transform.position, Quaternion.identity, null);
-                newTornado.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        //spawn tornado
+        if (selfStats.tornado[StatsConst.APPLY_INTENSITY] > 0)
+        {
+            GameObject newTornado = Instantiate(tornado, transform.position, Quaternion.identity, null);
+            newTornado.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
-                //apply tornado ice and fire
-                newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TORNADO, selfStats.tornado[StatsConst.APPLY_INTENSITY], selfStats.tornado[StatsConst.APPLY_REACH_TIME], selfStats.tornado[StatsConst.APPLY_RETURN_TIME]);
+            //apply tornado ice and fire
+            newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TORNADO, selfStats.tornado[StatsConst.APPLY_INTENSITY], selfStats.tornado[StatsConst.APPLY_REACH_TIME], selfStats.tornado[StatsConst.APPLY_RETURN_TIME]);
 
-                newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.ICE, selfStats.ice[StatsConst.APPLY_INTENSITY], selfStats.ice[StatsConst.APPLY_REACH_TIME], selfStats.ice[StatsConst.APPLY_RETURN_TIME]);
+            newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.ICE, selfStats.ice[StatsConst.APPLY_INTENSITY], selfStats.ice[StatsConst.APPLY_REACH_TIME], selfStats.ice[StatsConst.APPLY_RETURN_TIME]);
 
-                newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.FIRE, selfStats.fire[StatsConst.APPLY_INTENSITY], selfStats.fire[StatsConst.APPLY_REACH_TIME], selfStats.fire[StatsConst.APPLY_RETURN_TIME]);
-            }
+            newTornado.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.FIRE, selfStats.fire[StatsConst.APPLY_INTENSITY], selfStats.fire[StatsConst.APPLY_REACH_TIME], selfStats.fire[StatsConst.APPLY_RETURN_TIME]);
+        }
 
-            //spawn teleport
-            if (selfStats.teleport[StatsConst.APPLY_INTENSITY] > 0)
-            {
-                GameObject newPortal = Instantiate(portal, transform.position, Quaternion.identity, null);
-                newPortal.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        //spawn teleport
+        if (selfStats.teleport[StatsConst.APPLY_INTENSITY] > 0)
+        {
+            GameObject newPortal = Instantiate(portal, transform.position, Quaternion.identity, null);
+            newPortal.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
-                //apply teleport
-                newPortal.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TELEPORT, selfStats.teleport[StatsConst.APPLY_INTENSITY], selfStats.teleport[StatsConst.APPLY_REACH_TIME], selfStats.teleport[StatsConst.APPLY_RETURN_TIME]);
-            }
+            //apply teleport
+            newPortal.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TELEPORT, selfStats.teleport[StatsConst.APPLY_INTENSITY], selfStats.teleport[StatsConst.APPLY_REACH_TIME], selfStats.teleport[StatsConst.APPLY_RETURN_TIME]);
         }
     }
 
