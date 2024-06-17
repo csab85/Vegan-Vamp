@@ -112,7 +112,7 @@ public class BlenderJuice : MonoBehaviour
 
     public void FillBottle()
     {
-        if (!filling)
+        if (!filling && targetFill > minFilling)
         {
             //spawn and set juice stats
             GameObject newJuice = Instantiate(baseJuice, transform.position, Quaternion.identity);
@@ -134,8 +134,6 @@ public class BlenderJuice : MonoBehaviour
         //reset juice if empty
         if (targetFill <= minFilling)
         {
-
-            print("uifbdeuyihf");
             //reset stats
             foreach (float[] stat in selfStats.statsArray)
             {

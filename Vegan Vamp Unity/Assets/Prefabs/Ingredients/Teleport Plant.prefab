@@ -804,6 +804,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8557212254362355897}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2446093094493350871}
     - targetCorrespondingSourceObject: {fileID: -6733177361254619370, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2526978619032077374}
@@ -1066,6 +1069,24 @@ MonoBehaviour:
   areaRadius: 7
   tpCooldown: 3
   areaCenter: {x: 0, y: 0, z: 0}
+--- !u!114 &2446093094493350871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222480649571963433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce826e8ca83ce944dbd434a84fb4f5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredients:
+  - {fileID: 1501625895185074286}
+  timers:
+  - 0
+  growthTime: 180
+  harvestSize: 0.8
 --- !u!1 &5685519103158536302 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8700725330082129686, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}

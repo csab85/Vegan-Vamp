@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Coconut : MonoBehaviour
@@ -60,7 +61,7 @@ public class Coconut : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (spinning)
+        if (spinning && collision.gameObject.name != "Gravity Ingredient")
         {
             spinning = false;
             rb.useGravity = true;
@@ -82,6 +83,16 @@ public class Coconut : MonoBehaviour
             rb.MovePosition(new Vector3(x, transform.position.y, z));
 
             rb.AddTorque(new Vector3(0, transform.position.y, 0));
+        }
+
+        //reset when colected
+        if (transform.localScale.x <= 0.01f)
+        {
+            transform.localPosition = new Vector3(radius, 0.3f, radius);
+            rb.useGravity = false;
+            startDelay = Random.Range(3, 7);
+            StartCoroutine(WaitToSpin());
+            transform.localScale = new Vector3(0.02f, 0.02f, 0.02f); 
         }
     }
 
