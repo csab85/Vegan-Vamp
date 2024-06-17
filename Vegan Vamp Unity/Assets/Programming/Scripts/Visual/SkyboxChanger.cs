@@ -6,7 +6,7 @@ public class SkyboxChanger : MonoBehaviour
     //========================
     #region
 
-    Material skybox;
+    [SerializeField] Material skybox;
 
     #endregion
     //========================
