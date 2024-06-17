@@ -24,6 +24,7 @@ public class Movement : MonoBehaviour
     [Header ("Walking Settings")]
     [SerializeField] float playerHeight;
     [SerializeField] public float moveSpeed;
+    [SerializeField] float sprintMultiplier;
     [SerializeField] float groundDrag;
 
     [Header ("Jumping Settings")]
@@ -37,6 +38,8 @@ public class Movement : MonoBehaviour
     float verticalInput;
     float horizontalInput;
     Vector3 moveDirection;
+
+    float baseSpeed;
 
     StatsManager selfStats;
 
@@ -54,9 +57,26 @@ public class Movement : MonoBehaviour
     {
         if (selfStats.ice[StatsConst.SELF_INTENSITY] <= 0)
         {
+            //walk
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
 
+            //run
+            if (Input.GetButton("Sprint"))
+            {
+                print("corre fiao");
+                if (moveSpeed * selfStats.speedMultiplier != baseSpeed * selfStats.speedMultiplier * sprintMultiplier)
+                {
+                    moveSpeed *= sprintMultiplier;
+                }
+
+                else if (moveSpeed * selfStats.speedMultiplier != baseSpeed * selfStats.speedMultiplier)
+                {
+                    moveSpeed /= sprintMultiplier;
+                }
+            }
+
+            //jump
             if (Input.GetButtonDown("Jump") && grounded && !selfStats.dead)
             {
                 Jump();
@@ -144,6 +164,8 @@ public class Movement : MonoBehaviour
         selfStats = GetComponent<StatsManager>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
+        baseSpeed = moveSpeed;
     }
 
     void Update()
