@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -34,6 +36,12 @@ public class Tornado : MonoBehaviour
 
     float dampner = 10; //how much the intensity will be divided for when applying stats to objects in the tornado
 
+    StatsManager.Type[] allowedTypes = { StatsManager.Type.Ingredient, StatsManager.Type.NPC, StatsManager.Type.Player };
+
+    List<GameObject> pullingObjs = new List<GameObject>();
+    List<GameObject> burningObjs = new List<GameObject>();
+    List<GameObject> freezingObjs = new List<GameObject>();
+
     enum ElementalType
     {
         Normal,
@@ -52,56 +60,112 @@ public class Tornado : MonoBehaviour
     //========================
     #region
 
-    IEnumerator pullObject(Collider objCollider, bool shouldPull)
+    IEnumerator PullObject(GameObject obj)
     {
-        if (shouldPull)
+        if (pullingObjs.Contains(obj))
         {
             //pull objects with rigid body
-            Vector3 forceDirection = tornadoCenter.position - objCollider.transform.position;
+            Vector3 forceDirection = tornadoCenter.position - obj.transform.position;
             float actualPullForce = pullForce * transform.localScale.x;
 
-            objCollider.GetComponent<Rigidbody>().AddForce(forceDirection * actualPullForce * Time.deltaTime);
+            obj.GetComponent<Rigidbody>().AddForce(forceDirection * actualPullForce * Time.deltaTime);
 
-            //aply stats if needed
-            StatsManager objStats;
-            objCollider.gameObject.TryGetComponent<StatsManager>(out objStats);
+            yield return new WaitForSeconds(0.05f);
 
-            if (tornadoType == ElementalType.Ice | tornadoType == ElementalType.Mixed)
-            {   
-                if (objStats != null)
-                {
-                    objStats.ApplyStatSelf(StatsConst.ICE, selfStats.ice[StatsConst.SELF_INTENSITY]/dampner, selfStats.ice[StatsConst.APPLY_REACH_TIME], selfStats.ice[StatsConst.APPLY_RETURN_TIME]);
-                }
-            }
+            StartCoroutine(PullObject(obj));
+        }
+    }
 
-            if (tornadoType == ElementalType.Fire | tornadoType == ElementalType.Mixed)
-            {   
-                if (objStats != null)
-                {
-                    objStats.ApplyStatSelf(StatsConst.FIRE, selfStats.fire[StatsConst.SELF_INTENSITY]/dampner, selfStats.fire[StatsConst.APPLY_REACH_TIME], selfStats.fire[StatsConst.APPLY_RETURN_TIME]);
-                }
-            }
+    IEnumerator BurnObject(GameObject obj, StatsManager objStats)
+    {
+        if (burningObjs.Contains(obj))
+        {
+            objStats.ApplyStatSelf(StatsConst.FIRE, 0.1f, 0.5f, 0.6f);
 
-            //wait and restart coroutine
-            yield return new WaitForSeconds(waitTime);
-            
-            StartCoroutine(pullObject(objCollider, true));
+            // Wait and restart coroutine
+            yield return new WaitForSeconds(0.05f);
+
+            StartCoroutine(BurnObject(obj, objStats));
+        }
+    }
+
+    IEnumerator FreezeObject(GameObject obj, StatsManager objStats)
+    {
+        if (freezingObjs.Contains(obj))
+        {
+            objStats.ApplyStatSelf(StatsConst.ICE, 0.1f, 0.5f, 0.6f);
+
+            // Wait and restart coroutine
+            yield return new WaitForSeconds(0.05f);
+
+            StartCoroutine(FreezeObject(obj, objStats));
         }
     }
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.GetComponent<Rigidbody>() != null)
+        //check if has rigid body
+        Rigidbody rb = null;
+        collider.TryGetComponent<Rigidbody>(out rb);
+
+        if (rb != null)
         {
-            StartCoroutine(pullObject(collider, true));
+            //check if collider is in the dictionary
+            if (!pullingObjs.Contains(collider.gameObject))
+            {
+                pullingObjs.Add(collider.gameObject);
+                StartCoroutine(PullObject(collider.gameObject));
+            }
+        }
+
+        //check if it has a stats manager
+        StatsManager objStats = null;
+        collider.gameObject.TryGetComponent<StatsManager>(out objStats);
+
+        if (objStats != null)
+        {
+            //check if it is one of the allowed types
+            if (allowedTypes.Contains(objStats.objectType))
+            {
+                //check tornado elemental type
+                if (tornadoType == ElementalType.Fire | tornadoType == ElementalType.Mixed)
+                {
+                    //check if collider is in the dictionary
+                    if (!burningObjs.Contains(collider.gameObject))
+                    {
+                        burningObjs.Add(collider.gameObject);
+                        StartCoroutine(BurnObject(collider.gameObject, objStats));
+                    }
+                }
+
+                if (tornadoType == ElementalType.Ice | tornadoType == ElementalType.Mixed)
+                {
+                    //check if collider is in the dictionary
+                    if (!freezingObjs.Contains(collider.gameObject))
+                    {
+                        freezingObjs.Add(collider.gameObject);
+                        StartCoroutine(FreezeObject(collider.gameObject, objStats));
+                    }
+                }
+            }
         }
     }
 
     void OnTriggerExit(Collider collider)
     {
-        if (collider.GetComponent<Rigidbody>() != null)
+        if (pullingObjs.Contains(collider.gameObject))
         {
-            StartCoroutine(pullObject(collider, false));
+            pullingObjs.Remove(collider.gameObject);
+        }
+
+        if (burningObjs.Contains(collider.gameObject))
+        {
+            burningObjs.Remove(collider.gameObject);
+        }
+
+        if (freezingObjs.Contains(collider.gameObject))
+        {
+            freezingObjs.Remove(collider.gameObject);
         }
     }
 
