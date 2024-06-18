@@ -1,18 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Minimap : MonoBehaviour
+public class Minimap: MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    //IMPORTS
+    //========================
+    #region
+
+    [SerializeField] Transform player;
+
+    #endregion
+    //========================
+
+
+    //STATS AND VALUES
+    //========================
+    #region
+
+
+
+    #endregion
+    //========================
+
+
+    //FUNCTIONS
+    //========================
+    #region
+
+
+
+    #endregion
+    //========================
+
+
+    //RUNNING
+    //========================
+    #region
+
+    private void Update()
     {
-        
+        transform.position = new Vector3(player.position.x, transform.position.y, player.position.z);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    #endregion
+    //========================
+
+
 }
