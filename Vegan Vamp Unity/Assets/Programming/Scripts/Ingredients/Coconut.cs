@@ -51,6 +51,11 @@ public class Coconut : MonoBehaviour
     //========================
     #region
 
+    private void OnEnable()
+    {
+        StartCoroutine(WaitToSpin());
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();

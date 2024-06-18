@@ -34,6 +34,7 @@ public class SkyboxChanger : MonoBehaviour
     {
         if (collider.tag == "Player")
         {
+            skybox = RenderSettings.skybox;
             transitioning = true;
         }
     }
@@ -42,6 +43,7 @@ public class SkyboxChanger : MonoBehaviour
     {
         if (collider.tag == "Player")
         {
+            passedTime = 0;
             transitioning = false;
         }
     }
@@ -87,9 +89,9 @@ public class SkyboxChanger : MonoBehaviour
             passedTime += Time.deltaTime;
             DynamicGI.UpdateEnvironment();
 
-            if (timePercentage > 1)
+            if (timePercentage >= 1)
             {
-                timePercentage = 0;
+                transitioning = false;
             }
         }
     }
