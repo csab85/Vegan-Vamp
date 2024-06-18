@@ -9,6 +9,7 @@ public class TransitionCollider: MonoBehaviour
     //game objects
     [SerializeField] GameObject bag;
     [SerializeField] GameObject hotbar;
+    [SerializeField] GameObject beltBack;
 
     #endregion
     //========================
@@ -55,7 +56,10 @@ public class TransitionCollider: MonoBehaviour
             if (collider.transform.parent.gameObject != hotbar)
             {
                 collider.transform.SetParent(hotbar.transform);
-                collider.transform.SetSiblingIndex(2);
+
+                int beltBackIndex = beltBack.transform.GetSiblingIndex();
+
+                collider.transform.SetSiblingIndex(beltBackIndex + 1);
             }
 
             if (collider.tag == "Juice")
