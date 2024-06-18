@@ -37,9 +37,12 @@ public class TransitionCollider: MonoBehaviour
             }
 
             //fix bottle icon changing size
-            if (collider.GetComponent<BottleIcon>().placeInBag == BottleIcon.Place.None)
+            if (collider.tag == "Juice")
             {
-                collider.GetComponent<BottleIcon>().placeInBag = BottleIcon.Place.Outside;
+                if (collider.GetComponent<BottleIcon>().placeInBag == BottleIcon.Place.None)
+                {
+                    collider.GetComponent<BottleIcon>().placeInBag = BottleIcon.Place.Outside;
+                }
             }
 
         }
@@ -52,12 +55,14 @@ public class TransitionCollider: MonoBehaviour
             if (collider.transform.parent.gameObject != hotbar)
             {
                 collider.transform.SetParent(hotbar.transform);
-                collider.transform.SetSiblingIndex(1);
+                collider.transform.SetSiblingIndex(2);
             }
 
-            //fix bottle icon changing size
-            collider.GetComponent<BottleIcon>().placeInBag = BottleIcon.Place.None;
-
+            if (collider.tag == "Juice")
+            {
+                //fix bottle icon changing size
+                collider.GetComponent<BottleIcon>().placeInBag = BottleIcon.Place.None;
+            }
         }
     }
 

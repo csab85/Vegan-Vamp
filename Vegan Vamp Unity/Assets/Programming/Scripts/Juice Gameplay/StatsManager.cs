@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Linq;
 
 public class StatsManager : MonoBehaviour
 {
@@ -241,10 +242,10 @@ public class StatsManager : MonoBehaviour
         }
 
         //reset to default color
-        colors = new List<Color>() {Color.white};
+        colors = new List<Color>();
 
         //reset description
-        foreach (string key in descriptionDict.Keys)
+        foreach (string key in descriptionDict.Keys.ToList())
         {
             descriptionDict[key] = 0;
         }

@@ -93,7 +93,6 @@ public class BlenderJuice : MonoBehaviour
                 //add to description dict if name is the same
                 foreach (string ingredientName in selfStats.descriptionDict.Keys)
                 {
-
                     if (ingredientName == ingredient.name)
                     {
                         selfStats.descriptionDict[ingredientName] ++;
@@ -136,6 +135,7 @@ public class BlenderJuice : MonoBehaviour
         {
             //reset stats
             selfStats.ResetSelf();
+            selfStats.colors = new List<Color>() {initialColor};
         }
     }
 
