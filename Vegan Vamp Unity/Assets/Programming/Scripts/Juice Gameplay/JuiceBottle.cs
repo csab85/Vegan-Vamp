@@ -18,6 +18,7 @@ public class JuiceBottle : MonoBehaviour
     [SerializeField] GameObject splash;
     [SerializeField] GameObject tornado;
     [SerializeField] GameObject portal;
+    [SerializeField] GameObject heal;
 
     //components
     Animator animator;
@@ -154,6 +155,15 @@ public class JuiceBottle : MonoBehaviour
 
             //apply teleport
             newPortal.GetComponent<StatsManager>().ApplyStatSelf(StatsConst.TELEPORT, selfStats.teleport[StatsConst.APPLY_INTENSITY], selfStats.teleport[StatsConst.APPLY_REACH_TIME], selfStats.teleport[StatsConst.APPLY_RETURN_TIME]);
+        }
+
+        //spawn heal
+        if (selfStats.health[StatsConst.APPLY_INTENSITY] > 0)
+        {
+            float healScale = selfStats.health[StatsConst.APPLY_INTENSITY];
+
+            GameObject newHeal = Instantiate(heal, transform.position, Quaternion.identity, null);
+            newHeal.transform.localScale = new Vector3(healScale, healScale, healScale);
         }
     }
 

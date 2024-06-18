@@ -15,6 +15,7 @@ public class HealAura : MonoBehaviour
 
     //compents
     VisualEffect healVFX;
+    [SerializeReference] VisualEffect healBurst;
 
     #endregion
     //========================
@@ -26,6 +27,7 @@ public class HealAura : MonoBehaviour
 
     [SerializeField] float healPower;
     [SerializeField] float healFrequency;
+    float baseHealPower;
 
     StatsManager.Type[] allowedTypes = {StatsManager.Type.Ingredient, StatsManager.Type.NPC, StatsManager.Type.Player};
 
@@ -57,9 +59,10 @@ public class HealAura : MonoBehaviour
         if (healVFX.enabled)
         {
             StatsManager objStats = null;
+            collider.gameObject.TryGetComponent<StatsManager>(out objStats);
 
             //check if it has a stats manager
-            if (collider.gameObject.TryGetComponent<StatsManager>(out objStats))
+            if (objStats != null)
             {
                 //check if it is one of the allowed types
                 if (allowedTypes.Contains(objStats.objectType))
@@ -69,6 +72,10 @@ public class HealAura : MonoBehaviour
                     {
                         healingObjs.Add(collider.gameObject);
                         StartCoroutine(HealObject(collider.gameObject, objStats));
+
+                        //effect
+                        healBurst.gameObject.transform.position = collider.transform.position;
+                        healBurst.Play();
                     }
                 }
             }
@@ -96,29 +103,22 @@ public class HealAura : MonoBehaviour
     {
         //get components
         healVFX = GetComponent<VisualEffect>();
+
+        //get values
+        baseHealPower = healPower;
     }
 
     void Update()
     {
-        //change it to when its below a size, for when I implement growth
+        //update size and intensity
+        Vector3 healScale = healIngredient.transform.localScale;
+        transform.localScale = new Vector3(healScale.x * 1.5f, healScale.y, healScale.z * 1.5f);
         
-        if (!healIngredient.activeSelf)
+        if (healPower != transform.localScale.x * baseHealPower)
         {
-            healVFX.enabled = false;
-
-            if (healingObjs.Count > 0)
-            {
-                foreach (GameObject obj in healingObjs)
-                {
-                    healingObjs.Remove(obj);
-                }
-            }
+            healPower = transform.localScale.x * baseHealPower;
         }
 
-        else if(!healVFX.enabled)
-        {
-            healVFX.enabled = true;
-        }
     }
 
     #endregion

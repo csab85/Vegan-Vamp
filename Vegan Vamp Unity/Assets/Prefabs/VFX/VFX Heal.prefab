@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7943299508040751905}
   - component: {fileID: 5153532279521343464}
   - component: {fileID: 3996441754000516997}
+  - component: {fileID: 1637131273861332857}
   m_Layer: 0
   m_Name: VFX Heal
   m_TagString: Untagged
@@ -111,3 +112,16 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1637131273861332857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5591048651026483381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f700151abec9549a65f410ad5471b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 5

@@ -47,8 +47,21 @@ public class Interactions : MonoBehaviour
     {
         if (interactObj.layer == LayerMask.NameToLayer("Ingredient"))
         {
-            interactObj.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
             inventory.AddItem(interactObj);
+
+            //check if object is in plant or in world
+            Rigidbody rb = null;
+            interactObj.TryGetComponent<Rigidbody>(out rb);
+
+            if (rb != null)
+            {
+                Destroy(interactObj);
+            }
+
+            else
+            {
+                interactObj.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+            }
         }
 
         if (interactObj.name == "Blender")

@@ -3500,7 +3500,7 @@ GameObject:
   - component: {fileID: 3883704674342765409}
   - component: {fileID: 2125093118169321107}
   m_Layer: 0
-  m_Name: Splash VFX
+  m_Name: VFX Splash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4469,7 +4469,7 @@ MonoBehaviour:
     m_Bits: 64
   playerHeight: 3.2
   moveSpeed: 3.5
-  sprintMultiplier: 0
+  sprintMultiplier: 5
   groundDrag: 2
   jumpForce: 8
   airMultiplier: 0.4
@@ -5389,6 +5389,7 @@ MonoBehaviour:
   splash: {fileID: 6219979283168409204}
   tornado: {fileID: 9131918081954376367, guid: 3ba412533441bb64194b1bd904ed2b59, type: 3}
   portal: {fileID: 4953359166628225200, guid: 3e816ca48d2012642be5d850f4a13e54, type: 3}
+  heal: {fileID: 5591048651026483381, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
   inventory: {fileID: 0}
   throwPower: 25
   splashRange: 3

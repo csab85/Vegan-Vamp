@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 6103194030724718899}
   - component: {fileID: 7715536925565670870}
   m_Layer: 0
-  m_Name: Heal Effect
+  m_Name: Heal Aura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,7 +231,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.598, z: 0}
   m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 584276932044235772}
   m_Father: {fileID: 4243334130001104041}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &6085755510816650768
@@ -346,6 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healIngredient: {fileID: 7647681699722237835}
+  healBurst: {fileID: 2423647273316421429}
   healPower: 0.1
   healFrequency: 0.05
 --- !u!1001 &2205008185926142221
@@ -488,15 +490,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c31314be9d03ac64b92717bb47f2a4c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 575.9859
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c31314be9d03ac64b92717bb47f2a4c8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 8.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c31314be9d03ac64b92717bb47f2a4c8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 445.8605
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c31314be9d03ac64b92717bb47f2a4c8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -551,8 +553,16 @@ PrefabInstance:
       value: Heal Ingredient
       objectReference: {fileID: 0}
     - target: {fileID: -2932998491564163895, guid: c31314be9d03ac64b92717bb47f2a4c8, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -2932998491564163895, guid: c31314be9d03ac64b92717bb47f2a4c8, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2932998491564163895, guid: c31314be9d03ac64b92717bb47f2a4c8, type: 3}
+      propertyPath: m_TagString
+      value: Ingredient
       objectReference: {fileID: 0}
     - target: {fileID: -2932998491564163895, guid: c31314be9d03ac64b92717bb47f2a4c8, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -964,4 +974,91 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 221391002720604327, guid: ca30b3a3addf0b34ebbebd73847fc4f3, type: 3}
   m_PrefabInstance: {fileID: 5823173644795468500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7360992952664881373
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1034448330640483876}
+    m_Modifications:
+    - target: {fileID: 1637131273861332857, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: duration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591048651026483381, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_Name
+      value: VFX Heal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.26666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.26666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.598
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+--- !u!4 &584276932044235772 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+  m_PrefabInstance: {fileID: 7360992952664881373}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &2423647273316421429 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 5153532279521343464, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+  m_PrefabInstance: {fileID: 7360992952664881373}
   m_PrefabAsset: {fileID: 0}

@@ -71,13 +71,19 @@ public class Regrowth : MonoBehaviour
             {
                 if (ingredient.tag == "Ingredient")
                 {
-                    selfCollider.enabled = true;
+                    if (!selfCollider.enabled)
+                    {
+                        selfCollider.enabled = true;
+                    }
                 }
             }
 
             else
             {
-                selfCollider.enabled = false;
+                if (selfCollider.enabled)
+                {
+                    selfCollider.enabled = false;
+                }
             }
 
             //grow
