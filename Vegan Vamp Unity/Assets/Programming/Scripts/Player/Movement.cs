@@ -64,7 +64,6 @@ public class Movement : MonoBehaviour
             //run
             if (Input.GetButton("Sprint"))
             {
-                print("corre fiao");
                 if (moveSpeed * selfStats.speedMultiplier != baseSpeed * selfStats.speedMultiplier * sprintMultiplier)
                 {
                     moveSpeed *= sprintMultiplier;
