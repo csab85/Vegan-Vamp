@@ -46,6 +46,7 @@ public class JuiceBottle : MonoBehaviour
     [SerializeField] float throwPower;
     [SerializeField] public float splashRange;
     [SerializeField] LayerMask targetLayers;
+    Transform baseTransform;
 
     bool smashable = false;
 
@@ -222,9 +223,12 @@ public class JuiceBottle : MonoBehaviour
         //get scripts
         hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
         selfStats = GetComponent<StatsManager>();
+
+        //get values
+        baseTransform = transform;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         //throw bottle
         if (Input.GetButtonDown("Throw"))
@@ -236,6 +240,12 @@ public class JuiceBottle : MonoBehaviour
         Vector2 screenAim = new Vector2 (Screen.width / 2, Screen.height / 2);
         aimRay = Camera.main.ScreenPointToRay(screenAim);
         Physics.Raycast(aimRay, out aimHit);
+
+        if (baseTransform.position != transform.position)
+        {
+            transform.position = baseTransform.position;
+            transform.rotation = baseTransform.rotation;
+        }
     }
 
     #endregion

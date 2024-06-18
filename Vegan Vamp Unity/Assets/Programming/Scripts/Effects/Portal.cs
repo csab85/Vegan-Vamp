@@ -44,8 +44,11 @@ public class Portal : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        otherPortalParticles.Play();
-        collider.transform.position = otherPortal.transform.position + (otherPortal.transform.forward * 2);
+        if (collider.name != "Base Juice")
+        {
+            otherPortalParticles.Play();
+            collider.transform.position = otherPortal.transform.position + (otherPortal.transform.forward * 2);
+        }
     }
 
     #endregion
