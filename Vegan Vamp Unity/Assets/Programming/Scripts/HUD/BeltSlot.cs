@@ -16,6 +16,7 @@ public class BeltSlot : MonoBehaviour
 
     //scripts
     [SerializeField] Hotbar hotbar;
+    [SerializeField] Tutorial tutorial;
     StatsManager selfStats;
     StatsManager juiceStats;
 
@@ -71,6 +72,9 @@ public class BeltSlot : MonoBehaviour
                 }
 
                 selfStats.PasteStats(juiceStats);
+
+                //tutorial
+                tutorial.tutorialSteps = 2;
             }
         }
     }
@@ -82,6 +86,9 @@ public class BeltSlot : MonoBehaviour
             //deactivate selection
             GameObject selection = juiceIcon.transform.Find("Selection").gameObject;
             selection.SetActive(false);
+
+            //deactivate base juice
+            baseJuice.GetComponent<JuiceBottle>().DeactivateBottle();
         }
     }
 
@@ -102,6 +109,9 @@ public class BeltSlot : MonoBehaviour
         {   
             juiceIcon = collider.gameObject;
             selfStats.CopyStats(collider.gameObject.GetComponent<StatsManager>());
+
+            //tutorial
+            tutorial.tutorialSteps = 1;
         }
     }
 

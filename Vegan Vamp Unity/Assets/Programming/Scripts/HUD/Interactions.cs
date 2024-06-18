@@ -13,6 +13,7 @@ public class Interactions : MonoBehaviour
 
     [Header ("Imports")]
     [SerializeField] Inventory inventory;
+    [SerializeField] Tutorial tutorial;
     [SerializeField] GameObject waterBottle;
     [SerializeField] public GameObject player;
 
@@ -34,6 +35,9 @@ public class Interactions : MonoBehaviour
     [SerializeField] public float interactionRange;
     [SerializeField] LayerMask targetLayers;
     [SerializeField] Vector2 textOffset;
+
+    //tutorial triggers
+    bool firstBottle = true;
 
     #endregion
     //========================
@@ -78,6 +82,13 @@ public class Interactions : MonoBehaviour
         {
             Destroy(interactObj);
             inventory.AddItem(interactObj);
+
+            //tutorial
+            if (firstBottle)
+            {
+                tutorial.tutorialSteps = 0;
+                firstBottle = false;
+            }
         }
 
         if (interactObj.tag == "Water")
@@ -86,6 +97,11 @@ public class Interactions : MonoBehaviour
             newWaterBottle.name = "Water Bottle";
             inventory.AddItem(newWaterBottle);
             Destroy(newWaterBottle);
+
+            //tutorial
+            tutorial.tutorialSteps = 0;
+            firstBottle = false;
+
         }
     }
 

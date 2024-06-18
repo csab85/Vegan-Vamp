@@ -83,7 +83,6 @@ public class Inventory : MonoBehaviour
 
                 if (item.tag == "Juice")
                 {
-                    print("rapaiz");
                     item.GetComponent<StatsManager>().PasteStats(newItem.GetComponent<StatsManager>());
                 }
 
@@ -120,7 +119,7 @@ public class Inventory : MonoBehaviour
     {
         //game objects
         bag = FindChild(transform, "Bag");
-        spawnPoint = bag.transform.GetChild(0).gameObject;
+        spawnPoint = bag.transform.Find("Spawn Point").gameObject;
 
         //components
         bagRectTransform = bag.GetComponent<RectTransform>();

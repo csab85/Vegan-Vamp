@@ -27,6 +27,7 @@ public class JuiceBottle : MonoBehaviour
     //scripts
     [Header ("Scripts")]
     [SerializeField] Inventory inventory;
+    [SerializeField] Tutorial tutorial;
     Hotbar hotbar;
     StatsManager selfStats;
 
@@ -166,6 +167,12 @@ public class JuiceBottle : MonoBehaviour
             GameObject newHeal = Instantiate(heal, transform.position, Quaternion.identity, null);
             newHeal.transform.localScale = new Vector3(healScale, healScale, healScale);
         }
+
+        //spawn explosion
+        //cody things here
+
+        //tutorial
+        tutorial.tutorialSteps = 3;
     }
 
     public void ThrowBottle()
