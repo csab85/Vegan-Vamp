@@ -23,6 +23,7 @@ public class DragObject : MonoBehaviour
     #region
 
     bool dragging = false;
+    bool hovering = false;
 
     #endregion
     //========================
@@ -45,6 +46,16 @@ public class DragObject : MonoBehaviour
     public void Drop()
     {
         dragging = false;
+    }
+
+    public void Hover()
+    {
+        hovering = true;
+    }
+
+    public void Unhover()
+    {
+        hovering = false;
     }
 
     #endregion
@@ -71,7 +82,7 @@ public class DragObject : MonoBehaviour
             rb.MovePosition(Input.mousePosition);
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1) && hovering    )
         {
             inventory.DropItem(gameObject);
         }

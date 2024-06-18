@@ -227,6 +227,29 @@ public class StatsManager : MonoBehaviour
         }
     }
 
+    public void ResetSelf()
+    {
+        foreach (float[] stat in statsArray)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                if (stat[i] != 0)
+                {
+                    stat[i] = 0;
+                }
+            }
+        }
+
+        //reset to default color
+        colors = new List<Color>() {Color.white};
+
+        //reset description
+        foreach (string key in descriptionDict.Keys)
+        {
+            descriptionDict[key] = 0;
+        }
+    }
+
     void DriftTowardsBase()
     {
         for (int i = 0; i < statsArray.Length; i++)

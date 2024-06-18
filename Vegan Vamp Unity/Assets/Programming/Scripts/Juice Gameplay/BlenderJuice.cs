@@ -135,19 +135,7 @@ public class BlenderJuice : MonoBehaviour
         if (targetFill <= minFilling)
         {
             //reset stats
-            foreach (float[] stat in selfStats.statsArray)
-            {
-                for (int i = 0; i < 9; i++)
-                {
-                    if (stat[i] != 0)
-                    {
-                        stat[i] = 0;
-                    }
-                }
-            }
-
-            //reset to default color
-            selfStats.colors = new List<Color>() {initialColor};
+            selfStats.ResetSelf();
         }
     }
 

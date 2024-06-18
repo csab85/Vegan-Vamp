@@ -44,7 +44,7 @@ public class Igloo : MonoBehaviour
         selfStats.ice[StatsConst.DEFAULT_BASE] = 1;
     }
 
-    void Start()
+    void Awake()
     {
         selfStats = GetComponent<StatsManager>();
         iceDivider = selfStats.ice[StatsConst.SELF_INTENSITY];

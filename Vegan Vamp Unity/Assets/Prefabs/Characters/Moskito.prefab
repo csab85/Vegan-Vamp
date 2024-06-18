@@ -178,6 +178,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7fdbe7e5516682e4ca11d5bc46dd384c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 551449396724791520}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7fdbe7e5516682e4ca11d5bc46dd384c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4912974576138189013}
   m_SourcePrefab: {fileID: 100100000, guid: 7fdbe7e5516682e4ca11d5bc46dd384c, type: 3}
 --- !u!4 &561948687373948984 stripped
 Transform:
@@ -558,6 +561,18 @@ MonoBehaviour:
   shaderVarRate: 0.1
   shaderVarRefreshRate: 0
   isTrailActive: 0
+--- !u!114 &4912974576138189013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902868328485978754}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8c42f3b65317842947e6eff6bf09ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2393431266222028126
 PrefabInstance:
   m_ObjectHideFlags: 0

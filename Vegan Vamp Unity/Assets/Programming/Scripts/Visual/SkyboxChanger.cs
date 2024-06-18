@@ -54,24 +54,43 @@ public class SkyboxChanger : MonoBehaviour
     //========================
     #region
 
+    void Start()
+    {
+        skybox = new Material(skybox);
+        RenderSettings.skybox = skybox;
+    }
+
     void Update()
     {
-        if (skybox.GetColor("_Top") != top)
+        if (transitioning)
         {
             float timePercentage = Mathf.Clamp01(passedTime / transitionTime);
 
-            top = Vector4.Lerp(skybox.GetColor("_Top"), top, timePercentage);
+            if (skybox.GetColor("_Top") != top)
+            {
+                timePercentage = Mathf.Clamp01(passedTime / transitionTime);
 
-            skybox.SetColor("_Top", top);
-        }
+                Color newColor = Vector4.Lerp(skybox.GetColor("_Top"), top, timePercentage);
 
-        if (skybox.GetColor("_Bottom") != bottom)
-        {
-            float timePercentage = Mathf.Clamp01(passedTime / transitionTime);
+                skybox.SetColor("_Top", newColor);
+            }
 
-            top = Vector4.Lerp(skybox.GetColor("_Bottom"), bottom, timePercentage);
+            if (skybox.GetColor("_Bottom") != bottom)
+            {
+                timePercentage = Mathf.Clamp01(passedTime / transitionTime);
 
-            skybox.SetColor("_Bottom", bottom);
+                Color newColor = Vector4.Lerp(skybox.GetColor("_Bottom"), bottom, timePercentage);
+
+                skybox.SetColor("_Bottom", newColor);
+            }
+
+            passedTime += Time.deltaTime;
+            DynamicGI.UpdateEnvironment();
+
+            if (timePercentage > 1)
+            {
+                timePercentage = 0;
+            }
         }
     }
 

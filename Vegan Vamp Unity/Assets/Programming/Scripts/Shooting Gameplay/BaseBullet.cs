@@ -78,9 +78,14 @@ public class BaseBullet : MonoBehaviour
 
         if (enemyEffects != null)
         {
-            Vector3 direction = (collision.transform.position - transform.position).normalized;
+            StatsManager enemyStats = collision.gameObject.GetComponent<StatsManager>();
 
-            enemyEffects.DamageSelf(direction, damage);
+            if (enemyStats.objectType == StatsManager.Type.NPC && enemyStats.objectType == StatsManager.Type.Player)
+            {
+                Vector3 direction = (collision.transform.position - transform.position).normalized;
+
+                enemyEffects.DamageSelf(direction, damage);
+            }
         }
 
         rb.isKinematic = true;

@@ -34,8 +34,7 @@ public class Headbutt : MonoBehaviour
     #region
     
     [Header ("Time Settings")]
-    [SerializeField] float aimTime;
-    [SerializeField] float stunTime;
+    [SerializeField] float waitTime;
 
     [Header ("Headbutt Settings")]
     [SerializeField] float headbuttForce;
@@ -67,20 +66,6 @@ public class Headbutt : MonoBehaviour
     //FUNCTIONS
     //========================
     #region
-
-    // /// <summary>
-    // /// The object will look at the table for aim time seconds then go to state headbutting
-    // /// </summary>
-    // /// <returns></returns>
-    // IEnumerator Aim()
-    // {
-    //     aiming = true;
-    //     animator.SetBool ("Aiming", true);
-    //     yield return new WaitForSeconds(aimTime); 
-    //     fightState = FightState.Headbutting;      
-    //     aiming = false;
-    //     animator.SetBool ("Aiming", false);
-    // }
 
     void Attack()
     {
@@ -201,7 +186,7 @@ public class Headbutt : MonoBehaviour
                     if (!waiting)
                     {
                         animator.Play("Idle");
-                        StartCoroutine(Wait(1));
+                        StartCoroutine(Wait(waitTime));
                     }
 
                     break;

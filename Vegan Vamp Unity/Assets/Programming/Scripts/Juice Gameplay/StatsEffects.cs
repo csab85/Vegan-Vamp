@@ -152,7 +152,10 @@ public class StatsEffects : MonoBehaviour
                 if (selfStats.objectType == StatsManager.Type.NPC)
                 {
                     GetComponent<FieldOfView>().enabled = false;
+                    GetComponent<BasicBehaviour>().enabled = false;
                     GetComponent<NavMeshAgent>().enabled = false;
+                    GetComponent<Collider>().enabled = false;
+                    GetComponent<Disappear>().enabled = true;
 
                     animator.Play("Death");
                 }

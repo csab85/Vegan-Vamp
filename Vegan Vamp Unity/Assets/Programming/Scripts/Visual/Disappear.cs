@@ -1,15 +1,12 @@
-using System.Linq;
 using UnityEngine;
 
-public class DropCollider : MonoBehaviour
+public class Disappear : MonoBehaviour
 {
     //IMPORTS
     //========================
     #region
 
-    [SerializeField] Inventory inventory;
-    [SerializeField] GameObject player;
-    [SerializeField] string[] targetTags;
+
 
     #endregion
     //========================
@@ -29,13 +26,7 @@ public class DropCollider : MonoBehaviour
     //========================
     #region
 
-    void OnTriggerEnter2D(Collider2D collider2D)
-    {
-        if (targetTags.Contains(collider2D.tag))
-        {
-            inventory.DropItem(collider2D.gameObject);
-        }
-    }
+
 
     #endregion
     //========================
@@ -45,7 +36,17 @@ public class DropCollider : MonoBehaviour
     //========================
     #region
 
+    void Update()
+    {
+        Vector3 scale = Vector3.MoveTowards(transform.localScale, Vector3.zero, Time.deltaTime * 5);
 
+        transform.localScale = scale;
+
+        if (transform.localScale.x <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     #endregion
     //========================
