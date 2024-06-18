@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1469435108458072150}
   - component: {fileID: 2246683996151699383}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rock1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,9 +58,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1469435108458072150}
     m_Modifications:
+    - target: {fileID: 182926432642972829, guid: fb7e1c4bf7e7d97449ac6b98ebd3ef7f, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 8608080199684342923, guid: fb7e1c4bf7e7d97449ac6b98ebd3ef7f, type: 3}
       propertyPath: m_Name
       value: Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608080199684342923, guid: fb7e1c4bf7e7d97449ac6b98ebd3ef7f, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8952553497294937649, guid: fb7e1c4bf7e7d97449ac6b98ebd3ef7f, type: 3}
       propertyPath: m_LocalPosition.x
