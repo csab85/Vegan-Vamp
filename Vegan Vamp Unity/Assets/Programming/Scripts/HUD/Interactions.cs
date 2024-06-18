@@ -53,7 +53,7 @@ public class Interactions : MonoBehaviour
             Rigidbody rb = null;
             interactObj.TryGetComponent<Rigidbody>(out rb);
 
-            if (rb != null)
+            if (rb != null && interactObj.name != "Gravity Ingredient")
             {
                 Destroy(interactObj);
             }
