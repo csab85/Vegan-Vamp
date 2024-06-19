@@ -14,6 +14,7 @@ public class Interactions : MonoBehaviour
     [Header ("Imports")]
     [SerializeField] Inventory inventory;
     [SerializeField] Tutorial tutorial;
+    [SerializeField] Glossary glossary;
     [SerializeField] GameObject waterBottle;
     [SerializeField] public GameObject player;
 
@@ -52,6 +53,9 @@ public class Interactions : MonoBehaviour
         if (interactObj.layer == LayerMask.NameToLayer("Ingredient"))
         {
             inventory.AddItem(interactObj);
+
+            //add to glossary
+            glossary.AddEntry(interactObj.name);
 
             //check if object is in plant or in world
             Rigidbody rb = null;
