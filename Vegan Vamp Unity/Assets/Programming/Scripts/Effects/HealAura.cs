@@ -15,6 +15,7 @@ public class HealAura : MonoBehaviour
 
     //compents
     VisualEffect healVFX;
+    StatsEffects playerEffects;
     [SerializeReference] VisualEffect healBurst;
 
     #endregion
@@ -47,11 +48,21 @@ public class HealAura : MonoBehaviour
         {
             objStats.ApplyToBase(StatsConst.HEALTH, healPower);
 
+            //vignette
+            playerEffects.vignetteCorrect = false;
+            playerEffects.vignetteColor = Color.green;
+            playerEffects.vignetteIntensity = 0.4f;
+
             // Wait and restart coroutine
             yield return new WaitForSeconds(healFrequency);
 
             StartCoroutine(HealObject(obj, objStats));
+
+            yield break;
         }
+
+        playerEffects.vignetteCorrect = false;
+        playerEffects.vignetteIntensity = 0;
     }
 
     void OnTriggerEnter(Collider collider)
@@ -106,6 +117,9 @@ public class HealAura : MonoBehaviour
 
         //get values
         baseHealPower = healPower;
+
+        //get scripts
+        playerEffects = GameObject.Find("Player").GetComponent<StatsEffects>();
     }
 
     void Update()
