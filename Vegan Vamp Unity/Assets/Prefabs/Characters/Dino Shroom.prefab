@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 506.25
+      value: 496.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 523.62
+      value: 529.61
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57a18174721d8ec4eb185084d4d2a2dc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -164,7 +164,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.8
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -485,7 +485,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volume: {fileID: 0}
   fireProof: 0
+  vignetteIntensity: 0
+  vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+  vignetteCorrect: 0
 --- !u!114 &4477828362722396946
 MonoBehaviour:
   m_ObjectHideFlags: 0
