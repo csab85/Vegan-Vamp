@@ -38,6 +38,7 @@ public class AnimationEvents : MonoBehaviour
         if (animator.GetLayerWeight(AnimationConsts.DAMAGE_LAYER) > 0)
         {
             animator.SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 0);
+            print("CHEGA BELINGHAM");
         }
     }
 

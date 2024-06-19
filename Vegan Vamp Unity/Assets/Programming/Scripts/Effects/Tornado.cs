@@ -34,8 +34,6 @@ public class Tornado : MonoBehaviour
     //========================
     #region
 
-    float dampner = 10; //how much the intensity will be divided for when applying stats to objects in the tornado
-
     StatsManager.Type[] allowedTypes = { StatsManager.Type.Ingredient, StatsManager.Type.NPC, StatsManager.Type.Player };
 
     List<GameObject> pullingObjs = new List<GameObject>();
