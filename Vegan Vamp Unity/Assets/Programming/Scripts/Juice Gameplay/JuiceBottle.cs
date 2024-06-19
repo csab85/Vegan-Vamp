@@ -30,6 +30,7 @@ public class JuiceBottle : MonoBehaviour
     [SerializeField] Tutorial tutorial;
     Hotbar hotbar;
     StatsManager selfStats;
+    StatsEffects playerEffects;
 
     //extras
     Ray aimRay;
@@ -74,7 +75,6 @@ public class JuiceBottle : MonoBehaviour
         Broken.SetActive(false);
     }
 
-    //ISSO AQUI É PROVISORIO
     public void GrabJuice(GameObject juice)
     {   
         //Add to bag
@@ -128,6 +128,9 @@ public class JuiceBottle : MonoBehaviour
                         float applyReturnTime = selfStats.statsArray[i][StatsConst.APPLY_RETURN_TIME];
 
                         target.GetComponent<StatsManager>().ApplyToBase(i, applyIntensity);
+
+                        //vignette
+                        StartCoroutine(playerEffects.HealVignette());
                     }
                 }
             }
@@ -230,6 +233,7 @@ public class JuiceBottle : MonoBehaviour
         //get scripts
         hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
         selfStats = GetComponent<StatsManager>();
+        playerEffects = player.GetComponent<StatsEffects>();
 
         //get values
         baseTransform = transform;

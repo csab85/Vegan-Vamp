@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.VFX;
 
 //VFX container gotta be the third object
@@ -26,6 +29,8 @@ public class StatsEffects : MonoBehaviour
     Rigidbody rb;
     Animator animator;
     NavMeshAgent agent;
+    [SerializeField] Volume volume;
+    Vignette vignette;
 
     #endregion
     //========================
@@ -52,6 +57,11 @@ public class StatsEffects : MonoBehaviour
     //extras
     int iceNumber;
 
+    //vignete (for damage and heal)
+    [HideInInspector] public float vignetteIntensity;
+    [HideInInspector] public Color vignetteColor;
+    [HideInInspector] public bool vignetteCorrect;
+
     #endregion
     //========================
 
@@ -65,9 +75,20 @@ public class StatsEffects : MonoBehaviour
         if (burning)
         {
             selfStats.ApplyToBase(StatsConst.HEALTH, -fireDamage);
+
+            vignetteCorrect = false;
+            vignetteColor = new Color(1, 0.2f, 0, 1);
+            vignetteIntensity = 0.5f;
+
             yield return new WaitForSeconds(fireRefreshRate);
+
             StartCoroutine(FireDOT());
+
+            yield break;
         }
+
+        vignetteCorrect = false;
+        vignetteIntensity = 0;
     }
 
     public void DamageSelf(Vector3 knockbackDir, float dmg)
@@ -79,11 +100,65 @@ public class StatsEffects : MonoBehaviour
 
             if (gameObject.tag == "Player")
             {
+                //set animation layer
                 animator.SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 1);
+
+                //vignette
+                StartCoroutine(DamageVignette());
             }
 
             animator.Play("Damage");   
         }
+    }
+
+    IEnumerator DamageVignette()
+    {
+        vignetteCorrect = false;
+
+        vignetteColor = Color.red;
+        vignetteIntensity = 0.4f;
+
+        yield return new WaitForSeconds(1);
+
+        vignetteIntensity = 0;
+    }
+
+    public IEnumerator HealVignette()
+    {
+        vignetteCorrect = false;
+
+        vignetteColor = Color.green;
+        vignetteIntensity = 0.4f;
+
+        yield return new WaitForSeconds(1);
+
+        vignetteIntensity = 0;
+    }
+
+    bool SetVignette()
+    {
+        if (vignette.color != vignetteColor && vignette.intensity == vignetteIntensity)
+        {
+            return true;
+        }
+
+        //update if vignatte wrong
+        if (!vignetteCorrect)
+        {
+            if (vignette.color != vignetteColor)
+            {
+                vignette.color.Override(vignetteColor);
+            }
+
+            if (vignette.intensity != vignetteIntensity)
+            {
+                float newIntensity = Mathf.MoveTowards(vignette.intensity.value, vignetteIntensity, Time.deltaTime * 2);
+                vignette.intensity.Override(newIntensity);
+            }
+        }
+
+        return false;
+        
     }
 
     #endregion
@@ -123,6 +198,13 @@ public class StatsEffects : MonoBehaviour
                 iceCubesList.Add(iceCube.gameObject);
             }
         }
+
+        //post processing
+        if (tag == "Player")
+        {
+            volume.profile.TryGet<Vignette>(out vignette);
+        }
+
     }
 
     void Update()
@@ -357,6 +439,12 @@ public class StatsEffects : MonoBehaviour
                 }
             }
 
+        }
+
+        //post processing
+        if (tag == "Player")
+        {
+            vignetteCorrect = SetVignette();
         }
     }
 
