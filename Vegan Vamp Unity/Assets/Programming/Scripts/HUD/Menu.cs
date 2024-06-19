@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Menu: MonoBehaviour
 {
@@ -82,6 +83,16 @@ public class Menu: MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    public void ExitToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void CancelExit()
+    {
+        exit.SetActive(false );
     }
 
     #endregion
