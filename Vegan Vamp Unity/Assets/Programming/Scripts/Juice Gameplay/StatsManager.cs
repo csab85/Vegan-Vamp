@@ -396,7 +396,7 @@ public static class StatsConst
     public const int ICE = 2; 
     public const int TORNADO = 3;
     public const int SPEED = 4;
-    public const int NO_GRAVITY = 5;
+    public const int GRAVITY = 5;
     public const int TELEPORT = 6;
     public const int GROW = 7;
     public const int SHRINK = 8;
