@@ -80,8 +80,8 @@ public class BaseBullet : MonoBehaviour
         {
             StatsManager enemyStats = collision.gameObject.GetComponent<StatsManager>();
 
-            if (enemyStats.objectType == StatsManager.Type.NPC && enemyStats.objectType == StatsManager.Type.Player)
-            {
+            if (enemyStats.objectType == StatsManager.Type.NPC && enemyStats.objectType != StatsManager.Type.Player)
+            {    
                 Vector3 direction = (collision.transform.position - transform.position).normalized;
 
                 enemyEffects.DamageSelf(direction, damage);

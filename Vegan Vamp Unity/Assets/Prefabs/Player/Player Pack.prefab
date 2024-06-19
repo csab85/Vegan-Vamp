@@ -223,6 +223,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 703925639252509476}
     m_Modifications:
+    - target: {fileID: 1197826924267287941, guid: 25625d5a3511cb04187e1f22fca4c378, type: 3}
+      propertyPath: volume
+      value: 
+      objectReference: {fileID: 8152460010955830314}
     - target: {fileID: 2738054663653988900, guid: 25625d5a3511cb04187e1f22fca4c378, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.289459
@@ -394,11 +398,11 @@ PrefabInstance:
       objectReference: {fileID: 4991778616419397196}
     - target: {fileID: 2253001328065954985, guid: 73430c87734017a4dae073d420d55d49, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.10374772
+      value: 0.10374774
       objectReference: {fileID: 0}
     - target: {fileID: 2253001328065954985, guid: 73430c87734017a4dae073d420d55d49, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.023993004
+      value: 0.023993006
       objectReference: {fileID: 0}
     - target: {fileID: 2838024279970824779, guid: 73430c87734017a4dae073d420d55d49, type: 3}
       propertyPath: player
@@ -434,11 +438,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3371425883403886515, guid: 73430c87734017a4dae073d420d55d49, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.10266782
+      value: 0.10266787
       objectReference: {fileID: 0}
     - target: {fileID: 3371425883403886515, guid: 73430c87734017a4dae073d420d55d49, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.02825887
+      value: 0.028258882
       objectReference: {fileID: 0}
     - target: {fileID: 3671686903733453061, guid: 73430c87734017a4dae073d420d55d49, type: 3}
       propertyPath: m_XAxis.Value
@@ -621,3 +625,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 656128659949837143, guid: 73430c87734017a4dae073d420d55d49, type: 3}
   m_PrefabInstance: {fileID: 7495268982645934038}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8152460010955830314 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1812646357463479292, guid: 73430c87734017a4dae073d420d55d49, type: 3}
+  m_PrefabInstance: {fileID: 7495268982645934038}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

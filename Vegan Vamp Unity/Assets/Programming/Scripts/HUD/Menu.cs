@@ -18,6 +18,10 @@ public class Menu: MonoBehaviour
 
     List<GameObject> pages;
 
+    //scripts
+    [SerializeField] ThirdPersonCamera camScript;
+    [SerializeField] Movement playerMovement;
+
     #endregion
     //========================
 
@@ -82,6 +86,11 @@ public class Menu: MonoBehaviour
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+
+            camScript.explorationCamera.SetActive(true);
+            camScript.combatCamera.SetActive(true);
+
+            playerMovement.moveSpeed = playerMovement.baseSpeed;
         }
     }
 
@@ -136,6 +145,11 @@ public class Menu: MonoBehaviour
 
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
+
+                    camScript.explorationCamera.SetActive(false);
+                    camScript.combatCamera.SetActive(false);
+
+                    playerMovement.moveSpeed = 0;
                 }
             }
         }
