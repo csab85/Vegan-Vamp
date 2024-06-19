@@ -39,7 +39,7 @@ public class Movement : MonoBehaviour
     float horizontalInput;
     Vector3 moveDirection;
 
-    float baseSpeed;
+    [HideInInspector] public float baseSpeed;
 
     StatsManager selfStats;
 
