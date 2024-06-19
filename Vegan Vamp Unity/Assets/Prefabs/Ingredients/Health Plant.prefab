@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5329151898334489823}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6960412543300171448}
   - component: {fileID: 5058339182289201121}
   - component: {fileID: 225465262444287004}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7263352656562041342}
   - component: {fileID: 8769846485120863843}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Deactivator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 7124018397285425605}
   - component: {fileID: 6103194030724718899}
   - component: {fileID: 7715536925565670870}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Heal Aura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -599,6 +599,10 @@ PrefabInstance:
     - target: {fileID: 5914173764048766335, guid: c31314be9d03ac64b92717bb47f2a4c8, type: 3}
       propertyPath: m_Name
       value: Stalk
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914173764048766335, guid: c31314be9d03ac64b92717bb47f2a4c8, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5914173764048766335, guid: c31314be9d03ac64b92717bb47f2a4c8, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -994,6 +998,10 @@ PrefabInstance:
     - target: {fileID: 5591048651026483381, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
       propertyPath: m_Name
       value: VFX Heal
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591048651026483381, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7943299508040751905, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
       propertyPath: m_LocalScale.x

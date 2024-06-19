@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5189064713537153071}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Models
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7965616905708624037}
   - component: {fileID: 3974182912720162466}
   - component: {fileID: 5887607351765752904}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Icy Steam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4931,7 +4931,7 @@ GameObject:
   - component: {fileID: 7207872835511879492}
   - component: {fileID: 4890987603520573595}
   - component: {fileID: 9116357165726826531}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Icy Steam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9817,7 +9817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9063194832426747827}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ice Cubes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9910,6 +9910,10 @@ PrefabInstance:
       value: Ice Cube 2
       objectReference: {fileID: 0}
     - target: {fileID: 7822815019230662221, guid: 52b84ebb34b0ee14684a67030fab489c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7822815019230662221, guid: 52b84ebb34b0ee14684a67030fab489c, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -9923,9 +9927,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7822815019230662221, guid: 52b84ebb34b0ee14684a67030fab489c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2289052219938499116}
-    - targetCorrespondingSourceObject: {fileID: 7822815019230662221, guid: 52b84ebb34b0ee14684a67030fab489c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3149208119184789454}
   m_SourcePrefab: {fileID: 100100000, guid: 52b84ebb34b0ee14684a67030fab489c, type: 3}
 --- !u!4 &4873186736520681446 stripped
 Transform:
@@ -9957,28 +9958,6 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2212009239438826721, guid: dfe7f26bfe6b51a4196ece137ad135b1, type: 3}
---- !u!64 &3149208119184789454
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5254250681518624092}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2212009239438826721, guid: dfe7f26bfe6b51a4196ece137ad135b1, type: 3}
 --- !u!1001 &6419211353387813770
@@ -10050,6 +10029,10 @@ PrefabInstance:
       value: 'Ice Cube 1 '
       objectReference: {fileID: 0}
     - target: {fileID: 3290974584933970820, guid: cf2f307aeaf2dc54fbf90cf08b930d11, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290974584933970820, guid: cf2f307aeaf2dc54fbf90cf08b930d11, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -10063,9 +10046,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3290974584933970820, guid: cf2f307aeaf2dc54fbf90cf08b930d11, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3272016217171780913}
-    - targetCorrespondingSourceObject: {fileID: 3290974584933970820, guid: cf2f307aeaf2dc54fbf90cf08b930d11, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6576932637032443005}
   m_SourcePrefab: {fileID: 100100000, guid: cf2f307aeaf2dc54fbf90cf08b930d11, type: 3}
 --- !u!1 &8412298893358151694 stripped
 GameObject:
@@ -10073,28 +10053,6 @@ GameObject:
   m_PrefabInstance: {fileID: 6419211353387813770}
   m_PrefabAsset: {fileID: 0}
 --- !u!64 &3272016217171780913
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8412298893358151694}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5053925668127403250, guid: 160a544a62ec23c4da56b5540149c529, type: 3}
---- !u!64 &6576932637032443005
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
