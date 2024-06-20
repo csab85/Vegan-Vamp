@@ -73,9 +73,12 @@ public class BasicBehaviour : MonoBehaviour
 
         if (enemyEffects != null)
         {
-            Vector3 direction = (collision.transform.position - transform.position).normalized;
+            if (collision.gameObject.tag == "Player" && !selfStats.dead)
+            {
+                Vector3 direction = (collision.transform.position - transform.position).normalized;
 
-            enemyEffects.DamageSelf(direction, damage);
+                enemyEffects.DamageSelf(direction, damage);
+            }
         }
     }
 
@@ -83,8 +86,8 @@ public class BasicBehaviour : MonoBehaviour
         //========================
 
 
-        //RUNNING
-        //========================
+    //RUNNING
+    //========================
         #region
 
         void Start()

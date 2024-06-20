@@ -176,6 +176,9 @@ public class JuiceBottle : MonoBehaviour
 
         //tutorial
         tutorial.tutorialSteps = 3;
+
+        //disappear
+        GetComponent<Disappear>().enabled = true;
     }
 
     public void ThrowBottle()

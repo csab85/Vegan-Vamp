@@ -71,6 +71,8 @@ public class Headbutt : MonoBehaviour
     {
         fightState = FightState.Headbutting;
         aiming = false;
+
+        agent.destination = playerPosit + (headbuttDistance * transform.forward * 1.5f);
     }
 
     /// <summary>
@@ -101,6 +103,12 @@ public class Headbutt : MonoBehaviour
                 Vector3 headbuttDirection = (playerPosit - transform.position).normalized;
 
                 other.gameObject.GetComponent<Rigidbody>().AddForce(headbuttDirection * headbuttForce / 2, ForceMode.Impulse);
+
+                //knockbackl self
+                agent.destination = transform.position;
+                rb.AddForce(-headbuttDirection * headbuttForce / 2, ForceMode.Impulse);
+                animator.Play("Break");
+                print("irrinho");
             }
         }
         
@@ -167,7 +175,6 @@ public class Headbutt : MonoBehaviour
                     if (agent.speed != headbuttingSpeed * selfStats.speedMultiplier)
                     {
                         agent.speed = headbuttingSpeed * selfStats.speedMultiplier;
-                        agent.destination = playerPosit + (headbuttDistance * transform.forward * 1.5f);
 
                         //play animation
                         animator.Play("Attacking");
@@ -176,7 +183,6 @@ public class Headbutt : MonoBehaviour
                     if (agent.remainingDistance < 0.05f)
                     {
                         fightState = FightState.Waiting;
-
                     }
 
                     break;
@@ -185,8 +191,13 @@ public class Headbutt : MonoBehaviour
 
                     if (!waiting)
                     {
-                        animator.Play("Idle");
-                        StartCoroutine(Wait(waitTime));
+                        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+                        if (!stateInfo.IsName("Break"))
+                        {
+                            animator.Play("Idle");
+                            StartCoroutine(Wait(waitTime));
+                        }
                     }
 
                     break;

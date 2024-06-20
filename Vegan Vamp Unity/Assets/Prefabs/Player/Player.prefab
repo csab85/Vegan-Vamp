@@ -4473,6 +4473,7 @@ MonoBehaviour:
   groundDrag: 2
   jumpForce: 8
   airMultiplier: 0.4
+  baseSpeed: 0
 --- !u!114 &2263143811218729758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4651,7 +4652,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volume: {fileID: 0}
   fireProof: 0
+  vignetteIntensity: 0
+  vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+  vignetteCorrect: 0
 --- !u!114 &2190120469391700226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5299,6 +5304,7 @@ GameObject:
   - component: {fileID: 6528787239560788025}
   - component: {fileID: 9145960729518809489}
   - component: {fileID: 8613573618166727783}
+  - component: {fileID: 503943085814319875}
   m_Layer: 0
   m_Name: Base Juice
   m_TagString: Untagged
@@ -5391,6 +5397,7 @@ MonoBehaviour:
   portal: {fileID: 4953359166628225200, guid: 3e816ca48d2012642be5d850f4a13e54, type: 3}
   heal: {fileID: 5591048651026483381, guid: e2b2d817d5339d54088bf254508a50a3, type: 3}
   inventory: {fileID: 0}
+  tutorial: {fileID: 0}
   throwPower: 25
   splashRange: 3
   targetLayers:
@@ -5578,6 +5585,18 @@ MonoBehaviour:
   liquidObj: {fileID: 4737366254157599318}
   icon: {fileID: 0}
   dimension: 1
+--- !u!114 &503943085814319875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7862106828954697930}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8c42f3b65317842947e6eff6bf09ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7895959707626062014
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ public class Disappear : MonoBehaviour
 
     void Update()
     {
-        Vector3 scale = Vector3.MoveTowards(transform.localScale, Vector3.zero, Time.deltaTime * 5);
+        Vector3 scale = Vector3.MoveTowards(transform.localScale, Vector3.zero, Time.deltaTime * 0.5f);
 
         transform.localScale = scale;
 

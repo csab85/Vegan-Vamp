@@ -236,7 +236,6 @@ public class StatsEffects : MonoBehaviour
                     GetComponent<FieldOfView>().enabled = false;
                     GetComponent<BasicBehaviour>().enabled = false;
                     GetComponent<NavMeshAgent>().enabled = false;
-                    GetComponent<Collider>().enabled = false;
                     GetComponent<Disappear>().enabled = true;
 
                     animator.Play("Death");
