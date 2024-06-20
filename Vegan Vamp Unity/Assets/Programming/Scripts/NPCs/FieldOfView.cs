@@ -8,7 +8,7 @@ public class FieldOfView : MonoBehaviour
     //========================
     #region
 
-    public GameObject player;
+    [HideInInspector] public GameObject player;
     [SerializeField] LayerMask targetMask;
     [SerializeField] LayerMask obstructionMask;
 

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Moskito : MonoBehaviour
+public class Mosko : MonoBehaviour
 {
     //IMPORTS
     //========================
@@ -34,7 +34,7 @@ public class Moskito : MonoBehaviour
     [SerializeField] float waitTime;
 
     //pathfinding and State
-    [Header ("Info")]
+    [Header("Info")]
     [SerializeField] State actualState;
     [SerializeField] bool fighting;
     [SerializeField] bool aiming;

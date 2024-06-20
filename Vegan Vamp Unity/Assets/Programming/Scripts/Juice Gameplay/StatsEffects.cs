@@ -111,7 +111,7 @@ public class StatsEffects : MonoBehaviour
         }
     }
 
-    IEnumerator DamageVignette()
+    public IEnumerator DamageVignette()
     {
         vignetteCorrect = false;
 

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ProjectileDmg : MonoBehaviour
 {
-
+    [SerializeField] GameObject acid;
     [SerializeField] float damage;
+    [SerializeField] bool bossProjectile;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -16,6 +17,11 @@ public class ProjectileDmg : MonoBehaviour
             Vector3 direction = (collision.transform.position - transform.position).normalized;
 
             enemyEffects.DamageSelf(direction, damage);
+        }
+
+        if (bossProjectile)
+        {
+            GameObject newAcid = Instantiate(acid, transform.position, Quaternion.identity, null);
         }
 
         Destroy(gameObject);
