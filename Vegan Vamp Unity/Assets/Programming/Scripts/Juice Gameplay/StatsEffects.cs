@@ -95,7 +95,11 @@ public class StatsEffects : MonoBehaviour
     {
         if (!selfStats.dead)
         {
-            rb.AddForce(knockbackDir * 5, ForceMode.Impulse);
+            if (rb != null)
+            {
+                rb.AddForce(knockbackDir * 5, ForceMode.Impulse);
+            }
+
             selfStats.ApplyToBase(StatsConst.HEALTH, -dmg);
 
             if (gameObject.tag == "Player")
@@ -107,7 +111,10 @@ public class StatsEffects : MonoBehaviour
                 StartCoroutine(DamageVignette());
             }
 
-            animator.Play("Damage");   
+            if (animator != null)
+            {
+                animator.Play("Damage");
+            }
         }
     }
 
