@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Minimap: MonoBehaviour
+public class MinimapIcon : MonoBehaviour
 {
     //IMPORTS
     //========================

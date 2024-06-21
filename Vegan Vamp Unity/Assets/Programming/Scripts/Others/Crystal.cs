@@ -40,6 +40,7 @@ public class Crystal : MonoBehaviour
 
     IEnumerator ShowIsland()
     {
+        islandCam.gameObject.SetActive(true);
         islandCam.Priority = 2;
         islandCounter++;
         islandCam.LookAt = islands[islandCounter];
@@ -50,6 +51,7 @@ public class Crystal : MonoBehaviour
         yield return new WaitForSeconds(showTime);
 
         islandCam.Priority = 0;
+        islandCam.gameObject.SetActive(false);
         playerMovement.moveSpeed = playerMovement.baseSpeed;
     }
 

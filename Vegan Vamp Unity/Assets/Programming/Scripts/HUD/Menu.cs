@@ -13,8 +13,11 @@ public class Menu: MonoBehaviour
     [SerializeField] GameObject buttons;
     [SerializeField] GameObject profile;
     [SerializeField] GameObject glossary;
+    [SerializeField] GameObject map;
     [SerializeField] GameObject options;
     [SerializeField] GameObject exit;
+
+    [SerializeField] GameObject minimapCam;
 
     List<GameObject> pages;
 
@@ -47,6 +50,8 @@ public class Menu: MonoBehaviour
             page.SetActive(false);
         }
 
+        minimapCam.SetActive(false);
+
         profile.SetActive(true);
     }
 
@@ -57,7 +62,21 @@ public class Menu: MonoBehaviour
             page.SetActive(false);
         }
 
+        minimapCam.SetActive(false);
+
         glossary.SetActive(true);
+    }
+
+    public void OpenMap()
+    {
+        foreach (GameObject page in pages)
+        {
+            page.SetActive(false);
+        }
+
+        minimapCam.SetActive(true);
+
+        map.SetActive(true);
     }
 
     public void OpenOptions()
@@ -66,6 +85,8 @@ public class Menu: MonoBehaviour
         {
             page.SetActive(false);
         }
+
+        minimapCam.SetActive(false);
 
         options.SetActive(true);
     }
@@ -81,6 +102,7 @@ public class Menu: MonoBehaviour
         {
             page.SetActive(false);
             buttons.SetActive(false);
+            minimapCam.SetActive(false);
 
             EventSystem.current.SetSelectedGameObject(buttons.transform.Find("Glossary").gameObject);
 
