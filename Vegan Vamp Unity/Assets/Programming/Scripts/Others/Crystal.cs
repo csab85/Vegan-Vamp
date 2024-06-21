@@ -1,3 +1,5 @@
+using Cinemachine;
+using System.Collections;
 using UnityEngine;
 
 public class Crystal : MonoBehaviour
@@ -9,7 +11,12 @@ public class Crystal : MonoBehaviour
     [SerializeField] GameObject intact;
     [SerializeField] GameObject broke;
 
+    //components
+    [SerializeField] Transform[] islands;
+    [SerializeField] CinemachineClearShot islandCam;
+
     //scripts
+    [SerializeField] Movement playerMovement;
     StatsManager selfStats;
 
     #endregion
@@ -20,7 +27,8 @@ public class Crystal : MonoBehaviour
     //========================
     #region
 
-
+    [SerializeField] float showTime;
+    static int islandCounter = -1;
 
     #endregion
     //========================
@@ -30,7 +38,20 @@ public class Crystal : MonoBehaviour
     //========================
     #region
 
+    IEnumerator ShowIsland()
+    {
+        islandCam.Priority = 2;
+        islandCounter++;
+        islandCam.LookAt = islands[islandCounter];
 
+        //lock player
+        playerMovement.moveSpeed = 0;
+
+        yield return new WaitForSeconds(showTime);
+
+        islandCam.Priority = 0;
+        playerMovement.moveSpeed = playerMovement.baseSpeed;
+    }
 
     #endregion
     //========================
@@ -40,7 +61,25 @@ public class Crystal : MonoBehaviour
     //========================
     #region
 
+    private void Start()
+    {
+        selfStats = GetComponent<StatsManager>();
+    }
 
+    private void Update()
+    {
+        if (selfStats.dead)
+        {
+            if (intact.activeSelf)
+            {
+                intact.SetActive(false);
+                broke.SetActive(true);
+
+                //camera
+                StartCoroutine(ShowIsland());
+            }
+        }
+    }
 
     #endregion
     //========================

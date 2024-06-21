@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Disappear : MonoBehaviour
@@ -16,7 +17,8 @@ public class Disappear : MonoBehaviour
     //========================
     #region
 
-
+    [SerializeField] float waitTime;
+    bool disappearing = false;
 
     #endregion
     //========================
@@ -26,7 +28,12 @@ public class Disappear : MonoBehaviour
     //========================
     #region
 
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(waitTime);
 
+        disappearing = true;
+    }
 
     #endregion
     //========================
@@ -36,15 +43,23 @@ public class Disappear : MonoBehaviour
     //========================
     #region
 
+    private void Start()
+    {
+        StartCoroutine(Wait());
+    }
+
     void Update()
     {
-        Vector3 scale = Vector3.MoveTowards(transform.localScale, Vector3.zero, Time.deltaTime * 0.5f);
-
-        transform.localScale = scale;
-
-        if (transform.localScale.x <= 0)
+        if (disappearing)
         {
-            Destroy(gameObject);
+            Vector3 scale = Vector3.MoveTowards(transform.localScale, Vector3.zero, Time.deltaTime * 0.5f);
+
+            transform.localScale = scale;
+
+            if (transform.localScale.x <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
