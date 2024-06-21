@@ -111,7 +111,6 @@ public class Gun: MonoBehaviour
                                 //draw gun if not
                                 else
                                 {
-                                    print("irrinhó");
                                     //visuals
                                     meshRenderer.enabled = true;
                                     grapesObj.SetActive(true);
