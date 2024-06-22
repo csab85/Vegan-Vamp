@@ -81,6 +81,18 @@ public class BlenderJuice : MonoBehaviour
                 selfStats.colors.Add(color);
             }
         }
+
+        //throw out if player
+        if (collider.tag == "Player")
+        {
+            collider.transform.position = transform.forward * 2;
+        }
+
+        //destroy if juice
+        if (collider.tag == "Juice")
+        {
+            Destroy(collider.gameObject);
+        }
     }
 
     public void BlendJuice()

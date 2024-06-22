@@ -63,6 +63,7 @@ public class StatsManager : MonoBehaviour
     //Stats list of the game object
     #region
 
+#if UNITY_EDITOR
     [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
     public float[] health;
 
@@ -74,7 +75,7 @@ public class StatsManager : MonoBehaviour
 
     [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
     public float[] tornado;
-    
+
     [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
     public float[] speed;
 
@@ -92,7 +93,31 @@ public class StatsManager : MonoBehaviour
 
     [NamedArrayAttribute("Default Base", "Current Base", "Self Intensity", "Self Reach Time", "Self Return Time", "Apply Intensity", "Apply Reach Time", "Apply Return Time", "Cap Intensity", "Cap Reach Time", "Cap Return Time", "Starting Base", "Starting Intensity", "Passed Time")]
     public float[] dunno;
-    
+
+#else
+
+    public float[] health;
+
+    public float[] fire;
+
+    public float[] ice;
+
+    public float[] tornado;
+
+    public float[] speed;
+
+    public float[] noGravity;
+
+    public float[] teleport;
+
+    public float[] grow;
+
+    public float[] shrink;
+
+    public float[] dunno;
+
+#endif
+
     #endregion
 
     [SerializeField] public List<Color> colors;
@@ -123,7 +148,7 @@ public class StatsManager : MonoBehaviour
 
     [SerializeField] public Type objectType;
 
-    #endregion
+#endregion
     //========================
 
 
@@ -402,11 +427,11 @@ public static class StatsConst
     public const int SHRINK = 8;
 }
 
-
-//CLASSES TO CREATE THE NAME ARRAY THINGY
-//========================
+////CLASSES TO CREATE THE NAME ARRAY THINGY
+////========================
 #region 
 
+#if UNITY_EDITOR
 public class NamedArrayAttribute : PropertyAttribute
 {
     public string[] names;
@@ -432,7 +457,7 @@ public class NamedArrayDrawer : PropertyDrawer
         else if (property.propertyType == SerializedPropertyType.Float)
         {
             int index = GetIndex(property);
-            
+
             if (index >= 0 && index < namedArray.names.Length)
             {
                 label.text = namedArray.names[index];
@@ -459,6 +484,7 @@ public class NamedArrayDrawer : PropertyDrawer
         return -1;
     }
 }
+#endif
 
 #endregion
-//========================
+////========================
