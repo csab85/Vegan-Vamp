@@ -113,6 +113,8 @@ public class Menu: MonoBehaviour
             camScript.combatCamera.SetActive(true);
 
             playerMovement.moveSpeed = playerMovement.baseSpeed;
+
+            Time.timeScale = 1;
         }
     }
 
@@ -172,6 +174,8 @@ public class Menu: MonoBehaviour
                     camScript.combatCamera.SetActive(false);
 
                     playerMovement.moveSpeed = 0;
+
+                    Time.timeScale = 0;
                 }
             }
         }
