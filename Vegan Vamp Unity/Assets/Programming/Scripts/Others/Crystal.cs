@@ -92,6 +92,7 @@ public class Crystal : MonoBehaviour
 
                 crystalSoul.SetActive(true);
 
+                GetComponent<Collider>().enabled = false;
                 GetComponent<Disappear>().enabled = true;
             }
         }
