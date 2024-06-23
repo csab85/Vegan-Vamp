@@ -46,7 +46,7 @@ public class BasicBehaviour : MonoBehaviour
     float baseSpeed;
     float baseVisionRange;
     float baseAttackRange;
-    float baseVisionAngle;
+    [HideInInspector] public float baseVisionAngle;
 
     Vector3 playerPosit;
 
