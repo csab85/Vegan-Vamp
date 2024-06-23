@@ -52,11 +52,11 @@ public class Grow : MonoBehaviour
     {
         if (growing)
         {
-            Vector3 scale = Vector3.MoveTowards(transform.localScale, Vector3.one, Time.deltaTime * 0.5f);
+            Vector3 scale = Vector3.MoveTowards(transform.localScale, new Vector3(8, 8, 8), Time.deltaTime * 3);
 
             transform.localScale = scale;
 
-            if (transform.localScale.x >= 1)
+            if (transform.localScale.x >= 8)
             {
                 growing = false;
             }

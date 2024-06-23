@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: -7927615057882976413}
   - component: {fileID: 5647795171621885891}
   - component: {fileID: 3537237483348676184}
+  - component: {fileID: 5006392976594691412}
   m_Layer: 0
   m_Name: CrystalPurple
   m_TagString: Untagged
@@ -81,8 +82,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 954.1422, y: -20.221, z: 381.726}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1860382882213647757}
   - {fileID: 3339137020132099493}
@@ -130,6 +131,8 @@ MonoBehaviour:
   broke: {fileID: 5512771827680224397}
   crystalSoul: {fileID: 568361297102983240}
   islands:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   islandCam: {fileID: 0}
   audioCrystalBreak: {fileID: 8300000, guid: 8f2f78722824d5c46ae33464c1a00a8a, type: 3}
@@ -436,6 +439,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!208 &5006392976594691412
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5531392120110328848}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.7, y: 0.9, z: 0.7}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.2, z: -0.1}
+  m_TimeToStationary: 0.5
 --- !u!1001 &2888073239971233966
 PrefabInstance:
   m_ObjectHideFlags: 0

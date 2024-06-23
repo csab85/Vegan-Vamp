@@ -11,15 +11,15 @@ public class Inventory : MonoBehaviour
     //========================
     #region
 
-    [Header ("Imports")]
+    [Header("Imports")]
     [SerializeField] ThirdPersonCamera camScript;
     [SerializeField] GameObject player;
     [SerializeField] GameObject[] worldItemsArray;
     [SerializeField] GameObject[] inventoryItemsArray;
+    [SerializeField] Transform[] spawnpoints;
 
     GameObject bag;
     RectTransform bagRectTransform;
-    GameObject spawnPoint;
     StatsManager playerStats;
 
     #endregion
@@ -34,6 +34,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] float bigScale;
     [SerializeField] Vector2 bigPosit;
 
+    int spawnCounter = 0;
 
     Vector2 basePosit;
     Vector2 baseScale;
@@ -53,7 +54,9 @@ public class Inventory : MonoBehaviour
         {
             if ((addedItem.name + " 2D") == item.name)
             {
-                GameObject newItem = Instantiate(item, spawnPoint.transform.position, Quaternion.identity, bag.transform);
+                GameObject newItem = Instantiate(item, spawnpoints[spawnCounter].position, Quaternion.identity, bag.transform);
+
+                spawnCounter = (spawnCounter + 1) % spawnpoints.Length;
 
                 newItem.name = item.name;
 
@@ -80,6 +83,8 @@ public class Inventory : MonoBehaviour
                 GameObject newItem = Instantiate(worldItem, player.transform.position + spawnDistance, Quaternion.identity);
 
                 newItem.name = worldName;
+
+                newItem.GetComponent<Rigidbody>().AddForce(newItem.transform.forward, ForceMode.Impulse);
 
                 if (item.tag == "Juice")
                 {
@@ -119,7 +124,6 @@ public class Inventory : MonoBehaviour
     {
         //game objects
         bag = FindChild(transform, "Bag");
-        spawnPoint = bag.transform.Find("Spawn Point").gameObject;
 
         //components
         bagRectTransform = bag.GetComponent<RectTransform>();

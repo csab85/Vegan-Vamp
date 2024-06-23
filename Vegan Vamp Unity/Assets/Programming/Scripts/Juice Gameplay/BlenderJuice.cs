@@ -85,7 +85,7 @@ public class BlenderJuice : MonoBehaviour
         //throw out if player
         if (collider.tag == "Player")
         {
-            collider.transform.position = transform.forward * 2;
+            collider.transform.position = transform.position + transform.forward * 2;
         }
 
         //destroy if juice
