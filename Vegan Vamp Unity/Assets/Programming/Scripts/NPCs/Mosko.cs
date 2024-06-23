@@ -14,8 +14,11 @@ public class Mosko : MonoBehaviour
 
     //components
     [SerializeField] Transform projectileSpawn;
+    [SerializeField] AudioClip audioSpit;
+    [SerializeField] AudioClip audioAlert;
     Animator animator;
     NavMeshAgent agent;
+    AudioSource audioSource;
 
     //script
     RandomWalk randomWalk;
@@ -66,10 +69,16 @@ public class Mosko : MonoBehaviour
 
     public void Shoot()
     {
-        transform.LookAt(playerPosit);
         GameObject newProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity, null);
         newProjectile.SetActive(true);
-        newProjectile.GetComponent<Rigidbody>().AddForce(transform.forward * 20, ForceMode.Impulse);
+
+        Vector3 direction = (player.transform.position - newProjectile.transform.position).normalized;
+
+        newProjectile.GetComponent<Rigidbody>().AddForce(direction * 20, ForceMode.Impulse);
+
+        //sound
+        audioSource.clip = audioSpit;
+        audioSource.Play();
 
         StartCoroutine(Wait());
     }
@@ -100,6 +109,7 @@ public class Mosko : MonoBehaviour
         //get components
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
 
         //get scripts
         randomWalk = GetComponent<RandomWalk>();
@@ -145,7 +155,9 @@ public class Mosko : MonoBehaviour
 
                     if (agent.remainingDistance < 0.1f)
                     {
-                        actualState = State.Shooting;
+                        transform.LookAt(playerPosit);
+                        animator.Play("Attack");
+                        actualState = State.Waiting;
                     }
 
                     break;

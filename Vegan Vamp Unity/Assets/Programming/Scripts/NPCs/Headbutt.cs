@@ -15,9 +15,14 @@ public class Headbutt : MonoBehaviour
     GameObject player;
 
     //components
+    [Header ("Audio Clips")]
+    [SerializeField] AudioClip audioAlert;
+    [SerializeField] AudioClip audioAttack;
+
     Animator animator;
     Rigidbody rb;
     NavMeshAgent agent;
+    AudioSource audioSource;
 
     //scripts
     FieldOfView fov;
@@ -49,6 +54,7 @@ public class Headbutt : MonoBehaviour
     [SerializeField] bool waiting;
 
     Vector3 playerPosit;
+    bool alert = false;
 
     enum FightState
     {
@@ -72,6 +78,9 @@ public class Headbutt : MonoBehaviour
         aiming = false;
 
         agent.destination = playerPosit + (headbuttDistance * transform.forward * 1.5f);
+
+        audioSource.clip = audioAttack;
+        audioSource.Play();
     }
 
     /// <summary>
@@ -127,6 +136,7 @@ public class Headbutt : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
 
         //get scripts
         fov = GetComponent<FieldOfView>();
@@ -141,6 +151,14 @@ public class Headbutt : MonoBehaviour
     {
         if (basicBehaviour.alertState == BasicBehaviour.AlertState.Fighting && !selfStats.dead)
         {
+            if (!alert)
+            {
+                audioSource.clip = audioAlert;
+                audioSource.Play();
+
+                alert = true;
+            }
+
             playerPosit = player.transform.position;
 
             switch (fightState)
@@ -201,6 +219,11 @@ public class Headbutt : MonoBehaviour
 
                     break;
             }
+        }
+
+        else if (alert)
+        {
+            alert = false;
         }
     }
 

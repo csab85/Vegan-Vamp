@@ -14,8 +14,13 @@ public class Moskito : MonoBehaviour
 
     //components
     [SerializeField] Transform projectileSpawn;
+    [SerializeField] AudioClip audioAlert;
+    [SerializeField] AudioClip[] audiosSpit;
+
+
     Animator animator;
     NavMeshAgent agent;
+    AudioSource audioSource;
 
     //script
     RandomWalk randomWalk;
@@ -39,6 +44,7 @@ public class Moskito : MonoBehaviour
     [SerializeField] bool fighting;
     [SerializeField] bool aiming;
     [SerializeField] bool waiting;
+    bool alerted = false;
 
     Vector3 playerPosit;
 
@@ -73,6 +79,10 @@ public class Moskito : MonoBehaviour
 
         newProjectile.GetComponent<Rigidbody>().AddForce(direction * 20, ForceMode.Impulse);
 
+        //sound
+        audioSource.clip = audiosSpit[Random.Range(0, audiosSpit.Length)];
+        audioSource.Play();
+
         StartCoroutine(Wait());
     }
 
@@ -102,6 +112,7 @@ public class Moskito : MonoBehaviour
         //get components
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
 
         //get scripts
         randomWalk = GetComponent<RandomWalk>();
@@ -117,6 +128,15 @@ public class Moskito : MonoBehaviour
     {
         if (basicBehaviour.alertState == BasicBehaviour.AlertState.Fighting)
         {
+            //play sound
+            if (!alerted)
+            {
+                audioSource.clip = audioAlert;
+                audioSource.Play();
+
+                alerted = true;
+            }
+
             playerPosit = player.transform.position;
 
             //focus on flying around player
@@ -203,6 +223,11 @@ public class Moskito : MonoBehaviour
 
                     break;
             }
+        }
+
+        else if (alerted)
+        {
+            alerted = false;
         }
     }
 

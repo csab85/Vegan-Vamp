@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -10,7 +8,7 @@ public class Gun: MonoBehaviour
     //IMPORTS
     //========================
     #region
-    [Header("Imports")]
+    [Header("Game Objects")]
     //game objects
     [SerializeField] GameObject player;
     [SerializeField] GameObject bulletPool;
@@ -26,8 +24,18 @@ public class Gun: MonoBehaviour
     MeshRenderer meshRenderer;
     Animator animator;
     VisualEffect muzzleFX;
+    AudioSource audioSource;
+
+    [Header("Audio Clips")]
+    [SerializeField] AudioClip shot;
+    [SerializeField] AudioClip[] reloads;
+    [SerializeField] AudioClip finalReload;
+    [SerializeField] AudioClip empty;
+
+
 
     //scripts
+    [Header ("Scripts")]
     [SerializeField] Inventory inventory;
     Movement playerMovement;
     StatsManager playerStats;
@@ -122,6 +130,16 @@ public class Gun: MonoBehaviour
                                     //slow down movement
                                     playerMovement.moveSpeed = playerBaseSpeed * 0.70f;
                                 }
+                            }
+
+                            else if (shotCounter >= 0 && meshRenderer.enabled && !shooting && !reloading)
+                            {
+                                //animation
+                                animator.Play("Shoot");
+
+                                //audio
+                                audioSource.clip = empty;
+                                audioSource.Play();
                             }
                         }
                     }
@@ -220,7 +238,12 @@ public class Gun: MonoBehaviour
         muzzleFX.Play();
 
         //play animation
-        animator.Play("Shoot", AnimationConsts.GUN_LAYER);        
+        animator.Play("Shoot", AnimationConsts.GUN_LAYER);
+
+        //play sound
+        audioSource.clip = shot;
+        audioSource.Play();
+         
 
         yield return new WaitForSeconds(shotCooldown);
         shooting = false;
@@ -239,6 +262,17 @@ public class Gun: MonoBehaviour
             //bring grapes back
             if (gameObject.name == "Grape Shooter")
             {
+                if (shotCounter != 1)
+                {
+                    audioSource.clip = reloads[Random.Range(0, reloads.Length)];
+                }
+
+                else
+                {
+                    audioSource.clip = finalReload;
+                }
+
+                audioSource.Play();
                 grapes[shotCounter - 1].SetActive(true);
             }
 
@@ -277,6 +311,7 @@ public class Gun: MonoBehaviour
         animator = player.GetComponent<Animator>();
         muzzleFX = muzzle.GetComponent<VisualEffect>();
         meshRenderer = gunBody.GetComponent<MeshRenderer>();
+        audioSource = GetComponent<AudioSource>();
 
         //get scripts
         playerMovement = player.GetComponent<Movement>();

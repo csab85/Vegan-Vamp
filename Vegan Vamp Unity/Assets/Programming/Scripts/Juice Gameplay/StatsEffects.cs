@@ -26,10 +26,15 @@ public class StatsEffects : MonoBehaviour
     List<GameObject> iceCubesList = new List<GameObject>();
 
     //components
+    [SerializeField] AudioClip audioHurt;
+    [SerializeField] AudioClip audioDeath;
+
+    [SerializeField] Volume volume;
+
+    AudioSource audioSource;
     Rigidbody rb;
     Animator animator;
     NavMeshAgent agent;
-    [SerializeField] Volume volume;
     Vignette vignette;
 
     #endregion
@@ -115,6 +120,12 @@ public class StatsEffects : MonoBehaviour
             {
                 animator.Play("Damage");
             }
+
+            if (audioHurt != null)
+            {
+                audioSource.clip = audioHurt;
+                audioSource.Play();
+            }
         }
     }
 
@@ -183,6 +194,7 @@ public class StatsEffects : MonoBehaviour
         TryGetComponent<Animator>(out animator);
         TryGetComponent<MeshTrail>(out meshTrail);
         TryGetComponent<Rigidbody>(out rb);
+        TryGetComponent<AudioSource>(out audioSource);
 
         //Get vfx objects
         Transform VFX = transform.Find("VFX");
@@ -246,6 +258,13 @@ public class StatsEffects : MonoBehaviour
                     GetComponent<Disappear>().enabled = true;
 
                     animator.Play("Death");
+
+                    if (audioDeath != null)
+                    {
+                        audioSource.clip = audioDeath;
+                        audioSource.Play();
+                        audioDeath = null;
+                    }
                 }
 
                 if (selfStats.objectType == StatsManager.Type.Player)

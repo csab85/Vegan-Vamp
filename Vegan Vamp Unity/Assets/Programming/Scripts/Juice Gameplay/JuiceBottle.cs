@@ -23,6 +23,7 @@ public class JuiceBottle : MonoBehaviour
     //components
     Animator animator;
     BoxCollider bc;
+    AudioSource audioSource;
 
     //scripts
     [Header ("Scripts")]
@@ -92,6 +93,8 @@ public class JuiceBottle : MonoBehaviour
         splash.SetActive(true);
 
         bc.enabled = false;
+
+        audioSource.Play();
 
         //apply effects on targets
         Collider[] targets;
@@ -232,6 +235,7 @@ public class JuiceBottle : MonoBehaviour
         //get components
         animator = player.GetComponent<Animator>();
         bc = GetComponent<BoxCollider>();
+        audioSource = GetComponent<AudioSource>();
 
         //get scripts
         hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();

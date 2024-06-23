@@ -16,6 +16,7 @@ public class BaseBullet : MonoBehaviour
     MeshRenderer meshRenderer;
     GameObject hit;
     VisualEffect hitFx;
+    AudioSource audioSource;
 
     #endregion
     //========================
@@ -32,6 +33,9 @@ public class BaseBullet : MonoBehaviour
     [SerializeField] float returnDelay;
     [SerializeField] bool playFxOnCollision;
     [SerializeField] float fxDelay;
+
+    bool damaged = false;
+
     #endregion
     //========================
 
@@ -57,6 +61,8 @@ public class BaseBullet : MonoBehaviour
 
         hit.SetActive(false);
         gameObject.SetActive(false);
+
+        damaged = false;
     }
 
     /// <summary>
@@ -76,7 +82,7 @@ public class BaseBullet : MonoBehaviour
         //apply dmg
         StatsEffects enemyEffects = collision.gameObject.GetComponent<StatsEffects>();
 
-        if (enemyEffects != null)
+        if (enemyEffects != null && !damaged)
         {
             StatsManager enemyStats = collision.gameObject.GetComponent<StatsManager>();
 
@@ -85,8 +91,13 @@ public class BaseBullet : MonoBehaviour
                 Vector3 direction = (collision.transform.position - transform.position).normalized;
 
                 enemyEffects.DamageSelf(direction, damage);
+
+                damaged = true;
             }
         }
+
+        //play sound
+        audioSource.Play();
 
         rb.isKinematic = true;
 
@@ -117,6 +128,7 @@ public class BaseBullet : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         hit = transform.GetChild(0).gameObject;
         hitFx = hit.GetComponent<VisualEffect>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnEnable()
