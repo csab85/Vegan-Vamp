@@ -31,7 +31,7 @@ public class Crystal : MonoBehaviour
     #region
 
     [SerializeField] float showTime;
-    static int islandCounter = -1;
+    static int islandCounter = 0;
 
     #endregion
     //========================
@@ -45,8 +45,10 @@ public class Crystal : MonoBehaviour
     {
         islandCam.gameObject.SetActive(true);
         islandCam.Priority = 2;
-        islandCounter++;
         islandCam.LookAt = islands[islandCounter];
+        islands[islandCounter].gameObject.GetComponent<Grow>().enabled = true;
+
+        islandCounter++;
 
         //lock player
         playerMovement.moveSpeed = 0;

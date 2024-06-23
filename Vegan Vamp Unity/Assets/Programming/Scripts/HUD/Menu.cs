@@ -101,21 +101,22 @@ public class Menu: MonoBehaviour
         foreach (GameObject page in pages)
         {
             page.SetActive(false);
-            buttons.SetActive(false);
-            minimapCam.SetActive(false);
-
-            EventSystem.current.SetSelectedGameObject(buttons.transform.Find("Glossary").gameObject);
-
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-
-            camScript.explorationCamera.SetActive(true);
-            camScript.combatCamera.SetActive(true);
-
-            playerMovement.moveSpeed = playerMovement.baseSpeed;
-
-            Time.timeScale = 1;
         }
+
+        buttons.SetActive(false);
+        minimapCam.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(buttons.transform.Find("Glossary").gameObject);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        camScript.explorationCamera.SetActive(true);
+        camScript.combatCamera.SetActive(true);
+
+        playerMovement.moveSpeed = playerMovement.baseSpeed;
+
+        Time.timeScale = 1;
     }
 
     public void ExitToMainMenu()
@@ -142,6 +143,7 @@ public class Menu: MonoBehaviour
         pages = new List<GameObject>();
         pages.Add(profile);
         pages.Add(glossary);
+        pages.Add(map);
         pages.Add(options);
         pages.Add(exit);
 

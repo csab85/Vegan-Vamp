@@ -639,10 +639,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crystalHitFX: {fileID: 0}
   audioHurt: {fileID: 8300000, guid: 8999dc5c103bede4089a1a69e0857c30, type: 3}
   audioDeath: {fileID: 8300000, guid: c77bc59443763bc4fab806b18c5d6e93, type: 3}
+  audiosCrystalHit: []
   volume: {fileID: 0}
   fireProof: 0
+  crystal: 0
   vignetteIntensity: 0
   vignetteColor: {r: 0, g: 0, b: 0, a: 0}
   vignetteCorrect: 0
@@ -689,7 +692,7 @@ AudioSource:
   m_GameObject: {fileID: 902868328485978754}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8581179127881891938, guid: 17557789432003d4a9abf1bf3060d9de, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
