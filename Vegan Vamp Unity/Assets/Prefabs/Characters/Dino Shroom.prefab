@@ -259,8 +259,8 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 128
-  visionRadius: 25
-  attackRadius: 20
+  visionRadius: 15
+  attackRadius: 10
   angle: 260
   isSeeingPlayer: 0
   isInAttackRange: 0
@@ -277,9 +277,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  chasingSpeed: 7
-  chasingVisionRange: 30
-  chasingAttackRange: 25
+  chasingSpeed: 6
+  chasingVisionRange: 17
+  chasingAttackRange: 12
   chasingVisionAngle: 360
   flying: 0
   damage: 3
@@ -299,7 +299,7 @@ MonoBehaviour:
   waitTime: 3.5
   headbuttForce: 20
   headbuttDistance: 5
-  headbuttingSpeed: 25
+  headbuttingSpeed: 15
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -523,6 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8c42f3b65317842947e6eff6bf09ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitTime: 0
 --- !u!1001 &2804676048488955076
 PrefabInstance:
   m_ObjectHideFlags: 0

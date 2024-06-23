@@ -66,10 +66,12 @@ public class Moskito : MonoBehaviour
 
     public void Shoot()
     {
-        transform.LookAt(playerPosit);
         GameObject newProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity, null);
         newProjectile.SetActive(true);
-        newProjectile.GetComponent<Rigidbody>().AddForce(transform.forward * 20, ForceMode.Impulse);
+
+        Vector3 direction = (player.transform.position - newProjectile.transform.position).normalized;
+
+        newProjectile.GetComponent<Rigidbody>().AddForce(direction * 20, ForceMode.Impulse);
 
         StartCoroutine(Wait());
     }
@@ -145,7 +147,9 @@ public class Moskito : MonoBehaviour
 
                     if (agent.remainingDistance < 0.1f)
                     {
-                        actualState = State.Shooting;
+                        transform.LookAt(playerPosit);
+                        animator.Play("Attack");
+                        actualState = State.Waiting;
                     }
 
                     break;

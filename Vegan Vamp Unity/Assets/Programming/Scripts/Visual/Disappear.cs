@@ -28,7 +28,7 @@ public class Disappear : MonoBehaviour
     //========================
     #region
 
-    IEnumerator Wait()
+    IEnumerator WaitToDisappear()
     {
         yield return new WaitForSeconds(waitTime);
 
@@ -45,7 +45,7 @@ public class Disappear : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Wait());
+        StartCoroutine(WaitToDisappear());
     }
 
     void Update()
