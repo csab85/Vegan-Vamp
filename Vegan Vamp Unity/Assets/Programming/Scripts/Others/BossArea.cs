@@ -38,6 +38,8 @@ public class BossArea : MonoBehaviour
             //boss
             bossBehaviour.baseVisionAngle = 360;
             bossBehaviour.gameObject.GetComponent<FieldOfView>().angle = 360;
+
+            print("sim");
         }
     }
 
