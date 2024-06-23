@@ -22,12 +22,16 @@ public class StatsEffects : MonoBehaviour
     GameObject gravityParticles;
     MeshTrail meshTrail;
 
+    [Header ("Crystal")]
+    [SerializeField] VisualEffect crystalHitFX;
+
     //models
     List<GameObject> iceCubesList = new List<GameObject>();
 
     //components
     [SerializeField] AudioClip audioHurt;
     [SerializeField] AudioClip audioDeath;
+    [SerializeField] AudioClip[] audiosCrystalHit;
 
     [SerializeField] Volume volume;
 
@@ -51,6 +55,7 @@ public class StatsEffects : MonoBehaviour
     static float fireDamage = 0.1f;
     static float fireRefreshRate = 0.05f;
 
+    [SerializeField] bool crystal;
 
     //Check what coroutine is running
     bool burning;
@@ -61,6 +66,7 @@ public class StatsEffects : MonoBehaviour
 
     //extras
     int iceNumber;
+    int crystalHitCount = 0;
 
     //vignete (for damage and heal)
     [HideInInspector] public float vignetteIntensity;
@@ -100,32 +106,46 @@ public class StatsEffects : MonoBehaviour
     {
         if (!selfStats.dead)
         {
-            if (rb != null)
+            if (!crystal)
             {
-                rb.AddForce(knockbackDir * 5, ForceMode.Impulse);
+                if (rb != null)
+                {
+                    rb.AddForce(knockbackDir * 5, ForceMode.Impulse);
+                }
+
+                if (gameObject.tag == "Player")
+                {
+                    //set animation layer
+                    animator.SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 1);
+
+                    //vignette
+                    StartCoroutine(DamageVignette());
+                }
+
+                if (animator != null)
+                {
+                    animator.Play("Damage");
+                }
+
+                if (audioHurt != null)
+                {
+                    audioSource.clip = audioHurt;
+                    audioSource.Play();
+                }
+            }
+
+            else if (selfStats.health[StatsConst.SELF_INTENSITY] > 5)
+            {
+                print(crystalHitCount);
+                audioSource.clip = audiosCrystalHit[crystalHitCount];
+                audioSource.Play();
+
+                crystalHitFX.Play();
+
+                crystalHitCount ++;
             }
 
             selfStats.ApplyToBase(StatsConst.HEALTH, -dmg);
-
-            if (gameObject.tag == "Player")
-            {
-                //set animation layer
-                animator.SetLayerWeight(AnimationConsts.DAMAGE_LAYER, 1);
-
-                //vignette
-                StartCoroutine(DamageVignette());
-            }
-
-            if (animator != null)
-            {
-                animator.Play("Damage");
-            }
-
-            if (audioHurt != null)
-            {
-                audioSource.clip = audioHurt;
-                audioSource.Play();
-            }
         }
     }
 

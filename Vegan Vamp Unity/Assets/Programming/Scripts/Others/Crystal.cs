@@ -10,10 +10,13 @@ public class Crystal : MonoBehaviour
 
     [SerializeField] GameObject intact;
     [SerializeField] GameObject broke;
+    [SerializeField] GameObject crystalSoul;
 
     //components
     [SerializeField] Transform[] islands;
     [SerializeField] CinemachineClearShot islandCam;
+    [SerializeField] AudioClip audioCrystalBreak;
+    AudioSource audioSource;
 
     //scripts
     [SerializeField] Movement playerMovement;
@@ -66,6 +69,7 @@ public class Crystal : MonoBehaviour
     private void Start()
     {
         selfStats = GetComponent<StatsManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -79,6 +83,14 @@ public class Crystal : MonoBehaviour
 
                 //camera
                 StartCoroutine(ShowIsland());
+
+                //audio and vfx
+                audioSource.clip = audioCrystalBreak;
+                audioSource.Play();
+
+                crystalSoul.SetActive(true);
+
+                GetComponent<Disappear>().enabled = true;
             }
         }
     }
