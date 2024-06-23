@@ -35,7 +35,7 @@ public class Acid: MonoBehaviour
     {
         if (meltingObjs.Contains(obj))
         {
-            objStats.ApplyToBase(StatsConst.HEALTH, -0.03f);
+            objStats.ApplyToBase(StatsConst.HEALTH, -0.3f);
 
             //vignette thingy
             StatsEffects targetEffect = obj.GetComponent<StatsEffects>();
@@ -55,7 +55,6 @@ public class Acid: MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             GetComponent<Rigidbody>().isKinematic = true;
-            print("chao");
         }
 
         //apply damage
