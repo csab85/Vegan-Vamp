@@ -4456,6 +4456,7 @@ GameObject:
   - component: {fileID: 1197826924267287941}
   - component: {fileID: 2190120469391700226}
   - component: {fileID: 391737219539120668}
+  - component: {fileID: 19768071137178433}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -4593,9 +4594,9 @@ MonoBehaviour:
   dead: 0
   speedMultiplier: 0
   health:
-  - 12
-  - 12
-  - 12
+  - 25
+  - 25
+  - 25
   - 0
   - 0
   - 0
@@ -4800,6 +4801,19 @@ MonoBehaviour:
   shaderVarRate: 0.1
   shaderVarRefreshRate: 0.05
   isTrailActive: 0
+--- !u!114 &19768071137178433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291324401332410514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1189b8779ae67dd42bb8dd04d6484ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &7365911881402820643
 GameObject:
   m_ObjectHideFlags: 0
