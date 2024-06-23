@@ -231,7 +231,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  - 0.75
+  - 0.4
   - 1
   - 10
   - -1
@@ -315,7 +315,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crystalHitFX: {fileID: 0}
+  audioHurt: {fileID: 0}
+  audioDeath: {fileID: 0}
+  audiosCrystalHit: []
+  volume: {fileID: 0}
   fireProof: 0
+  crystal: 0
+  vignetteIntensity: 0
+  vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+  vignetteCorrect: 0
 --- !u!4 &750718828049677170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eec118905120a814f937180f60b9369b, type: 3}

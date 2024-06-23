@@ -157,7 +157,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!136 &1595586289525380018
 CapsuleCollider:
@@ -262,6 +262,7 @@ MonoBehaviour:
   flying: 0
   damage: 1
   alertState: 0
+  baseVisionAngle: 0
 --- !u!114 &5989838793564898605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,8 +456,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crystalHitFX: {fileID: 0}
+  audioHurt: {fileID: 0}
+  audioDeath: {fileID: 0}
+  audiosCrystalHit: []
   volume: {fileID: 0}
   fireProof: 0
+  crystal: 0
   vignetteIntensity: 0
   vignetteColor: {r: 0, g: 0, b: 0, a: 0}
   vignetteCorrect: 0
@@ -672,6 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8c42f3b65317842947e6eff6bf09ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitTime: 0
 --- !u!1001 &3945316767076919359
 PrefabInstance:
   m_ObjectHideFlags: 0
