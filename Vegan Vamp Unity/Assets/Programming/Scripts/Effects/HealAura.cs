@@ -30,7 +30,7 @@ public class HealAura : MonoBehaviour
     [SerializeField] float healFrequency;
     float baseHealPower;
 
-    StatsManager.Type[] allowedTypes = {StatsManager.Type.Ingredient, StatsManager.Type.NPC, StatsManager.Type.Player};
+    StatsManager.Type[] allowedTypes = {StatsManager.Type.Player};
 
     List<GameObject> healingObjs = new List<GameObject>();
 
