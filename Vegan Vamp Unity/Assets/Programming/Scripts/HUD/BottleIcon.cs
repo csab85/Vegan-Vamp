@@ -115,7 +115,7 @@ public class BottleIcon : MonoBehaviour
             {
                 Vector2 targetSize = new Vector2(smallSize, smallSize);
 
-                transform.localScale = Vector2.MoveTowards(transform.localScale, targetSize, 0.02f);
+                transform.localScale = targetSize;
             }
 
             //physics
@@ -129,7 +129,7 @@ public class BottleIcon : MonoBehaviour
             {
                 Vector2 targetSize = new Vector2(largeSize, largeSize);
 
-                transform.localScale = Vector2.MoveTowards(transform.localScale, targetSize, 0.02f);
+                transform.localScale = targetSize;
             }
 
             //rotation

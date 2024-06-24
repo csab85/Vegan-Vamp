@@ -78,7 +78,7 @@ public class Tornado : MonoBehaviour
     {
         if (burningObjs.Contains(obj))
         {
-            objStats.ApplyStatSelf(StatsConst.FIRE, 0.1f, 0.5f, 0.6f);
+            objStats.ApplyStatSelf(StatsConst.FIRE, 0.01f, 0.5f, 0.6f);
 
             // Wait and restart coroutine
             yield return new WaitForSeconds(0.05f);
@@ -91,7 +91,7 @@ public class Tornado : MonoBehaviour
     {
         if (freezingObjs.Contains(obj))
         {
-            objStats.ApplyStatSelf(StatsConst.ICE, 0.1f, 0.5f, 0.6f);
+            objStats.ApplyStatSelf(StatsConst.ICE, 0.01f, 0.5f, 0.6f);
 
             // Wait and restart coroutine
             yield return new WaitForSeconds(0.05f);

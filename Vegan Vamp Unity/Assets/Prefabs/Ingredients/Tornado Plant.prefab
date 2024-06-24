@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tornadoCenter: {fileID: 103734774188514126}
-  pullForce: 5000
+  pullForce: 4000
   waitTime: 0.05
   widingSpeed: 1
   maxWideness: 2
@@ -1072,7 +1072,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crystalHitFX: {fileID: 0}
+  audioHurt: {fileID: 0}
+  audioDeath: {fileID: 0}
+  audiosCrystalHit: []
+  volume: {fileID: 0}
   fireProof: 0
+  crystal: 0
+  vignetteIntensity: 0
+  vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+  vignetteCorrect: 0
 --- !u!114 &3515042394732771092
 MonoBehaviour:
   m_ObjectHideFlags: 0
