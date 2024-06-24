@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06530565, g: 0.344307, b: 0.07199918, a: 1}
+  m_IndirectSpecularColor: {r: 0.0653057, g: 0.344307, b: 0.07199918, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16071,11 +16071,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2087820302387967453, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_XAxis.m_MaxSpeed
-      value: 200
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2087820302387967453, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_YAxis.m_MaxSpeed
-      value: 7
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087820302387967453, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: m_XAxis.m_AccelTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087820302387967453, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: m_XAxis.m_DecelTime
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2087820302387967453, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_YAxis.m_AccelTime
@@ -16379,15 +16387,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6632776691908721182, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.15394415
+      value: -0.15394416
       objectReference: {fileID: 0}
     - target: {fileID: 6632776691908721182, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.017906874
+      value: 0.017906845
       objectReference: {fileID: 0}
     - target: {fileID: 6632776691908721182, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0022639371
+      value: -0.0022639334
       objectReference: {fileID: 0}
     - target: {fileID: 6798353240093659718, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_AnchorMax.x
@@ -16404,6 +16412,18 @@ PrefabInstance:
     - target: {fileID: 6807692489354411703, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_MinValue
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903066212242419091, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 39cf6853a070a68499cd12eb930a5707, type: 2}
+    - target: {fileID: 6903066212242419091, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3170795935123060621, guid: 39cf6853a070a68499cd12eb930a5707, type: 2}
+    - target: {fileID: 6903066212242419091, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7125435316946887640, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_AnchorMax.x
@@ -16463,11 +16483,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8543692856453085889, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_XAxis.m_MaxSpeed
-      value: 200
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8543692856453085889, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_YAxis.m_MaxSpeed
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8543692856453085889, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_XAxis.m_AccelTime
@@ -16475,6 +16495,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8543692856453085889, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_XAxis.m_DecelTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8543692856453085889, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: m_YAxis.m_AccelTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8543692856453085889, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
+      propertyPath: m_YAxis.m_DecelTime
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8593096412894823295, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
@@ -16495,15 +16523,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8593096412894823295, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.20969647
+      value: -0.20969646
       objectReference: {fileID: 0}
     - target: {fileID: 8593096412894823295, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.10409805
+      value: 0.10409804
       objectReference: {fileID: 0}
     - target: {fileID: 8593096412894823295, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.022458969
+      value: 0.022458965
       objectReference: {fileID: 0}
     - target: {fileID: 8889002954084462925, guid: f4fd85dcd3ebf374c87c9e92403d2d9b, type: 3}
       propertyPath: m_LocalPosition.x
