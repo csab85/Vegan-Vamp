@@ -144,7 +144,7 @@ public class Headbutt : MonoBehaviour
         selfStats = GetComponent<StatsManager>();
 
         //get game objects
-        player = fov.player;
+        player = GameObject.Find("Player");
     }
 
     void Update()

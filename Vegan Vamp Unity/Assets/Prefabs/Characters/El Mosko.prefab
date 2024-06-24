@@ -346,6 +346,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: El Mosko
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3113743d13108cd49976fc8b69eb12f7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3113743d13108cd49976fc8b69eb12f7, type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 1818720707241677448, guid: 3113743d13108cd49976fc8b69eb12f7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -54.47141
@@ -805,6 +813,7 @@ MonoBehaviour:
   flying: 1
   damage: 3
   alertState: 0
+  baseVisionAngle: 0
 --- !u!114 &6702070824842904198
 MonoBehaviour:
   m_ObjectHideFlags: 0

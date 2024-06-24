@@ -126,7 +126,7 @@ public class AsyncLoad : MonoBehaviour
 
                         if (!loadText.typing && !loadText.waiting)
                         {
-                            StartCoroutine(loadText.DeleteText(3, 0.1f));
+                            StartCoroutine(loadText.DeleteText(3, 0.03f));
                         }
                     }
 
@@ -137,7 +137,7 @@ public class AsyncLoad : MonoBehaviour
                     //delete second text
                     if (!loadText.typing)
                     {
-                        StartCoroutine(loadText.DeleteText(2, 0.1f));
+                        StartCoroutine(loadText.DeleteText(2, 0.03f));
                     }
 
                     break;
@@ -147,7 +147,7 @@ public class AsyncLoad : MonoBehaviour
                     //delete first text
                     if (!loadText.typing)
                     {
-                        StartCoroutine(loadText.DeleteText(1, 0.1f));
+                        StartCoroutine(loadText.DeleteText(1, 0.03f));
                     }
 
                     break;
