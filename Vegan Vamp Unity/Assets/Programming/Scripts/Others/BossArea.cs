@@ -31,12 +31,15 @@ public class BossArea : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            other.gameObject.GetComponent<Respanw>().spawnPoint = transform.position;
             other.gameObject.GetComponent<AudioSource>().clip = audioBossTheme;
             other.gameObject.GetComponent<AudioSource>().Play();
 
             //boss
             bossBehaviour.baseVisionAngle = 360;
             bossBehaviour.gameObject.GetComponent<FieldOfView>().angle = 360;
+
+            print("sim");
         }
     }
 

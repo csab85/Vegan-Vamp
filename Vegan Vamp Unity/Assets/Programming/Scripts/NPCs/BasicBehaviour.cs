@@ -120,7 +120,6 @@ public class BasicBehaviour : MonoBehaviour
                 //go to normal speed
                 if (agent.speed != baseSpeed * selfStats.speedMultiplier)
                 {
-                    print("decrease");
                     agent.speed = baseSpeed;
                     fov.visionRadius = baseVisionRange;
                     fov.attackRadius = baseAttackRange;
@@ -159,7 +158,6 @@ public class BasicBehaviour : MonoBehaviour
 
                 if (agent.speed != chasingSpeed * selfStats.speedMultiplier)
                 {
-                    print("enhance");
                     agent.speed = chasingSpeed;
                     fov.visionRadius = chasingVisionRange;
                     fov.attackRadius = chasingAttackRange;

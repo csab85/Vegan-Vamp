@@ -59,12 +59,9 @@ public class Interactions : MonoBehaviour
 
             //check if object is in plant or in world
             Rigidbody rb = null;
-            Coconut coconut = null;
-
             interactObj.TryGetComponent<Rigidbody>(out rb);
-            interactObj.TryGetComponent<Coconut>(out coconut);
 
-            if (rb != null && coconut == null)
+            if (rb != null && interactObj.name != "Gravity Ingredient")
             {
                 Destroy(interactObj);
             }
