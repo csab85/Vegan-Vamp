@@ -719,6 +719,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.7250977
       objectReference: {fileID: 0}
@@ -757,6 +769,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8391222552659086748, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}
       propertyPath: m_Name
@@ -1045,7 +1061,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9b1824ca0592468409e8d5eed06c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crystalHitFX: {fileID: 0}
+  audioHurt: {fileID: 0}
+  audioDeath: {fileID: 0}
+  audiosCrystalHit: []
+  volume: {fileID: 0}
   fireProof: 0
+  crystal: 0
+  vignetteIntensity: 0
+  vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+  vignetteCorrect: 0
 --- !u!4 &1752033472900233428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3316992658331686828, guid: d4c77169decadc845b5b3a92a5fc976f, type: 3}

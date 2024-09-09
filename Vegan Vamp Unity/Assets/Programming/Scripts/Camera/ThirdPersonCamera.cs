@@ -112,7 +112,7 @@ public class ThirdPersonCamera : MonoBehaviour
                 float horizontalInput = Input.GetAxis ("Horizontal");
                 float verticalInput = Input.GetAxis ("Vertical");
 
-                Vector3 inputDirection = orientTransf.forward * verticalInput + orientTransf.right * horizontalInput;
+                Vector3 inputDirection = orientTransf.forward * verticalInput * Time.deltaTime + orientTransf.right * horizontalInput * Time.deltaTime;
 
                 if (inputDirection != Vector3.zero)
                 {

@@ -159,7 +159,7 @@ public class StatsManager : MonoBehaviour
     /// <summary>
     /// Applies the a stat on the object calling this function
     /// </summary>
-    /// <param name="stat">The stat being applied</param>
+    /// <param name="statNum">The stat being applied</param>
     /// <param name="intensity">How much intensity is being added</param>
     /// <param name="reachTime">How much time to reach is being added</param>
     /// /// <param name="returnTime">How much time to return is being added</param>
