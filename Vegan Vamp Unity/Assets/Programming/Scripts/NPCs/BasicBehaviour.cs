@@ -12,6 +12,9 @@ public class BasicBehaviour : MonoBehaviour
 
     //game objects
     [HideInInspector] public GameObject player;
+    [SerializeField] GameObject searchingIcon;
+    [SerializeField] GameObject attackingIcon;
+    
 
     //components
     Animator animator;
@@ -132,6 +135,17 @@ public class BasicBehaviour : MonoBehaviour
                     }
                 }
 
+                //deactivate icons
+                if (searchingIcon.activeSelf)
+                {
+                    searchingIcon.SetActive(false);
+                }
+
+                if (attackingIcon.activeSelf)
+                {
+                    attackingIcon.SetActive(false);
+                }
+
                 //walk or fly randomly
                 if (agent.remainingDistance <= 0.1f)
                 {
@@ -156,6 +170,7 @@ public class BasicBehaviour : MonoBehaviour
             
             case AlertState.Searching:
 
+                //set speed
                 if (agent.speed != chasingSpeed * selfStats.speedMultiplier)
                 {
                     agent.speed = chasingSpeed;
@@ -170,12 +185,34 @@ public class BasicBehaviour : MonoBehaviour
                     }
                 }
 
+                //set icons
+                if (!searchingIcon.activeSelf && !fov.isSeeingPlayer)
+                {
+                    searchingIcon.SetActive(true);
+                }
+
+                if (attackingIcon.activeSelf && !fov.isSeeingPlayer)
+                {
+                    attackingIcon.SetActive(false);
+                }
+
                 playerPosit = player.transform.position;
 
-                //follow player if seeing
+                //follow player if seeing && set icons
                 if (fov.isSeeingPlayer)
                 {
                     agent.destination = playerPosit;
+
+                    //set icons
+                    if (searchingIcon.activeSelf)
+                    {
+                        searchingIcon.SetActive(false);
+                    }
+
+                    if (!attackingIcon.activeSelf)
+                    {
+                        attackingIcon.SetActive(true);
+                    }
                 }
 
                 //if not seeing and on last seen posit, walk randomly
@@ -192,6 +229,20 @@ public class BasicBehaviour : MonoBehaviour
 
                 break;
 
+            case AlertState.Fighting:
+
+                //set icons
+                if (searchingIcon.activeSelf)
+                {
+                    searchingIcon.SetActive(false);
+                }
+
+                if (!attackingIcon.activeSelf)
+                {
+                    attackingIcon.SetActive(true);
+                }
+
+                break;
         }
     }
 
