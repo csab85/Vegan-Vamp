@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering;
 using UnityEngine.VFX;
 
@@ -68,6 +69,7 @@ public class Tornado : MonoBehaviour
 
             obj.GetComponent<Rigidbody>().AddForce(forceDirection * actualPullForce * Time.deltaTime);
 
+
             yield return new WaitForSeconds(0.05f);
 
             StartCoroutine(PullObject(obj));
@@ -112,6 +114,15 @@ public class Tornado : MonoBehaviour
             if (!pullingObjs.Contains(collider.gameObject))
             {
                 pullingObjs.Add(collider.gameObject);
+
+                //deactivate agent if it has
+                NavMeshAgent colliderAgent = collider.gameObject.GetComponent<NavMeshAgent>();
+
+                if (colliderAgent != null)
+                {
+                    colliderAgent.enabled = false;
+                }
+
                 StartCoroutine(PullObject(collider.gameObject));
             }
         }
@@ -153,6 +164,14 @@ public class Tornado : MonoBehaviour
     {
         if (pullingObjs.Contains(collider.gameObject))
         {
+            //reactivate agent if it has
+            NavMeshAgent colliderAgent = collider.gameObject.GetComponent<NavMeshAgent>();
+
+            if (colliderAgent != null)
+            {
+                colliderAgent.enabled = true;
+            }
+
             pullingObjs.Remove(collider.gameObject);
         }
 
