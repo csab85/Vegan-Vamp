@@ -164,6 +164,7 @@ public class BasicBehaviour : MonoBehaviour
                 if (fov.isSeeingPlayer)
                 {
                     alertState = AlertState.Searching;
+                    print("procurando");
                 }
 
                 break;
