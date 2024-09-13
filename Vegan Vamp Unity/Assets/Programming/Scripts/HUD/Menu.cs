@@ -13,7 +13,6 @@ public class Menu: MonoBehaviour
     [SerializeField] GameObject buttons;
     [SerializeField] GameObject profile;
     [SerializeField] GameObject glossary;
-    [SerializeField] GameObject map;
     [SerializeField] GameObject options;
     [SerializeField] GameObject exit;
 
@@ -65,18 +64,6 @@ public class Menu: MonoBehaviour
         minimapCam.SetActive(false);
 
         glossary.SetActive(true);
-    }
-
-    public void OpenMap()
-    {
-        foreach (GameObject page in pages)
-        {
-            page.SetActive(false);
-        }
-
-        minimapCam.SetActive(true);
-
-        map.SetActive(true);
     }
 
     public void OpenOptions()
@@ -143,7 +130,6 @@ public class Menu: MonoBehaviour
         pages = new List<GameObject>();
         pages.Add(profile);
         pages.Add(glossary);
-        pages.Add(map);
         pages.Add(options);
         pages.Add(exit);
 

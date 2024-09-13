@@ -24,6 +24,7 @@ public class JuiceBottle : MonoBehaviour
     Animator animator;
     BoxCollider bc;
     AudioSource audioSource;
+    LineRenderer lineRenderer;
 
     //scripts
     [Header ("Scripts")]
@@ -45,11 +46,17 @@ public class JuiceBottle : MonoBehaviour
     //========================
     #region
 
-    [Header ("Settings")]
+    [Header ("Throw Settings")]
     [SerializeField] float throwPower;
     [SerializeField] public float splashRange;
     [SerializeField] LayerMask targetLayers;
     Transform baseTransform;
+
+    [Header("Projection Settings")]
+    [SerializeField]
+    [Range(10, 100)] int linePoints = 25;
+    [SerializeField]
+    [Range(0.1f, 0.25f)] float timeBetweenPoints = 0.1f;
 
     bool smashable = false;
 
@@ -236,6 +243,7 @@ public class JuiceBottle : MonoBehaviour
         animator = player.GetComponent<Animator>();
         bc = GetComponent<BoxCollider>();
         audioSource = GetComponent<AudioSource>();
+        lineRenderer = GetComponent<LineRenderer>();
 
         //get scripts
         hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
