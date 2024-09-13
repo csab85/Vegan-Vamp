@@ -32,7 +32,7 @@ public class ColorSwitch: MonoBehaviour
 
     //colors
     List<Color> colors = new List<Color>();
-    Color selfColor;
+    [HideInInspector] public Color selfColor;
 
     //object type
     enum Dimension

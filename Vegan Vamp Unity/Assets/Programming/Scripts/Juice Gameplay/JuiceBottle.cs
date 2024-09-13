@@ -13,6 +13,7 @@ public class JuiceBottle : MonoBehaviour
     //game objects
     [Header ("Game Objects")]
     GameObject player;
+    GameObject vfxExplosion;
     [SerializeField] public GameObject Intact;
     [SerializeField] GameObject Broken;
     [SerializeField] GameObject splash;
@@ -33,6 +34,7 @@ public class JuiceBottle : MonoBehaviour
     Hotbar hotbar;
     StatsManager selfStats;
     StatsEffects playerEffects;
+    ColorSwitch colorSwitch;
 
     //extras
     Ray aimRay;
@@ -181,8 +183,22 @@ public class JuiceBottle : MonoBehaviour
             newHeal.transform.localScale = new Vector3(healScale, healScale, healScale);
         }
 
-        //spawn explosion
-        //cody things here
+        //EXPLOSION
+        //set explosion color
+        vfxExplosion.GetComponent<VisualEffect>().SetVector4("Explosion Color", colorSwitch.selfColor);
+
+        //unparent then set size and rotation
+        vfxExplosion.transform.parent = null;
+
+        vfxExplosion.transform.rotation = Quaternion.identity;
+        float explosionSize = splashRange * 1.5f;
+        vfxExplosion.transform.localScale = new Vector3(explosionSize, explosionSize, explosionSize);
+
+        //activate explosion
+        vfxExplosion.SetActive(true);
+
+        //activate explosion disappear code
+        vfxExplosion.GetComponent<Disappear>().enabled = true;
 
         //tutorial
         tutorial.tutorialSteps = 3;
@@ -238,6 +254,7 @@ public class JuiceBottle : MonoBehaviour
     {
         //get game object
         player = GameObject.Find("Player").gameObject;
+        vfxExplosion = transform.Find("VFX Explosion").gameObject;
 
         //get components
         animator = player.GetComponent<Animator>();
@@ -249,6 +266,7 @@ public class JuiceBottle : MonoBehaviour
         hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
         selfStats = GetComponent<StatsManager>();
         playerEffects = player.GetComponent<StatsEffects>();
+        colorSwitch = GetComponent<ColorSwitch>();
 
         //get values
         baseTransform = transform;
