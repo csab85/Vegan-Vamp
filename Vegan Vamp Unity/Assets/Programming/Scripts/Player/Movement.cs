@@ -87,7 +87,7 @@ public class Movement : MonoBehaviour
     {
         if (!selfStats.dead)
         {
-            moveDirection = orientTransform.forward * verticalInput + orientTransform.right * horizontalInput;
+            moveDirection = Camera.main.transform.forward * verticalInput + Camera.main.transform.right * horizontalInput;
 
             if (grounded)
             {
