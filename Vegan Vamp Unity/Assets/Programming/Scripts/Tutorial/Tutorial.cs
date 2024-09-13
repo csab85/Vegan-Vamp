@@ -27,6 +27,10 @@ public class Tutorial : MonoBehaviour
     [SerializeField] TextMeshProUGUI throwText;
     [SerializeField] Image throwBg;
 
+    [Header("Last Tutorial")]
+    [SerializeField] TextMeshProUGUI lastText;
+    [SerializeField] Image lastBg;
+
     TextMeshProUGUI fadeInText;
     Image fadeInBg;
 
@@ -89,7 +93,7 @@ public class Tutorial : MonoBehaviour
             fadingOut = false;
 
             //deactivate if at final stage
-            if (tutorialSteps == 3)
+            if (tutorialSteps == 4)
             {
                 foreach (GameObject tutorialObj in tutorialObjs)
                 {
@@ -99,6 +103,25 @@ public class Tutorial : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+    }
+
+    IEnumerator TimedLastTutorial()
+    {
+        //show text
+        fadeInText = lastText;
+        fadeInBg = lastBg;
+
+        fadingIn = true;
+
+        yield return new WaitForSeconds(3.75f);
+
+        //remove text
+        fadeOutText = lastText;
+        fadeOutBg = lastBg;
+
+        fadingOut = true;
+
+        tutorialSteps = 4;
     }
 
     #endregion
@@ -182,13 +205,18 @@ public class Tutorial : MonoBehaviour
 
             case 3:
 
-                //hide hotbar tutorial
+                //hide throw tutorial
                 if (fadeOutText != throwText)
                 {
                     fadeOutText = throwText;
                     fadeOutBg = throwBg;
 
                     fadingOut = true;
+                }
+
+                if (!fadingOut)
+                {
+                    StartCoroutine(TimedLastTutorial());
                 }
 
             break;
