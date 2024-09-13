@@ -71,12 +71,14 @@ public class AsyncLoad : MonoBehaviour
         if (loading)
         {
             //update load text
-            loadText.text = loadOperation.progress < 0.9f ? $"Carregando - {loadOperation.progress * 100}%" : "Carregando - 100%\nAperte ESPAÇO para começar";
+            loadText.text = loadOperation.progress < 0.9f ? $"Carregando - {Mathf.Round(loadOperation.progress * 1000)/10}%" : "Carregando - 100%\nAperte ESPAÇO para começar";
 
             //Load if scene loaded and space pressed
             if (Input.GetKeyDown(KeyCode.Space) && loadOperation.progress >= 0.9f)
             {
                 loadOperation.allowSceneActivation = true;
+
+                SceneManager.UnloadSceneAsync("MainMenu");
             }
         }
     }

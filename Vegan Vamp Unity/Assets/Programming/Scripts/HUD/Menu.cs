@@ -100,7 +100,8 @@ public class Menu: MonoBehaviour
 
     public void ExitToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadSceneAsync("MainMenu");
+        SceneManager.UnloadSceneAsync("NewOpenWorld");
     }
 
     public void CancelExit()
@@ -127,6 +128,9 @@ public class Menu: MonoBehaviour
 
         //select glossary
         EventSystem.current.SetSelectedGameObject(buttons.transform.Find("Glossary").gameObject);
+
+        //gambiarra braba p qnd o jogo comeca travado
+        Time.timeScale = 1;
     }
 
     private void Update()
