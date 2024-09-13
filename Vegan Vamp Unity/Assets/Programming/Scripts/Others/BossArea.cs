@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class BossArea : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class BossArea : MonoBehaviour
     #region
 
     [SerializeField] AudioClip audioBossTheme;
+    [SerializeField] AudioClip audioOverworldTheme;
     [SerializeField] BasicBehaviour bossBehaviour;
 
     #endregion
@@ -38,9 +40,13 @@ public class BossArea : MonoBehaviour
             //boss
             bossBehaviour.baseVisionAngle = 360;
             bossBehaviour.gameObject.GetComponent<FieldOfView>().angle = 360;
-
-            print("sim");
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        other.gameObject.GetComponent<AudioSource>().clip = audioOverworldTheme;
+        other.gameObject.GetComponent<AudioSource>().Play();
     }
 
     #endregion

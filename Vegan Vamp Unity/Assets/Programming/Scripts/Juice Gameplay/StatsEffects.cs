@@ -381,6 +381,12 @@ public class StatsEffects : MonoBehaviour
                     {
                         gameObject.layer = LayerMask.NameToLayer("Ingredient Part");
                     }
+
+                    //deactivate navmesh agent
+                    if (agent != null)
+                    {
+                        agent.enabled = false;
+                    }
                 }
 
                 else if (frozen)
@@ -402,6 +408,12 @@ public class StatsEffects : MonoBehaviour
                     if (selfStats.objectType == StatsManager.Type.Ingredient)
                     {
                         gameObject.layer = LayerMask.NameToLayer("Ingredient");
+                    }
+
+                    //deactivate navmesh agent
+                    if (agent != null)
+                    {
+                        agent.enabled = true;
                     }
                 }
         }
