@@ -100,7 +100,7 @@ public class Portal : MonoBehaviour
         float selfScale = selfStats.teleport[StatsConst.SELF_INTENSITY];
         transform.localScale = new Vector3(selfScale, selfScale, selfScale);
 
-        if (selfScale <= 0.01f)
+        if (selfStats.teleport[StatsConst.SELF_INTENSITY] == 0)
         {
             Destroy(gameObject);
         }

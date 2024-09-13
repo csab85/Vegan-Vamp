@@ -52,7 +52,7 @@ public class StatsEffects : MonoBehaviour
     //Fire Damage
     [Tooltip ("Can burn but won't take damage")]
     [SerializeField] bool fireProof;
-    static float fireDamage = 0.1f;
+    static float fireDamage = 0.3f;
     static float fireRefreshRate = 0.05f;
 
     [SerializeField] bool crystal;
