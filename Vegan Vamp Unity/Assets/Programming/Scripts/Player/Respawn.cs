@@ -21,7 +21,7 @@ public class Respanw : MonoBehaviour
     //========================
     #region
 
-    [HideInInspector] public Vector3 spawnPoint;
+    [SerializeField] Transform spawnPoint;
     float baseHealth;
     bool respawning = false;
 
@@ -44,7 +44,7 @@ public class Respanw : MonoBehaviour
 
         selfStats.ApplyToBase(StatsConst.HEALTH, healthToSum);
 
-        transform.position = spawnPoint;
+        transform.position = spawnPoint.position;
 
         selfStats.dead = false;
         respawning = false;
@@ -67,7 +67,6 @@ public class Respanw : MonoBehaviour
         selfStats = GetComponent<StatsManager>();
 
         //get values
-        spawnPoint = transform.position;
         baseHealth = selfStats.health[StatsConst.SELF_INTENSITY];
     }
 

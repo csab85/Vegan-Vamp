@@ -49,7 +49,7 @@ public class MoskitFloor : MonoBehaviour
             {
                 Vector3 direction = (collision.transform.position - transform.position).normalized;
 
-                enemyEffects.DamageSelf(direction, damage);
+                enemyEffects.DamageSelf(direction * 3, damage);
             }
         }
     }
@@ -112,13 +112,6 @@ public class MoskitFloor : MonoBehaviour
             {
                 attackingIcon.SetActive(true);
             }
-        }
-
-        //test
-        if (Input.GetKey(KeyCode.Space))
-        {
-            GetComponent<Rigidbody>().AddForce(transform.up, ForceMode.Impulse);
-            print("nhe");
         }
     }
 
