@@ -113,6 +113,13 @@ public class MoskitFloor : MonoBehaviour
                 attackingIcon.SetActive(true);
             }
         }
+
+        //test
+        if (Input.GetKey(KeyCode.Space))
+        {
+            GetComponent<Rigidbody>().AddForce(transform.up, ForceMode.Impulse);
+            print("nhe");
+        }
     }
 
     #endregion
