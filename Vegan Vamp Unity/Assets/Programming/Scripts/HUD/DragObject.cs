@@ -79,7 +79,7 @@ public class DragObject : MonoBehaviour
     {
         if (dragging)
         {
-            rb.MovePosition(Input.mousePosition);
+            transform.position = (Input.mousePosition);
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && hovering    )
